@@ -1,0 +1,6 @@
+# transport:
+#   client:
+#     gocloud:
+#       region: "us-east-1"
+#       resource: "https://sqs.us-east-1.amazonaws.com/0000000/my-sqs-name"
+#       type: "sqs"
