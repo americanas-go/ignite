@@ -4,11 +4,11 @@ import (
 	"context"
 	"sync"
 
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	serverfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/core/server"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
 	server "github.com/americanas-go/multiserver"
 	f "github.com/gofiber/fiber/v2"
+	contextfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/context"
+	serverfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/core/server"
+	"github.com/jvitoroc/ignite/gofiber/fiber.v2"
 	"go.uber.org/fx"
 )
 

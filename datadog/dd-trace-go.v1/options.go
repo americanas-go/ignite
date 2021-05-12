@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/net/http/client"
+	"github.com/jvitoroc/ignite/net/http/client"
 )
 
 type Options struct {

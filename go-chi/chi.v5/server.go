@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/americanas-go/ignite/net/http/server"
 	"github.com/americanas-go/log"
 	"github.com/go-chi/chi/v5"
+	"github.com/jvitoroc/ignite/net/http/server"
 )
 
 type Config struct {

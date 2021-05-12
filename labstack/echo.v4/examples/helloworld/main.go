@@ -5,15 +5,15 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/labstack/echo.v4"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/health"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/logger"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/status"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/cors"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/gzip"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/requestid"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
+	"github.com/jvitoroc/ignite/labstack/echo.v4"
+	"github.com/jvitoroc/ignite/labstack/echo.v4/plugins/core/health"
+	"github.com/jvitoroc/ignite/labstack/echo.v4/plugins/core/logger"
+	"github.com/jvitoroc/ignite/labstack/echo.v4/plugins/core/status"
+	"github.com/jvitoroc/ignite/labstack/echo.v4/plugins/native/cors"
+	"github.com/jvitoroc/ignite/labstack/echo.v4/plugins/native/gzip"
+	"github.com/jvitoroc/ignite/labstack/echo.v4/plugins/native/requestid"
+	"github.com/jvitoroc/ignite/sirupsen/logrus.v1"
 	e "github.com/labstack/echo/v4"
 )
 

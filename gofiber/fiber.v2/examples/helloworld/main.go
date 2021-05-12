@@ -5,12 +5,12 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	logger "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/native/cors"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/native/etag"
 	"github.com/americanas-go/log"
 	f "github.com/gofiber/fiber/v2"
+	logger "github.com/jvitoroc/ignite/americanas-go/log.v1"
+	"github.com/jvitoroc/ignite/gofiber/fiber.v2"
+	"github.com/jvitoroc/ignite/gofiber/fiber.v2/plugins/native/cors"
+	"github.com/jvitoroc/ignite/gofiber/fiber.v2/plugins/native/etag"
 )
 
 const HelloWorldEndpoint = "app.endpoint.helloworld"

@@ -4,11 +4,11 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/aws/aws-sdk-go.v2"
-	"github.com/americanas-go/ignite/aws/aws-sdk-go.v2/client/sns"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
 	asns "github.com/aws/aws-sdk-go-v2/service/sns"
+	"github.com/jvitoroc/ignite/aws/aws-sdk-go.v2"
+	"github.com/jvitoroc/ignite/aws/aws-sdk-go.v2/client/sns"
+	"github.com/jvitoroc/ignite/sirupsen/logrus.v1"
 )
 
 const Bucket = "aws.s3.bucket"

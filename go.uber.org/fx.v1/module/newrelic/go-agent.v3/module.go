@@ -3,8 +3,8 @@ package newrelic
 import (
 	"sync"
 
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
+	contextfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/context"
+	newrelic "github.com/jvitoroc/ignite/newrelic/go-agent.v3"
 	"go.uber.org/fx"
 )
 

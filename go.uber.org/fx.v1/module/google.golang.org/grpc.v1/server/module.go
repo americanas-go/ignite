@@ -4,10 +4,10 @@ import (
 	"context"
 	"sync"
 
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	serverfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/core/server"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server"
 	s "github.com/americanas-go/multiserver"
+	contextfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/context"
+	serverfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/core/server"
+	"github.com/jvitoroc/ignite/google.golang.org/grpc.v1/server"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 )

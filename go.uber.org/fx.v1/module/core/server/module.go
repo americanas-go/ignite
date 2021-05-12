@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync"
 
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	"github.com/americanas-go/ignite/spf13/cobra.v1"
 	server "github.com/americanas-go/multiserver"
+	contextfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/context"
+	"github.com/jvitoroc/ignite/spf13/cobra.v1"
 	c "github.com/spf13/cobra"
 	"go.uber.org/fx"
 )

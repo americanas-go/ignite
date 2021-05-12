@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/gocloud.dev/pubsub.v0"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
+	"github.com/jvitoroc/ignite/gocloud.dev/pubsub.v0"
+	"github.com/jvitoroc/ignite/sirupsen/logrus.v1"
 	p "gocloud.dev/pubsub"
 )
 

@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/health"
-	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
 	"github.com/americanas-go/log"
+	"github.com/jvitoroc/ignite/go.mongodb.org/mongo-driver.v1"
 	m "go.mongodb.org/mongo-driver/mongo"
 )
 

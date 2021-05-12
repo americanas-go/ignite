@@ -2,7 +2,7 @@ package newrelic
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/client"
+	"github.com/jvitoroc/ignite/google.golang.org/grpc.v1/client"
 )
 
 const (

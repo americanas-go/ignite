@@ -2,7 +2,7 @@ package prometheus
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5"
 )
 
 const (

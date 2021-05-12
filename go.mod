@@ -1,4 +1,4 @@
-module github.com/americanas-go/ignite
+module github.com/jvitoroc/ignite
 
 go 1.16
 

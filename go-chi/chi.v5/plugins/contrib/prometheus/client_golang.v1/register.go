@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
 	"github.com/americanas-go/log"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 

@@ -3,8 +3,8 @@ package nats
 import (
 	"sync"
 
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	"github.com/americanas-go/ignite/nats-io/nats.go.v1"
+	contextfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/context"
+	"github.com/jvitoroc/ignite/nats-io/nats.go.v1"
 	"go.uber.org/fx"
 )
 

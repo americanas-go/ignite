@@ -2,7 +2,7 @@ package echo_pprof_v1
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/labstack/echo.v4"
+	"github.com/jvitoroc/ignite/labstack/echo.v4"
 )
 
 const (

@@ -6,13 +6,13 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/health"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/log"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/status"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/realip"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/recoverer"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5/plugins/core/health"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5/plugins/core/log"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5/plugins/core/status"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5/plugins/native/realip"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5/plugins/native/recoverer"
+	"github.com/jvitoroc/ignite/sirupsen/logrus.v1"
 )
 
 const HelloWorldEndpoint = "app.endpoint.helloworld"

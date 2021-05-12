@@ -2,7 +2,7 @@ package recover
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
+	"github.com/jvitoroc/ignite/gofiber/fiber.v2"
 )
 
 const (

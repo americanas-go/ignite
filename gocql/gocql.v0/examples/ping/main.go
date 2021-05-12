@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/gocql/gocql.v0"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
+	"github.com/jvitoroc/ignite/gocql/gocql.v0"
+	"github.com/jvitoroc/ignite/sirupsen/logrus.v1"
 )
 
 func main() {

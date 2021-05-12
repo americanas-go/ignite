@@ -2,7 +2,7 @@ package health
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/elastic/go-elasticsearch.v8"
+	"github.com/jvitoroc/ignite/elastic/go-elasticsearch.v8"
 )
 
 const (

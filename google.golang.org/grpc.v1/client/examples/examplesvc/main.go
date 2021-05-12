@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/client"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
+	"github.com/jvitoroc/ignite/google.golang.org/grpc.v1/client"
+	"github.com/jvitoroc/ignite/sirupsen/logrus.v1"
 )
 
 func main() {

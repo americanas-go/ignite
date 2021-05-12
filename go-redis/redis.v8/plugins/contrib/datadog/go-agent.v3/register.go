@@ -3,9 +3,9 @@ package newrelic
 import (
 	"context"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
 	"github.com/americanas-go/log"
 	"github.com/go-redis/redis/v8"
+	datadog "github.com/jvitoroc/ignite/datadog/dd-trace-go.v1"
 	redistrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8"
 )
 

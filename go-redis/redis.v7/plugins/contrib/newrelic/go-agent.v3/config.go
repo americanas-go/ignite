@@ -2,7 +2,7 @@ package newrelic
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/go-redis/redis.v7"
+	"github.com/jvitoroc/ignite/go-redis/redis.v7"
 )
 
 const (

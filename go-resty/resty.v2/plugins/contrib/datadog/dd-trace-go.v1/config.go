@@ -2,7 +2,7 @@ package datadog
 
 import (
 	"github.com/americanas-go/config"
-	girest "github.com/americanas-go/ignite/go-resty/resty.v2"
+	girest "github.com/jvitoroc/ignite/go-resty/resty.v2"
 )
 
 const (

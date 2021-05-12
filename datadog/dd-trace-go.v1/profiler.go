@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/americanas-go/ignite/net/http/client"
 	"github.com/americanas-go/log"
+	"github.com/jvitoroc/ignite/net/http/client"
 	"gopkg.in/DataDog/dd-trace-go.v1/profiler"
 )
 

@@ -5,9 +5,9 @@ import (
 
 	"net/http"
 
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
 	"github.com/americanas-go/log"
 	"github.com/go-resty/resty/v2"
+	newrelic "github.com/jvitoroc/ignite/newrelic/go-agent.v3"
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 

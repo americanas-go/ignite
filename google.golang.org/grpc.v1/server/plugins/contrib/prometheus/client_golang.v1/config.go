@@ -2,7 +2,7 @@ package prometheus
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server"
+	"github.com/jvitoroc/ignite/google.golang.org/grpc.v1/server"
 )
 
 const (

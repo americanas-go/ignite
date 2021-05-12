@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
 	"github.com/americanas-go/log"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5"
 )
 
 func Register(ctx context.Context) (*chi.Config, error) {

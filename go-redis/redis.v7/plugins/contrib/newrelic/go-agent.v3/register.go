@@ -3,9 +3,9 @@ package newrelic
 import (
 	"context"
 
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
 	"github.com/americanas-go/log"
 	"github.com/go-redis/redis/v7"
+	newrelic "github.com/jvitoroc/ignite/newrelic/go-agent.v3"
 	"github.com/newrelic/go-agent/v3/integrations/nrredis-v7"
 )
 

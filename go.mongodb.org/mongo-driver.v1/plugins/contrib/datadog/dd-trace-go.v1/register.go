@@ -3,9 +3,9 @@ package datadog
 import (
 	"context"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
-	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
 	"github.com/americanas-go/log"
+	datadog "github.com/jvitoroc/ignite/datadog/dd-trace-go.v1"
+	"github.com/jvitoroc/ignite/go.mongodb.org/mongo-driver.v1"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	mongotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo"
 )

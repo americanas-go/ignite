@@ -6,10 +6,10 @@ import (
 
 	"github.com/americanas-go/config"
 	h "github.com/americanas-go/health"
-	"github.com/americanas-go/ignite/elastic/go-elasticsearch.v8"
-	"github.com/americanas-go/ignite/elastic/go-elasticsearch.v8/plugins/core/health"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
+	"github.com/jvitoroc/ignite/elastic/go-elasticsearch.v8"
+	"github.com/jvitoroc/ignite/elastic/go-elasticsearch.v8/plugins/core/health"
+	"github.com/jvitoroc/ignite/sirupsen/logrus.v1"
 )
 
 func main() {

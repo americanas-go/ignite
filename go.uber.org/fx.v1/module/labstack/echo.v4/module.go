@@ -4,10 +4,10 @@ import (
 	"context"
 	"sync"
 
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	serverfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/core/server"
-	"github.com/americanas-go/ignite/labstack/echo.v4"
 	server "github.com/americanas-go/multiserver"
+	contextfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/context"
+	serverfx "github.com/jvitoroc/ignite/go.uber.org/fx.v1/module/core/server"
+	"github.com/jvitoroc/ignite/labstack/echo.v4"
 	e "github.com/labstack/echo/v4"
 	"go.uber.org/fx"
 )

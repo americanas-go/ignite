@@ -1,7 +1,7 @@
 package newrelic
 
 import (
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
+	newrelic "github.com/jvitoroc/ignite/newrelic/go-agent.v3"
 	"github.com/nats-io/nats.go"
 	"github.com/newrelic/go-agent/v3/integrations/nrnats"
 )

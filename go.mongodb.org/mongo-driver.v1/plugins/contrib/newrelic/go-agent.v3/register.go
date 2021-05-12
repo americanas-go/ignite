@@ -3,9 +3,9 @@ package newrelic
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
 	"github.com/americanas-go/log"
+	"github.com/jvitoroc/ignite/go.mongodb.org/mongo-driver.v1"
+	newrelic "github.com/jvitoroc/ignite/newrelic/go-agent.v3"
 	"github.com/newrelic/go-agent/v3/integrations/nrmongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

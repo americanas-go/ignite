@@ -3,12 +3,12 @@ package aws
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/net/http/client"
 	"github.com/americanas-go/log"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	c "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/jvitoroc/ignite/net/http/client"
 )
 
 type Plugin func(context.Context, *aws.Config) error

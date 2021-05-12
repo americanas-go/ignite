@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
 	"github.com/americanas-go/log"
 	response "github.com/americanas-go/rest-response"
+	"github.com/jvitoroc/ignite/go-chi/chi.v5"
 )
 
 func Register(ctx context.Context) (*chi.Config, error) {

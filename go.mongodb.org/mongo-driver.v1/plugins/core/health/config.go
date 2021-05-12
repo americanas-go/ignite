@@ -2,7 +2,7 @@ package health
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
+	"github.com/jvitoroc/ignite/go.mongodb.org/mongo-driver.v1"
 )
 
 const (

@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/go-resty/resty.v2"
+	"github.com/jvitoroc/ignite/go-resty/resty.v2"
 )
 
 const (

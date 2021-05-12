@@ -2,7 +2,7 @@ package newrelic
 
 import (
 	"github.com/americanas-go/config"
-	ginats "github.com/americanas-go/ignite/nats-io/nats.go.v1"
+	ginats "github.com/jvitoroc/ignite/nats-io/nats.go.v1"
 )
 
 const (

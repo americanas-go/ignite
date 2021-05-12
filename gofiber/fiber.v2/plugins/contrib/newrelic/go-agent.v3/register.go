@@ -7,9 +7,9 @@ import (
 	"net/url"
 	"strings"
 
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
 	"github.com/americanas-go/log"
 	"github.com/gofiber/fiber/v2"
+	newrelic "github.com/jvitoroc/ignite/newrelic/go-agent.v3"
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 

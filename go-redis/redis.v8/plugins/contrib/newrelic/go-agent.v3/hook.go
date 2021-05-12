@@ -13,8 +13,8 @@ import (
 	"strings"
 	"sync"
 
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
 	"github.com/go-redis/redis/v8"
+	newrelic "github.com/jvitoroc/ignite/newrelic/go-agent.v3"
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
