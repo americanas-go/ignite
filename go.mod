@@ -33,6 +33,7 @@ require (
 	github.com/godror/godror v0.24.6
 	github.com/gofiber/fiber/v2 v2.9.0
 	github.com/golang/protobuf v1.5.2
+	github.com/google/uuid v1.1.2
 	github.com/graphql-go/graphql v0.7.9
 	github.com/graphql-go/handler v0.2.3
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
@@ -55,7 +56,6 @@ require (
 	github.com/panjf2000/ants/v2 v2.4.4
 	github.com/philhofer/fwd v1.1.1 // indirect
 	github.com/prometheus/client_golang v1.10.0
-	github.com/satori/go.uuid v1.2.0
 	github.com/segmentio/kafka-go v0.4.15
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.1.3
