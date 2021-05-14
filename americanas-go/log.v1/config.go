@@ -3,14 +3,21 @@ package log
 import "github.com/americanas-go/config"
 
 const (
-	root = "ignite.log"
-	impl = root + ".impl"
+	root            = "ignite.log"
+	tp              = root + ".type"
+	logrusRoot      = root + ".logrus"
+	logrusFormatter = logrusRoot + ".formatter"
 )
 
 func init() {
-	config.Add(impl, "LOGRUS", "defines log implementation LOGRUS/ZAP/ZEROLOG")
+	config.Add(tp, "LOGRUS", "defines log implementation LOGRUS/ZAP/ZEROLOG")
+	config.Add(logrusFormatter, "TEXT", "defines logrus formatter TEXT/JSON/CLOUDWATCH")
 }
 
-func Impl() string {
-	return config.String(impl)
+func Type() string {
+	return config.String(tp)
+}
+
+func LogrusFormatter() string {
+	return config.String(logrusFormatter)
 }

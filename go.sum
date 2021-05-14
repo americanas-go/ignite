@@ -114,8 +114,8 @@ github.com/americanas-go/errors v1.0.0 h1:nyMfmV0zIkBN7vWgI0mDVSFVRua5HnXVaUHK7k
 github.com/americanas-go/errors v1.0.0/go.mod h1:yM2qJYuyQ1VCUqyhEqVwpnu0c4NFxxE6A20ZARKllng=
 github.com/americanas-go/health v1.0.0 h1:pSWqKibs6zGd8TiMmh6bNn/aLTATgZXvztXJMlg3AsE=
 github.com/americanas-go/health v1.0.0/go.mod h1:eDOEGHqgQnw9vWMk1sJDCO/kD1x2lFkbUZtXmvLXHIo=
-github.com/americanas-go/log v1.1.0 h1:v7c9jukbGZ5wPH/fhTTPDxDufyqMYRCVpw3Wi+7w5ck=
-github.com/americanas-go/log v1.1.0/go.mod h1:AEE/4CDDYd+U3kaib6DrADR+t38yrXvDS0gk3EHYD3A=
+github.com/americanas-go/log v1.2.0 h1:gxBc5E2xzVBcwN2pkD4UH/jZiX0UE+oqQTQzq6j2pvw=
+github.com/americanas-go/log v1.2.0/go.mod h1:AEE/4CDDYd+U3kaib6DrADR+t38yrXvDS0gk3EHYD3A=
 github.com/americanas-go/multiserver v1.0.0 h1:9gxgJK8rbAmkXI758g7G6FgdZw8LEcNwcmHmeFDnJWA=
 github.com/americanas-go/multiserver v1.0.0/go.mod h1:YmGl4jagA++yaYo4rYQwGWJL0TnEreTOZcQP0V+qqVI=
 github.com/americanas-go/rest-response v1.0.2 h1:o91Jgqvp1yCSKoXTdjIhecMSPvKF2N6ldePUpEm7Unk=
