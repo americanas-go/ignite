@@ -11,6 +11,14 @@ import (
 
 type Plugin func(context.Context, *resty.Client) error
 
+func NewClient(ctx context.Context, plugins ...Plugin) (*resty.Client, error) {
+	opts, err := NewOptions()
+	if err != nil {
+		return nil, err
+	}
+	return NewClientWithOptions(ctx, opts, plugins...), nil
+}
+
 func NewClientWithOptions(ctx context.Context, options *Options, plugins ...Plugin) *resty.Client {
 
 	logger := log.FromContext(ctx)
