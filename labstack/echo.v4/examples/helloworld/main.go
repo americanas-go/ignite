@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/health"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/logger"
@@ -12,7 +13,6 @@ import (
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/cors"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/gzip"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/requestid"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
 	e "github.com/labstack/echo/v4"
 )
@@ -54,9 +54,8 @@ func Get(c e.Context) (err error) {
 func main() {
 
 	config.Load()
-	logrus.NewLogger()
-	//zap.NewLogger()
-	//zerolog.NewLogger()
+
+	ilog.New()
 
 	c := Config{}
 

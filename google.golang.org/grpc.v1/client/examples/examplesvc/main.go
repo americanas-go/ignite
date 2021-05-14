@@ -4,8 +4,9 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/client"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
+	"github.com/americanas-go/log"
 )
 
 func main() {
@@ -14,7 +15,7 @@ func main() {
 
 	config.Load()
 
-	logger := logrus.NewLogger()
+	ilog.New()
 
 	request := &TestRequest{
 		Message: "mensagem da requisição",
@@ -32,10 +33,10 @@ func main() {
 
 	test, err := c.Test(ctx, request)
 	if err != nil {
-		logger.Fatalf("%v.Call(_) = _, %v", c, err)
+		log.Fatalf("%v.Call(_) = _, %v", c, err)
 	}
 
-	logger.Infof(test.Message)
+	log.Infof(test.Message)
 
-	logger.Infof(conn.GetState().String())
+	log.Infof(conn.GetState().String())
 }
