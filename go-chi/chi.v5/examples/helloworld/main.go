@@ -6,13 +6,13 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
 	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/health"
 	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/log"
 	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/status"
 	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/realip"
 	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/recoverer"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 )
 
 const HelloWorldEndpoint = "app.endpoint.helloworld"
@@ -59,7 +59,7 @@ func main() {
 
 	ctx := context.Background()
 
-	logrus.NewLogger()
+	ilog.New()
 
 	srv := chi.NewServer(ctx,
 		recoverer.Register,

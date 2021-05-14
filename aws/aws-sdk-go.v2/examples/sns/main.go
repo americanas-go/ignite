@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/aws/aws-sdk-go.v2"
 	"github.com/americanas-go/ignite/aws/aws-sdk-go.v2/client/sns"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
 	asns "github.com/aws/aws-sdk-go-v2/service/sns"
 )
@@ -24,9 +24,7 @@ func main() {
 	// create background context
 	ctx := context.Background()
 
-	// start logrus
-	// zap.NewLogger()
-	logrus.NewLogger()
+	ilog.New()
 
 	// get logrus instance from context
 	logger := log.FromContext(ctx)
