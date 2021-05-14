@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/gocloud.dev/pubsub.v0"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
 	p "gocloud.dev/pubsub"
 )
@@ -16,7 +16,7 @@ func main() {
 
 	ctx := context.Background()
 
-	logrus.NewLogger()
+	ilog.New()
 
 	logger := log.FromContext(ctx)
 

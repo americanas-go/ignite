@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
 )
 
@@ -15,8 +15,7 @@ func main() {
 
 	config.Load()
 
-	// start logrus
-	logrus.NewLogger()
+	ilog.New()
 
 	srv := server.NewServer(ctx)
 

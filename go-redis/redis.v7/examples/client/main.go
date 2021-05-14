@@ -6,9 +6,9 @@ import (
 
 	"github.com/americanas-go/config"
 	h "github.com/americanas-go/health"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/go-redis/redis.v7"
 	"github.com/americanas-go/ignite/go-redis/redis.v7/plugins/core/health"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
 )
 
@@ -16,7 +16,7 @@ func main() {
 
 	config.Load()
 
-	logrus.NewLogger()
+	ilog.New()
 
 	var err error
 

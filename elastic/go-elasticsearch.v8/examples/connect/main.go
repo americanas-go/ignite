@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
+	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/elastic/go-elasticsearch.v8"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 	"github.com/americanas-go/log"
 )
 
@@ -13,7 +13,7 @@ func main() {
 
 	config.Load()
 
-	logrus.NewLogger()
+	ilog.New()
 
 	client, err := elasticsearch.NewClient(context.Background())
 	if err != nil {
