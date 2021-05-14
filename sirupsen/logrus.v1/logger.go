@@ -6,12 +6,11 @@ import (
 	lg "github.com/sirupsen/logrus"
 )
 
-func NewLogger(hooks ...lg.Hook) log.Logger {
-	return logrus.NewLogger(options(), hooks...)
-}
-
-func NewLoggerWithFormatter(formatter lg.Formatter, hooks ...lg.Hook) log.Logger {
-	return logrus.NewLoggerWithFormatter(formatter, options(), hooks...)
+func NewLogger(formatter lg.Formatter, hooks ...lg.Hook) log.Logger {
+	options := options()
+	options.Hooks = hooks
+	options.Formatter = formatter
+	return logrus.NewLoggerWithOptions(options)
 }
 
 func options() *logrus.Options {

@@ -2,12 +2,14 @@ module github.com/americanas-go/ignite
 
 go 1.16
 
+// replace github.com/americanas-go/log => ../log/
+
 require (
 	github.com/Microsoft/go-winio v0.5.0 // indirect
 	github.com/americanas-go/config v1.0.0
 	github.com/americanas-go/errors v1.0.0
 	github.com/americanas-go/health v1.0.0
-	github.com/americanas-go/log v1.1.0
+	github.com/americanas-go/log v1.2.0
 	github.com/americanas-go/multiserver v1.0.0
 	github.com/americanas-go/rest-response v1.0.2
 	github.com/ansrivas/fiberprometheus/v2 v2.1.2
@@ -56,6 +58,7 @@ require (
 	github.com/panjf2000/ants/v2 v2.4.4
 	github.com/philhofer/fwd v1.1.1 // indirect
 	github.com/prometheus/client_golang v1.10.0
+	github.com/ravernkoh/cwlogsfmt v0.0.0-20180121032441-917bad983b4c
 	github.com/segmentio/kafka-go v0.4.15
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.1.3
