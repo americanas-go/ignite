@@ -13,7 +13,7 @@ type Options struct {
 	KeepAlive         time.Duration
 	RequestTimeout    time.Duration
 	FallbackDelay     time.Duration
-	Transport         *OptionsTransport
+	Transport         OptionsTransport
 	Host              string
 }
 
