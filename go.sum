@@ -108,8 +108,8 @@ github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751/go.mod h1:LOuy
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/alecthomas/units v0.0.0-20190717042225-c3de453c63f4/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d/go.mod h1:rBZYJk541a8SKzHPHnH3zbiI+7dagKZ0cgpgrD7Fyho=
-github.com/americanas-go/config v1.0.0 h1:uka92eBoyK1wKXByPH2q5smZsvlcVJxiWmax2KE3sNA=
-github.com/americanas-go/config v1.0.0/go.mod h1:aP+oK1snLguqdk9IEjAX9A77aB3ma085nM66S/dLqXc=
+github.com/americanas-go/config v1.1.0 h1:b5SHgJXR0tV6OClv4EnUzhAyuB0rXHIQBg5iTjjyPXw=
+github.com/americanas-go/config v1.1.0/go.mod h1:aP+oK1snLguqdk9IEjAX9A77aB3ma085nM66S/dLqXc=
 github.com/americanas-go/errors v1.0.0 h1:nyMfmV0zIkBN7vWgI0mDVSFVRua5HnXVaUHK7kUh+iA=
 github.com/americanas-go/errors v1.0.0/go.mod h1:yM2qJYuyQ1VCUqyhEqVwpnu0c4NFxxE6A20ZARKllng=
 github.com/americanas-go/health v1.0.0 h1:pSWqKibs6zGd8TiMmh6bNn/aLTATgZXvztXJMlg3AsE=
