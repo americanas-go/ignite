@@ -6,7 +6,7 @@ import (
 	"github.com/americanas-go/config"
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/go-resty/resty.v2"
-	"github.com/americanas-go/ignite/go-resty/resty.v2/plugins/core/health"
+	"github.com/americanas-go/ignite/go-resty/resty.v2/plugins/contrib/americanas-go/health.v1"
 	"github.com/americanas-go/log"
 	r "github.com/go-resty/resty/v2"
 )
