@@ -2,11 +2,11 @@ package text
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 )
 
 const (
-	root                      = logrus.FormattersRoot + ".text"
+	formattersRoot            = "ignite.logrus.formatters"
+	root                      = formattersRoot + ".text"
 	forceColors               = root + ".forceColors"
 	disableColors             = root + ".disableColors"
 	disableQuote              = root + ".disableQuote"

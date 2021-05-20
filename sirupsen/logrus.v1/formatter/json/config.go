@@ -2,11 +2,11 @@ package json
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 )
 
 const (
-	root              = logrus.FormattersRoot + ".json"
+	formattersRoot    = "ignite.logrus.formatters"
+	root              = formattersRoot + ".json"
 	timestampFormat   = root + ".timestampFormat"
 	disableTimestamp  = root + ".disableTimestamp"
 	disableHTMLEscape = root + ".disableHTMLEscape"
