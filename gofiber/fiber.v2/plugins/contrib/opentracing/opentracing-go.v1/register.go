@@ -3,21 +3,24 @@ package opentracing
 import (
 	"context"
 
+	"github.com/americanas-go/ignite/gofiber/fiber.v2"
 	"github.com/americanas-go/log"
-	"github.com/gofiber/fiber/v2"
+	f "github.com/gofiber/fiber/v2"
 )
 
-func Register(ctx context.Context, app *fiber.App) error {
+func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !IsEnabled() {
-		return nil
+		return nil, nil
 	}
 
-	l := log.FromContext(ctx)
-	l.Trace("enabling opentracing middleware in fiber")
+	logger := log.FromContext(ctx)
+	logger.Trace("enabling opentracing middleware in fiber")
 
-	app.Use(opentracingMiddleware())
+	return nil, func(ctx context.Context, app *f.App) error {
+		app.Use(opentracingMiddleware())
 
-	l.Debug("opentracing middleware successfully enabled in fiber")
+		logger.Debug("opentracing middleware successfully enabled in fiber")
 
-	return nil
+		return nil
+	}
 }

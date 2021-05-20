@@ -2,6 +2,7 @@ package status
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/americanas-go/ignite/gofiber/fiber.v2"
@@ -10,9 +11,9 @@ import (
 	f "github.com/gofiber/fiber/v2"
 )
 
-func Register(ctx context.Context, app *f.App) error {
+func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !IsEnabled() {
-		return nil
+		return nil, nil
 	}
 
 	logger := log.FromContext(ctx)
@@ -21,11 +22,23 @@ func Register(ctx context.Context, app *f.App) error {
 
 	logger.Tracef("configuring status router on %s in fiber", statusRoute)
 
-	app.Get(statusRoute, func(c *f.Ctx) error {
-		return fiber.JSON(c, http.StatusOK, response.NewResourceStatus(), nil)
-	})
+	return nil, func(ctx context.Context, app *f.App) error {
 
-	logger.Debugf("status router configured on %s in fiber", statusRoute)
+		app.Get(statusRoute, func(c *f.Ctx) error {
 
-	return nil
+			c = c.Status(http.StatusOK)
+
+			resourceStatus := response.NewResourceStatus()
+
+			if options.Type != "REST" {
+				return c.SendString(fmt.Sprintf("%v", resourceStatus))
+			}
+
+			return c.JSON(resourceStatus)
+		})
+
+		logger.Debugf("status router configured on %s in fiber", statusRoute)
+		return nil
+	}
+
 }

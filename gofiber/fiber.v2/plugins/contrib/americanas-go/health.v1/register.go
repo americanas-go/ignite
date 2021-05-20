@@ -9,9 +9,10 @@ import (
 	f "github.com/gofiber/fiber/v2"
 )
 
-func Register(ctx context.Context, app *f.App) error {
+func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+
 	if !IsEnabled() {
-		return nil
+		return nil, nil
 	}
 
 	logger := log.FromContext(ctx)
@@ -20,17 +21,26 @@ func Register(ctx context.Context, app *f.App) error {
 
 	logger.Tracef("configuring health router on %s in fiber", healthRoute)
 
-	app.Get(healthRoute, func(c *f.Ctx) error {
+	return nil, func(ctx context.Context, app *f.App) error {
 
-		ctx, cancel := context.WithCancel(c.Context())
-		defer cancel()
+		app.Get(healthRoute, func(c *f.Ctx) error {
 
-		resp, httpCode := response.NewHealth(ctx)
+			ctx, cancel := context.WithCancel(c.Context())
+			defer cancel()
 
-		return fiber.JSON(c, httpCode, resp, nil)
-	})
+			resp, httpCode := response.NewHealth(ctx)
 
-	logger.Debugf("health router configured on %s in fiber", healthRoute)
+			c = c.Status(httpCode)
 
-	return nil
+			if options.Type != "REST" {
+				return c.SendString(resp.Status.String())
+			}
+
+			return c.JSON(resp)
+		})
+
+		logger.Debugf("health router configured on %s in fiber", healthRoute)
+
+		return nil
+	}
 }
