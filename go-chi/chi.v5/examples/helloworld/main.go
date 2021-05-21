@@ -8,9 +8,9 @@ import (
 	"github.com/americanas-go/config"
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/health"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/log"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/core/status"
+	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/contrib/americanas-go/health.v1"
+	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/contrib/americanas-go/log.v1"
+	status "github.com/americanas-go/ignite/go-chi/chi.v5/plugins/contrib/americanas-go/rest-response.v1"
 	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/realip"
 	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/recoverer"
 )
@@ -68,7 +68,7 @@ func main() {
 		status.Register,
 		health.Register)
 
-	srv.Mux().Get(c.App.Endpoint.Helloworld, Get(ctx))
+	srv.Get(c.App.Endpoint.Helloworld, Get(ctx))
 
 	srv.Serve(ctx)
 }

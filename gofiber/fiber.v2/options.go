@@ -7,6 +7,7 @@ import (
 
 type Options struct {
 	Port   int
+	Type   string
 	Config *fiber.Config
 }
 

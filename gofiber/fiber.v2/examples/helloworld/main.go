@@ -7,9 +7,9 @@ import (
 	"github.com/americanas-go/config"
 	logger "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/gofiber/fiber.v2"
+	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/extra/error_handler"
 	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/native/cors"
 	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/native/etag"
-	"github.com/americanas-go/log"
 	f "github.com/gofiber/fiber/v2"
 )
 
@@ -40,15 +40,13 @@ func NewHandler() *Handler {
 
 func (h *Handler) Get(c *f.Ctx) (err error) {
 
-	l := log.FromContext(context.Background())
-
 	resp := Response{
 		Message: "Hello World!!",
 	}
 
 	err = config.Unmarshal(&resp)
 	if err != nil {
-		l.Errorf(err.Error())
+		return err
 	}
 
 	return c.Status(http.StatusOK).JSON(resp)
@@ -71,10 +69,11 @@ func main() {
 
 	handler := &Handler{}
 
-	fiberSrv := fiber.NewServer(ctx,
+	srv := fiber.NewServer(ctx,
+		error_handler.Register,
 		cors.Register,
 		etag.Register)
 
-	fiberSrv.App().Get(c.App.Endpoint.Helloworld, handler.Get)
-	fiberSrv.Serve(ctx)
+	srv.Get(c.App.Endpoint.Helloworld, handler.Get)
+	srv.Serve(ctx)
 }

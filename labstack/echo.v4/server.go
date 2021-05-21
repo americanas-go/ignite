@@ -47,7 +47,10 @@ func (s *Server) Serve(ctx context.Context) {
 	logger := log.FromContext(ctx)
 	logger.Infof("starting echo Server. https://echo.labstack.com/")
 	address := ":" + strconv.Itoa(s.options.Port)
-	if err := s.instance.Start(address); err != nil {
-		s.instance.Logger.Fatalf(err.Error())
-	}
+	logger.Error(s.instance.Start(address))
+}
+
+func (s *Server) Shutdown(ctx context.Context) {
+	logger := log.FromContext(ctx)
+	logger.Error(s.instance.Shutdown(ctx))
 }
