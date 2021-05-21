@@ -139,8 +139,9 @@ func (s *Server) Serve(ctx context.Context) {
 
 	logger.Infof("grpc server started on port %v", s.options.Port)
 
-	if err := s.server.Serve(lis); err != nil {
-		logger.Fatalf("failed to serve: %v", err.Error())
-	}
+	logger.Error(s.server.Serve(lis))
+}
 
+func (s *Server) Shutdown(ctx context.Context) {
+	s.server.GracefulStop()
 }
