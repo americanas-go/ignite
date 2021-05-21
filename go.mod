@@ -3,6 +3,7 @@ module github.com/americanas-go/ignite
 go 1.16
 
 // replace github.com/americanas-go/log => ../log/
+// replace github.com/americanas-go/multiserver => ../multiserver/
 
 require (
 	github.com/Microsoft/go-winio v0.5.0 // indirect
@@ -10,7 +11,7 @@ require (
 	github.com/americanas-go/errors v1.0.0
 	github.com/americanas-go/health v1.0.0
 	github.com/americanas-go/log v1.2.0
-	github.com/americanas-go/multiserver v1.0.0
+	github.com/americanas-go/multiserver v1.1.0
 	github.com/americanas-go/rest-response v1.0.2
 	github.com/ansrivas/fiberprometheus/v2 v2.1.2
 	github.com/aws/aws-sdk-go-v2 v1.4.0
