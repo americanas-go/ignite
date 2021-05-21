@@ -115,5 +115,10 @@ func (s *Server) Serve(ctx context.Context) {
 
 	addr := ":" + strconv.Itoa(s.options.Port)
 
-	logger.Fatal(s.app.Listen(addr))
+	logger.Error(s.app.Listen(addr))
+}
+
+func (s *Server) Shutdown(ctx context.Context) {
+	logger := log.FromContext(ctx)
+	logger.Error(s.app.Shutdown())
 }
