@@ -8,9 +8,9 @@ import (
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/go-resty/resty.v2"
 	"github.com/americanas-go/ignite/labstack/echo.v4"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/health"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/logger"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/core/status"
+	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/health.v1"
+	logplugin "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/log.v1"
+	status "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/rest-response.v1"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/cors"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/gzip"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/requestid"
@@ -87,7 +87,7 @@ func main() {
 		cors.Register,
 		requestid.Register,
 		gzip.Register,
-		logger.Register,
+		logplugin.Register,
 		status.Register,
 		health.Register)
 
