@@ -68,7 +68,7 @@ func main() {
 		status.Register,
 		health.Register)
 
-	srv.Mux().Get(c.App.Endpoint.Helloworld, Get(ctx))
+	srv.Get(c.App.Endpoint.Helloworld, Get(ctx))
 
 	srv.Serve(ctx)
 }

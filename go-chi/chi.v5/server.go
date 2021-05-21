@@ -29,8 +29,9 @@ type ConfigRouter struct {
 type Plugin func(context.Context) (*Config, error)
 
 type Server struct {
-	mux  *chi.Mux
-	opts *server.Options
+	mux        *chi.Mux
+	opts       *server.Options
+	httpServer *http.Server
 }
 
 func NewServer(ctx context.Context, plugins ...Plugin) *Server {
@@ -91,21 +92,100 @@ func NewServerWithOptions(ctx context.Context, opts *server.Options, plugins ...
 		}
 	}
 
-	return &Server{mux: mux, opts: opts}
+	httpServer := server.NewServerWithOptions(mux, opts)
+
+	return &Server{mux: mux, httpServer: httpServer, opts: opts}
 }
 
 func (s *Server) Mux() *chi.Mux {
 	return s.mux
 }
 
+func (s *Server) HttpServer() *http.Server {
+	return s.httpServer
+}
+
 func (s *Server) Serve(ctx context.Context) {
 
 	logger := log.FromContext(ctx)
 
-	httpServer := server.NewServerWithOptions(s.mux, s.opts)
+	logger.Infof("started chi http Server [%s]", s.httpServer.Addr)
+	logger.Error(s.httpServer.ListenAndServe())
+}
 
-	logger.Infof("started chi http Server [%s]", httpServer.Addr)
-	if err := httpServer.ListenAndServe(); err != nil {
-		logger.Fatalf("cannot start chi http server", err.Error())
-	}
+func (s *Server) Shutdown(ctx context.Context) {
+	logger := log.FromContext(ctx)
+	logger.Error(s.httpServer.Shutdown(ctx))
+}
+
+func (s *Server) Get(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Get(pattern, handlerFn)
+}
+
+func (s *Server) Post(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Post(pattern, handlerFn)
+}
+
+func (s *Server) Delete(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Delete(pattern, handlerFn)
+}
+
+func (s *Server) Head(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Head(pattern, handlerFn)
+}
+
+func (s *Server) Put(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Put(pattern, handlerFn)
+}
+
+func (s *Server) Patch(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Patch(pattern, handlerFn)
+}
+
+func (s *Server) Connect(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Connect(pattern, handlerFn)
+}
+
+func (s *Server) Group(fn func(r chi.Router)) {
+	s.mux.Group(fn)
+}
+
+func (s *Server) Route(pattern string, fn func(r chi.Router)) {
+	s.mux.Route(pattern, fn)
+}
+
+func (s *Server) Handle(pattern string, handler http.Handler) {
+	s.mux.Handle(pattern, handler)
+}
+
+func (s *Server) HandleFunc(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.HandleFunc(pattern, handlerFn)
+}
+
+func (s *Server) MethodFunc(method string, pattern string, handlerFn http.HandlerFunc) {
+	s.mux.MethodFunc(method, pattern, handlerFn)
+}
+
+func (s *Server) Method(method string, pattern string, handler http.Handler) {
+	s.mux.Method(method, pattern, handler)
+}
+
+func (s *Server) Match(ctx *chi.Context, method string, path string) {
+	s.mux.Match(ctx, method, path)
+}
+
+func (s *Server) Trace(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Trace(pattern, handlerFn)
+}
+
+func (s *Server) Use(middlewares ...func(http.Handler) http.Handler) {
+	s.mux.Use(middlewares...)
+}
+
+func (s *Server) With(middlewares ...func(http.Handler) http.Handler) chi.Router {
+	return s.mux.With(middlewares...)
+}
+
+func (s *Server) Options(pattern string, handlerFn http.HandlerFunc) {
+	s.mux.Options(pattern, handlerFn)
 }
