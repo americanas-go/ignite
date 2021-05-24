@@ -10,7 +10,7 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
-func Register(ctx context.Context, instance *e.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 	if !IsEnabled() {
 		return nil
 	}
@@ -21,21 +21,13 @@ func Register(ctx context.Context, instance *e.Echo) error {
 
 	logger.Tracef("configuring status router on %s in echo", statusRoute)
 
-	statusHandler := NewResourceStatusHandler()
-	instance.GET(statusRoute, statusHandler.Get)
+	server.GET(statusRoute, handler)
 
 	logger.Debugf("status router configured on %s in echo", statusRoute)
 
 	return nil
 }
 
-func NewResourceStatusHandler() *ResourceStatusHandler {
-	return &ResourceStatusHandler{}
-}
-
-type ResourceStatusHandler struct {
-}
-
-func (u *ResourceStatusHandler) Get(c e.Context) error {
-	return echo.JSON(c, http.StatusOK, response.NewResourceStatus(), nil)
+func handler(c e.Context) error {
+	return c.JSON(http.StatusOK, response.NewResourceStatus())
 }

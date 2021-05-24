@@ -3,12 +3,12 @@ package requestid
 import (
 	"context"
 
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/log"
-	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Register(ctx context.Context, instance *echo.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 	if !IsEnabled() {
 		return nil
 	}
@@ -17,7 +17,7 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 	logger.Trace("enabling requestID middleware in echo")
 
-	instance.Use(middleware.RequestID())
+	server.Use(middleware.RequestID())
 
 	logger.Debug("requestID middleware successfully enabled in echo")
 

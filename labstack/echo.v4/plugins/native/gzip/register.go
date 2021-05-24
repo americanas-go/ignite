@@ -3,12 +3,12 @@ package gzip
 import (
 	"context"
 
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/log"
-	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Register(ctx context.Context, instance *echo.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 	if !IsEnabled() {
 	}
 
@@ -16,7 +16,7 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 	logger.Trace("enabling gzip middleware in echo")
 
-	instance.Use(middleware.Gzip())
+	server.Use(middleware.Gzip())
 
 	logger.Debug("gzip middleware successfully enabled in echo")
 

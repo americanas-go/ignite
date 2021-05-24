@@ -13,7 +13,6 @@ import (
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/cors"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/gzip"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/requestid"
-	"github.com/americanas-go/log"
 	e "github.com/labstack/echo/v4"
 )
 
@@ -37,18 +36,16 @@ type Response struct {
 
 func Get(c e.Context) (err error) {
 
-	l := log.FromContext(context.Background())
-
 	resp := Response{
 		Message: "Hello World!!",
 	}
 
 	err = config.Unmarshal(&resp)
 	if err != nil {
-		l.Errorf(err.Error())
+		return err
 	}
 
-	return echo.JSON(c, http.StatusOK, resp, err)
+	return c.JSON(http.StatusOK, resp)
 }
 
 func main() {
@@ -74,7 +71,7 @@ func main() {
 		status.Register,
 		health.Register)
 
-	srv.Instance().GET(c.App.Endpoint.Helloworld, Get)
+	srv.GET(c.App.Endpoint.Helloworld, Get)
 
 	srv.Serve(ctx)
 }
