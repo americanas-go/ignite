@@ -3,12 +3,12 @@ package echo_pprof_v1
 import (
 	"context"
 
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/log"
 	echopprof "github.com/hiko1129/echo-pprof"
-	"github.com/labstack/echo/v4"
 )
 
-func Register(ctx context.Context, instance *echo.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 
 	if !IsEnabled() {
 		return nil
@@ -18,7 +18,7 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 	logger.Trace("configuring pprof in echo")
 
-	echopprof.Wrap(instance)
+	echopprof.Wrap(server.Instance())
 
 	logger.Debug("pprof configured with echo with success")
 

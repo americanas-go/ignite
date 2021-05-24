@@ -3,58 +3,34 @@ package main
 import (
 	"context"
 	"net/http"
+	"os"
 
 	"github.com/americanas-go/config"
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/go-resty/resty.v2"
 	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/health.v1"
 	logplugin "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/log.v1"
+	mserver "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/multi-server.v1"
 	status "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/rest-response.v1"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/cors"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/gzip"
 	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/native/requestid"
-	r "github.com/go-resty/resty/v2"
+	"github.com/americanas-go/multiserver"
 	e "github.com/labstack/echo/v4"
 )
 
-const Endpoint = "app.endpoint.google"
-
 func init() {
-	config.Add(Endpoint, "/google", "google endpoint")
-}
-
-type Config struct {
-	App struct {
-		Endpoint struct {
-			Google string
-		}
-	}
+	echo.ConfigAdd("ignite.echo2")
 }
 
 type Response struct {
 	Message string
 }
 
-type Handler struct {
-	client *r.Client
-}
-
-func NewHandler(client *r.Client) *Handler {
-	return &Handler{client: client}
-}
-
-func (h *Handler) Get(c e.Context) (err error) {
-
-	request := h.client.R().EnableTrace()
-
-	_, err = request.Get("http://google.com")
-	if err != nil {
-		return err
-	}
+func Get(c e.Context) (err error) {
 
 	resp := Response{
-		Message: "Hello Google!!",
+		Message: "Hello World!!",
 	}
 
 	err = config.Unmarshal(&resp)
@@ -67,20 +43,15 @@ func (h *Handler) Get(c e.Context) (err error) {
 
 func main() {
 
+	os.Setenv("IGNITE_ECHO2_PORT", "8086")
+
 	config.Load()
-
-	c := Config{}
-
-	err := config.Unmarshal(&c)
-	if err != nil {
-		panic(err)
-	}
-
-	ctx := context.Background()
 
 	ilog.New()
 
-	srv := echo.NewServer(ctx,
+	ctx1 := context.Background()
+
+	srv1 := echo.NewServer(ctx1,
 		cors.Register,
 		requestid.Register,
 		gzip.Register,
@@ -88,16 +59,25 @@ func main() {
 		status.Register,
 		health.Register)
 
-	// instance.AddErrorAdvice(customErrors.InvalidPayload, 400)
+	srv1.GET("/test", Get)
 
-	options := resty.Options{
-		Host: "http://www.google.com",
+	ctx2 := context.Background()
+
+	options2, err := echo.NewOptionsWithPath("ignite.echo2")
+	if err != nil {
+		panic(err)
 	}
 
-	client := resty.NewClientWithOptions(ctx, &options)
+	srv2 := echo.NewServerWithOptions(ctx2, options2,
+		cors.Register,
+		requestid.Register,
+		gzip.Register,
+		logplugin.Register,
+		status.Register,
+		mserver.Register,
+		health.Register)
 
-	handler := NewHandler(client)
-	srv.GET(c.App.Endpoint.Google, handler.Get)
+	srv2.GET("/test", Get)
 
-	srv.Serve(ctx)
+	multiserver.Serve(context.Background(), srv1, srv2)
 }

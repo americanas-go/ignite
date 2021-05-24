@@ -4,14 +4,10 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/labstack/echo.v4"
-	"github.com/americanas-go/log"
 	e "github.com/labstack/echo/v4"
 )
 
 func Get(c e.Context) (err error) {
-
-	logger := log.FromContext(c.Request().Context())
 
 	resp := Response{
 		Message: "Hello Google!!",
@@ -19,8 +15,8 @@ func Get(c e.Context) (err error) {
 
 	err = config.Unmarshal(&resp)
 	if err != nil {
-		logger.Errorf(err.Error())
+		return err
 	}
 
-	return echo.JSON(c, http.StatusOK, resp, err)
+	return c.JSON(http.StatusOK, resp)
 }

@@ -3,19 +3,19 @@ package echo
 import "github.com/americanas-go/config"
 
 const (
-	root              = "ignite.echo"
-	hideBanner        = root + ".hidebanner"
-	port              = root + ".port"
-	jsonPrettyEnabled = root + ".json.pretty.enabled"
-	PluginsRoot       = root + ".plugins"
+	root        = "ignite.echo"
+	hideBanner  = ".hidebanner"
+	tp          = ".type"
+	port        = ".port"
+	PluginsRoot = root + ".plugins"
 )
 
 func init() {
-	config.Add(hideBanner, true, "echo hide/show banner")
-	config.Add(port, 8080, "Server http port")
-	config.Add(jsonPrettyEnabled, false, "enable/disable json pretty response")
+	ConfigAdd(root)
 }
 
-func GetJSONPrettyEnabled() bool {
-	return config.Bool(jsonPrettyEnabled)
+func ConfigAdd(path string) {
+	config.Add(path+hideBanner, true, "echo hide/show banner")
+	config.Add(path+port, 8080, "Server http port")
+	config.Add(path+tp, "REST", "defines type for applicaton")
 }
