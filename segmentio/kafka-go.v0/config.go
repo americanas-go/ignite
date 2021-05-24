@@ -4,17 +4,21 @@ import "github.com/americanas-go/config"
 
 const (
 	root      = "ignite.kafka"
-	address   = root + ".address"
-	topic     = root + ".topic"
-	partition = root + ".partition"
-	network   = root + ".network"
-	connType  = root + ".connType"
+	address   = ".address"
+	topic     = ".topic"
+	partition = ".partition"
+	network   = ".network"
+	connType  = ".connType"
 )
 
 func init() {
-	config.Add(address, "localhost:9092", "defines host address")
-	config.Add(topic, "", "defines topic name")
-	config.Add(partition, 0, "defines partition number")
-	config.Add(network, "tcp", "defines network protocol")
-	config.Add(connType, "LEADER", "defines connectio type. LEADER, PARTITION or SERVER")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+address, "localhost:9092", "defines host address")
+	config.Add(path+topic, "", "defines topic name")
+	config.Add(path+partition, 0, "defines partition number")
+	config.Add(path+network, "tcp", "defines network protocol")
+	config.Add(path+connType, "LEADER", "defines connectio type. LEADER, PARTITION or SERVER")
 }

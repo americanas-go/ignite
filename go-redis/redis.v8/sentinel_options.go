@@ -1,7 +1,7 @@
 package redis
 
 type SentinelOptions struct {
-	MasterName string `config:"masterName"`
+	MasterName string
 	Addrs      []string
 	Password   string
 }

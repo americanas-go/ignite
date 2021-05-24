@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	root    = ginats.ExtRoot + ".newrelic"
+	root    = ginats.PluginsRoot + ".newrelic"
 	enabled = root + ".enabled"
 )
 
