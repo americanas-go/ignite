@@ -52,7 +52,7 @@ func main() {
 		status.Register,
 		health.Register)
 
-	srv.Instance().GET(c.App.Endpoint.Google, Get)
+	srv.GET(c.App.Endpoint.Google, Get)
 
 	srv.Serve(ctx)
 }
