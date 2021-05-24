@@ -5,6 +5,7 @@ import "github.com/americanas-go/config"
 type Options struct {
 	HideBanner bool
 	Port       int
+	Type       string
 	Json       struct {
 		Pretty struct {
 			Enabled bool

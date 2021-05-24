@@ -3,12 +3,13 @@ package bodydump
 import (
 	"context"
 
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/log"
-	"github.com/labstack/echo/v4"
+	e "github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Register(ctx context.Context, instance *echo.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 	if !IsEnabled() {
 		return nil
 	}
@@ -17,14 +18,14 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 	logger.Trace("enabling body dump middleware in echo")
 
-	instance.Use(middleware.BodyDump(bodyDump))
+	server.Use(middleware.BodyDump(bodyDump))
 
 	logger.Debug("body dump middleware successfully enabled in echo")
 
 	return nil
 }
 
-func bodyDump(c echo.Context, reqBody []byte, resBody []byte) {
+func bodyDump(c e.Context, reqBody []byte, resBody []byte) {
 	logger := log.FromContext(c.Request().Context())
 	logger.Info("request body --->")
 	logger.Info(string(reqBody))

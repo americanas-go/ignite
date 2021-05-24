@@ -3,12 +3,12 @@ package cors
 import (
 	"context"
 
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/log"
-	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Register(ctx context.Context, instance *echo.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 	if !IsEnabled() {
 		return nil
 	}
@@ -17,7 +17,7 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 	logger.Trace("enabling cors middleware in echo")
 
-	instance.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	server.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins:     GetAllowOrigins(),
 		AllowMethods:     GetAllowMethods(),
 		AllowHeaders:     GetAllowHeaders(),

@@ -5,11 +5,12 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/log"
-	"github.com/labstack/echo/v4"
+	e "github.com/labstack/echo/v4"
 )
 
-func Register(ctx context.Context, instance *echo.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 	if !IsEnabled() {
 		return nil
 	}
@@ -18,7 +19,7 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 	logger.Trace("enabling logger middleware in echo")
 
-	instance.Use(loggerMiddleware(Level()))
+	server.Use(loggerMiddleware(Level()))
 
 	logger.Debug("logger middleware successfully enabled in echo")
 
@@ -26,18 +27,18 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 }
 
 // loggerMiddleware returns a middleware that logs HTTP requests.
-func loggerMiddleware(level string) echo.MiddlewareFunc {
-	return func(next echo.HandlerFunc) echo.HandlerFunc {
-		return func(c echo.Context) error {
+func loggerMiddleware(level string) e.MiddlewareFunc {
+	return func(next e.HandlerFunc) e.HandlerFunc {
+		return func(c e.Context) error {
 			req := c.Request()
 			res := c.Response()
 			start := time.Now()
 
 			ctx := req.Context()
 
-			id := req.Header.Get(echo.HeaderXRequestID)
+			id := req.Header.Get(e.HeaderXRequestID)
 			if id == "" {
-				id = res.Header().Get(echo.HeaderXRequestID)
+				id = res.Header().Get(e.HeaderXRequestID)
 			}
 
 			logger := log.FromContext(ctx).
@@ -54,7 +55,7 @@ func loggerMiddleware(level string) echo.MiddlewareFunc {
 
 			stop := time.Now()
 
-			reqSize := req.Header.Get(echo.HeaderContentLength)
+			reqSize := req.Header.Get(e.HeaderContentLength)
 			if reqSize == "" {
 				reqSize = "0"
 			}
