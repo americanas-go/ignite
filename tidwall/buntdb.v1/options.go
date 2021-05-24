@@ -9,7 +9,7 @@ type Options struct {
 		Percentage int
 		MinSize    int
 		Disabled   bool
-	} `config:"autoShrink"`
+	}
 }
 
 func NewOptions() (*Options, error) {

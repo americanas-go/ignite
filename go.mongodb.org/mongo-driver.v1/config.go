@@ -4,15 +4,19 @@ import "github.com/americanas-go/config"
 
 const (
 	root        = "ignite.mongo"
-	uri         = root + ".uri"
-	authRoot    = root + ".auth"
+	uri         = ".uri"
+	authRoot    = ".auth"
 	username    = authRoot + ".username"
 	password    = authRoot + ".password"
 	PluginsRoot = root + ".plugins"
 )
 
 func init() {
-	config.Add(uri, "mongodb://localhost:27017/temp", "define mongodb uri")
-	config.Add(username, "", "define mongodb username", config.WithHide())
-	config.Add(password, "", "define mongodb password", config.WithHide())
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+uri, "mongodb://localhost:27017/temp", "define mongodb uri")
+	config.Add(path+username, "", "define mongodb username", config.WithHide())
+	config.Add(path+password, "", "define mongodb password", config.WithHide())
 }

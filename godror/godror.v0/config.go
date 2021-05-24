@@ -8,17 +8,20 @@ import (
 
 const (
 	root            = "ignite.godror"
-	dataSourceName  = root + ".dataSourceName"
-	connMaxLifetime = root + ".connMaxLifetime"
-	maxIdleConns    = root + ".maxIdleConns"
-	maxOpenConns    = root + ".maxOpenConns"
+	dataSourceName  = ".dataSourceName"
+	connMaxLifetime = ".connMaxLifetime"
+	maxIdleConns    = ".maxIdleConns"
+	maxOpenConns    = ".maxOpenConns"
 	PluginsRoot     = root + ".plugins"
 )
 
 func init() {
+	ConfigAdd(root)
+}
 
-	config.Add(dataSourceName, "", "database name and connection information")
-	config.Add(connMaxLifetime, 0*time.Second, "sets the maximum amount of time a connection may be reused. If d <= 0, connections are reused forever")
-	config.Add(maxIdleConns, 2, "sets the maximum number of connections in the idle connection pool.")
-	config.Add(maxOpenConns, 5, "sets the maximum number of open connections to the database.")
+func ConfigAdd(path string) {
+	config.Add(path+dataSourceName, "", "database name and connection information")
+	config.Add(path+connMaxLifetime, 0*time.Second, "sets the maximum amount of time a connection may be reused. If d <= 0, connections are reused forever")
+	config.Add(path+maxIdleConns, 2, "sets the maximum number of connections in the idle connection pool.")
+	config.Add(path+maxOpenConns, 5, "sets the maximum number of open connections to the database.")
 }

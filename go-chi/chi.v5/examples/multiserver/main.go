@@ -44,7 +44,7 @@ type LocalServer struct {
 
 func (s *LocalServer) Serve(ctx context.Context) {
 	time.Sleep(30 * time.Second)
-	fmt.Printf("acabei")
+	fmt.Printf("finished")
 }
 
 func (s *LocalServer) Shutdown(ctx context.Context) {

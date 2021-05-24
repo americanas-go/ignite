@@ -4,9 +4,13 @@ import "github.com/americanas-go/config"
 
 const (
 	root           = "ignite.k8s"
-	kubeConfigPath = root + ".kubeConfigPath"
+	kubeConfigPath = ".kubeConfigPath"
 )
 
 func init() {
-	config.Add(kubeConfigPath, "~/.kube/config", "defines kubeconfig request")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+kubeConfigPath, "~/.kube/config", "defines kubeconfig request")
 }

@@ -4,9 +4,13 @@ import "github.com/americanas-go/config"
 
 const (
 	root      = "ignite.freecache"
-	cacheSize = root + ".cacheSize"
+	cacheSize = ".cacheSize"
 )
 
 func init() {
-	config.Add(cacheSize, 100*1024*1024, "The cache size will be set to 512KB at minimum")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+cacheSize, 100*1024*1024, "The cache size will be set to 512KB at minimum")
 }
