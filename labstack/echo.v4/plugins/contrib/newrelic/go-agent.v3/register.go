@@ -3,13 +3,14 @@ package newrelic
 import (
 	"context"
 
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
 	"github.com/americanas-go/log"
-	"github.com/labstack/echo/v4"
+	e "github.com/labstack/echo/v4"
 	"github.com/newrelic/go-agent/v3/integrations/nrecho-v4"
 )
 
-func Register(ctx context.Context, instance *echo.Echo) error {
+func Register(ctx context.Context, server *echo.Server) error {
 
 	if !IsEnabled() || !newrelic.IsEnabled() {
 		return nil
@@ -19,7 +20,7 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 	logger.Trace("enabling newrelic middleware in echo")
 
-	instance.Use(nrecho.Middleware(newrelic.Application()))
+	server.Use(nrecho.Middleware(newrelic.Application()))
 
 	logger.Debug("newrelic middleware successfully enabled in echo")
 
@@ -27,7 +28,7 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 
 		logger.Trace("enabling requestID newrelic middleware in echo")
 
-		instance.Use(requestIDMiddleware())
+		server.Use(requestIDMiddleware())
 
 		logger.Debug("requestID newrelic middleware successfully enabled in echo")
 	}
@@ -35,14 +36,14 @@ func Register(ctx context.Context, instance *echo.Echo) error {
 	return nil
 }
 
-func requestIDMiddleware() echo.MiddlewareFunc {
-	return func(next echo.HandlerFunc) echo.HandlerFunc {
-		return func(c echo.Context) (err error) {
+func requestIDMiddleware() e.MiddlewareFunc {
+	return func(next e.HandlerFunc) e.HandlerFunc {
+		return func(c e.Context) (err error) {
 			ctx := c.Request().Context()
 			txn := newrelic.FromContext(ctx)
-			reqId := c.Request().Header.Get(echo.HeaderXRequestID)
+			reqId := c.Request().Header.Get(e.HeaderXRequestID)
 			if reqId == "" {
-				reqId = c.Response().Header().Get(echo.HeaderXRequestID)
+				reqId = c.Response().Header().Get(e.HeaderXRequestID)
 			}
 
 			txn.AddAttribute("request.id", reqId)
