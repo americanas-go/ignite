@@ -10,5 +10,5 @@ func NewLogger() log.Logger {
 	if err != nil {
 		panic(err)
 	}
-	return zerolog.NewLogger(options)
+	return zerolog.NewLoggerWithOptions(options)
 }

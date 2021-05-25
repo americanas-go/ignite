@@ -7,10 +7,10 @@ import (
 )
 
 type Options struct {
-	DataSourceName  string        `config:"datasourcename"`
-	ConnMaxLifetime time.Duration `config:"connmaxlifetime"`
-	MaxIdleConns    int           `config:"maxidleconns"`
-	MaxOpenConns    int           `config:"maxopenconns"`
+	DataSourceName  string
+	ConnMaxLifetime time.Duration
+	MaxIdleConns    int
+	MaxOpenConns    int
 }
 
 func NewOptions() (*Options, error) {

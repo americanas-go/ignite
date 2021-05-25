@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	root        = ginats.ExtRoot + ".health"
+	root        = ginats.PluginsRoot + ".health"
 	name        = root + ".name"
 	description = root + ".description"
 	required    = root + ".required"

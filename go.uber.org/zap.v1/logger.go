@@ -10,5 +10,5 @@ func NewLogger() log.Logger {
 	if err != nil {
 		panic(err)
 	}
-	return zap.NewLogger(options)
+	return zap.NewLoggerWithOptions(options)
 }
