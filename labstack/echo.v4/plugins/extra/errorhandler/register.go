@@ -2,6 +2,7 @@ package errorhandler
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/americanas-go/errors"
@@ -111,7 +112,7 @@ func errorHandlerJSON(err error, c e.Context) {
 		case *e.HTTPError:
 			er = c.JSON(
 				t.Code,
-				response.Error{HttpStatusCode: t.Code, Message: t.Error()})
+				response.Error{HttpStatusCode: t.Code, Message: fmt.Sprintf("%v", t.Message)})
 		default:
 			er = c.JSON(http.StatusInternalServerError,
 				response.Error{HttpStatusCode: http.StatusInternalServerError, Message: t.Error()})
