@@ -100,7 +100,7 @@ func addResource(o *Options) {
 	case NATS:
 		// TODO: https://gocloud.dev/howto/pubsub/publish/#nats
 	case PUBSUB:
-		// TODO: https://gocloud.dev/howto/pubsub/publish/#gcp
+		o.Resource = addPUBSUBResource(o.Resource)
 	default:
 		o.Resource = addMEMResource(o.Resource)
 	}
@@ -117,6 +117,10 @@ func addSQSResource(url string) string {
 
 func addSNSResource(arn string) string {
 	return "awssns:///" + arn
+}
+
+func addPUBSUBResource(url string) string {
+	return "gcppubsub://" + url
 }
 
 func appendRegion(add, region string) string {
