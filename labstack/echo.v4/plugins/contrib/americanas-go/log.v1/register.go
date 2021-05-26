@@ -85,7 +85,7 @@ func loggerMiddleware(level string) e.MiddlewareFunc {
 
 			var err error
 			if err = next(c); err != nil {
-				return err
+				c.Error(err)
 			}
 
 			return nil

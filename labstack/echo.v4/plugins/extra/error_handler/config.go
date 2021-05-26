@@ -1,4 +1,4 @@
-package errorhandler
+package error_handler
 
 import (
 	"github.com/americanas-go/config"
@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	enabled = echo.PluginsRoot + ".errorhandler.enabled"
+	enabled = echo.PluginsRoot + ".errorHandler.enabled"
 )
 
 func init() {
