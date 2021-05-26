@@ -30,6 +30,7 @@ func Register(ctx context.Context, server *echo.Server) error {
 func loggerMiddleware(level string) e.MiddlewareFunc {
 	return func(next e.HandlerFunc) e.HandlerFunc {
 		return func(c e.Context) error {
+
 			req := c.Request()
 			res := c.Response()
 			start := time.Now()
@@ -48,44 +49,46 @@ func loggerMiddleware(level string) e.MiddlewareFunc {
 			ctx = logger.ToContext(ctx)
 			c.SetRequest(req.WithContext(ctx))
 
+			defer func() {
+				stop := time.Now()
+
+				reqSize := req.Header.Get(e.HeaderContentLength)
+				if reqSize == "" {
+					reqSize = "0"
+				}
+
+				var method func(format string, args ...interface{})
+
+				switch level {
+				case "TRACE":
+					method = logger.Tracef
+				case "INFO":
+					method = logger.Infof
+				default:
+					method = logger.Debugf
+				}
+
+				method("%s %s %s %-7s %s %3d %s %s %13v %s %s",
+					id,
+					c.RealIP(),
+					req.Host,
+					req.Method,
+					req.RequestURI,
+					res.Status,
+					reqSize,
+					strconv.FormatInt(res.Size, 10),
+					stop.Sub(start).String(),
+					req.Referer(),
+					req.UserAgent(),
+				)
+			}()
+
 			var err error
 			if err = next(c); err != nil {
-				c.Error(err)
+				return err
 			}
 
-			stop := time.Now()
-
-			reqSize := req.Header.Get(e.HeaderContentLength)
-			if reqSize == "" {
-				reqSize = "0"
-			}
-
-			var method func(format string, args ...interface{})
-
-			switch level {
-			case "TRACE":
-				method = logger.Tracef
-			case "INFO":
-				method = logger.Infof
-			default:
-				method = logger.Debugf
-			}
-
-			method("%s %s %s %-7s %s %3d %s %s %13v %s %s",
-				id,
-				c.RealIP(),
-				req.Host,
-				req.Method,
-				req.RequestURI,
-				res.Status,
-				reqSize,
-				strconv.FormatInt(res.Size, 10),
-				stop.Sub(start).String(),
-				req.Referer(),
-				req.UserAgent(),
-			)
-
-			return err
+			return nil
 		}
 	}
 }
