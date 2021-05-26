@@ -6,6 +6,7 @@ import (
 	"github.com/americanas-go/log"
 	v2 "github.com/cloudevents/sdk-go/v2"
 	"github.com/cloudevents/sdk-go/v2/client"
+	"github.com/cloudevents/sdk-go/v2/protocol/http"
 )
 
 type Client struct {
@@ -13,9 +14,20 @@ type Client struct {
 	client  client.Client
 }
 
-func NewDefaultClient(ctx context.Context, handler Handler) *Client {
+func NewHTTP(ctx context.Context, handler Handler, opts ...http.Option) *Client {
 	logger := log.FromContext(ctx)
-	c, err := v2.NewDefaultClient()
+	c, err := client.NewHTTP(opts...)
+	if err != nil {
+		logger.Panic(err.Error())
+	}
+	return &Client{handler: handler, client: c}
+}
+
+// NewDefault has been replaced by NewHTTP
+// Deprecated. To get the same as NewDefault provided, please use NewHTTP with
+func NewDefaultClient(ctx context.Context, handler Handler, opts ...http.Option) *Client {
+	logger := log.FromContext(ctx)
+	c, err := v2.NewDefaultClient(opts...)
 	if err != nil {
 		logger.Panic(err.Error())
 	}
