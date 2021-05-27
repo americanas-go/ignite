@@ -7,7 +7,7 @@ go 1.16
 
 require (
 	github.com/Microsoft/go-winio v0.5.0 // indirect
-	github.com/americanas-go/config v1.1.0
+	github.com/americanas-go/config v1.2.0
 	github.com/americanas-go/errors v1.0.0
 	github.com/americanas-go/health v1.0.0
 	github.com/americanas-go/log v1.3.0
