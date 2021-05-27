@@ -15,6 +15,14 @@ func Error(err error) error {
 		return status.Errorf(codes.InvalidArgument, err.Error())
 	} else if errors.IsServiceUnavailable(err) {
 		return status.Errorf(codes.Unavailable, err.Error())
+	} else if errors.IsConflict(err) || errors.IsAlreadyExists(err) {
+		return status.Errorf(codes.AlreadyExists, err.Error())
+	} else if errors.IsNotImplemented(err) || errors.IsNotProvisioned(err) {
+		return status.Errorf(codes.Unimplemented, err.Error())
+	} else if errors.IsUnauthorized(err) {
+		return status.Errorf(codes.Unauthenticated, err.Error())
+	} else if errors.IsForbidden(err) {
+		return status.Errorf(codes.PermissionDenied, err.Error())
 	} else {
 		switch t := err.(type) {
 		case validator.ValidationErrors:
