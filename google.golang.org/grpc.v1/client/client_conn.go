@@ -16,6 +16,14 @@ import (
 
 type Plugin func(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption)
 
+func NewClientConn(ctx context.Context, plugins ...Plugin) *grpc.ClientConn {
+	opt, err := NewOptions()
+	if err != nil {
+		panic(err)
+	}
+	return NewClientConnWithOptions(ctx, opt, plugins...)
+}
+
 func NewClientConnWithOptions(ctx context.Context, options *Options, plugins ...Plugin) *grpc.ClientConn {
 
 	var err error
