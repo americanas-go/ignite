@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
+	"github.com/americanas-go/ignite/go.uber.org/fx.v1/module/americanas-go/multiserver.v1"
 	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	serverfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/core/server"
 	"github.com/americanas-go/ignite/gofiber/fiber.v2"
 	server "github.com/americanas-go/multiserver"
 	f "github.com/gofiber/fiber/v2"
@@ -36,7 +36,7 @@ func Module() fx.Option {
 			),
 			fx.Provide(
 				fx.Annotated{
-					Group: serverfx.ServersGroupKey,
+					Group: multiserver.ServersGroupKey,
 					Target: func(srv *fiber.Server) server.Server {
 						return srv
 					},

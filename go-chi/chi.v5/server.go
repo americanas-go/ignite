@@ -106,16 +106,17 @@ func (s *Server) HttpServer() *http.Server {
 }
 
 func (s *Server) Serve(ctx context.Context) {
-
 	logger := log.FromContext(ctx)
-
 	logger.Infof("started chi http Server [%s]", s.httpServer.Addr)
 	logger.Error(s.httpServer.ListenAndServe())
 }
 
 func (s *Server) Shutdown(ctx context.Context) {
 	logger := log.FromContext(ctx)
-	logger.Error(s.httpServer.Shutdown(ctx))
+	if err := s.httpServer.Shutdown(ctx); err != nil {
+		log.Error(err)
+	}
+	logger.Info("stopped chi http Server")
 }
 
 func (s *Server) Get(pattern string, handlerFn http.HandlerFunc) {

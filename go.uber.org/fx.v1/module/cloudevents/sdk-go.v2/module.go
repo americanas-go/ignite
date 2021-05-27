@@ -18,7 +18,7 @@ func Module() fx.Option {
 		options = fx.Options(
 			contextfx.Module(),
 			fx.Provide(
-				cloudevents.NewDefaultClient,
+				cloudevents.NewHTTP,
 			),
 		)
 	})

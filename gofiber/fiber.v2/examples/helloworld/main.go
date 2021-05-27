@@ -44,11 +44,6 @@ func (h *Handler) Get(c *f.Ctx) (err error) {
 		Message: "Hello World!!",
 	}
 
-	err = config.Unmarshal(&resp)
-	if err != nil {
-		return err
-	}
-
 	return c.Status(http.StatusOK).JSON(resp)
 }
 

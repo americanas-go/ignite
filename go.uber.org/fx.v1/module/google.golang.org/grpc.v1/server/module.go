@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
+	"github.com/americanas-go/ignite/go.uber.org/fx.v1/module/americanas-go/multiserver.v1"
 	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	serverfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/core/server"
 	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server"
 	s "github.com/americanas-go/multiserver"
 	"go.uber.org/fx"
@@ -37,7 +37,7 @@ func Module() fx.Option {
 					return srv.ServiceRegistrar()
 				},
 				fx.Annotated{
-					Group: serverfx.ServersGroupKey,
+					Group: multiserver.ServersGroupKey,
 					Target: func(srv *server.Server) s.Server {
 						return srv
 					},
