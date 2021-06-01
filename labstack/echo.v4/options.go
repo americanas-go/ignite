@@ -3,10 +3,23 @@ package echo
 import "github.com/americanas-go/config"
 
 type Options struct {
-	HideBanner bool
-	Port       int
-	Type       string
-	Json       struct {
+	HideBanner   bool
+	DisableHTTP2 bool `config:"disableHTTP2"`
+	Port         int
+	Type         string
+	Protocol     string
+	TLS          struct {
+		Enabled bool
+		Type    string
+		Auto    struct {
+			Host string
+		}
+		File struct {
+			Cert string
+			Key  string
+		}
+	} `config:"tls"`
+	Json struct {
 		Pretty struct {
 			Enabled bool
 		}
