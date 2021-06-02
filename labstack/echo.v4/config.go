@@ -26,7 +26,7 @@ const (
 
 func init() {
 	ConfigAdd(root)
-	server.ConfigAdd(hc2Root)
+	server.ConfigAdd(root + hc2Root)
 }
 
 func ConfigAdd(path string) {
