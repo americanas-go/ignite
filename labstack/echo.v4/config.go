@@ -26,10 +26,10 @@ const (
 
 func init() {
 	ConfigAdd(root)
-	server.ConfigAdd(hc2Root)
 }
 
 func ConfigAdd(path string) {
+	server.ConfigAdd(path + hc2Root)
 	config.Add(path+hideBanner, true, "hide/show banner")
 	config.Add(path+disableHTTP2, false, "disable http2")
 	config.Add(path+port, 8080, "Server http port")
