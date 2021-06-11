@@ -8,10 +8,19 @@ type Options struct {
 	InitialWindowSize     int32
 	InitialConnWindowSize int32
 	TLS                   struct {
-		Enabled  bool
-		CertFile string
-		KeyFile  string
-		CAFile   string `config:"caFile"`
+		Enabled bool
+		Auth    struct {
+			Type string
+		}
+		Type string
+		Auto struct {
+			Host string
+		}
+		File struct {
+			Cert string
+			Key  string
+			CA   string `config:"ca"`
+		}
 	} `config:"tls"`
 }
 
