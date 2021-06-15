@@ -14,13 +14,13 @@ require (
 	github.com/americanas-go/multiserver v1.1.0
 	github.com/americanas-go/rest-response v1.0.2
 	github.com/ansrivas/fiberprometheus/v2 v2.1.2
-	github.com/aws/aws-sdk-go-v2 v1.4.0
-	github.com/aws/aws-sdk-go-v2/config v1.1.7
-	github.com/aws/aws-sdk-go-v2/credentials v1.1.7
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.2.3
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.6.0
-	github.com/aws/aws-sdk-go-v2/service/sns v1.3.0
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.3.2
+	github.com/aws/aws-sdk-go-v2 v1.6.0
+	github.com/aws/aws-sdk-go-v2/config v1.3.0
+	github.com/aws/aws-sdk-go-v2/credentials v1.2.1
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.4.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.10.0
+	github.com/aws/aws-sdk-go-v2/service/sns v1.5.0
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.4.2
 	github.com/cheekybits/is v0.0.0-20150225183255-68e9c0620927 // indirect
 	github.com/cloudevents/sdk-go/v2 v2.4.1
 	github.com/coocood/freecache v1.1.1
