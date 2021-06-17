@@ -33,8 +33,13 @@ func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plug
 		return aws.Config{}
 	}
 
-	cfg.Region = options.DefaultRegion
-	cfg.Credentials = credentials.NewStaticCredentialsProvider(options.AccessKeyId, options.SecretAccessKey, options.SessionToken)
+	if options.DefaultRegion != "" {
+		cfg.Region = options.DefaultRegion
+	}
+
+	if options.AccessKeyId != "" && options.SecretAccessKey != "" {
+		cfg.Credentials = credentials.NewStaticCredentialsProvider(options.AccessKeyId, options.SecretAccessKey, options.SessionToken)
+	}
 
 	httpClient := client.NewClientWithOptions(ctx, &options.HttpClient)
 
