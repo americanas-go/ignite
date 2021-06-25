@@ -66,7 +66,7 @@ func (c *client) ResolveQueueUrl(ctx context.Context, queueName string) (*string
 	}
 
 	if result == nil || result.QueueUrl == nil {
-		return nil, errors.New("error resolving sqs queue url")
+		return nil, errors.Errorf("sqs queue %s not found", queueName)
 	}
 
 	c.queueUrls[queueName] = result.QueueUrl
