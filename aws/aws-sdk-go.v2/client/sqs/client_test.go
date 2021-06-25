@@ -1,0 +1,268 @@
+package sqs
+
+import (
+	"context"
+	"reflect"
+	"testing"
+
+	"github.com/americanas-go/errors"
+	iglogrus "github.com/americanas-go/log/contrib/sirupsen/logrus.v1"
+	"github.com/aws/aws-sdk-go-v2/service/sqs"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/suite"
+)
+
+type ServiceProductSuite struct {
+	suite.Suite
+}
+
+func TestServiceProductSuite(t *testing.T) {
+	suite.Run(t, new(ServiceProductSuite))
+}
+
+func (s *ServiceProductSuite) SetupSuite() {
+	iglogrus.NewLogger()
+}
+
+func (s *ServiceProductSuite) TestNewClient() {
+
+	var sqsCli *sqs.Client
+
+	tt := []struct {
+		name   string
+		client *sqs.Client
+		want   *client
+	}{
+		{
+			name:   "success",
+			client: sqsCli,
+			want:   &client{sqsCli, map[string]*string{}},
+		},
+	}
+
+	for _, t := range tt {
+		s.Run(t.name, func() {
+			got := NewClient(t.client)
+			s.Assert().True(reflect.DeepEqual(got, t.want), "got  %v\nwant %v", got, t.want)
+		})
+	}
+}
+
+func (s *ServiceProductSuite) TestPublish() {
+
+	tt := []struct {
+		name    string
+		in      *sqs.SendMessageInput
+		mock    func(*mockSqsClient)
+		cli     func(sqsClient) *client
+		wantErr func(error) bool
+	}{
+		{
+			name: "when success",
+			in:   &sqs.SendMessageInput{},
+			mock: func(m *mockSqsClient) {
+				m.On("SendMessage", mock.Anything, mock.Anything).Once().Return(&sqs.SendMessageOutput{
+					MessageId: aws.String("123"),
+				}, nil)
+			},
+			cli: func(m sqsClient) *client {
+				return &client{m, map[string]*string{}}
+			},
+			wantErr: func(e error) bool {
+				return e == nil
+			},
+		},
+		{
+			name: "when error",
+			in:   &sqs.SendMessageInput{},
+			mock: func(m *mockSqsClient) {
+				m.On("SendMessage", mock.Anything, mock.Anything).Once().Return(nil, errors.New("OPs!"))
+			},
+			cli: func(m sqsClient) *client {
+				return &client{m, map[string]*string{}}
+			},
+			wantErr: func(e error) bool {
+				return e != nil
+			},
+		},
+	}
+
+	for _, t := range tt {
+		s.Run(t.name, func() {
+			m := &mockSqsClient{}
+			t.mock(m)
+			cli := t.cli(m)
+			err := cli.Publish(context.TODO(), t.in)
+			s.Assert().True(t.wantErr(err), "unexpected error %v", err)
+			m.AssertExpectations(s.T())
+		})
+	}
+}
+
+func (s *ServiceProductSuite) TestResolveQueueUrl() {
+
+	tt := []struct {
+		name    string
+		in      string
+		mock    func(*mockSqsClient)
+		cli     func(sqsClient) *client
+		want    *string
+		wantErr func(error) bool
+	}{
+		{
+			name: "when gets queueUrl from cache",
+			in:   "queueName",
+			mock: func(m *mockSqsClient) {
+			},
+			cli: func(m sqsClient) *client {
+				return &client{m, map[string]*string{"queueName": aws.String("blah")}}
+			},
+			want: aws.String("blah"),
+			wantErr: func(e error) bool {
+				return e == nil
+			},
+		},
+		{
+			name: "when gets queueUrl for the very first time",
+			in:   "queueName",
+			mock: func(m *mockSqsClient) {
+				m.On("GetQueueUrl", mock.Anything, mock.Anything).Once().Return(&sqs.GetQueueUrlOutput{
+					QueueUrl: aws.String("Blah"),
+				}, nil)
+			},
+			cli: func(m sqsClient) *client {
+				return &client{m, map[string]*string{}}
+			},
+			want: aws.String("Blah"),
+			wantErr: func(e error) bool {
+				return e == nil
+			},
+		},
+		{
+			name: "when gets queueUrl for the very first time and an error occurs",
+			in:   "queueName",
+			mock: func(m *mockSqsClient) {
+				m.On("GetQueueUrl", mock.Anything, mock.Anything).
+					Once().Return(nil, errors.New("ops!"))
+			},
+			cli: func(m sqsClient) *client {
+				return &client{m, map[string]*string{}}
+			},
+			want: nil,
+			wantErr: func(e error) bool {
+				return e != nil
+			},
+		},
+		{
+			name: "when gets queueUrl for the very first time and response from aws is nil",
+			in:   "queueName",
+			mock: func(m *mockSqsClient) {
+				m.On("GetQueueUrl", mock.Anything, mock.Anything).
+					Once().Return(nil, nil)
+			},
+			cli: func(m sqsClient) *client {
+				return &client{m, map[string]*string{}}
+			},
+			want: nil,
+			wantErr: func(e error) bool {
+				return e != nil
+			},
+		},
+		{
+			name: "when gets queueUrl for the very first time and response from aws has QueueUrl as nil",
+			in:   "queueName",
+			mock: func(m *mockSqsClient) {
+				m.On("GetQueueUrl", mock.Anything, mock.Anything).
+					Once().Return(&sqs.GetQueueUrlOutput{
+					QueueUrl: nil,
+				}, nil)
+			},
+			cli: func(m sqsClient) *client {
+				return &client{m, map[string]*string{}}
+			},
+			want: nil,
+			wantErr: func(e error) bool {
+				return e != nil
+			},
+		},
+	}
+
+	for _, t := range tt {
+		s.Run(t.name, func() {
+			m := &mockSqsClient{}
+			t.mock(m)
+			cli := t.cli(m)
+			got, err := cli.ResolveQueueUrl(context.TODO(), t.in)
+			s.Assert().True(t.wantErr(err), "unexpected error %v", err)
+			s.Assert().True(reflect.DeepEqual(got, t.want), "got  %v\nwant %v", got, t.want)
+			m.AssertExpectations(s.T())
+		})
+	}
+}
+
+// MOCK ---------------------------------------------------------------------------------------
+// sqsClient is an autogenerated mock type for the sqsClient type
+type mockSqsClient struct {
+	mock.Mock
+}
+
+// GetQueueUrl provides a mock function with given fields: ctx, params, optFns
+func (_m *mockSqsClient) GetQueueUrl(ctx context.Context, params *sqs.GetQueueUrlInput, optFns ...func(*sqs.Options)) (*sqs.GetQueueUrlOutput, error) {
+	_va := make([]interface{}, len(optFns))
+	for _i := range optFns {
+		_va[_i] = optFns[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, params)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *sqs.GetQueueUrlOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *sqs.GetQueueUrlInput, ...func(*sqs.Options)) *sqs.GetQueueUrlOutput); ok {
+		r0 = rf(ctx, params, optFns...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*sqs.GetQueueUrlOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *sqs.GetQueueUrlInput, ...func(*sqs.Options)) error); ok {
+		r1 = rf(ctx, params, optFns...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SendMessage provides a mock function with given fields: ctx, params, optFns
+func (_m *mockSqsClient) SendMessage(ctx context.Context, params *sqs.SendMessageInput, optFns ...func(*sqs.Options)) (*sqs.SendMessageOutput, error) {
+	_va := make([]interface{}, len(optFns))
+	for _i := range optFns {
+		_va[_i] = optFns[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, ctx, params)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *sqs.SendMessageOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *sqs.SendMessageInput, ...func(*sqs.Options)) *sqs.SendMessageOutput); ok {
+		r0 = rf(ctx, params, optFns...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*sqs.SendMessageOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *sqs.SendMessageInput, ...func(*sqs.Options)) error); ok {
+		r1 = rf(ctx, params, optFns...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
