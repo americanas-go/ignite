@@ -13,19 +13,19 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
-type ServiceProductSuite struct {
+type SqsClientSuite struct {
 	suite.Suite
 }
 
 func TestServiceProductSuite(t *testing.T) {
-	suite.Run(t, new(ServiceProductSuite))
+	suite.Run(t, new(SqsClientSuite))
 }
 
-func (s *ServiceProductSuite) SetupSuite() {
+func (s *SqsClientSuite) SetupSuite() {
 	iglogrus.NewLogger()
 }
 
-func (s *ServiceProductSuite) TestNewClient() {
+func (s *SqsClientSuite) TestNewClient() {
 
 	var sqsCli *sqs.Client
 
@@ -49,7 +49,7 @@ func (s *ServiceProductSuite) TestNewClient() {
 	}
 }
 
-func (s *ServiceProductSuite) TestPublish() {
+func (s *SqsClientSuite) TestPublish() {
 
 	tt := []struct {
 		name    string
@@ -100,7 +100,7 @@ func (s *ServiceProductSuite) TestPublish() {
 	}
 }
 
-func (s *ServiceProductSuite) TestResolveQueueUrl() {
+func (s *SqsClientSuite) TestResolveQueueUrl() {
 
 	tt := []struct {
 		name    string
