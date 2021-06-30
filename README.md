@@ -1,11 +1,11 @@
 ignite
 =======
 
-An easy way to makes dependency injection and eliminates the need to use the `func init()`. But retains the flexibility of being able to change the default settings using a custom `func init()`.
+An easy way to makes dependency injection and eliminates the need to use the `func init()`. But retains the flexibility of being able to change the default settings using a custom `func init()` or use config files.
 
-Contains the main libraries of different types: log, cloud computing, event data, cache, cloud monitoring, search engine, database, http client/server, dependency injection, pub/sub, rpc, data query, ftp client, kubernetes client , web framework, messaging system client, managing goroutines, software bus framework, command-line interface, etc.
+Contains factories for the main libraries of different domains: log, cloud computing, event data, cache, cloud monitoring, search engine, database, http client/server, dependency injection, pub/sub, rpc, data query, ftp client, kubernetes client , web framework, messaging system client, managing goroutines, software bus framework, command-line interface, etc.
 
-To use just follow the examples in each package.
+To use just follow the examples contained in each package.
 
 Installation
 ------------
