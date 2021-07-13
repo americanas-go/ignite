@@ -49,7 +49,10 @@ func errorHandler(server *echo.Server) func(err error, c e.Context) {
 func errorConverter(next e.HandlerFunc) e.HandlerFunc {
 	return func(c e.Context) error {
 		err := next(c)
-		status := echo.ErrorStatusCode(err)
-		return e.NewHTTPError(status, err.Error())
+		if err != nil {
+			status := echo.ErrorStatusCode(err)
+			return e.NewHTTPError(status, err.Error())
+		}
+		return nil
 	}
 }
