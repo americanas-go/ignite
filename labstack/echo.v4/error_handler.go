@@ -45,7 +45,7 @@ func errorHandler(err error, c e.Context, contentType string) {
 			er = c.String(status, message)
 		}
 	}
-	if err != nil {
+	if er != nil {
 		c.Logger().Error(er)
 	}
 }
