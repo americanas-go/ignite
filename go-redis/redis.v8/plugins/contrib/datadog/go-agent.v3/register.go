@@ -19,7 +19,10 @@ func Register(ctx context.Context, client *redis.Client) error {
 
 	logger.Trace("integrating redis in datadog")
 
-	redistrace.WrapClient(client)
+	redistrace.WrapClient(client,
+		redistrace.WithServiceName(datadog.Service()),
+		redistrace.WithAnalyticsRate(datadog.AnalyticsRate()),
+	)
 
 	logger.Debug("redis successfully integrated in datadog")
 

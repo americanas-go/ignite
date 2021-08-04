@@ -21,7 +21,10 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 
 	return nil, func(ctx context.Context, app *f.App) error {
 
-		app.Use(fibertrace.Middleware(fibertrace.WithServiceName(datadog.Service())))
+		app.Use(fibertrace.Middleware(
+			fibertrace.WithServiceName(datadog.Service()),
+			fibertrace.WithAnalyticsRate(datadog.AnalyticsRate()),
+		))
 
 		logger.Debug("datadog middleware successfully enabled in fiber")
 

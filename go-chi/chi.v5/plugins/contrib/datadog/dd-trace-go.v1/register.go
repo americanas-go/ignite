@@ -7,7 +7,7 @@ import (
 	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
 	"github.com/americanas-go/log"
-	c "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func Register(ctx context.Context) (*chi.Config, error) {
@@ -20,7 +20,10 @@ func Register(ctx context.Context) (*chi.Config, error) {
 
 	return &chi.Config{
 		Middlewares: []func(http.Handler) http.Handler{
-			c.Middleware(c.WithServiceName(datadog.Service())),
+			Middleware(
+				tracer.ServiceName(datadog.Service()),
+				tracer.AnalyticsRate(datadog.AnalyticsRate()),
+			),
 		},
 	}, nil
 }

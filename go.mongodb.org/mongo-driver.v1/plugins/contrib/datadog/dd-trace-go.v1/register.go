@@ -7,7 +7,7 @@ import (
 	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
 	"github.com/americanas-go/log"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	mongotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
@@ -21,7 +21,10 @@ func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugi
 
 		logger.Trace("integrating mongo in datadog")
 
-		options.SetMonitor(mongotrace.NewMonitor(mongotrace.WithServiceName(datadog.Service())))
+		options.SetMonitor(NewMonitor(
+			tracer.ServiceName(datadog.Service()),
+			tracer.AnalyticsRate(datadog.AnalyticsRate()),
+		))
 
 		logger.Debug("mongo successfully integrated in datadog")
 

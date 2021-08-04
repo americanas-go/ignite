@@ -14,6 +14,7 @@ const (
 	version               = root + ".version"
 	enabled               = root + ".enabled"
 	tags                  = root + ".tags"
+	headerTags            = root + ".headerTags"
 	host                  = root + ".host"
 	port                  = root + ".port"
 	lambdaMode            = root + ".lambdaMode"
@@ -43,6 +44,7 @@ func init() {
 	config.Add(enabled, true, "enables datadog")
 	config.Add(logLevel, "DEBUG", "log level")
 	config.Add(tags, map[string]string{}, "sets a key/value pair which will be set as a tag on all spans created by tracer. This option may be used multiple times")
+	config.Add(headerTags, map[string]string{}, "a map containing headers from request/response objetcs to be globally mapped as span tags wherever applicable, the key being the header to capture and value the tag name")
 	config.Add(host, "localhost", "sets the address where the agent is located")
 	config.Add(port, "8126", "sets the port where the agent is located")
 	config.Add(lambdaMode, false, "enables lambda mode on the tracer, for use with AWS Lambda")
@@ -70,4 +72,12 @@ func IsEnabled() bool {
 
 func Service() string {
 	return config.String(service)
+}
+
+func AnalyticsRate() float64 {
+	return config.Float64(analyticsRate)
+}
+
+func HeaderTags() map[string]string {
+	return config.StringMap(headerTags)
 }
