@@ -11,7 +11,7 @@ import (
 
 func Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 
-	if !IsEnabled() || !datadog.IsEnabled() {
+	if !IsEnabled() || !datadog.IsTracerEnabled() {
 		return nil, nil
 	}
 

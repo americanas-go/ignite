@@ -12,7 +12,7 @@ import (
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 
-	if !IsEnabled() || !datadog.IsEnabled() {
+	if !IsEnabled() || !datadog.IsTracerEnabled() {
 		return nil, nil
 	}
 
