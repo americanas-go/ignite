@@ -3,6 +3,7 @@ package echo
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/americanas-go/errors"
 	response "github.com/americanas-go/rest-response"
@@ -10,92 +11,68 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
+// ErrorHandlerString implements plain text content type error handler.
 func ErrorHandlerString(err error, c e.Context) {
+	errorHandler(err, c, e.MIMETextPlain)
+}
 
-	var er error
-	var status int
-	message := err.Error()
+// ErrorHandlerJSON implements JSON content type error handler.
+func ErrorHandlerJSON(err error, c e.Context) {
+	errorHandler(err, c, e.MIMEApplicationJSON)
+}
 
-	if errors.IsNotFound(err) {
-		status = http.StatusNotFound
-	} else if errors.IsNotValid(err) || errors.IsBadRequest(err) {
-		status = http.StatusBadRequest
-	} else if errors.IsServiceUnavailable(err) {
-		status = http.StatusServiceUnavailable
-	} else if errors.IsConflict(err) || errors.IsAlreadyExists(err) {
-		status = http.StatusConflict
-	} else if errors.IsNotImplemented(err) || errors.IsNotProvisioned(err) {
-		status = http.StatusNotImplemented
-	} else if errors.IsUnauthorized(err) {
-		status = http.StatusUnauthorized
-	} else if errors.IsForbidden(err) {
-		status = http.StatusForbidden
+func errorHandler(err error, c e.Context, contentType string) {
+	var (
+		status  int
+		message string
+	)
+	if echoErr, ok := err.(*e.HTTPError); ok {
+		status = echoErr.Code
+		message = fmt.Sprintf("%v", echoErr.Message)
 	} else {
-
-		switch t := err.(type) {
-		case validator.ValidationErrors:
-			status = http.StatusUnprocessableEntity
-		case *e.HTTPError:
-			status = t.Code
-			message = fmt.Sprintf("%v", t.Message)
-		default:
-			status = http.StatusInternalServerError
-		}
+		status = ErrorStatusCode(err)
+		message = err.Error()
 	}
 
+	var er error
 	if c.Request().Method == http.MethodHead {
 		er = c.NoContent(status)
 	} else {
-		er = c.String(status, message)
+		switch contentType {
+		case e.MIMEApplicationJSON:
+			er = c.JSON(status, response.Error{HttpStatusCode: status, ErrorCode: strconv.Itoa(status), Message: message})
+		default:
+			er = c.String(status, message)
+		}
 	}
-
 	if er != nil {
 		c.Logger().Error(er)
 	}
 }
 
-func ErrorHandlerJSON(err error, c e.Context) {
+// ErrorStatusCode translates to the respective status code.
+// TODO: Move to github.com/americanas-go/errors or github.com/americanas-go/rest-response module.
+func ErrorStatusCode(err error) int {
+	switch {
+	case errors.IsNotFound(err):
+		return http.StatusNotFound
+	case errors.IsNotValid(err) || errors.IsBadRequest(err):
+		return http.StatusBadRequest
+	case errors.IsServiceUnavailable(err):
+		return http.StatusServiceUnavailable
+	case errors.IsConflict(err) || errors.IsAlreadyExists(err):
+		return http.StatusConflict
+	case errors.IsNotImplemented(err) || errors.IsNotProvisioned(err):
+		return http.StatusNotImplemented
+	case errors.IsUnauthorized(err):
+		return http.StatusUnauthorized
+	case errors.IsForbidden(err):
+		return http.StatusForbidden
 
-	var er error
-	var status int
-	message := err.Error()
-
-	if errors.IsNotFound(err) {
-		status = http.StatusNotFound
-	} else if errors.IsNotValid(err) || errors.IsBadRequest(err) {
-		status = http.StatusBadRequest
-	} else if errors.IsServiceUnavailable(err) {
-		status = http.StatusServiceUnavailable
-	} else if errors.IsConflict(err) || errors.IsAlreadyExists(err) {
-		status = http.StatusConflict
-	} else if errors.IsNotImplemented(err) || errors.IsNotProvisioned(err) {
-		status = http.StatusNotImplemented
-	} else if errors.IsUnauthorized(err) {
-		status = http.StatusUnauthorized
-	} else if errors.IsForbidden(err) {
-		status = http.StatusForbidden
-	} else {
-
-		switch t := err.(type) {
-		case validator.ValidationErrors:
-			status = http.StatusUnprocessableEntity
-		case *e.HTTPError:
-			status = t.Code
-			message = fmt.Sprintf("%v", t.Message)
-		default:
-			status = http.StatusInternalServerError
+	default:
+		if _, ok := err.(validator.ValidationErrors); ok {
+			return http.StatusUnprocessableEntity
 		}
+		return http.StatusInternalServerError
 	}
-
-	if c.Request().Method == http.MethodHead {
-		er = c.NoContent(status)
-	} else {
-		er = c.JSON(status,
-			response.Error{HttpStatusCode: status, Message: message})
-	}
-
-	if er != nil {
-		c.Logger().Error(er)
-	}
-
 }
