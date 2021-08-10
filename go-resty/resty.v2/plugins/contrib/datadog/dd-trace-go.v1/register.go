@@ -26,7 +26,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 
 		opts := []ddtrace.StartSpanOption{
 			tracer.ResourceName(request.URL),
-			tracer.SpanType(ext.SpanTypeWeb),
+			tracer.SpanType(ext.SpanTypeHTTP),
 			tracer.Tag(ext.HTTPMethod, request.Method),
 			tracer.Tag(ext.HTTPURL, request.URL),
 		}
@@ -34,8 +34,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 			opts = append(opts, tracer.ChildOf(spanctx))
 		}
 
-		span, ctx := tracer.StartSpanFromContext(request.Context(), "http.request", opts...)
-		defer span.Finish()
+		_, ctx := tracer.StartSpanFromContext(request.Context(), "http.request", opts...)
 
 		// pass the span through the request context
 		request.SetContext(ctx)
