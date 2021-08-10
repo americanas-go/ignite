@@ -23,7 +23,7 @@ var profilerOnce sync.Once
 
 func StartProfilerWithOptions(ctx context.Context, options *Options, profileOptions ...profiler.Option) {
 
-	if !IsEnabled() {
+	if !IsProfilerEnabled() {
 		return
 	}
 

@@ -10,7 +10,7 @@ import (
 )
 
 func Register(ctx context.Context, server *echo.Server) error {
-	if !IsEnabled() || !datadog.IsEnabled() {
+	if !IsEnabled() || !datadog.IsTracerEnabled() {
 		return nil
 	}
 

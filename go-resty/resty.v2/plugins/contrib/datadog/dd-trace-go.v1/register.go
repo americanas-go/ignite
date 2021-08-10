@@ -14,7 +14,7 @@ import (
 
 func Register(ctx context.Context, client *resty.Client) error {
 
-	if !IsEnabled() || !datadog.IsEnabled() {
+	if !IsEnabled() || !datadog.IsTracerEnabled() {
 		return nil
 	}
 

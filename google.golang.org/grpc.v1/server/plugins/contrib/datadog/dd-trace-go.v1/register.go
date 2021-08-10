@@ -11,7 +11,7 @@ import (
 
 func Register(ctx context.Context) []grpc.ServerOption {
 
-	if !IsEnabled() || !datadog.IsEnabled() {
+	if !IsEnabled() || !datadog.IsTracerEnabled() {
 		return nil
 	}
 

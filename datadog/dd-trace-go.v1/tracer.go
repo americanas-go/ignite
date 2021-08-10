@@ -23,7 +23,7 @@ var tracerOnce sync.Once
 
 func StartTracerWithOptions(ctx context.Context, options *Options, startOptions ...tracer.StartOption) {
 
-	if !IsEnabled() {
+	if !IsTracerEnabled() {
 		return
 	}
 

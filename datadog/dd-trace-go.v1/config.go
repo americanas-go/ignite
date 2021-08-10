@@ -13,6 +13,8 @@ const (
 	env                   = root + ".env"
 	version               = root + ".version"
 	enabled               = root + ".enabled"
+	tracerEnabled         = root + ".trace.enabled"
+	profilerEnabled       = root + ".profiler.enabled"
 	tags                  = root + ".tags"
 	host                  = root + ".host"
 	port                  = root + ".port"
@@ -40,7 +42,8 @@ const (
 func init() {
 	config.Add(service, "", "service name for datadog")
 	config.Add(env, "", "service env")
-	config.Add(enabled, true, "enables datadog")
+	config.Add(tracerEnabled, true, "enables tracer datadog")
+	config.Add(profilerEnabled, true, "enables profiler datadog")
 	config.Add(logLevel, "DEBUG", "log level")
 	config.Add(tags, map[string]string{}, "sets a key/value pair which will be set as a tag on all spans created by tracer. This option may be used multiple times")
 	config.Add(host, "localhost", "sets the address where the agent is located")
@@ -64,8 +67,12 @@ func init() {
 	config.Add(version, "0.0.0", "application version")
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func IsTracerEnabled() bool {
+	return config.Bool(tracerEnabled)
+}
+
+func IsProfilerEnabled() bool {
+	return config.Bool(tracerEnabled)
 }
 
 func Service() string {
