@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/americanas-go/config"
 	"github.com/americanas-go/log"
 	r "github.com/go-resty/resty/v2"
 )
@@ -36,9 +35,9 @@ func (p *Retry) Register(ctx context.Context, client *r.Client) error {
 	logger.Trace("configuring retry in resty")
 
 	client.
-		SetRetryCount(config.Int(count)).
-		SetRetryWaitTime(config.Duration(waitTime)).
-		SetRetryMaxWaitTime(config.Duration(maxWaitTime)).
+		SetRetryCount(p.options.Count).
+		SetRetryWaitTime(p.options.WaitTime).
+		SetRetryMaxWaitTime(p.options.MaxWaitTime).
 		AddRetryCondition(statusCodeRetryCondition).
 		AddRetryCondition(addTimeoutRetryCondition(client.GetClient().Timeout))
 
