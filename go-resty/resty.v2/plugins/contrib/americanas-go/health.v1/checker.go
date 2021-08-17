@@ -16,7 +16,7 @@ type Checker struct {
 
 func (c *Checker) Check(ctx context.Context) (err error) {
 
-	request := c.client.R().EnableTrace()
+	request := c.client.R()
 
 	var response *resty.Response
 
