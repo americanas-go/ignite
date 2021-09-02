@@ -4,7 +4,6 @@ import (
 	"context"
 	"strconv"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
 	"github.com/americanas-go/log"
 	"github.com/go-resty/resty/v2"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
@@ -12,9 +11,29 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
-func Register(ctx context.Context, client *resty.Client) error {
+type DataDog struct {
+	options *Options
+}
 
-	if !IsEnabled() || !datadog.IsTracerEnabled() {
+func NewDataDogWithOptions(options *Options) *DataDog {
+	return &DataDog{options: options}
+}
+
+func NewDataDog() *DataDog {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+	return NewDataDogWithOptions(o)
+}
+
+func Register(ctx context.Context, client *resty.Client) error {
+	datadog := NewDataDog()
+	return datadog.Register(ctx, client)
+}
+
+func (d *DataDog) Register(ctx context.Context, client *resty.Client) error {
+	if !d.options.Enabled {
 		return nil
 	}
 
@@ -23,30 +42,29 @@ func Register(ctx context.Context, client *resty.Client) error {
 	logger.Trace("integrating resty in datadog")
 
 	client.OnBeforeRequest(func(client *resty.Client, request *resty.Request) error {
-
-		opts := []ddtrace.StartSpanOption{
+		spanOptions := []ddtrace.StartSpanOption{
 			tracer.ResourceName(request.URL),
 			tracer.SpanType(ext.SpanTypeHTTP),
 			tracer.Tag(ext.HTTPMethod, request.Method),
 			tracer.Tag(ext.HTTPURL, request.URL),
 		}
-		if spanctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(request.Header)); err == nil {
-			opts = append(opts, tracer.ChildOf(spanctx))
-		}
 
-		_, ctx := tracer.StartSpanFromContext(request.Context(), "http.request", opts...)
+		spanOptions = append(spanOptions, d.options.SpanOptions...)
+
+		reqCtx := request.Context()
+		span, ctx := tracer.StartSpanFromContext(reqCtx, d.options.OperationName, spanOptions...)
 
 		// pass the span through the request context
 		request.SetContext(ctx)
 
-		return nil
+		return tracer.Inject(span.Context(), tracer.HTTPHeadersCarrier(request.Header))
 	})
 
 	client.OnAfterResponse(func(c *resty.Client, resp *resty.Response) error {
-
 		ctx := resp.Request.Context()
 
 		span, ok := tracer.SpanFromContext(ctx)
+
 		if ok {
 			span.SetTag(ext.HTTPCode, strconv.Itoa(resp.StatusCode()))
 			span.SetTag(ext.Error, resp.Error())
