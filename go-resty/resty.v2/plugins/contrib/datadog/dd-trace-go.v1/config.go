@@ -6,12 +6,18 @@ import (
 )
 
 const (
-	ConfigRoot = girest.PluginsRoot + ".datadog"
-	enabled    = ConfigRoot + ".enabled"
+	root          = girest.PluginsRoot + ".datadog"
+	operationName = ".operationName"
+	enabled       = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable datadog integration")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+operationName, "http.request", "defines span operation name")
+	config.Add(path+enabled, true, "enable/disable datadog integration")
 }
 
 func IsEnabled() bool {
