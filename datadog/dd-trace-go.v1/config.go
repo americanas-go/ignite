@@ -67,14 +67,17 @@ func init() {
 	config.Add(version, "0.0.0", "application version")
 }
 
+// IsTracerEnabled returns config value from key ignite.datadog.trace.enabled where default is true.
 func IsTracerEnabled() bool {
 	return config.Bool(tracerEnabled)
 }
 
+// IsProfilerEnabled returns config value from key ignite.datadog.profiler.enabled where default is true.
 func IsProfilerEnabled() bool {
-	return config.Bool(tracerEnabled)
+	return config.Bool(profilerEnabled)
 }
 
+// Service returns config value from key ignite.datadog.service where default is empty.
 func Service() string {
 	return config.String(service)
 }
