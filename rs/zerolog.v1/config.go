@@ -4,12 +4,11 @@ import "github.com/americanas-go/config"
 
 const (
 	root           = "ignite.zerolog"
+	level          = root + ".level"
 	consoleRoot    = root + ".console"
 	consoleEnabled = consoleRoot + ".enabled"
-	consoleLevel   = consoleRoot + ".level"
 	fileRoot       = root + ".file"
 	fileEnabled    = fileRoot + ".enabled"
-	fileLevel      = fileRoot + ".level"
 	filePath       = fileRoot + ".path"
 	fileName       = fileRoot + ".name"
 	fileMaxSize    = fileRoot + ".maxsize"
@@ -19,10 +18,9 @@ const (
 )
 
 func init() {
+	config.Add(level, "INFO", "log level")
 	config.Add(consoleEnabled, true, "enable/disable console logging")
-	config.Add(consoleLevel, "INFO", "console log level")
 	config.Add(fileEnabled, false, "enable/disable file logging")
-	config.Add(fileLevel, "INFO", "console log level")
 	config.Add(filePath, "/tmp", "log path")
 	config.Add(fileName, "application.l", "log filename")
 	config.Add(fileMaxSize, 100, "log file max size (MB)")
