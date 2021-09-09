@@ -7,6 +7,7 @@ import (
 	"github.com/coocood/freecache"
 )
 
+// NewCacheWithOptions returns a cache with options.
 func NewCacheWithOptions(ctx context.Context, o *Options, opts ...Option) (cache *freecache.Cache, err error) {
 
 	logger := log.FromContext(ctx)
@@ -23,6 +24,7 @@ func NewCacheWithOptions(ctx context.Context, o *Options, opts ...Option) (cache
 
 }
 
+// NewCache returns a cache.
 func NewCache(ctx context.Context, opts ...Option) (*freecache.Cache, error) {
 
 	logger := log.FromContext(ctx)

@@ -19,7 +19,3 @@ func ConfigAdd(path string) {
 	config.Add(path+operationName, "http.request", "defines span operation name")
 	config.Add(path+enabled, true, "enable/disable datadog integration")
 }
-
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}

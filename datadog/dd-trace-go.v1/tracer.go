@@ -9,6 +9,7 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
+// StartTracer starts the tracer like StartTraceWithOptions but with default Options.
 func StartTracer(ctx context.Context, startOptions ...tracer.StartOption) {
 
 	o, err := NewOptions()
@@ -21,6 +22,7 @@ func StartTracer(ctx context.Context, startOptions ...tracer.StartOption) {
 
 var tracerOnce sync.Once
 
+// StartTracerWithOptions starts the tracer with the given set of options. It will stop and replace any running tracer, meaning that calling it several times will result in a restart of the tracer by replacing the current instance with a new one.
 func StartTracerWithOptions(ctx context.Context, options *Options, startOptions ...tracer.StartOption) {
 
 	if !IsTracerEnabled() {

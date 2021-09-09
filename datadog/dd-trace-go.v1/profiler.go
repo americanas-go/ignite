@@ -9,6 +9,7 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/profiler"
 )
 
+// StartProfiler starts the profiler.
 func StartProfiler(ctx context.Context, profileOptions ...profiler.Option) {
 
 	o, err := NewOptions()
@@ -21,6 +22,7 @@ func StartProfiler(ctx context.Context, profileOptions ...profiler.Option) {
 
 var profilerOnce sync.Once
 
+// StartProfilerWithOptions start the profiler with options.
 func StartProfilerWithOptions(ctx context.Context, options *Options, profileOptions ...profiler.Option) {
 
 	if !IsProfilerEnabled() {

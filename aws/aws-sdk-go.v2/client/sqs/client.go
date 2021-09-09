@@ -9,9 +9,12 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 )
 
-// Client knows how to publish on sqs
+// Client knows how to publish on sqs.
 type Client interface {
+	// Publish publish message on sns.
 	Publish(ctx context.Context, input *sqs.SendMessageInput) error
+
+	// ResolveQueueUrl resolves the URL of the queue.
 	ResolveQueueUrl(ctx context.Context, queueName string) (*string, error)
 }
 
@@ -20,18 +23,17 @@ type sqsClient interface {
 	GetQueueUrl(ctx context.Context, params *sqs.GetQueueUrlInput, optFns ...func(*sqs.Options)) (*sqs.GetQueueUrlOutput, error)
 }
 
-// Client holds client and resource name
+// Client holds client and resource name.
 type client struct {
 	client    sqsClient
 	queueUrls map[string]*string
 }
 
-// NewClient returns a initialized client
+// NewClient returns a initialized client.
 func NewClient(c *sqs.Client) Client {
 	return &client{c, map[string]*string{}}
 }
 
-// Publish publish message on sns
 func (c *client) Publish(ctx context.Context, input *sqs.SendMessageInput) error {
 
 	logger := log.FromContext(ctx).
