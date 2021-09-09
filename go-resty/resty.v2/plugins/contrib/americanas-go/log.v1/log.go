@@ -13,10 +13,53 @@ type l func(format string, args ...interface{})
 
 var lvl string
 
-func m(logger log.Logger) (method l) {
+type Log struct {
+	options *Options
+}
+
+func NewLogWithConfigPath(path string) (*Log, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewLogWithOptions(o), nil
+}
+
+func NewLogWithOptions(options *Options) *Log {
+	return &Log{options: options}
+}
+
+func Register(ctx context.Context, client *resty.Client) error {
+	o, err := NewOptions()
+	if err != nil {
+		return err
+	}
+
+	plugin := NewLogWithOptions(o)
+	return plugin.Register(ctx, client)
+}
+
+func (i *Log) Register(ctx context.Context, client *resty.Client) error {
+
+	if !i.options.Enabled {
+		return nil
+	}
+
+	logger := log.FromContext(ctx)
+	logger.Trace("enabling logger middleware in resty")
+
+	client.OnBeforeRequest(i.logBeforeResponse)
+	client.OnAfterResponse(i.logAfterResponse)
+
+	logger.Debug("logger middleware successfully enabled in resty")
+
+	return nil
+}
+
+func (i *Log) m(logger log.Logger) (method l) {
 
 	if lvl == "" {
-		lvl = Level()
+		lvl = i.options.Level
 	}
 	switch lvl {
 	case "TRACE":
@@ -30,24 +73,7 @@ func m(logger log.Logger) (method l) {
 	return method
 }
 
-func Register(ctx context.Context, client *resty.Client) error {
-
-	if !IsEnabled() {
-		return nil
-	}
-
-	logger := log.FromContext(ctx)
-	logger.Trace("enabling logger middleware in resty")
-
-	client.OnBeforeRequest(logBeforeResponse)
-	client.OnAfterResponse(logAfterResponse)
-
-	logger.Debug("logger middleware successfully enabled in resty")
-
-	return nil
-}
-
-func logBeforeResponse(client *resty.Client, request *resty.Request) error {
+func (i *Log) logBeforeResponse(client *resty.Client, request *resty.Request) error {
 
 	logger := log.FromContext(request.Context())
 
@@ -65,14 +91,14 @@ func logBeforeResponse(client *resty.Client, request *resty.Request) error {
 				"rest_request_method":  request.Method,
 			})
 
-	xx := m(logger)
+	xx := i.m(logger)
 
 	xx("rest request processing")
 
 	return nil
 }
 
-func logAfterResponse(client *resty.Client, response *resty.Response) error {
+func (i *Log) logAfterResponse(client *resty.Client, response *resty.Response) error {
 
 	logger := log.FromContext(response.Request.Context())
 
@@ -93,7 +119,7 @@ func logAfterResponse(client *resty.Client, response *resty.Response) error {
 	} else if statusCode > 400 {
 		logger.Warnf("rest request processed with warning")
 	} else {
-		xx := m(logger)
+		xx := i.m(logger)
 		xx("successful rest request processed")
 	}
 

@@ -8,9 +8,35 @@ import (
 	"github.com/google/uuid"
 )
 
-func Register(ctx context.Context, client *resty.Client) error {
+type RequestID struct {
+	options *Options
+}
 
-	if !IsEnabled() {
+func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewRequestIDWithOptions(o), nil
+}
+
+func NewRequestIDWithOptions(options *Options) *RequestID {
+	return &RequestID{options: options}
+}
+
+func Register(ctx context.Context, client *resty.Client) error {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	plugin := NewRequestIDWithOptions(o)
+	return plugin.Register(ctx, client)
+}
+
+func (i *RequestID) Register(ctx context.Context, client *resty.Client) error {
+
+	if i.options.Enabled {
 		return nil
 	}
 

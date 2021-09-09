@@ -16,20 +16,24 @@ type DataDog struct {
 	options *Options
 }
 
+func NewDatadogWithConfigPath(path string) (*DataDog, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewDataDogWithOptions(o), nil
+}
+
 func NewDataDogWithOptions(options *Options) *DataDog {
 	return &DataDog{options: options}
 }
 
-func NewDataDog() *DataDog {
+func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
-		log.Fatalf(err.Error())
+		return err
 	}
-	return NewDataDogWithOptions(o)
-}
-
-func Register(ctx context.Context, client *resty.Client) error {
-	datadog := NewDataDog()
+	datadog := NewDataDogWithOptions(o)
 	return datadog.Register(ctx, client)
 }
 

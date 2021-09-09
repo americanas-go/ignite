@@ -11,9 +11,35 @@ import (
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
-func Register(ctx context.Context, client *resty.Client) error {
+type Newrelic struct {
+	options *Options
+}
 
-	if !IsEnabled() || !newrelic.IsEnabled() {
+func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewNewrelicWithOptions(o), nil
+}
+
+func NewNewrelicWithOptions(options *Options) *Newrelic {
+	return &Newrelic{options: options}
+}
+
+func Register(ctx context.Context, client *resty.Client) error {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	plugin := NewNewrelicWithOptions(o)
+	return plugin.Register(ctx, client)
+}
+
+func (i *Newrelic) Register(ctx context.Context, client *resty.Client) error {
+
+	if !i.options.Enabled || !newrelic.IsEnabled() {
 		return nil
 	}
 
