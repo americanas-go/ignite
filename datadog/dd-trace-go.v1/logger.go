@@ -6,9 +6,11 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
 )
 
+// Logger represents Datadog's Logger implementation.
 type Logger struct {
 }
 
+// NewLogger returns implementation of Datadog's Logger interface.
 func NewLogger() ddtrace.Logger {
 	return &Logger{}
 }
