@@ -4,6 +4,7 @@ import (
 	"context"
 	"strconv"
 
+	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
 	"github.com/americanas-go/log"
 	"github.com/go-resty/resty/v2"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
@@ -33,7 +34,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 }
 
 func (d *DataDog) Register(ctx context.Context, client *resty.Client) error {
-	if !d.options.Enabled {
+	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil
 	}
 
