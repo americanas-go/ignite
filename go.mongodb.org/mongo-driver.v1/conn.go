@@ -34,6 +34,14 @@ func NewConn(ctx context.Context, plugins ...Plugin) (*Conn, error) {
 	return NewConnWithOptions(ctx, o, plugins...)
 }
 
+func NewConnWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*Conn, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewConnWithOptions(ctx, opts, plugins...)
+}
+
 func NewConnWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (conn *Conn, err error) {
 
 	logger := log.FromContext(ctx)
