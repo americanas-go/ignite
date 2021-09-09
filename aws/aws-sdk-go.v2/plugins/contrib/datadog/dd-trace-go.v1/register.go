@@ -9,6 +9,7 @@ import (
 	awstrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws"
 )
 
+// Register registers AWS tracing for Datadog.
 func Register(ctx context.Context, awsCfg *aws.Config) error {
 
 	if !IsEnabled() || !datadog.IsTracerEnabled() {
