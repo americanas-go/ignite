@@ -28,6 +28,7 @@ type Options struct {
 	Addr string
 }
 
+// NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
 
 	opts, err = NewOptions()
@@ -43,6 +44,7 @@ func NewOptionsWithPath(path string) (opts *Options, err error) {
 	return opts, nil
 }
 
+// NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
 
 	opts := &Options{}
