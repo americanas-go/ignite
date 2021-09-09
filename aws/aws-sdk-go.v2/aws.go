@@ -11,8 +11,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials"
 )
 
+// Plugin defines a function to process plugin.
 type Plugin func(context.Context, *aws.Config) error
 
+// NewConfig returns aws config.
 func NewConfig(ctx context.Context, plugins ...Plugin) aws.Config {
 
 	o, err := NewOptions()
@@ -23,6 +25,7 @@ func NewConfig(ctx context.Context, plugins ...Plugin) aws.Config {
 	return NewConfigWithOptions(ctx, o, plugins...)
 }
 
+// NewConfigWithOptions returns aws config with options.
 func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plugin) aws.Config {
 
 	logger := log.FromContext(ctx)

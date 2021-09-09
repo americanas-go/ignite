@@ -9,11 +9,13 @@ import (
 	"github.com/cloudevents/sdk-go/v2/protocol/http"
 )
 
+// Client represents CloudEvents client.
 type Client struct {
 	handler Handler
 	client  client.Client
 }
 
+// NewHTTP provides HTTP Protocol client.
 func NewHTTP(ctx context.Context, handler Handler, opts ...http.Option) *Client {
 	logger := log.FromContext(ctx)
 	c, err := client.NewHTTP(opts...)
@@ -23,8 +25,8 @@ func NewHTTP(ctx context.Context, handler Handler, opts ...http.Option) *Client 
 	return &Client{handler: handler, client: c}
 }
 
-// NewDefault has been replaced by NewHTTP
-// Deprecated. To get the same as NewDefault provided, please use NewHTTP with
+// NewDefault has been replaced by NewHTTP.
+// Deprecated. To get the same as NewDefault provided, please use NewHTTP with.
 func NewDefaultClient(ctx context.Context, handler Handler, opts ...http.Option) *Client {
 	logger := log.FromContext(ctx)
 	c, err := v2.NewDefaultClient(opts...)
@@ -34,6 +36,7 @@ func NewDefaultClient(ctx context.Context, handler Handler, opts ...http.Option)
 	return &Client{handler: handler, client: c}
 }
 
+// Start sets up the given handler to handle Receive.
 func (s *Client) Start(ctx context.Context) {
 	logger := log.FromContext(ctx).WithTypeOf(*s)
 	if err := s.client.StartReceiver(ctx, s.handler); err != nil {

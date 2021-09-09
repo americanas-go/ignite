@@ -10,6 +10,7 @@ import (
 	lr "github.com/sirupsen/logrus"
 )
 
+// New initializes the log according to the configured type and formatter.
 func New() {
 	switch Type() {
 	case "ZEROLOG":

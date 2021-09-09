@@ -8,22 +8,22 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sns"
 )
 
-// Client knows how to publish on sns
+// Client knows how to publish on sns.
 type Client interface {
 	Publish(ctx context.Context, input *sns.PublishInput) error
 }
 
-// Client holds client and resource name
+// Client holds client and resource name.
 type client struct {
 	client *sns.Client
 }
 
-// NewClient returns a initialized client
+// NewClient returns a initialized client.
 func NewClient(c *sns.Client) Client {
 	return &client{c}
 }
 
-// Publish publish message on sns
+// Publish publishes message on sns.
 func (c *client) Publish(ctx context.Context, input *sns.PublishInput) error {
 
 	logger := log.FromContext(ctx).
