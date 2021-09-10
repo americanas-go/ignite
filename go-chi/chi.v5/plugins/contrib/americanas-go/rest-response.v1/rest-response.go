@@ -12,37 +12,58 @@ import (
 )
 
 func Register(ctx context.Context) (*chi.Config, error) {
-	if !IsEnabled() {
+	l := NewStatus()
+	return l.Register(ctx)
+}
+
+type Status struct {
+	options *Options
+}
+
+func NewStatusWithOptions(options *Options) *Status {
+	return &Status{options: options}
+}
+
+func NewStatusWithConfigPath(path string) (*Status, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewStatusWithOptions(o), nil
+}
+
+func NewStatus() *Status {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewStatusWithOptions(o)
+}
+
+func (i *Status) Register(ctx context.Context) (*chi.Config, error) {
+	if !i.options.Enabled {
 		return nil, nil
 	}
 
 	logger := log.FromContext(ctx)
 
-	statusRoute := getRoute()
+	statusRoute := i.options.Route
 
 	logger.Tracef("configuring status router on %s in chi", statusRoute)
-
-	statusHandler := NewResourceStatusHandler()
 
 	return &chi.Config{
 		Routes: []chi.ConfigRouter{
 			{
 				Method:      http.MethodGet,
-				HandlerFunc: statusHandler.Get(),
+				HandlerFunc: handler(),
 				Pattern:     statusRoute,
 			},
 		},
 	}, nil
 }
 
-func NewResourceStatusHandler() *ResourceStatusHandler {
-	return &ResourceStatusHandler{}
-}
-
-type ResourceStatusHandler struct {
-}
-
-func (u *ResourceStatusHandler) Get() http.HandlerFunc {
+func handler() http.HandlerFunc {
 	resourceStatus := response.NewResourceStatus()
 	reqBodyBytes := new(bytes.Buffer)
 	json.NewEncoder(reqBodyBytes).Encode(resourceStatus)

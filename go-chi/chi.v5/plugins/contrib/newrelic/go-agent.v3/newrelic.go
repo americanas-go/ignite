@@ -14,7 +14,32 @@ import (
 )
 
 func Register(ctx context.Context) (*chi.Config, error) {
-	if !IsEnabled() || !newrelic.IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, err
+	}
+	n := NewNewrelicWithOptions(o)
+	return n.Register(ctx)
+}
+
+type Newrelic struct {
+	options *Options
+}
+
+func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewNewrelicWithOptions(o), nil
+}
+
+func NewNewrelicWithOptions(options *Options) *Newrelic {
+	return &Newrelic{options: options}
+}
+
+func (d *Newrelic) Register(ctx context.Context) (*chi.Config, error) {
+	if !d.options.Enabled || !newrelic.IsEnabled() {
 		return nil, nil
 	}
 
@@ -23,12 +48,12 @@ func Register(ctx context.Context) (*chi.Config, error) {
 
 	return &chi.Config{
 		Middlewares: []func(http.Handler) http.Handler{
-			nrMiddleware,
+			d.nrMiddleware,
 		},
 	}, nil
 }
 
-func nrMiddleware(next http.Handler) http.Handler {
+func (d *Newrelic) nrMiddleware(next http.Handler) http.Handler {
 
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
@@ -42,7 +67,7 @@ func nrMiddleware(next http.Handler) http.Handler {
 
 		txn.SetWebRequestHTTP(r)
 
-		if isWebResponseEnabled() {
+		if d.options.WebResponseEnabled {
 			w = txn.SetWebResponse(w)
 		}
 

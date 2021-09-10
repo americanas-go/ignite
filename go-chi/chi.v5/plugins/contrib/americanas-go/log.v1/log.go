@@ -12,8 +12,33 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
-func Register(ctx context.Context) (*chi.Config, error) {
-	if !IsEnabled() {
+type Log struct {
+	options *Options
+}
+
+func NewLogWithOptions(options *Options) *Log {
+	return &Log{options: options}
+}
+
+func NewLogWithConfigPath(path string) (*Log, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewLogWithOptions(o), nil
+}
+
+func NewLog() *Log {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewLogWithOptions(o)
+}
+
+func (i *Log) Register(ctx context.Context) (*chi.Config, error) {
+	if !i.options.Enabled {
 		return nil, nil
 	}
 
@@ -22,16 +47,16 @@ func Register(ctx context.Context) (*chi.Config, error) {
 
 	return &chi.Config{
 		Middlewares: []func(http.Handler) http.Handler{
-			loggerMiddleware,
+			i.loggerMiddleware,
 		},
 	}, nil
 
 }
 
 // loggerMiddleware returns a middleware that logs HTTP requests.
-func loggerMiddleware(next http.Handler) http.Handler {
+func (i *Log) loggerMiddleware(next http.Handler) http.Handler {
 
-	level := Level()
+	level := i.options.Level
 
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
@@ -124,4 +149,9 @@ func loggerMiddleware(next http.Handler) http.Handler {
 	}
 
 	return http.HandlerFunc(fn)
+}
+
+func Register(ctx context.Context) (*chi.Config, error) {
+	l := NewLog()
+	return l.Register(ctx)
 }
