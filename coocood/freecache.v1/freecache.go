@@ -7,7 +7,6 @@ import (
 	"github.com/coocood/freecache"
 )
 
-// NewCacheWithOptions returns a cache with options.
 func NewCacheWithConfigPath(ctx context.Context, path string, opts ...Option) (*freecache.Cache, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -16,6 +15,7 @@ func NewCacheWithConfigPath(ctx context.Context, path string, opts ...Option) (*
 	return NewCacheWithOptions(ctx, options, opts...)
 }
 
+// NewCacheWithOptions returns a cache with options.
 func NewCacheWithOptions(ctx context.Context, o *Options, opts ...Option) (cache *freecache.Cache, err error) {
 
 	logger := log.FromContext(ctx)
