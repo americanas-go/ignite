@@ -1,4 +1,4 @@
-package newrelic
+package datadog
 
 import (
 	"github.com/americanas-go/config"
@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	root    = redis.PluginsRoot + ".newrelic"
+	root    = redis.PluginsRoot + ".datadog"
 	enabled = ".enabled"
 )
 
@@ -15,5 +15,5 @@ func init() {
 }
 
 func ConfigAdd(path string) {
-	config.Add(path+enabled, true, "enable/disable newrelic integration")
+	config.Add(path+enabled, true, "enable/disable datadog integration")
 }
