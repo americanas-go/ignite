@@ -19,10 +19,10 @@ func NewDatadogWithConfigPath(path string) (*DataDog, error) {
 	if err != nil {
 		return nil, err
 	}
-	return NewDataDogWithOptions(o), nil
+	return NewDatadogWithOptions(o), nil
 }
 
-func NewDataDogWithOptions(options *Options) *DataDog {
+func NewDatadogWithOptions(options *Options) *DataDog {
 	return &DataDog{options: options}
 }
 
@@ -34,11 +34,11 @@ func (d *DataDog) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mong
 	return func(ctx context.Context, options *options.ClientOptions) error {
 		logger := log.FromContext(ctx)
 
-		logger.Trace("integrating mongo in datadog")
+		logger.Trace("integrating datadog in mongo")
 
 		options.SetMonitor(mongotrace.NewMonitor(d.options.Options...))
 
-		logger.Debug("mongo successfully integrated in datadog")
+		logger.Debug("datadog successfully integrated in mongo")
 
 		return nil
 	}, nil
@@ -49,6 +49,6 @@ func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugi
 	if err != nil {
 		return nil, nil
 	}
-	datadog := NewDataDogWithOptions(o)
+	datadog := NewDatadogWithOptions(o)
 	return datadog.Register(ctx)
 }
