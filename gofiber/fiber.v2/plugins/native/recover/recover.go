@@ -10,7 +10,32 @@ import (
 )
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	n := NewRecoverWithOptions(o)
+	return n.Register(ctx, options)
+}
+
+type Recover struct {
+	options *Options
+}
+
+func NewRecoverWithConfigPath(path string) (*Recover, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewRecoverWithOptions(o), nil
+}
+
+func NewRecoverWithOptions(options *Options) *Recover {
+	return &Recover{options: options}
+}
+
+func (d *Recover) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+	if !d.options.Enabled {
 		return nil, nil
 	}
 

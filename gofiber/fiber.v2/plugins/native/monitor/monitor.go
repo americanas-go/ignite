@@ -10,7 +10,33 @@ import (
 )
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	n := NewMonitorWithOptions(o)
+	return n.Register(ctx, options)
+}
+
+type Monitor struct {
+	options *Options
+}
+
+func NewMonitorWithConfigPath(path string) (*Monitor, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewMonitorWithOptions(o), nil
+}
+
+func NewMonitorWithOptions(options *Options) *Monitor {
+	return &Monitor{options: options}
+}
+
+func (d *Monitor) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+
+	if !d.options.Enabled {
 		return nil, nil
 	}
 

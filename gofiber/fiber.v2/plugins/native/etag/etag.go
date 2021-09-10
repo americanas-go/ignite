@@ -10,7 +10,32 @@ import (
 )
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	n := NewETagWithOptions(o)
+	return n.Register(ctx, options)
+}
+
+type ETag struct {
+	options *Options
+}
+
+func NewETagWithConfigPath(path string) (*ETag, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewETagWithOptions(o), nil
+}
+
+func NewETagWithOptions(options *Options) *ETag {
+	return &ETag{options: options}
+}
+
+func (d *ETag) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+	if !d.options.Enabled {
 		return nil, nil
 	}
 

@@ -12,13 +12,43 @@ import (
 )
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
-	if !IsEnabled() {
+	l := NewStatus()
+	return l.Register(ctx, options)
+}
+
+type Status struct {
+	options *Options
+}
+
+func NewStatusWithOptions(options *Options) *Status {
+	return &Status{options: options}
+}
+
+func NewStatusWithConfigPath(path string) (*Status, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewStatusWithOptions(o), nil
+}
+
+func NewStatus() *Status {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewStatusWithOptions(o)
+}
+
+func (i *Status) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+	if !i.options.Enabled {
 		return nil, nil
 	}
 
 	logger := log.FromContext(ctx)
 
-	statusRoute := getRoute()
+	statusRoute := i.options.Route
 
 	logger.Tracef("configuring status router on %s in fiber", statusRoute)
 

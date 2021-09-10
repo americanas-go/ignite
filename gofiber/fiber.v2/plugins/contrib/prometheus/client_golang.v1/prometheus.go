@@ -10,8 +10,33 @@ import (
 )
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	n := NewNewrelicWithOptions(o)
+	return n.Register(ctx, options)
+}
 
-	if !IsEnabled() {
+type Newrelic struct {
+	options *Options
+}
+
+func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewNewrelicWithOptions(o), nil
+}
+
+func NewNewrelicWithOptions(options *Options) *Newrelic {
+	return &Newrelic{options: options}
+}
+
+func (d *Newrelic) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+
+	if !d.options.Enabled {
 		return nil, nil
 	}
 
@@ -25,7 +50,7 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 
 		logger.Debug("prometheus middleware successfully enabled in fiber")
 
-		prometheusRoute := getRoute()
+		prometheusRoute := d.options.Route
 
 		logger.Tracef("configuring prometheus metric router on %s in fiber", prometheusRoute)
 

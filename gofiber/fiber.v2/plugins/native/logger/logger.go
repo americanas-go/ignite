@@ -10,7 +10,32 @@ import (
 )
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	n := NewLoggerWithOptions(o)
+	return n.Register(ctx, options)
+}
+
+type Logger struct {
+	options *Options
+}
+
+func NewLoggerWithConfigPath(path string) (*Logger, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewLoggerWithOptions(o), nil
+}
+
+func NewLoggerWithOptions(options *Options) *Logger {
+	return &Logger{options: options}
+}
+
+func (d *Logger) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+	if !d.options.Enabled {
 		return nil, nil
 	}
 

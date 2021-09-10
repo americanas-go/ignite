@@ -13,8 +13,33 @@ import (
 )
 
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	n := NewErrorHandlerWithOptions(o)
+	return n.Register(ctx, options)
+}
 
-	if !IsEnabled() {
+type ErrorHandler struct {
+	options *Options
+}
+
+func NewErrorHandlerWithConfigPath(path string) (*ErrorHandler, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewErrorHandlerWithOptions(o), nil
+}
+
+func NewErrorHandlerWithOptions(options *Options) *ErrorHandler {
+	return &ErrorHandler{options: options}
+}
+
+func (d *ErrorHandler) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
+
+	if !d.options.Enabled {
 		return nil, nil
 	}
 
