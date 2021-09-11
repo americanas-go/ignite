@@ -10,7 +10,41 @@ import (
 )
 
 func Register(ctx context.Context, server *echo.Server) error {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewBodyDumpWithOptions(o)
+	return h.Register(ctx, server)
+}
+
+type BodyDump struct {
+	options *Options
+}
+
+func NewBodyDumpWithOptions(options *Options) *BodyDump {
+	return &BodyDump{options: options}
+}
+
+func NewBodyDumpWithConfigPath(path string) (*BodyDump, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewBodyDumpWithOptions(o), nil
+}
+
+func NewBodyDump() *BodyDump {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewBodyDumpWithOptions(o)
+}
+
+func (i *BodyDump) Register(ctx context.Context, server *echo.Server) error {
+	if !i.options.Enabled {
 		return nil
 	}
 

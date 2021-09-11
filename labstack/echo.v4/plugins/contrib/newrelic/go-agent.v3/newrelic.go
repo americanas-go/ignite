@@ -11,8 +11,42 @@ import (
 )
 
 func Register(ctx context.Context, server *echo.Server) error {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewNewrelicWithOptions(o)
+	return h.Register(ctx, server)
+}
 
-	if !IsEnabled() || !newrelic.IsEnabled() {
+type Newrelic struct {
+	options *Options
+}
+
+func NewNewrelicWithOptions(options *Options) *Newrelic {
+	return &Newrelic{options: options}
+}
+
+func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewNewrelicWithOptions(o), nil
+}
+
+func NewNewrelic() *Newrelic {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewNewrelicWithOptions(o)
+}
+
+func (i *Newrelic) Register(ctx context.Context, server *echo.Server) error {
+
+	if !i.options.Enabled || !newrelic.IsEnabled() {
 		return nil
 	}
 
@@ -24,7 +58,7 @@ func Register(ctx context.Context, server *echo.Server) error {
 
 	logger.Debug("newrelic middleware successfully enabled in echo")
 
-	if IsEnabledRequestID() {
+	if i.options.Middlewares.RequestID.Enabled {
 
 		logger.Trace("enabling requestID newrelic middleware in echo")
 

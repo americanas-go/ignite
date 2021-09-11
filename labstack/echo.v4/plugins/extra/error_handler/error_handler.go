@@ -8,16 +8,42 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
-// Register registers the error handler for echo.
-//
-// The error handler and converter middleware are registered.
-// The handler handles how the application's errors will be sent in the response.
-// And the converter converts application errors into echo errors.
-//
-// If the New Relic agent integration for Echo is used, this Register function must
-// be called after the New Relic agent Register function.
 func Register(ctx context.Context, server *echo.Server) error {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewErrorHandlerWithOptions(o)
+	return h.Register(ctx, server)
+}
+
+type ErrorHandler struct {
+	options *Options
+}
+
+func NewErrorHandlerWithOptions(options *Options) *ErrorHandler {
+	return &ErrorHandler{options: options}
+}
+
+func NewErrorHandlerWithConfigPath(path string) (*ErrorHandler, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewErrorHandlerWithOptions(o), nil
+}
+
+func NewErrorHandler() *ErrorHandler {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewErrorHandlerWithOptions(o)
+}
+
+func (i *ErrorHandler) Register(ctx context.Context, server *echo.Server) error {
+	if !i.options.Enabled {
 		return nil
 	}
 

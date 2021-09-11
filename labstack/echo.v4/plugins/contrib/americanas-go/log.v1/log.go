@@ -11,7 +11,41 @@ import (
 )
 
 func Register(ctx context.Context, server *echo.Server) error {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewLogWithOptions(o)
+	return h.Register(ctx, server)
+}
+
+type Log struct {
+	options *Options
+}
+
+func NewLogWithOptions(options *Options) *Log {
+	return &Log{options: options}
+}
+
+func NewLogWithConfigPath(path string) (*Log, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewLogWithOptions(o), nil
+}
+
+func NewLog() *Log {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewLogWithOptions(o)
+}
+
+func (i *Log) Register(ctx context.Context, server *echo.Server) error {
+	if !i.options.Enabled {
 		return nil
 	}
 
@@ -19,7 +53,7 @@ func Register(ctx context.Context, server *echo.Server) error {
 
 	logger.Trace("enabling logger middleware in echo")
 
-	server.Use(loggerMiddleware(Level()))
+	server.Use(loggerMiddleware(i.options.Level))
 
 	logger.Debug("logger middleware successfully enabled in echo")
 

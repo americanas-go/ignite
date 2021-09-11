@@ -11,13 +11,47 @@ import (
 )
 
 func Register(ctx context.Context, server *echo.Server) error {
-	if !IsEnabled() {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewMultiServerWithOptions(o)
+	return h.Register(ctx, server)
+}
+
+type MultiServer struct {
+	options *Options
+}
+
+func NewMultiServerWithOptions(options *Options) *MultiServer {
+	return &MultiServer{options: options}
+}
+
+func NewMultiServerWithConfigPath(path string) (*MultiServer, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewMultiServerWithOptions(o), nil
+}
+
+func NewMultiServer() *MultiServer {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewMultiServerWithOptions(o)
+}
+
+func (i *MultiServer) Register(ctx context.Context, server *echo.Server) error {
+	if !i.options.Enabled {
 		return nil
 	}
 
 	logger := log.FromContext(ctx)
 
-	checkRoute := getRoute()
+	checkRoute := i.options.Route
 
 	logger.Tracef("configuring multi server check router on %s in echo", checkRoute)
 
