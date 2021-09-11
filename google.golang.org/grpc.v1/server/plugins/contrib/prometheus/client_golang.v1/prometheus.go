@@ -9,8 +9,42 @@ import (
 )
 
 func Register(ctx context.Context) []grpc.ServerOption {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewPrometheusWithOptions(o)
+	return h.Register(ctx)
+}
 
-	if !IsEnabled() {
+type Prometheus struct {
+	options *Options
+}
+
+func NewPrometheusWithOptions(options *Options) *Prometheus {
+	return &Prometheus{options: options}
+}
+
+func NewPrometheusWithConfigPath(path string) (*Prometheus, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewPrometheusWithOptions(o), nil
+}
+
+func NewPrometheus() *Prometheus {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewPrometheusWithOptions(o)
+}
+
+func (i *Prometheus) Register(ctx context.Context) []grpc.ServerOption {
+
+	if !i.options.Enabled {
 		return nil
 	}
 

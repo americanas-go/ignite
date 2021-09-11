@@ -1,23 +1,67 @@
 package log
 
 import (
+	"context"
 	"time"
 
 	"github.com/americanas-go/log"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
+func Register(ctx context.Context) []grpc.ServerOption {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewLogWithOptions(o)
+	return h.Register(ctx)
+}
+
+type Log struct {
+	options *Options
+}
+
+func NewLogWithOptions(options *Options) *Log {
+	return &Log{options: options}
+}
+
+func NewLogWithConfigPath(path string) (*Log, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewLogWithOptions(o), nil
+}
+
+func NewLog() *Log {
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewLogWithOptions(o)
+}
+
+func (i *Log) Register(ctx context.Context) []grpc.ServerOption {
+
+	if !i.options.Enabled {
+		return nil
+	}
+
+	logger := log.FromContext(ctx)
+	logger.Debug("logger interceptor successfully enabled in grpc server")
+
+	return []grpc.ServerOption{
+		grpc.ChainStreamInterceptor(i.streamInterceptor()),
+		grpc.ChainUnaryInterceptor(i.unaryInterceptor()),
+	}
+}
+
 type l func(format string, args ...interface{})
 
-var lvl string
+func (i *Log) m(logger log.Logger) (method l) {
 
-func m(logger log.Logger) (method l) {
-
-	if lvl == "" {
-		lvl = Level()
-	}
-	switch lvl {
+	switch i.options.Level {
 	case "TRACE":
 		method = logger.Tracef
 	case "DEBUG":
@@ -29,7 +73,7 @@ func m(logger log.Logger) (method l) {
 	return method
 }
 
-func streamInterceptor() grpc.StreamServerInterceptor {
+func (i *Log) streamInterceptor() grpc.StreamServerInterceptor {
 	return func(srv interface{}, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		logger := log.FromContext(stream.Context())
 
@@ -47,13 +91,13 @@ func streamInterceptor() grpc.StreamServerInterceptor {
 			logger = logger.WithField("error", err.Error())
 		}
 
-		xx := m(logger)
+		xx := i.m(logger)
 		xx("stream request received")
 		return err
 	}
 }
 
-func unaryInterceptor() grpc.UnaryServerInterceptor {
+func (i *Log) unaryInterceptor() grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 
 		logger := log.FromContext(ctx)
@@ -72,7 +116,7 @@ func unaryInterceptor() grpc.UnaryServerInterceptor {
 			logger = logger.WithField("error", err.Error())
 		}
 
-		xx := m(logger)
+		xx := i.m(logger)
 		xx("unary request received")
 		return resp, err
 	}
