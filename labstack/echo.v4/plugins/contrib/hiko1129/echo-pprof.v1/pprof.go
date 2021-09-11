@@ -1,4 +1,4 @@
-package echo_pprof_v1
+package pprof
 
 import (
 	"context"

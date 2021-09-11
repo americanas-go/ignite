@@ -6,13 +6,13 @@ import (
 )
 
 type Options struct {
-	Enabled bool
-	Options []fibertrace.Option
+	Enabled      bool
+	TraceOptions []fibertrace.Option
 }
 
-func NewOptions(options ...fibertrace.Option) (*Options, error) {
+func NewOptions(traceOptions ...fibertrace.Option) (*Options, error) {
 	o := &Options{
-		Options: options,
+		TraceOptions: traceOptions,
 	}
 
 	err := config.UnmarshalWithPath(root, o)
@@ -23,8 +23,8 @@ func NewOptions(options ...fibertrace.Option) (*Options, error) {
 	return o, nil
 }
 
-func NewOptionsWithPath(path string, options ...fibertrace.Option) (opts *Options, err error) {
-	opts, err = NewOptions(options...)
+func NewOptionsWithPath(path string, traceOptions ...fibertrace.Option) (opts *Options, err error) {
+	opts, err = NewOptions(traceOptions...)
 	if err != nil {
 		return nil, err
 	}

@@ -10,23 +10,32 @@ import (
 	mongotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo"
 )
 
-type DataDog struct {
+type Datadog struct {
 	options *Options
 }
 
-func NewDatadogWithConfigPath(path string) (*DataDog, error) {
-	o, err := NewOptionsWithPath(path)
+func NewDatadogWithConfigPath(path string, options ...mongotrace.Option) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, options...)
 	if err != nil {
 		return nil, err
 	}
 	return NewDatadogWithOptions(o), nil
 }
 
-func NewDatadogWithOptions(options *Options) *DataDog {
-	return &DataDog{options: options}
+func NewDatadogWithOptions(options *Options) *Datadog {
+	return &Datadog{options: options}
 }
 
-func (d *DataDog) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
+func NewDatadog(traceOptions ...mongotrace.Option) *Datadog {
+	o, err := NewOptions(traceOptions...)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewDatadogWithOptions(o)
+}
+
+func (d *Datadog) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil, nil
 	}

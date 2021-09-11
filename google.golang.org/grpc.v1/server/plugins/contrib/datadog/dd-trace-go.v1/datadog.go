@@ -26,16 +26,16 @@ func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
-func NewDatadogWithConfigPath(path string) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path)
+func NewDatadogWithConfigPath(path string, traceOptions ...grpctrace.Option) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
 		return nil, err
 	}
 	return NewDatadogWithOptions(o), nil
 }
 
-func NewDatadog() *Datadog {
-	o, err := NewOptions()
+func NewDatadog(traceOptions ...grpctrace.Option) *Datadog {
+	o, err := NewOptions(traceOptions...)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -53,8 +53,8 @@ func (i *Datadog) Register(ctx context.Context) []grpc.ServerOption {
 	logger.Debug("datadog interceptor successfully enabled in grpc server")
 
 	return []grpc.ServerOption{
-		grpc.ChainUnaryInterceptor(grpctrace.UnaryServerInterceptor()),
-		grpc.ChainStreamInterceptor(grpctrace.StreamServerInterceptor()),
+		grpc.ChainUnaryInterceptor(grpctrace.UnaryServerInterceptor(i.options.traceOptions...)),
+		grpc.ChainStreamInterceptor(grpctrace.StreamServerInterceptor(i.options.traceOptions...)),
 	}
 
 }

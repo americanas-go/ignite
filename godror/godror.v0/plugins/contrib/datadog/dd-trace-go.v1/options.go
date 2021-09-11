@@ -6,13 +6,13 @@ import (
 )
 
 type Options struct {
-	Enabled bool
-	Options []sqltrace.Option
+	Enabled      bool
+	TraceOptions []sqltrace.Option
 }
 
-func NewOptions(options ...sqltrace.Option) (*Options, error) {
+func NewOptions(traceOptions ...sqltrace.Option) (*Options, error) {
 	o := &Options{
-		Options: options,
+		TraceOptions: traceOptions,
 	}
 
 	err := config.UnmarshalWithPath(root, o)
@@ -23,8 +23,8 @@ func NewOptions(options ...sqltrace.Option) (*Options, error) {
 	return o, nil
 }
 
-func NewOptionsWithPath(path string, options ...sqltrace.Option) (opts *Options, err error) {
-	opts, err = NewOptions(options...)
+func NewOptionsWithPath(path string, traceOptions ...sqltrace.Option) (opts *Options, err error) {
+	opts, err = NewOptions(traceOptions...)
 	if err != nil {
 		return nil, err
 	}

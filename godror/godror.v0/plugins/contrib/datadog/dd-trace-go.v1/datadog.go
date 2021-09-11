@@ -26,16 +26,16 @@ func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
-func NewDatadogWithConfigPath(path string) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path)
+func NewDatadogWithConfigPath(path string, traceOptions ...sqltrace.Option) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
 		return nil, err
 	}
 	return NewDatadogWithOptions(o), nil
 }
 
-func NewDatadog() *Datadog {
-	o, err := NewOptions()
+func NewDatadog(traceOptions ...sqltrace.Option) *Datadog {
+	o, err := NewOptions(traceOptions...)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -52,7 +52,7 @@ func (i *Datadog) Register(ctx context.Context, db *sql.DB) error {
 
 	logger.Trace("integrating oracle in datadog")
 
-	sqltrace.Register("godror", db.Driver(), i.options.Options...)
+	sqltrace.Register("godror", db.Driver(), i.options.TraceOptions...)
 
 	logger.Debug("datadog successfully integrated in oracle")
 

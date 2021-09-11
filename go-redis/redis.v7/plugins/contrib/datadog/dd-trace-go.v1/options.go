@@ -2,14 +2,16 @@ package datadog
 
 import (
 	"github.com/americanas-go/config"
+	redistrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v7"
 )
 
 type Options struct {
-	Enabled bool
+	Enabled      bool
+	TraceOptions []redistrace.ClientOption
 }
 
-func NewOptions() (*Options, error) {
-	o := &Options{}
+func NewOptions(traceOptions ...redistrace.ClientOption) (*Options, error) {
+	o := &Options{TraceOptions: traceOptions}
 
 	err := config.UnmarshalWithPath(root, o)
 	if err != nil {
@@ -19,8 +21,8 @@ func NewOptions() (*Options, error) {
 	return o, nil
 }
 
-func NewOptionsWithPath(path string) (opts *Options, err error) {
-	opts, err = NewOptions()
+func NewOptionsWithPath(path string, traceOptions ...redistrace.ClientOption) (opts *Options, err error) {
+	opts, err = NewOptions(traceOptions...)
 	if err != nil {
 		return nil, err
 	}

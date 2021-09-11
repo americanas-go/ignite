@@ -7,15 +7,15 @@ import (
 	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
 	"github.com/americanas-go/log"
-	c "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5"
+	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5"
 )
 
 type Datadog struct {
 	options *Options
 }
 
-func NewDatadogWithConfigPath(path string) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path)
+func NewDatadogWithConfigPath(path string, traceOptions ...chitrace.Option) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
 		return nil, err
 	}
@@ -24,6 +24,15 @@ func NewDatadogWithConfigPath(path string) (*Datadog, error) {
 
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
+}
+
+func NewDatadog(traceOptions ...chitrace.Option) *Datadog {
+	o, err := NewOptions(traceOptions...)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewDatadogWithOptions(o)
 }
 
 func (d *Datadog) Register(ctx context.Context) (*chi.Config, error) {
@@ -36,7 +45,7 @@ func (d *Datadog) Register(ctx context.Context) (*chi.Config, error) {
 
 	return &chi.Config{
 		Middlewares: []func(http.Handler) http.Handler{
-			c.Middleware(c.WithServiceName(datadog.Service())),
+			chitrace.Middleware(d.options.TraceOptions...),
 		},
 	}, nil
 }

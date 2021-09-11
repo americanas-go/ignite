@@ -13,12 +13,21 @@ type Datadog struct {
 	options *Options
 }
 
-func NewDatadogWithConfigPath(path string) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path)
+func NewDatadogWithConfigPath(path string, options ...redistrace.ClientOption) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, options...)
 	if err != nil {
 		return nil, err
 	}
 	return NewDatadogWithOptions(o), nil
+}
+
+func NewDatadog(traceOptions ...redistrace.ClientOption) *Datadog {
+	o, err := NewOptions(traceOptions...)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewDatadogWithOptions(o)
 }
 
 func NewDatadogWithOptions(options *Options) *Datadog {
@@ -35,7 +44,7 @@ func (d *Datadog) Register(ctx context.Context, client *redis.Client) error {
 
 	logger.Trace("integrating redis in datadog")
 
-	redistrace.WrapClient(client)
+	redistrace.WrapClient(client, d.options.TraceOptions...)
 
 	logger.Debug("redis successfully integrated in datadog")
 

@@ -13,8 +13,8 @@ type Datadog struct {
 	options *Options
 }
 
-func NewDatadogWithConfigPath(path string) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path)
+func NewDatadogWithConfigPath(path string, traceOptions ...awstrace.Option) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
 		return nil, err
 	}
@@ -23,6 +23,15 @@ func NewDatadogWithConfigPath(path string) (*Datadog, error) {
 
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
+}
+
+func NewDatadog(traceOptions ...awstrace.Option) *Datadog {
+	o, err := NewOptions(traceOptions...)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	return NewDatadogWithOptions(o)
 }
 
 func Register(ctx context.Context, awsCfg *aws.Config) error {
@@ -45,7 +54,7 @@ func (i *Datadog) Register(ctx context.Context, awsCfg *aws.Config) error {
 	logger := log.FromContext(ctx)
 	logger.Trace("enabling datadog middleware in aws")
 
-	awstrace.AppendMiddleware(awsCfg)
+	awstrace.AppendMiddleware(awsCfg, i.options.TraceOptions...)
 
 	logger.Debug("datadog middleware successfully enabled in aws")
 

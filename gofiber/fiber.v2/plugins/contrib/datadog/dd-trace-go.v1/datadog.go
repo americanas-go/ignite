@@ -27,16 +27,16 @@ func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
-func NewDatadogWithConfigPath(path string) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path)
+func NewDatadogWithConfigPath(path string, traceOptions ...fibertrace.Option) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
 		return nil, err
 	}
 	return NewDatadogWithOptions(o), nil
 }
 
-func NewDatadog() *Datadog {
-	o, err := NewOptions()
+func NewDatadog(traceOptions ...fibertrace.Option) *Datadog {
+	o, err := NewOptions(traceOptions...)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -55,7 +55,7 @@ func (i *Datadog) Register(ctx context.Context, options *fiber.Options) (fiber.C
 
 	return nil, func(ctx context.Context, app *f.App) error {
 
-		app.Use(fibertrace.Middleware(i.options.Options...))
+		app.Use(fibertrace.Middleware(i.options.TraceOptions...))
 
 		logger.Debug("datadog middleware successfully enabled in fiber")
 

@@ -2,14 +2,16 @@ package datadog
 
 import (
 	"github.com/americanas-go/config"
+	awstrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws"
 )
 
 type Options struct {
-	Enabled bool
+	Enabled      bool
+	TraceOptions []awstrace.Option
 }
 
-func NewOptions() (*Options, error) {
-	o := &Options{}
+func NewOptions(traceOptions ...awstrace.Option) (*Options, error) {
+	o := &Options{TraceOptions: traceOptions}
 
 	err := config.UnmarshalWithPath(root, o)
 	if err != nil {
@@ -19,9 +21,9 @@ func NewOptions() (*Options, error) {
 	return o, nil
 }
 
-func NewOptionsWithPath(path string) (opts *Options, err error) {
+func NewOptionsWithPath(path string, traceOptions ...awstrace.Option) (opts *Options, err error) {
 
-	opts, err = NewOptions()
+	opts, err = NewOptions(traceOptions...)
 	if err != nil {
 		return nil, err
 	}
