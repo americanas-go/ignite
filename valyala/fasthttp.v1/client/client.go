@@ -7,7 +7,7 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
-// NewConfigWithOptions returns http client with options.
+// NewClientWithOptions returns http client with options.
 func NewClientWithOptions(ctx context.Context, o *Options) *fasthttp.Client {
 
 	client := &fasthttp.Client{
