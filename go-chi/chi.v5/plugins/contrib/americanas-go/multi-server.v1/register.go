@@ -9,6 +9,7 @@ import (
 	"github.com/americanas-go/multiserver"
 )
 
+// Register registers multi server check router for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 	if !IsEnabled() {
 		return nil, nil
@@ -31,6 +32,7 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	}, nil
 }
 
+// Get returns http handler for multi server check.
 func Get(ctx context.Context) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 

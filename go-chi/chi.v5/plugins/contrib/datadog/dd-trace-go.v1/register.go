@@ -10,6 +10,7 @@ import (
 	c "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5"
 )
 
+// Register registers datadog middleware for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 	if !IsEnabled() || !datadog.IsTracerEnabled() {
 		return nil, nil

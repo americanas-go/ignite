@@ -16,6 +16,7 @@ func init() {
 	config.Add(webResponseEnabled, true, "enable/disable newrelic web response")
 }
 
+// IsEnabled returns config value from key ignite.chi.plugins.newrelic.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

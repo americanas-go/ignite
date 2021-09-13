@@ -9,6 +9,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+// Register registers prometheus middleware and router for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 
 	if !IsEnabled() {

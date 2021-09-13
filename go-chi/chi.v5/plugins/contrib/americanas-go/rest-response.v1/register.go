@@ -11,6 +11,7 @@ import (
 	response "github.com/americanas-go/rest-response"
 )
 
+// Register registers status router for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 	if !IsEnabled() {
 		return nil, nil
@@ -35,6 +36,7 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	}, nil
 }
 
+// NewResourceStatusHandler returns a new ResourceStatusHandler.
 func NewResourceStatusHandler() *ResourceStatusHandler {
 	return &ResourceStatusHandler{}
 }
@@ -42,6 +44,7 @@ func NewResourceStatusHandler() *ResourceStatusHandler {
 type ResourceStatusHandler struct {
 }
 
+// Get returns http handler for status.
 func (u *ResourceStatusHandler) Get() http.HandlerFunc {
 	resourceStatus := response.NewResourceStatus()
 	reqBodyBytes := new(bytes.Buffer)

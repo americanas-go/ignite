@@ -16,6 +16,7 @@ func init() {
 	config.Add(route, "/resource-status", "define status url")
 }
 
+// IsEnabled returns config value from key ignite.chi.plugins.status.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

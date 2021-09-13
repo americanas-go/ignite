@@ -31,6 +31,7 @@ func init() {
 	config.Add(maxAge, 5200, "cors max age (seconds)")
 }
 
+// IsEnabled returns config value from key ignite.chi.plugins.cors.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

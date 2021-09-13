@@ -16,6 +16,7 @@ func init() {
 	config.Add(route, "/metrics", "define prometheus metrics url")
 }
 
+// IsEnabled returns config value from key ignite.chi.plugins.prometheus.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

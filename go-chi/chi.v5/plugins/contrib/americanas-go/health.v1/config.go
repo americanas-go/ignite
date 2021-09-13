@@ -16,6 +16,7 @@ func init() {
 	config.Add(route, "/health", "define status url")
 }
 
+// IsEnabled returns config value from key ignite.chi.plugins.health.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

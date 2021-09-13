@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/cors"
 )
 
+// Register registers cors middleware for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 
 	if !IsEnabled() {

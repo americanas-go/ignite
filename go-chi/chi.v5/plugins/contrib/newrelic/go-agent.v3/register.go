@@ -13,6 +13,7 @@ import (
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
+// Register registers newrelic middleware for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 	if !IsEnabled() || !newrelic.IsEnabled() {
 		return nil, nil

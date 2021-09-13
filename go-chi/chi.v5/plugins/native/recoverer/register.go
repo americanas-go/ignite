@@ -9,6 +9,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
+// Register registers recoverer middleware for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 	if !IsEnabled() {
 		return nil, nil

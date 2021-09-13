@@ -16,6 +16,7 @@ func init() {
 	config.Add(route, "/check", "define multi server check url")
 }
 
+// IsEnabled returns config value from key ignite.chi.plugins.multiServer.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

@@ -14,6 +14,7 @@ func init() {
 	config.Add(enabled, true, "enable/disable stripSlashes middleware")
 }
 
+// IsEnabled returns config value from key ignite.chi.plugins.stripslashes.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

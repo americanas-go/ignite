@@ -10,6 +10,7 @@ import (
 	response "github.com/americanas-go/rest-response"
 )
 
+// Register registers health check handler for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 	if !IsEnabled() {
 		return nil, nil
@@ -34,13 +35,16 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	}, nil
 }
 
+// NewHealthHandler returns a new HealthHandler.
 func NewHealthHandler() *HealthHandler {
 	return &HealthHandler{}
 }
 
+// HealthHandler represents a health check handler.
 type HealthHandler struct {
 }
 
+// Get returns a http handler for health check.
 func (u *HealthHandler) Get(ctx context.Context) http.HandlerFunc {
 	resp, httpCode := response.NewHealth(ctx)
 	return func(w http.ResponseWriter, r *http.Request) {
