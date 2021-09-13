@@ -30,7 +30,7 @@ func Format() string {
 	return fmt
 }
 
-// Location returns config value from key ignite.datadog.location where default is UTC.
+// Location returns config value from key ignite.time.location where default is UTC.
 func Location() *time.Location {
 	if loc == nil {
 		var err error
