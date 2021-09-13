@@ -10,6 +10,7 @@ import (
 
 type clusterExt func(context.Context, *redis.ClusterClient) error
 
+// NewClusterClient returns a new ClusterClient.
 func NewClusterClient(ctx context.Context, plugins ...clusterExt) (*redis.ClusterClient, error) {
 
 	logger := log.FromContext(ctx)
@@ -22,6 +23,7 @@ func NewClusterClient(ctx context.Context, plugins ...clusterExt) (*redis.Cluste
 	return NewClusterClientWithOptions(ctx, o, plugins...)
 }
 
+// NewClusterClientWithOptions returns a new ClusterClient with options.
 func NewClusterClientWithOptions(ctx context.Context, o *Options, plugins ...clusterExt) (client *redis.ClusterClient, err error) {
 
 	logger := log.FromContext(ctx)

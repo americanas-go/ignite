@@ -14,6 +14,7 @@ func init() {
 	config.Add(enabled, true, "enable/disable redis integration")
 }
 
+// IsEnabled returns config value from key ignite.redis.plugins.newrelic.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

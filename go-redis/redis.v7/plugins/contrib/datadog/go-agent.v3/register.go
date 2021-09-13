@@ -9,6 +9,7 @@ import (
 	redistrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v7"
 )
 
+// Register registers redis for datadog.
 func Register(ctx context.Context, client *redis.Client) error {
 
 	if !IsEnabled() || !datadog.IsTracerEnabled() {
