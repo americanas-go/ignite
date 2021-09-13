@@ -9,12 +9,34 @@ import (
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
+func NewMiddlewareWithConfigPath(path string) (ants.Middleware, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewMiddlewareWithOptions(o), nil
+}
+
+func NewMiddlewareWithOptions(options *Options) ants.Middleware {
+	return &middleware{options: options}
+}
+
+func NewMiddleware() ants.Middleware {
+	log.Trace("creating newrelic middleware for ants")
+	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+	return NewMiddlewareWithOptions(o)
+}
+
 type middleware struct {
+	options *Options
 }
 
 func (i *middleware) Before(ctx context.Context) context.Context {
 
-	if IsEnabled() || !newrelic.IsEnabled() {
+	if !i.options.Enabled || !newrelic.IsEnabled() {
 		return ctx
 	}
 
@@ -31,13 +53,8 @@ func (i *middleware) Before(ctx context.Context) context.Context {
 
 func (i *middleware) After(ctx context.Context) {
 
-	if IsEnabled() || !newrelic.IsEnabled() {
+	if !i.options.Enabled || !newrelic.IsEnabled() {
 		return
 	}
 
-}
-
-func NewMiddleware() ants.Middleware {
-	log.Trace("creating newrelic middleware for ants")
-	return &middleware{}
 }
