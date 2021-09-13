@@ -7,6 +7,7 @@ import (
 	"github.com/tidwall/buntdb"
 )
 
+// NewDBWithOptions returns DB with options.
 func NewDBWithOptions(ctx context.Context, o *Options) (db *buntdb.DB, err error) {
 
 	logger := log.FromContext(ctx)
@@ -45,6 +46,7 @@ func NewDBWithOptions(ctx context.Context, o *Options) (db *buntdb.DB, err error
 
 }
 
+// NewDB returns DB.
 func NewDB(ctx context.Context) (*buntdb.DB, error) {
 
 	logger := log.FromContext(ctx)
