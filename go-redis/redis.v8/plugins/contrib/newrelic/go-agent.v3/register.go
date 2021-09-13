@@ -8,6 +8,7 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
+// Register registers redis for newrelic.
 func Register(ctx context.Context, client *redis.Client) error {
 
 	if !IsEnabled() || !newrelic.IsEnabled() {

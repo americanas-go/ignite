@@ -8,14 +8,17 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
+// ClientHealth represents client health.
 type ClientHealth struct {
 	options *Options
 }
 
+// NewClientHealthWithOptions returns a health with the options provided.
 func NewClientHealthWithOptions(options *Options) *ClientHealth {
 	return &ClientHealth{options: options}
 }
 
+// NewClientHealth returns a client health with default options.
 func NewClientHealth() *ClientHealth {
 	o, err := NewOptions()
 	if err != nil {
@@ -25,6 +28,7 @@ func NewClientHealth() *ClientHealth {
 	return NewClientHealthWithOptions(o)
 }
 
+// Register registers a new ClientChecker in the health package.
 func (i *ClientHealth) Register(ctx context.Context, client *redis.Client) error {
 
 	logger := log.FromContext(ctx).WithTypeOf(*i)
