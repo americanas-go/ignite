@@ -14,36 +14,36 @@ func Register(ctx context.Context) []grpc.ServerOption {
 	if err != nil {
 		return nil
 	}
-	h := NewNewrelicWithOptions(o)
+	h := NewOpenTracingWithOptions(o)
 	return h.Register(ctx)
 }
 
-type Newrelic struct {
+type OpenTracing struct {
 	options *Options
 }
 
-func NewNewrelicWithOptions(options *Options) *Newrelic {
-	return &Newrelic{options: options}
+func NewOpenTracingWithOptions(options *Options) *OpenTracing {
+	return &OpenTracing{options: options}
 }
 
-func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
+func NewOpenTracingWithConfigPath(path string) (*OpenTracing, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
 		return nil, err
 	}
-	return NewNewrelicWithOptions(o), nil
+	return NewOpenTracingWithOptions(o), nil
 }
 
-func NewNewrelic() *Newrelic {
+func NewOpenTracing() *OpenTracing {
 	o, err := NewOptions()
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
 
-	return NewNewrelicWithOptions(o)
+	return NewOpenTracingWithOptions(o)
 }
 
-func (i *Newrelic) Register(ctx context.Context) []grpc.ServerOption {
+func (i *OpenTracing) Register(ctx context.Context) []grpc.ServerOption {
 
 	if !i.options.Enabled {
 		return nil

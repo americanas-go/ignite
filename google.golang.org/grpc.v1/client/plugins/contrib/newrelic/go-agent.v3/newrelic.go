@@ -14,36 +14,36 @@ func Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 	if err != nil {
 		return nil, nil
 	}
-	h := NewDatadogWithOptions(o)
+	h := NewNewrelicWithOptions(o)
 	return h.Register(ctx)
 }
 
-type Datadog struct {
+type Newrelic struct {
 	options *Options
 }
 
-func NewDatadogWithOptions(options *Options) *Datadog {
-	return &Datadog{options: options}
+func NewNewrelicWithOptions(options *Options) *Newrelic {
+	return &Newrelic{options: options}
 }
 
-func NewDatadogWithConfigPath(path string) (*Datadog, error) {
+func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
 		return nil, err
 	}
-	return NewDatadogWithOptions(o), nil
+	return NewNewrelicWithOptions(o), nil
 }
 
-func NewDatadog() *Datadog {
+func NewNewrelic() *Newrelic {
 	o, err := NewOptions()
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
 
-	return NewDatadogWithOptions(o)
+	return NewNewrelicWithOptions(o)
 }
 
-func (i *Datadog) Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
+func (i *Newrelic) Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 
 	if !i.options.Enabled || !newrelic.IsEnabled() {
 		return nil, nil
