@@ -46,7 +46,7 @@ func NewDBWithOptions(ctx context.Context, o *Options) (db *buntdb.DB, err error
 
 }
 
-// NewDB returns DB.
+// NewDB returns DB with default options.
 func NewDB(ctx context.Context) (*buntdb.DB, error) {
 
 	logger := log.FromContext(ctx)
