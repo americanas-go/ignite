@@ -30,7 +30,7 @@ func NewClientWithOptions(ctx context.Context, o *Options) *fasthttp.Client {
 	return client
 }
 
-// NewClient returns http client.
+// NewClient returns http client with default options.
 func NewClient(ctx context.Context) *fasthttp.Client {
 
 	logger := log.FromContext(ctx)
