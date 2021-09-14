@@ -14,6 +14,7 @@ func init() {
 	config.Add(enabled, true, "enable/disable opentracing")
 }
 
+// IsEnabled returns config value from key ignite.resty.plugins.opentracing.enabled where default is true.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }

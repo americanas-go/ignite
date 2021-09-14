@@ -11,6 +11,7 @@ import (
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
+// Register registers newrelic for resty.
 func Register(ctx context.Context, client *resty.Client) error {
 
 	if !IsEnabled() || !newrelic.IsEnabled() {

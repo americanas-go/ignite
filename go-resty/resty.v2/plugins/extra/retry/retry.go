@@ -13,10 +13,12 @@ type Retry struct {
 	options *Options
 }
 
+// NewRetryWithOptions returns a new Retry with options.
 func NewRetryWithOptions(options *Options) *Retry {
 	return &Retry{options: options}
 }
 
+// NewRetry returns a new Retry.
 func NewRetry() *Retry {
 	o, err := NewOptions()
 	if err != nil {
@@ -25,6 +27,7 @@ func NewRetry() *Retry {
 	return NewRetryWithOptions(o)
 }
 
+// Registry registers retry in resty.
 func (p *Retry) Register(ctx context.Context, client *r.Client) error {
 
 	if !p.options.Enabled {

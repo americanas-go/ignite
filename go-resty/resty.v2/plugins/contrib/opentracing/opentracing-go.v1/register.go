@@ -8,6 +8,7 @@ import (
 	"github.com/opentracing/opentracing-go"
 )
 
+// Register registers opentracing middleware for resty.
 func Register(ctx context.Context, client *resty.Client) error {
 
 	if !IsEnabled() {
@@ -15,11 +16,11 @@ func Register(ctx context.Context, client *resty.Client) error {
 	}
 
 	logger := log.FromContext(ctx)
-	logger.Trace("enabling requestID middleware in resty")
+	logger.Trace("enabling opentracing middleware in resty")
 
 	client.OnBeforeRequest(ot)
 
-	logger.Debug("requestID middleware successfully enabled in resty")
+	logger.Debug("opentracing middleware successfully enabled in resty")
 
 	return nil
 }

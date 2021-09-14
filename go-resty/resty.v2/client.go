@@ -9,8 +9,10 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+// Plugin defines a function to process plugin.
 type Plugin func(context.Context, *resty.Client) error
 
+// NewClient returns a new resty Client.
 func NewClient(ctx context.Context, plugins ...Plugin) (*resty.Client, error) {
 	opts, err := NewOptions()
 	if err != nil {
@@ -19,6 +21,7 @@ func NewClient(ctx context.Context, plugins ...Plugin) (*resty.Client, error) {
 	return NewClientWithOptions(ctx, opts, plugins...), nil
 }
 
+// NewClientWithOptions returns a new resty Client with options.
 func NewClientWithOptions(ctx context.Context, options *Options, plugins ...Plugin) *resty.Client {
 
 	logger := log.FromContext(ctx)

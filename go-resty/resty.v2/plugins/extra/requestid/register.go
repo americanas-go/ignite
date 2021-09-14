@@ -8,6 +8,7 @@ import (
 	"github.com/google/uuid"
 )
 
+// Register registers requestID middleware for resty.
 func Register(ctx context.Context, client *resty.Client) error {
 
 	if !IsEnabled() {

@@ -30,6 +30,7 @@ func m(logger log.Logger) (method l) {
 	return method
 }
 
+// Register registers logger middleware for resty.
 func Register(ctx context.Context, client *resty.Client) error {
 
 	if !IsEnabled() {
