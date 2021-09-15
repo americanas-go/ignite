@@ -1,0 +1,55 @@
+package newrelic
+
+import (
+	"context"
+
+	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
+	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
+	"github.com/americanas-go/log"
+	"github.com/newrelic/go-agent/v3/integrations/nrmongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
+
+type Newrelic struct {
+	options *Options
+}
+
+func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewNewrelicWithOptions(o), nil
+}
+
+func NewNewrelicWithOptions(options *Options) *Newrelic {
+	return &Newrelic{options: options}
+}
+
+func (d *Newrelic) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
+
+	if !d.options.Enabled || !newrelic.IsEnabled() {
+		return nil, nil
+	}
+
+	return func(ctx context.Context, options *options.ClientOptions) error {
+		logger := log.FromContext(ctx)
+
+		logger.Trace("integrating mongo in newrelic")
+
+		options.SetMonitor(nrmongo.NewCommandMonitor(options.Monitor))
+
+		logger.Debug("mongo successfully integrated in newrelic")
+
+		return nil
+	}, nil
+}
+
+func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	datadog := NewNewrelicWithOptions(o)
+	return datadog.Register(ctx)
+}

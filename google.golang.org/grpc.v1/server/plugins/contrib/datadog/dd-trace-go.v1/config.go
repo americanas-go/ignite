@@ -7,13 +7,13 @@ import (
 
 const (
 	root    = server.PluginsRoot + ".datadog"
-	enabled = root + ".enabled"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable datadog")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable datadog")
 }

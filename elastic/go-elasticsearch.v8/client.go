@@ -25,6 +25,14 @@ func NewClient(ctx context.Context, plugins ...Plugin) (*elasticsearch.Client, e
 	return NewClientWithOptions(ctx, o, plugins...)
 }
 
+func NewClientWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*elasticsearch.Client, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientWithOptions(ctx, opts, plugins...)
+}
+
 func NewClientWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (client *elasticsearch.Client, err error) {
 
 	logger := log.FromContext(ctx)

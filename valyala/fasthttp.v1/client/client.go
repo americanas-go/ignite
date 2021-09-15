@@ -7,6 +7,14 @@ import (
 	"github.com/valyala/fasthttp"
 )
 
+func NewClientWithConfigPath(ctx context.Context, path string) (*fasthttp.Client, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientWithOptions(ctx, options), nil
+}
+
 func NewClientWithOptions(ctx context.Context, o *Options) *fasthttp.Client {
 
 	client := &fasthttp.Client{

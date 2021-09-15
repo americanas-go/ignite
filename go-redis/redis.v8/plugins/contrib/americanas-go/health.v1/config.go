@@ -7,16 +7,19 @@ import (
 
 const (
 	root        = redis.PluginsRoot + ".health"
-	name        = root + ".name"
-	description = root + ".description"
-	required    = root + ".required"
-	enabled     = root + ".enabled"
+	name        = ".name"
+	description = ".description"
+	required    = ".required"
+	enabled     = ".enabled"
 )
 
 func init() {
+	ConfigAdd(root)
+}
 
-	config.Add(name, "redis", "health name")
-	config.Add(description, "default connection", "define health description")
-	config.Add(required, true, "define health description")
-	config.Add(enabled, true, "enable/disable health")
+func ConfigAdd(path string) {
+	config.Add(path+name, "redis", "health name")
+	config.Add(path+description, "default connection", "define health description")
+	config.Add(path+required, true, "define health description")
+	config.Add(path+enabled, true, "enable/disable health")
 }

@@ -5,10 +5,17 @@ import (
 	"database/sql"
 
 	"github.com/americanas-go/log"
-	_ "github.com/godror/godror"
 )
 
 type Plugin func(context.Context, *sql.DB) error
+
+func NewDBWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*sql.DB, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewDBWithOptions(ctx, opts, plugins...)
+}
 
 func NewDBWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (db *sql.DB, err error) {
 

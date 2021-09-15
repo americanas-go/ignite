@@ -7,19 +7,15 @@ import (
 
 const (
 	root    = client.PluginsRoot + ".log"
-	enabled = root + ".enabled"
-	level   = root + ".level"
+	enabled = ".enabled"
+	level   = ".level"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable logger")
-	config.Add(level, "INFO", "sets log level INFO/DEBUG/TRACE")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func Level() string {
-	return config.String(level)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable logger")
+	config.Add(path+level, "INFO", "sets log level INFO/DEBUG/TRACE")
 }

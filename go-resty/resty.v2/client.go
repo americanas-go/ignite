@@ -19,6 +19,14 @@ func NewClient(ctx context.Context, plugins ...Plugin) (*resty.Client, error) {
 	return NewClientWithOptions(ctx, opts, plugins...), nil
 }
 
+func NewClientWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*resty.Client, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientWithOptions(ctx, opts, plugins...), nil
+}
+
 func NewClientWithOptions(ctx context.Context, options *Options, plugins ...Plugin) *resty.Client {
 
 	logger := log.FromContext(ctx)

@@ -7,13 +7,9 @@ import (
 
 const (
 	root  = client.PluginsRoot + ".compressor"
-	level = root + ".level"
+	level = ".level"
 )
 
-func init() {
-	config.Add(level, -1, "sets gzip level")
-}
-
-func Level() int {
-	return config.Int(level)
+func ConfigAdd(path string) {
+	config.Add(path+level, -1, "sets gzip level")
 }

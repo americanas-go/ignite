@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = chi.PluginsRoot + ".requestid.enabled"
+	root    = chi.PluginsRoot + ".requestId"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable requestid middleware")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable requestId middleware")
 }

@@ -6,20 +6,16 @@ import (
 )
 
 const (
-	ConfigRoot = echo.PluginsRoot + ".prometheus"
-	enabled    = ConfigRoot + ".enabled"
-	route      = ConfigRoot + ".route"
+	root    = echo.PluginsRoot + ".prometheus"
+	enabled = ".enabled"
+	route   = ".route"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable prometheus integration")
-	config.Add(route, "/metrics", "define prometheus metrics url")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func GetRoute() string {
-	return config.String(route)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable prometheus integration")
+	config.Add(path+route, "/metrics", "define prometheus metrics url")
 }
