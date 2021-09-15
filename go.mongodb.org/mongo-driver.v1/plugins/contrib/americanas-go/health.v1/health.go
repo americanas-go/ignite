@@ -17,6 +17,14 @@ func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+func NewHealthWithConfigPath(path string) (*Health, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewHealthWithOptions(o), nil
+}
+
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,4 +50,13 @@ func (i *Health) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo
 
 		return nil
 	}
+}
+
+func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
+	o, err := NewOptions()
+	if err != nil {
+		return nil, nil
+	}
+	h := NewHealthWithOptions(o)
+	return h.Register(ctx)
 }

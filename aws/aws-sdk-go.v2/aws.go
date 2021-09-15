@@ -25,6 +25,14 @@ func NewConfig(ctx context.Context, plugins ...Plugin) aws.Config {
 	return NewConfigWithOptions(ctx, o, plugins...)
 }
 
+func NewConfigWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (aws.Config, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return aws.Config{}, err
+	}
+	return NewConfigWithOptions(ctx, opts, plugins...), nil
+}
+
 // NewConfigWithOptions returns aws config with options.
 func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plugin) aws.Config {
 
@@ -32,7 +40,7 @@ func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plug
 
 	cfg, err := c.LoadDefaultConfig(ctx)
 	if err != nil {
-		logger.Panicf("unable to load AWS SDK config, %s", err.Error())
+		logger.Errorf("unable to load AWS SDK config, %s", err.Error())
 		return aws.Config{}
 	}
 

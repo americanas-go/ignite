@@ -16,6 +16,14 @@ func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+func NewHealthWithConfigPath(path string) (*Health, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewHealthWithOptions(o), nil
+}
+
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
@@ -37,4 +45,13 @@ func (i *Health) Register(ctx context.Context, client *elasticsearch.Client) err
 	logger.Debug("elasticsearch successfully integrated in health")
 
 	return nil
+}
+
+func Register(ctx context.Context, client *elasticsearch.Client) error {
+	o, err := NewOptions()
+	if err != nil {
+		return err
+	}
+	health := NewHealthWithOptions(o)
+	return health.Register(ctx, client)
 }

@@ -6,14 +6,14 @@ import (
 )
 
 const (
-	enabled = aws.PluginsRoot + ".datadog.enabled"
+	root    = aws.PluginsRoot + ".datadog"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable datadog integration")
+	ConfigAdd(root)
 }
 
-// IsEnabled returns config value from key ignite.aws.plugins.datadog.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(enabled, true, "enable/disable datadog integration")
 }

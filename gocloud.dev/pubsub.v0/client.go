@@ -34,6 +34,14 @@ func NewTopic(ctx context.Context) (*pubsub.Topic, error) {
 	return NewTopicWithOptions(ctx, o)
 }
 
+func NewTopicWithConfigPath(ctx context.Context, path string) (*pubsub.Topic, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewTopicWithOptions(ctx, options)
+}
+
 // NewTopicWithOptions start a new topic for send message
 func NewTopicWithOptions(ctx context.Context, o *Options) (*pubsub.Topic, error) {
 
@@ -66,6 +74,14 @@ func NewSubscription(ctx context.Context) (*pubsub.Subscription, error) {
 	}
 
 	return NewSubscriptionWithOptions(ctx, o)
+}
+
+func NewSubscriptionWithConfigPath(ctx context.Context, path string) (*pubsub.Subscription, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewSubscriptionWithOptions(ctx, options)
 }
 
 // NewSubscriptionWithOptions ..

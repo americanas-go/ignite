@@ -7,13 +7,17 @@ import (
 
 const (
 	root    = echo.PluginsRoot + ".swagger"
-	enabled = root + ".enabled"
-	route   = root + ".route"
+	enabled = ".enabled"
+	route   = ".route"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable swagger integration")
-	config.Add(route, "/swagger/*", "define swagger metrics url")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable swagger integration")
+	config.Add(path+route, "/swagger/*", "define swagger metrics url")
 }
 
 func IsEnabled() bool {

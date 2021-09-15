@@ -7,19 +7,15 @@ import (
 
 const (
 	root    = fiber.PluginsRoot + ".health"
-	enabled = root + ".enabled"
-	route   = root + ".route"
+	enabled = ".enabled"
+	route   = ".route"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable health route")
-	config.Add(route, "/health", "define status url")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func getRoute() string {
-	return config.String(route)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable health route")
+	config.Add(path+route, "/health", "define status url")
 }

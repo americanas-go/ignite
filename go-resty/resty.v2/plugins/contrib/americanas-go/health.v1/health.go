@@ -12,17 +12,26 @@ type Health struct {
 	options *Options
 }
 
+func NewHealthWithConfigPath(path string) (*Health, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewHealthWithOptions(o), nil
+}
+
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
-func NewHealth() *Health {
+func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
-		log.Fatalf(err.Error())
+		return err
 	}
 
-	return NewHealthWithOptions(o)
+	plugin := NewHealthWithOptions(o)
+	return plugin.Register(ctx, client)
 }
 
 func (i *Health) Register(ctx context.Context, client *resty.Client) error {
