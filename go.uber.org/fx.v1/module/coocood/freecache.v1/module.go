@@ -16,7 +16,7 @@ func Module() fx.Option {
 	once.Do(func() {
 		options = fx.Options(
 			contextfx.Module(),
-			fx.Invoke(
+			fx.Provide(
 				freecache.NewCache,
 			),
 		)
