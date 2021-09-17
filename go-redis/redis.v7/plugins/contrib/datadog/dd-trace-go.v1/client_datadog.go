@@ -5,36 +5,36 @@ import (
 
 	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
 	"github.com/americanas-go/log"
-	"github.com/go-redis/redis/v8"
-	redistrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8"
+	"github.com/go-redis/redis/v7"
+	redistrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v7"
 )
 
-type Datadog struct {
+type ClientDatadog struct {
 	options *Options
 }
 
-func NewDatadogWithConfigPath(path string, traceOptions ...redistrace.ClientOption) (*Datadog, error) {
+func NewClientDatadogWithConfigPath(path string, traceOptions ...redistrace.ClientOption) (*ClientDatadog, error) {
 	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
 		return nil, err
 	}
-	return NewDatadogWithOptions(o), nil
+	return NewClientDatadogWithOptions(o), nil
 }
 
-func NewDatadog(traceOptions ...redistrace.ClientOption) *Datadog {
+func NewClientDatadog(traceOptions ...redistrace.ClientOption) *ClientDatadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
 
-	return NewDatadogWithOptions(o)
+	return NewClientDatadogWithOptions(o)
 }
 
-func NewDatadogWithOptions(options *Options) *Datadog {
-	return &Datadog{options: options}
+func NewClientDatadogWithOptions(options *Options) *ClientDatadog {
+	return &ClientDatadog{options: options}
 }
 
-func (d *Datadog) Register(ctx context.Context, client *redis.Client) error {
+func (d *ClientDatadog) Register(ctx context.Context, client *redis.Client) error {
 
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil
@@ -51,11 +51,11 @@ func (d *Datadog) Register(ctx context.Context, client *redis.Client) error {
 	return nil
 }
 
-func Register(ctx context.Context, client *redis.Client) error {
+func ClientRegister(ctx context.Context, client *redis.Client) error {
 	o, err := NewOptions()
 	if err != nil {
 		return err
 	}
-	d := NewDatadogWithOptions(o)
+	d := NewClientDatadogWithOptions(o)
 	return d.Register(ctx, client)
 }
