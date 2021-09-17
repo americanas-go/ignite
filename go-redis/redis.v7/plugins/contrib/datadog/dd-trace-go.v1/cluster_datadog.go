@@ -9,32 +9,32 @@ import (
 	redistrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v7"
 )
 
-type Datadog struct {
+type ClusterDatadog struct {
 	options *Options
 }
 
-func NewDatadogWithConfigPath(path string, options ...redistrace.ClientOption) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path, options...)
+func NewClusterDatadogWithConfigPath(path string, traceOptions ...redistrace.ClientOption) (*ClusterDatadog, error) {
+	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
 		return nil, err
 	}
-	return NewDatadogWithOptions(o), nil
+	return NewClusterDatadogWithOptions(o), nil
 }
 
-func NewDatadog(traceOptions ...redistrace.ClientOption) *Datadog {
+func NewClusterDatadog(traceOptions ...redistrace.ClientOption) *ClusterDatadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
 
-	return NewDatadogWithOptions(o)
+	return NewClusterDatadogWithOptions(o)
 }
 
-func NewDatadogWithOptions(options *Options) *Datadog {
-	return &Datadog{options: options}
+func NewClusterDatadogWithOptions(options *Options) *ClusterDatadog {
+	return &ClusterDatadog{options: options}
 }
 
-func (d *Datadog) Register(ctx context.Context, client *redis.Client) error {
+func (d *ClusterDatadog) Register(ctx context.Context, client *redis.ClusterClient) error {
 
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil
@@ -51,11 +51,11 @@ func (d *Datadog) Register(ctx context.Context, client *redis.Client) error {
 	return nil
 }
 
-func Register(ctx context.Context, client *redis.Client) error {
+func ClusterRegister(ctx context.Context, client *redis.ClusterClient) error {
 	o, err := NewOptions()
 	if err != nil {
 		return err
 	}
-	d := NewDatadogWithOptions(o)
+	d := NewClusterDatadogWithOptions(o)
 	return d.Register(ctx, client)
 }
