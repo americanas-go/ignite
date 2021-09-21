@@ -19,11 +19,3 @@ func ConfigAdd(path string) {
 	config.Add(path+enabled, true, "enable/disable swagger integration")
 	config.Add(path+route, "/swagger/*", "define swagger metrics url")
 }
-
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func GetRoute() string {
-	return config.String(route)
-}

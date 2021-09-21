@@ -44,13 +44,13 @@ func NewSwagger() *Swagger {
 
 func (i *Swagger) Register(ctx context.Context, server *echo.Server) error {
 
-	if !IsEnabled() {
+	if !i.options.Enabled {
 		return nil
 	}
 
 	logger := log.FromContext(ctx)
 
-	swaggerRoute := GetRoute()
+	swaggerRoute := i.options.Route
 
 	logger.Tracef("configuring swagger router on %s in echo", swaggerRoute)
 
