@@ -36,7 +36,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 
 func (i *Opentracing) Register(ctx context.Context, client *resty.Client) error {
 
-	if i.options.Enabled {
+	if !i.options.Enabled {
 		return nil
 	}
 

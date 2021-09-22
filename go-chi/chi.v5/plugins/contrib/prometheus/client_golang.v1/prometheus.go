@@ -27,7 +27,7 @@ func NewPrometheusWithOptions(options *Options) *Prometheus {
 
 func (d *Prometheus) Register(ctx context.Context) (*chi.Config, error) {
 
-	if d.options.Enabled {
+	if !d.options.Enabled {
 		return nil, nil
 	}
 
