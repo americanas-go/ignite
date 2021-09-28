@@ -4,7 +4,9 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/americanas-go/ignite/time"
 	"github.com/americanas-go/log"
+	"github.com/godror/godror"
 )
 
 type Plugin func(context.Context, *sql.DB) error
@@ -21,15 +23,23 @@ func NewDBWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (db *s
 
 	logger := log.FromContext(ctx)
 
-	db, err = sql.Open("godror", o.DataSourceName)
-	if err != nil {
-		return nil, err
+	var P godror.ConnectionParams
+	P.ConnectString = o.ConnectString
+	if o.Username != "" && o.Password != "" {
+		P.Username, P.Password = o.Username, godror.NewPassword(o.Password)
 	}
-	// defer db.Close()
+	P.SessionTimeout = o.SessionTimeout
+	P.MaxLifeTime = o.MaxLifetime
+	P.MaxSessions = o.MaxSessions
+	P.MinSessions = o.MinSessions
+	P.MaxSessionsPerShard = o.MaxSessionsPerShard
+	P.Timezone = time.Location()
+	P.WaitTimeout = o.WaitTimeout
+	P.SessionIncrement = o.SessionIncrement
+	// P.SetSessionParamOnInit("NLS_NUMERIC_CHARACTERS", ",.")
+	// P.SetSessionParamOnInit("NLS_LANGUAGE", "FRENCH")
 
-	db.SetConnMaxLifetime(o.ConnMaxLifetime)
-	db.SetMaxIdleConns(o.MaxIdleConns)
-	db.SetMaxOpenConns(o.MaxOpenConns)
+	db = sql.OpenDB(godror.NewConnector(P))
 
 	if err = db.Ping(); err != nil {
 		return nil, err

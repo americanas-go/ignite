@@ -4,10 +4,11 @@ go 1.16
 
 // replace github.com/americanas-go/log => ../log/
 // replace github.com/americanas-go/multiserver => ../multiserver/
+// replace github.com/americanas-go/config => ../config/
 
 require (
 	github.com/Microsoft/go-winio v0.5.0 // indirect
-	github.com/americanas-go/config v1.3.0
+	github.com/americanas-go/config v1.4.0
 	github.com/americanas-go/errors v1.1.0
 	github.com/americanas-go/health v1.0.0
 	github.com/americanas-go/log v1.6.0
@@ -34,6 +35,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.3
 	github.com/go-resty/resty/v2 v2.6.0
 	github.com/gocql/gocql v0.0.0-20210817081954-bc256bbb90de
+	github.com/godror/godror v0.26.3
 	github.com/gofiber/fiber/v2 v2.18.0
 	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.3.0
@@ -41,12 +43,14 @@ require (
 	github.com/graphql-go/handler v0.2.3
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/hashicorp/go-memdb v1.3.2
+	github.com/hashicorp/vault/api v1.0.5-0.20191108163347-bdd38fca2cff
 	github.com/hiko1129/echo-pprof v1.0.1
 	github.com/jlaffaye/ftp v0.0.0-20210307004419-5d4190119067
 	github.com/labstack/echo/v4 v4.5.0
 	github.com/labstack/gommon v0.3.0
 	github.com/matryer/try v0.0.0-20161228173917-9ac251b645a2 // indirect
 	github.com/mattn/go-sqlite3 v1.14.8 // indirect
+	github.com/mittwald/vaultgo v0.0.11
 	github.com/nats-io/nats.go v1.12.1
 	github.com/newrelic/go-agent/v3 v3.15.0
 	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.0.1
