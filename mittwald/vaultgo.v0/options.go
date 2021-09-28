@@ -1,22 +1,21 @@
-package godror
+package vault
 
 import (
-	"time"
-
 	"github.com/americanas-go/config"
 )
 
 type Options struct {
-	ConnectString       string
-	Username            string
-	Password            string
-	MaxLifetime         time.Duration
-	SessionTimeout      time.Duration
-	WaitTimeout         time.Duration
-	MaxSessions         int
-	SessionIncrement    int
-	MinSessions         int
-	MaxSessionsPerShard int
+	Addr   string
+	Type   string
+	CaPath string
+	Token  string
+	K8s    struct {
+		Role string
+		Jwt  struct {
+			File    string
+			Content string
+		}
+	}
 }
 
 func NewOptions() (*Options, error) {
