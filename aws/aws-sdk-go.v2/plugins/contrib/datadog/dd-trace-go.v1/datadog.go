@@ -25,13 +25,13 @@ func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
-func NewDatadog(traceOptions ...awstrace.Option) *Datadog {
+func NewDatadog(traceOptions ...awstrace.Option) (*Datadog, error) {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
 
-	return NewDatadogWithOptions(o)
+	return NewDatadogWithOptions(o), nil
 }
 
 func Register(ctx context.Context, awsCfg *aws.Config) error {

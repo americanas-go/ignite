@@ -21,14 +21,11 @@ const (
 	PUBSUB = "pubsub"
 )
 
-// NewTopic ..
+// NewTopic creates a topic publisher
 func NewTopic(ctx context.Context) (*pubsub.Topic, error) {
-
-	logger := log.FromContext(ctx)
-
 	o, err := NewOptions()
 	if err != nil {
-		logger.Fatalf(err.Error())
+		return nil, err
 	}
 
 	return NewTopicWithOptions(ctx, o)
@@ -63,14 +60,11 @@ func NewTopicWithOptions(ctx context.Context, o *Options) (*pubsub.Topic, error)
 
 }
 
-// NewSubscription ..
+// NewSubscription creates a subscription
 func NewSubscription(ctx context.Context) (*pubsub.Subscription, error) {
-
-	logger := log.FromContext(ctx)
-
 	o, err := NewOptions()
 	if err != nil {
-		logger.Fatalf(err.Error())
+		return nil, err
 	}
 
 	return NewSubscriptionWithOptions(ctx, o)
