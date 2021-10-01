@@ -21,13 +21,13 @@ func NewClusterDatadogWithConfigPath(path string, traceOptions ...redistrace.Cli
 	return NewClusterDatadogWithOptions(o), nil
 }
 
-func NewClusterDatadog(traceOptions ...redistrace.ClientOption) *ClusterDatadog {
+func NewClusterDatadog(traceOptions ...redistrace.ClientOption) (*ClusterDatadog, error) {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
 
-	return NewClusterDatadogWithOptions(o)
+	return NewClusterDatadogWithOptions(o), nil
 }
 
 func NewClusterDatadogWithOptions(options *Options) *ClusterDatadog {

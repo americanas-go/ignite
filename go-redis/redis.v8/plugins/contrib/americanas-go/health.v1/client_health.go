@@ -24,13 +24,13 @@ func NewClientHealthWithConfigPath(path string) (*ClientHealth, error) {
 	return NewClientHealthWithOptions(o), nil
 }
 
-func NewClientHealth() *ClientHealth {
+func NewClientHealth() (*ClientHealth, error) {
 	o, err := NewOptions()
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
 
-	return NewClientHealthWithOptions(o)
+	return NewClientHealthWithOptions(o), nil
 }
 
 func (i *ClientHealth) Register(ctx context.Context, client *redis.Client) error {

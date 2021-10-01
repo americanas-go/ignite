@@ -11,12 +11,9 @@ import (
 type ClusterPlugin func(context.Context, *redis.ClusterClient) error
 
 func NewClusterClient(ctx context.Context, plugins ...ClusterPlugin) (*redis.ClusterClient, error) {
-
-	logger := log.FromContext(ctx)
-
 	o, err := NewOptions()
 	if err != nil {
-		logger.Fatalf(err.Error())
+		return nil, err
 	}
 
 	return NewClusterClientWithOptions(ctx, o, plugins...)
@@ -62,7 +59,7 @@ func NewClusterClientWithOptions(ctx context.Context, o *Options, plugins ...Clu
 
 	for _, plugin := range plugins {
 		if err := plugin(ctx, client); err != nil {
-			panic(err)
+			return nil, err
 		}
 	}
 

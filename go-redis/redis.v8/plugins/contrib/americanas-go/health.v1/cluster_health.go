@@ -24,13 +24,13 @@ func NewClusterHealthWithConfigPath(path string) (*ClusterHealth, error) {
 	return NewClusterHealthWithOptions(o), nil
 }
 
-func NewClusterHealth() *ClusterHealth {
+func NewClusterHealth() (*ClusterHealth, error) {
 	o, err := NewOptions()
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
 
-	return NewClusterHealthWithOptions(o)
+	return NewClusterHealthWithOptions(o), nil
 }
 
 func (i *ClusterHealth) Register(ctx context.Context, client *redis.ClusterClient) error {
