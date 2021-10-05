@@ -51,7 +51,6 @@ func (i *ErrorHandler) Register(ctx context.Context, server *echo.Server) error 
 	logger.Trace("configuring error handler in echo")
 
 	server.Instance().HTTPErrorHandler = errorHandler(server)
-	server.Instance().Use(errorConverter)
 
 	logger.Debug("error handler successfully configured in echo")
 
@@ -69,16 +68,5 @@ func errorHandler(server *echo.Server) func(err error, c e.Context) {
 			}
 		}
 
-	}
-}
-
-func errorConverter(next e.HandlerFunc) e.HandlerFunc {
-	return func(c e.Context) error {
-		err := next(c)
-		if err != nil {
-			status := echo.ErrorStatusCode(err)
-			return e.NewHTTPError(status, err.Error())
-		}
-		return nil
 	}
 }
