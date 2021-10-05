@@ -51,11 +51,13 @@ func errorHandler(err error, c e.Context, contentType string) {
 }
 
 // ErrorStatusCode translates to the respective status code.
-// TODO: Move to github.com/americanas-go/errors or github.com/americanas-go/rest-response module.
 func ErrorStatusCode(err error) int {
+
 	switch {
 	case errors.IsNotFound(err):
 		return http.StatusNotFound
+	case errors.IsMethodNotAllowed(err):
+		return http.StatusMethodNotAllowed
 	case errors.IsNotValid(err) || errors.IsBadRequest(err):
 		return http.StatusBadRequest
 	case errors.IsServiceUnavailable(err):
