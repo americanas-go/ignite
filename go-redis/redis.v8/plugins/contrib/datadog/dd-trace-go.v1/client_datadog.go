@@ -18,6 +18,11 @@ func NewClientDatadogWithConfigPath(path string, traceOptions ...redistrace.Clie
 	if err != nil {
 		return nil, err
 	}
+
+	if !datadog.IsTracerEnabled() {
+		o.Enabled = false
+	}
+
 	return NewClientDatadogWithOptions(o), nil
 }
 
@@ -35,8 +40,7 @@ func NewClientDatadogWithOptions(options *Options) *ClientDatadog {
 }
 
 func (d *ClientDatadog) Register(ctx context.Context, client *redis.Client) error {
-
-	if !d.options.Enabled || !datadog.IsTracerEnabled() {
+	if !d.options.Enabled {
 		return nil
 	}
 

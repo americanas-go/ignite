@@ -2,8 +2,8 @@ package datadog
 
 import (
 	"context"
-
 	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
+
 	"github.com/americanas-go/log"
 	"github.com/go-redis/redis/v8"
 	redistrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-redis/redis.v8"
@@ -18,6 +18,11 @@ func NewClusterDatadogWithConfigPath(path string, traceOptions ...redistrace.Cli
 	if err != nil {
 		return nil, err
 	}
+
+	if !datadog.IsTracerEnabled() {
+		o.Enabled = false
+	}
+	
 	return NewClusterDatadogWithOptions(o), nil
 }
 
@@ -35,8 +40,7 @@ func NewClusterDatadogWithOptions(options *Options) *ClusterDatadog {
 }
 
 func (d *ClusterDatadog) Register(ctx context.Context, client *redis.ClusterClient) error {
-
-	if !d.options.Enabled || !datadog.IsTracerEnabled() {
+	if !d.options.Enabled {
 		return nil
 	}
 
