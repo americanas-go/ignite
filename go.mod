@@ -7,6 +7,7 @@ go 1.16
 // replace github.com/americanas-go/config => ../config/
 
 require (
+	cloud.google.com/go/bigquery v1.8.0
 	github.com/Microsoft/go-winio v0.5.0 // indirect
 	github.com/americanas-go/config v1.4.0
 	github.com/americanas-go/errors v1.1.0
