@@ -39,7 +39,7 @@ type Server struct {
 	httpServer *http.Server
 }
 
-// NewServer creates a new http server for chi.
+// NewServer creates a new http server for chi with plugins.
 func NewServer(ctx context.Context, plugins ...Plugin) *Server {
 	opt, err := server.NewOptions()
 	if err != nil {
@@ -48,7 +48,16 @@ func NewServer(ctx context.Context, plugins ...Plugin) *Server {
 	return NewServerWithOptions(ctx, opt, plugins...)
 }
 
-// NewServerWithOptions creates a new http server for chi with options.
+// NewServer creates a new http server for chi with options from path and plugins.
+func NewServerWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*Server, error) {
+	o, err := server.NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewServerWithOptions(ctx, o, plugins...), nil
+}
+
+// NewServer creates a new http server for chi with options and plugins
 func NewServerWithOptions(ctx context.Context, opts *server.Options, plugins ...Plugin) *Server {
 
 	mux := chi.NewRouter()

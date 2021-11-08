@@ -6,15 +6,15 @@ import (
 )
 
 const (
-	root    = chi.PluginsRoot + ".stripslashes"
-	enabled = root + ".enabled"
+	root    = chi.PluginsRoot + ".stripSlashes"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable stripSlashes middleware")
+	ConfigAdd(root)
 }
 
-// IsEnabled returns config value from key ignite.chi.plugins.stripslashes.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
+// ConfigAdd adds config from path
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable stripSlashes middleware")
 }

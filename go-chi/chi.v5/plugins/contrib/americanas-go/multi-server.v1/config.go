@@ -7,20 +7,16 @@ import (
 
 const (
 	root    = chi.PluginsRoot + ".multiServer"
-	enabled = root + ".enabled"
-	route   = root + ".route"
+	enabled = ".enabled"
+	route   = ".route"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable multi server check route")
-	config.Add(route, "/check", "define multi server check url")
+	ConfigAdd(root)
 }
 
-// IsEnabled returns config value from key ignite.chi.plugins.multiServer.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func getRoute() string {
-	return config.String(route)
+// ConfigAdd adds config from path
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable multi server check route")
+	config.Add(path+route, "/check", "define multi server check url")
 }

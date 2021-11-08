@@ -6,14 +6,15 @@ import (
 )
 
 const (
-	enabled = chi.PluginsRoot + ".requestid.enabled"
+	root    = chi.PluginsRoot + ".requestId"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable requestid middleware")
+	ConfigAdd(root)
 }
 
-// IsEnabled returns config value from key ignite.chi.plugins.requestid.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
+// ConfigAdd adds config from path
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable requestId middleware")
 }

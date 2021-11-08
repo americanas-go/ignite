@@ -6,20 +6,16 @@ import (
 )
 
 const (
-	semaphoreRoot = echo.PluginsRoot + ".semaphore"
-	enabled       = semaphoreRoot + ".enabled"
-	limit         = semaphoreRoot + ".limit"
+	root    = echo.PluginsRoot + ".semaphore"
+	enabled = ".enabled"
+	limit   = ".limit"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable semaphore middleware")
-	config.Add(limit, 10000, "defines numbers for concurrent connections")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func GetLimit() int {
-	return config.Int(limit)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable semaphore middleware")
+	config.Add(path+limit, int64(10000), "defines numbers for concurrent connections")
 }

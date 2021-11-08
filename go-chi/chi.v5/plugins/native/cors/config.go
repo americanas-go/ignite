@@ -9,53 +9,30 @@ import (
 
 const (
 	root               = chi.PluginsRoot + ".cors"
-	enabled            = root + ".enabled"
-	allowedOrigins     = root + ".allowed.origins"
-	allowedHeaders     = root + ".allowed.headers"
-	allowedMethods     = root + ".allowed.methods"
-	allowedCredentials = root + ".allowed.credentials"
-	exposedHeaders     = root + ".exposed.headers"
-	maxAge             = root + ".maxage"
+	enabled            = ".enabled"
+	allowedRoot        = ".allowed"
+	allowedOrigins     = allowedRoot + ".origins"
+	allowedHeaders     = allowedRoot + ".headers"
+	allowedMethods     = allowedRoot + ".methods"
+	allowedCredentials = allowedRoot + ".credentials"
+	exposedHeaders     = ".exposed.headers"
+	maxAge             = ".maxAge"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable cors middleware")
-	config.Add(allowedOrigins, []string{"*"}, "cors allow origins")
-	config.Add(allowedHeaders, []string{"Origin", "Content-Type", "Accept"},
+	ConfigAdd(root)
+}
+
+// ConfigAdd adds config from path
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable cors middleware")
+	config.Add(path+allowedOrigins, []string{"*"}, "cors allow origins")
+	config.Add(path+allowedHeaders, []string{"Origin", "Content-Type", "Accept"},
 		"cors allow headers")
-	config.Add(allowedMethods,
+	config.Add(path+allowedMethods,
 		[]string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
 		"cors allow methods")
-	config.Add(allowedCredentials, true, "cors allow credentials")
-	config.Add(exposedHeaders, []string{}, "cors expose headers")
-	config.Add(maxAge, 5200, "cors max age (seconds)")
-}
-
-// IsEnabled returns config value from key ignite.chi.plugins.cors.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func getAllowedOrigins() []string {
-	return config.Strings(allowedOrigins)
-}
-
-func getAllowedMethods() []string {
-	return config.Strings(allowedMethods)
-}
-
-func getAllowedHeaders() []string {
-	return config.Strings(allowedHeaders)
-}
-
-func getAllowedCredentials() bool {
-	return config.Bool(allowedCredentials)
-}
-
-func getExposedHeaders() []string {
-	return config.Strings(exposedHeaders)
-}
-
-func getMaxAge() int {
-	return config.Int(maxAge)
+	config.Add(path+allowedCredentials, true, "cors allow credentials")
+	config.Add(path+exposedHeaders, []string{}, "cors expose headers")
+	config.Add(path+maxAge, 5200, "cors max age (seconds)")
 }

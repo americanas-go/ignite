@@ -7,20 +7,16 @@ import (
 
 const (
 	root               = chi.PluginsRoot + ".newrelic"
-	enabled            = root + ".enabled"
-	webResponseEnabled = root + ".webresponse.enabled"
+	enabled            = ".enabled"
+	webResponseEnabled = ".webresponse.enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable newrelic middleware")
-	config.Add(webResponseEnabled, true, "enable/disable newrelic web response")
+	ConfigAdd(root)
 }
 
-// IsEnabled returns config value from key ignite.chi.plugins.newrelic.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func isWebResponseEnabled() bool {
-	return config.Bool(enabled)
+// ConfigAdd adds config from path
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable newrelic middleware")
+	config.Add(path+webResponseEnabled, true, "enable/disable newrelic web response")
 }

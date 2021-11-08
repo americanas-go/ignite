@@ -7,6 +7,14 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
+func NewConnWithConfigPath(ctx context.Context, path string) (*kafka.Conn, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewConnWithOptions(ctx, options)
+}
+
 func NewConnWithOptions(ctx context.Context, o *Options) (conn *kafka.Conn, err error) {
 
 	logger := log.FromContext(ctx)

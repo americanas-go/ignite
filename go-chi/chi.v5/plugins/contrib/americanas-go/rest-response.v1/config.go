@@ -7,20 +7,16 @@ import (
 
 const (
 	root    = chi.PluginsRoot + ".status"
-	enabled = root + ".enabled"
-	route   = root + ".route"
+	enabled = ".enabled"
+	route   = ".route"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable status route")
-	config.Add(route, "/resource-status", "define status url")
+	ConfigAdd(root)
 }
 
-// IsEnabled returns config value from key ignite.chi.plugins.status.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func getRoute() string {
-	return config.String(route)
+// ConfigAdd adds config from path
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable status route")
+	config.Add(path+route, "/resource-status", "define status url")
 }
