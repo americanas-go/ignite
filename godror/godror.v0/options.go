@@ -7,10 +7,16 @@ import (
 )
 
 type Options struct {
-	DataSourceName  string
-	ConnMaxLifetime time.Duration
-	MaxIdleConns    int
-	MaxOpenConns    int
+	ConnectString       string
+	Username            string
+	Password            string
+	MaxLifetime         time.Duration
+	SessionTimeout      time.Duration
+	WaitTimeout         time.Duration
+	MaxSessions         int
+	SessionIncrement    int
+	MinSessions         int
+	MaxSessionsPerShard int
 }
 
 func NewOptions() (*Options, error) {

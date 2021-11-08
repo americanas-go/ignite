@@ -18,6 +18,15 @@ func NewClientHealthWithOptions(options *Options) *ClientHealth {
 	return &ClientHealth{options: options}
 }
 
+// NewClientHealthWithConfigPath returns a client health with default options.
+func NewClientHealthWithConfigPath(path string) (*ClientHealth, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientHealthWithOptions(o), nil
+}
+
 // NewClientHealth returns a client health with default options.
 func NewClientHealth() *ClientHealth {
 	o, err := NewOptions()
@@ -42,4 +51,13 @@ func (i *ClientHealth) Register(ctx context.Context, client *redis.Client) error
 	logger.Debug("redis successfully integrated in health")
 
 	return nil
+}
+
+func ClientRegister(ctx context.Context, client *redis.Client) error {
+	o, err := NewOptions()
+	if err != nil {
+		return err
+	}
+	health := NewClientHealthWithOptions(o)
+	return health.Register(ctx, client)
 }

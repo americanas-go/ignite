@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = chi.PluginsRoot + ".recover.enabled"
+	root    = chi.PluginsRoot + ".recoverer"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable recover middleware")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable recoverer middleware")
 }

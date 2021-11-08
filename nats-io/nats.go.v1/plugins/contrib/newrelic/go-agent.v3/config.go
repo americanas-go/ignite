@@ -2,18 +2,18 @@ package newrelic
 
 import (
 	"github.com/americanas-go/config"
-	ginats "github.com/americanas-go/ignite/nats-io/nats.go.v1"
+	"github.com/americanas-go/ignite/nats-io/nats.go.v1"
 )
 
 const (
-	root    = ginats.PluginsRoot + ".newrelic"
-	enabled = root + ".enabled"
+	root    = nats.PluginsRoot + ".newrelic"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable newrelic")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable newrelic")
 }

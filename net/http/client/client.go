@@ -9,6 +9,14 @@ import (
 	"github.com/americanas-go/log"
 )
 
+func NewClientWithConfigPath(ctx context.Context, path string) (*http.Client, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientWithOptions(ctx, options), nil
+}
+
 func NewClientWithOptions(ctx context.Context, options *Options) *http.Client {
 
 	tr := &http.Transport{

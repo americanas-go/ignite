@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = echo.PluginsRoot + ".errorHandler.enabled"
+	root    = echo.PluginsRoot + ".errorHandler"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable custom error handler")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable custom error handler")
 }

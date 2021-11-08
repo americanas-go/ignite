@@ -10,13 +10,19 @@ import (
 
 type Plugin func(context.Context, *gocql.Session) error
 
-func NewSession(ctx context.Context, plugins ...Plugin) (*gocql.Session, error) {
+func NewSessionWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*gocql.Session, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewSessionWithOptions(ctx, opts, plugins...)
+}
 
-	logger := log.FromContext(ctx)
+func NewSession(ctx context.Context, plugins ...Plugin) (*gocql.Session, error) {
 
 	o, err := NewOptions()
 	if err != nil {
-		logger.Fatalf(err.Error())
+		return nil, err
 	}
 
 	return NewSessionWithOptions(ctx, o, plugins...)
