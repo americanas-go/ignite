@@ -23,7 +23,6 @@ func init() {
 	ConfigAdd(root)
 }
 
-// ConfigAdd adds config from path
 func ConfigAdd(path string) {
 	config.Add(path+enabled, true, "enable/disable cors middleware")
 	config.Add(path+allowedOrigins, []string{"*"}, "cors allow origins")

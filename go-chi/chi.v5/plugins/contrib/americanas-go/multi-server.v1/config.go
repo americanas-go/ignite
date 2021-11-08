@@ -15,7 +15,6 @@ func init() {
 	ConfigAdd(root)
 }
 
-// ConfigAdd adds config from path
 func ConfigAdd(path string) {
 	config.Add(path+enabled, true, "enable/disable multi server check route")
 	config.Add(path+route, "/check", "define multi server check url")
