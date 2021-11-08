@@ -6,6 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// NewFormatter returns logrus formatter for cloudwatch.
 func NewFormatter() (logrus.Formatter, error) {
 
 	fmt := &cwlogsfmt.CloudWatchLogsFormatter{}

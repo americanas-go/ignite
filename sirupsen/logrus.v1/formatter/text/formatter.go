@@ -5,6 +5,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// NewFormatter returns logrus formatter for text.
 func NewFormatter() (logrus.Formatter, error) {
 
 	fmt := &logrus.TextFormatter{}
