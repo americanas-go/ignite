@@ -6,19 +6,16 @@ import (
 )
 
 const (
-	enabled = echo.PluginsRoot + ".bodylimit.enabled"
-	size    = echo.PluginsRoot + ".bodylimit.size"
+	root    = echo.PluginsRoot + ".bodyLimit"
+	enabled = ".enabled"
+	size    = ".size"
 )
 
 func init() {
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
 	config.Add(enabled, true, "enable/disable body limit middleware")
 	config.Add(size, "8M", "body limit size")
-}
-
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func GetSize() string {
-	return config.String(size)
 }

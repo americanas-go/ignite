@@ -16,6 +16,14 @@ func NewClusterHealthWithOptions(options *Options) *ClusterHealth {
 	return &ClusterHealth{options: options}
 }
 
+func NewClusterHealthWithConfigPath(path string) (*ClusterHealth, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClusterHealthWithOptions(o), nil
+}
+
 func NewClusterHealth() *ClusterHealth {
 	o, err := NewOptions()
 	if err != nil {
@@ -38,4 +46,13 @@ func (i *ClusterHealth) Register(ctx context.Context, client *redis.ClusterClien
 	logger.Debug("redis successfully integrated in health")
 
 	return nil
+}
+
+func ClusterRegister(ctx context.Context, client *redis.ClusterClient) error {
+	o, err := NewOptions()
+	if err != nil {
+		return err
+	}
+	health := NewClusterHealthWithOptions(o)
+	return health.Register(ctx, client)
 }

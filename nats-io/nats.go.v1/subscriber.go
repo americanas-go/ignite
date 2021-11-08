@@ -14,6 +14,14 @@ type Subscriber struct {
 	msgHandlers []msgHandler
 }
 
+func NewSubscriberWithConfigPath(ctx context.Context, path string, msgHandlers ...msgHandler) (*Subscriber, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewSubscriberWithOptions(ctx, options, msgHandlers...)
+}
+
 func NewSubscriberWithOptions(ctx context.Context, options *Options, msgHandlers ...msgHandler) (*Subscriber, error) {
 	conn, err := NewConnWithOptions(ctx, options)
 	if err != nil {

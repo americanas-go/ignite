@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = echo.PluginsRoot + ".bodydump.enabled"
+	root    = echo.PluginsRoot + ".bodydump"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable body dump middleware")
+
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable body dump middleware")
 }

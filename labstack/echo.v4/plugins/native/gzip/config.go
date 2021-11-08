@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = echo.PluginsRoot + ".gzip.enabled"
+	root    = echo.PluginsRoot + ".gzip"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable gzip middleware")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable gzip middleware")
 }
