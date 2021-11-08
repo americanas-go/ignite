@@ -6,6 +6,7 @@ import (
 	lg "github.com/sirupsen/logrus"
 )
 
+// NewLogger returns logger with default options.
 func NewLogger(formatter lg.Formatter, hooks ...lg.Hook) log.Logger {
 	options := options()
 	options.Hooks = hooks

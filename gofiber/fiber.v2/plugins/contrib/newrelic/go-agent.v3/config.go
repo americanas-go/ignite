@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = fiber.PluginsRoot + ".newrelic.enabled"
+	root    = fiber.PluginsRoot + ".newrelic"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable fiber integration")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable newrelic middleware")
 }

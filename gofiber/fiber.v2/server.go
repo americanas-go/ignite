@@ -18,6 +18,14 @@ type Server struct {
 	options *Options
 }
 
+func NewServerWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*Server, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewServerWithOptions(ctx, opts, plugins...), nil
+}
+
 func NewServer(ctx context.Context, plugins ...Plugin) *Server {
 	options, err := NewOptions()
 	if err != nil {

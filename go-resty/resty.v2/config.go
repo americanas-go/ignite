@@ -8,6 +8,7 @@ import (
 
 const (
 	root                           = "ignite.resty"
+	host                           = ".host"
 	debug                          = ".debug"
 	closeConnection                = ".closeConnection"
 	connectionTimeout              = ".connectionTimeout"
@@ -32,12 +33,13 @@ func init() {
 }
 
 func ConfigAdd(path string) {
-	config.Add(path+debug, false, "defines global debug request")
-	config.Add(path+closeConnection, false, "defines global http close connection")
-	config.Add(path+connectionTimeout, 3*time.Minute, "defines global http connection timeout")
-	config.Add(path+keepAlive, 30*time.Second, "defines global http keepalive")
-	config.Add(path+fallbackDelay, 300*time.Millisecond, "defines global fallbackDelay")
-	config.Add(path+requestTimeout, 30*time.Second, "defines global http request timeout")
+	config.Add(path+host, "http://localhost", "defines host request")
+	config.Add(path+debug, false, "defines debug request")
+	config.Add(path+closeConnection, false, "defines http close connection")
+	config.Add(path+connectionTimeout, 3*time.Minute, "defines http connection timeout")
+	config.Add(path+keepAlive, 30*time.Second, "defines http keepalive")
+	config.Add(path+fallbackDelay, 300*time.Millisecond, "defines fallbackDelay")
+	config.Add(path+requestTimeout, 30*time.Second, "defines http request timeout")
 	config.Add(path+transportDisableCompression, false, "enabled/disable transport compression")
 	config.Add(path+transportDisableKeepAlives, false, "enabled/disable transport keep alives")
 	config.Add(path+transportMaxIdleConnsPerHost, 2, "define transport max idle conns per host")

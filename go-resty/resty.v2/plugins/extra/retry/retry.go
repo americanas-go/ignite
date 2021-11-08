@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/americanas-go/log"
-	r "github.com/go-resty/resty/v2"
+	"github.com/go-resty/resty/v2"
 )
 
 type Retry struct {
@@ -17,15 +17,24 @@ func NewRetryWithOptions(options *Options) *Retry {
 	return &Retry{options: options}
 }
 
-func NewRetry() *Retry {
-	o, err := NewOptions()
+func NewRetryWithConfigPath(path string) (*Retry, error) {
+	o, err := NewOptionsWithPath(path)
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
-	return NewRetryWithOptions(o)
+	return NewRetryWithOptions(o), nil
 }
 
-func (p *Retry) Register(ctx context.Context, client *r.Client) error {
+func Register(ctx context.Context, client *resty.Client) error {
+	o, err := NewOptions()
+	if err != nil {
+		return err
+	}
+	plugin := NewRetryWithOptions(o)
+	return plugin.Register(ctx, client)
+}
+
+func (p *Retry) Register(ctx context.Context, client *resty.Client) error {
 
 	if !p.options.Enabled {
 		return nil
@@ -46,7 +55,7 @@ func (p *Retry) Register(ctx context.Context, client *r.Client) error {
 	return nil
 }
 
-func statusCodeRetryCondition(r *r.Response, err error) bool {
+func statusCodeRetryCondition(r *resty.Response, err error) bool {
 	switch statusCode := r.StatusCode(); statusCode {
 
 	case http.StatusTooManyRequests:
@@ -62,9 +71,9 @@ func statusCodeRetryCondition(r *r.Response, err error) bool {
 	}
 }
 
-func addTimeoutRetryCondition(timeout time.Duration) func(r *r.Response, err error) bool {
+func addTimeoutRetryCondition(timeout time.Duration) func(r *resty.Response, err error) bool {
 
-	return func(resp *r.Response, err error) bool {
+	return func(resp *resty.Response, err error) bool {
 
 		if resp.Time() > timeout {
 			return true

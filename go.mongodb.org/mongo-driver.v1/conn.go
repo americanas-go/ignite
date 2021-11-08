@@ -15,6 +15,8 @@ type Conn struct {
 	ClientOptions *options.ClientOptions
 	Client        *mongo.Client
 	Database      *mongo.Database
+	Options       *Options
+	Plugins       []Plugin
 }
 
 type ClientOptionsPlugin func(context.Context, *options.ClientOptions) error
@@ -85,6 +87,8 @@ func NewConnWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (con
 		ClientOptions: co,
 		Client:        client,
 		Database:      database,
+		Plugins:       plugins,
+		Options:       o,
 	}
 
 	return conn, err

@@ -7,19 +7,15 @@ import (
 
 const (
 	root               = chi.PluginsRoot + ".newrelic"
-	enabled            = root + ".enabled"
-	webResponseEnabled = root + ".webresponse.enabled"
+	enabled            = ".enabled"
+	webResponseEnabled = ".webresponse.enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable newrelic middleware")
-	config.Add(webResponseEnabled, true, "enable/disable newrelic web response")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func isWebResponseEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable newrelic middleware")
+	config.Add(path+webResponseEnabled, true, "enable/disable newrelic web response")
 }

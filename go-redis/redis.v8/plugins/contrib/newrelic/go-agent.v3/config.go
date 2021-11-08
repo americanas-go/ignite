@@ -2,19 +2,18 @@ package newrelic
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/go-redis/redis.v7"
+	"github.com/americanas-go/ignite/go-redis/redis.v8"
 )
 
 const (
 	root    = redis.PluginsRoot + ".newrelic"
-	enabled = root + ".enabled"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable redis integration")
+	ConfigAdd(root)
 }
 
-// IsEnabled returns config value from key ignite.redis.plugins.newrelic.enabled where default is true.
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable newrelic integration")
 }

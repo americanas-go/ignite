@@ -7,20 +7,16 @@ import (
 
 const (
 	root                       = echo.PluginsRoot + ".newrelic"
-	enabled                    = root + ".enabled"
-	middlewareRoot             = root + ".middleware"
+	enabled                    = ".enabled"
+	middlewareRoot             = ".middlewares"
 	middlewareRequestIDEnabled = middlewareRoot + ".requestId.enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable newrelic integration")
-	config.Add(middlewareRequestIDEnabled, true, "enable/disable request id middleware")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func IsEnabledRequestID() bool {
-	return config.Bool(middlewareRequestIDEnabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable newrelic integration")
+	config.Add(path+middlewareRequestIDEnabled, true, "enable/disable request id middleware")
 }

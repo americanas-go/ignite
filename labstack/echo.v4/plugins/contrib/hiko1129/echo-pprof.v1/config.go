@@ -1,4 +1,4 @@
-package echo_pprof_v1
+package pprof
 
 import (
 	"github.com/americanas-go/config"
@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = echo.PluginsRoot + ".pprof.enabled"
+	root    = echo.PluginsRoot + ".pprof"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable pprof integration")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable pprof integration")
 }
