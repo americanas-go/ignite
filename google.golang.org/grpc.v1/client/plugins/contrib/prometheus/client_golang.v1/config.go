@@ -7,13 +7,13 @@ import (
 
 const (
 	root    = client.PluginsRoot + ".prometheus"
-	enabled = root + ".enabled"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable prometheus")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable prometheus")
 }

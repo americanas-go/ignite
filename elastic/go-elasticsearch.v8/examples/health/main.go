@@ -18,9 +18,7 @@ func main() {
 
 	ilog.New()
 
-	i := health.NewHealth()
-
-	_, err := elasticsearch.NewClient(context.Background(), i.Register)
+	_, err := elasticsearch.NewClient(context.Background(), health.Register)
 	if err != nil {
 		log.Panic(err)
 	}

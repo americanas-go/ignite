@@ -8,7 +8,7 @@ import (
 
 const (
 	root     = "ignite.time"
-	format   = root + ".timestamp"
+	format   = root + ".format"
 	location = root + ".location"
 )
 

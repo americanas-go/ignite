@@ -42,6 +42,14 @@ func NewServer(ctx context.Context, plugins ...Plugin) *Server {
 	return NewServerWithOptions(ctx, opt, plugins...)
 }
 
+func NewServerWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*Server, error) {
+	o, err := server.NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewServerWithOptions(ctx, o, plugins...), nil
+}
+
 func NewServerWithOptions(ctx context.Context, opts *server.Options, plugins ...Plugin) *Server {
 
 	mux := chi.NewRouter()
