@@ -11,9 +11,5 @@ const (
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable requestId")
-}
-
-func IsEnabled() bool {
-	return config.Bool(enabled)
+	config.Add(enabled, true, "enable/disable requestid")
 }

@@ -13,6 +13,14 @@ func NewServer(handler http.Handler) *http.Server {
 	return NewServerWithOptions(handler, opt)
 }
 
+func NewServerWithConfigPath(handler http.Handler, path string) (*http.Server, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewServerWithOptions(handler, options), nil
+}
+
 // NewServerWithOptions returns a pointer with new Server
 func NewServerWithOptions(handler http.Handler, options *Options) *http.Server {
 	return &http.Server{

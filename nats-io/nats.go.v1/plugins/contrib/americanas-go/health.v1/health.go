@@ -8,12 +8,29 @@ import (
 	"github.com/nats-io/nats.go"
 )
 
+func Register(ctx context.Context, conn *nats.Conn) error {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewHealthWithOptions(o)
+	return h.Register(ctx, conn)
+}
+
 type Health struct {
 	options *Options
 }
 
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
+}
+
+func NewHealthWithConfigPath(path string) (*Health, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewHealthWithOptions(o), nil
 }
 
 func NewHealth() *Health {

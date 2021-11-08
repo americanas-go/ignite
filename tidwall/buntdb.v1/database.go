@@ -7,6 +7,15 @@ import (
 	"github.com/tidwall/buntdb"
 )
 
+// NewDBWithConfigPath returns DB with options from config path.
+func NewDBWithConfigPath(ctx context.Context, path string) (*buntdb.DB, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewDBWithOptions(ctx, options)
+}
+
 // NewDBWithOptions returns DB with options.
 func NewDBWithOptions(ctx context.Context, o *Options) (db *buntdb.DB, err error) {
 

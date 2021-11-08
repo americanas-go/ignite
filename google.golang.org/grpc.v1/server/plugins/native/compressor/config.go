@@ -11,9 +11,9 @@ const (
 )
 
 func init() {
-	config.Add(level, -1, "sets gzip level")
+	ConfigAdd(root)
 }
 
-func Level() int {
-	return config.Int(level)
+func ConfigAdd(path string) {
+	config.Add(path+level, -1, "sets gzip level")
 }
