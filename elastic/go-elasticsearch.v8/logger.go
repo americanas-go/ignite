@@ -10,12 +10,10 @@ import (
 )
 
 // Logger implements the estransport.Logger interface.
-//
 type Logger struct {
 }
 
 // LogRoundTrip prints the information about request and response.
-//
 func (l *Logger) LogRoundTrip(
 	req *http.Request,
 	res *http.Response,
@@ -62,8 +60,8 @@ func (l *Logger) LogRoundTrip(
 	return nil
 }
 
-// RequestBodyEnabled makes the client pass request body to logger
+// RequestBodyEnabled makes the client pass request body to logger.
 func (l *Logger) RequestBodyEnabled() bool { return true }
 
-// RequestBodyEnabled makes the client pass response body to logger
+// RequestBodyEnabled makes the client pass response body to logger.
 func (l *Logger) ResponseBodyEnabled() bool { return true }

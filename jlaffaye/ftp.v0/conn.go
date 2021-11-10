@@ -30,6 +30,14 @@ func NewServerConnWithOptions(ctx context.Context, options *Options) (*ftp.Serve
 	return conn, nil
 }
 
+func NewServerConnWithConfigPath(ctx context.Context, path string) (*ftp.ServerConn, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewServerConnWithOptions(ctx, options)
+}
+
 func NewServerConn(ctx context.Context) (*ftp.ServerConn, error) {
 
 	logger := log.FromContext(ctx)

@@ -8,12 +8,29 @@ import (
 	"google.golang.org/grpc"
 )
 
+func Register(ctx context.Context, conn *grpc.ClientConn) error {
+	o, err := NewOptions()
+	if err != nil {
+		return nil
+	}
+	h := NewHealthWithOptions(o)
+	return h.Register(ctx, conn)
+}
+
 type Health struct {
 	options *Options
 }
 
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
+}
+
+func NewHealthWithConfigPath(path string) (*Health, error) {
+	o, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewHealthWithOptions(o), nil
 }
 
 func NewHealth() *Health {
@@ -24,17 +41,18 @@ func NewHealth() *Health {
 
 	return NewHealthWithOptions(o)
 }
+
 func (i *Health) Register(ctx context.Context, conn *grpc.ClientConn) error {
 
 	logger := log.FromContext(ctx).WithTypeOf(*i)
 
-	logger.Trace("integrating grpc with health")
+	logger.Trace("integrating grpc client in health")
 
 	checker := NewChecker(conn)
 	hc := health.NewHealthChecker(i.options.Name, i.options.Description, checker, i.options.Required, i.options.Enabled)
 	health.Add(hc)
 
-	logger.Debug("grpc integrated on health with success")
+	logger.Debug("grpc client successfully integrated in health")
 
 	return nil
 }

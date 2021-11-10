@@ -6,14 +6,14 @@ import (
 )
 
 const (
-	ConfigRoot = resty.PluginsRoot + ".newrelic"
-	enabled    = ConfigRoot + ".enabled"
+	root    = resty.PluginsRoot + ".newrelic"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable newrelic integration")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable newrelic integration")
 }

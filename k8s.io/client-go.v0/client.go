@@ -21,6 +21,14 @@ func NewClientset(ctx context.Context) *kubernetes.Clientset {
 	return NewClientsetWithOptions(ctx, o)
 }
 
+func NewClientsetWithConfigPath(ctx context.Context, path string) (*kubernetes.Clientset, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientsetWithOptions(ctx, options), nil
+}
+
 func NewClientsetWithOptions(ctx context.Context, options *Options) *kubernetes.Clientset {
 
 	logger := log.FromContext(ctx).

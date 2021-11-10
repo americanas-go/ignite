@@ -7,6 +7,15 @@ import (
 	"github.com/segmentio/kafka-go"
 )
 
+// NewConnWithConfigPath returns connection with options from config path.
+func NewConnWithConfigPath(ctx context.Context, path string) (*kafka.Conn, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewConnWithOptions(ctx, options)
+}
+
 // NewConnWithOptions returns connection with options.
 func NewConnWithOptions(ctx context.Context, o *Options) (conn *kafka.Conn, err error) {
 

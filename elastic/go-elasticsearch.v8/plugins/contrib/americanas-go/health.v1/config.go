@@ -14,8 +14,12 @@ const (
 )
 
 func init() {
-	config.Add(name, "elasticsearch", "health name")
-	config.Add(description, "default connection", "define health description")
-	config.Add(required, true, "define health description")
-	config.Add(enabled, true, "enable/disable health")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+name, "elasticsearch", "health name")
+	config.Add(path+description, "default connection", "define health description")
+	config.Add(path+required, true, "define health description")
+	config.Add(path+enabled, true, "enable/disable health")
 }

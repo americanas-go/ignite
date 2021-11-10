@@ -24,6 +24,14 @@ func NewClientConn(ctx context.Context, plugins ...Plugin) *grpc.ClientConn {
 	return NewClientConnWithOptions(ctx, opt, plugins...)
 }
 
+func NewClientConnWithConfigPath(ctx context.Context, path string) (*grpc.ClientConn, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientConnWithOptions(ctx, options), nil
+}
+
 func NewClientConnWithOptions(ctx context.Context, options *Options, plugins ...Plugin) *grpc.ClientConn {
 
 	var err error

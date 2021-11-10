@@ -6,14 +6,14 @@ import (
 )
 
 const (
-	root    = chi.PluginsRoot + ".stripslashes"
-	enabled = root + ".enabled"
+	root    = chi.PluginsRoot + ".stripSlashes"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable stripSlashes middleware")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable stripSlashes middleware")
 }
