@@ -32,12 +32,10 @@ func (m *ManagerPool) ManageAll(ctx context.Context) {
 
 	for _, manager := range m.managers {
 		mr := manager
-		go func() {
-			err := m.Configure(ctx, mr)
-			if err != nil {
-				log.Errorf("error on start vault manager. %s", err.Error())
-			}
-		}()
+		err := m.Configure(ctx, mr)
+		if err != nil {
+			log.Errorf("error on start vault manager. %s", err.Error())
+		}
 	}
 
 }
@@ -104,12 +102,12 @@ func (m *ManagerPool) watch(ctx context.Context, manager Manager, response api.S
 		case rawData := <-watcher.RenewCh():
 			log.Debugf("received renewal at: %+v", rawData.RenewedAt)
 			log.Debugf("received renewal Secret: %+v", rawData.Secret)
-		case er := <-watcher.DoneCh():
+		case err := <-watcher.DoneCh():
 			if err != nil {
-				log.Errorf("Got watcher error: %s", er.Error())
+				log.Errorf("Got watcher error: %s", err.Error())
 			}
 			watcher.Stop()
-			if err := manager.Close(ctx); err != nil {
+			if er := manager.Close(ctx); er != nil {
 				log.Errorf("Got manager error: %s", er.Error())
 			}
 			go func() {

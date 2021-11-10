@@ -11,6 +11,7 @@ type Options struct {
 	SpanOptions   []ddtrace.StartSpanOption
 }
 
+// NewOptions returns options from config file or environment vars.
 func NewOptions(spanOptions ...ddtrace.StartSpanOption) (*Options, error) {
 	o := &Options{
 		SpanOptions: spanOptions,
@@ -24,6 +25,7 @@ func NewOptions(spanOptions ...ddtrace.StartSpanOption) (*Options, error) {
 	return o, nil
 }
 
+// NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string, spanOptions ...ddtrace.StartSpanOption) (opts *Options, err error) {
 	opts, err = NewOptions(spanOptions...)
 	if err != nil {

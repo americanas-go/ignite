@@ -29,6 +29,7 @@ func NewLogWithOptions(options *Options) *Log {
 	return &Log{options: options}
 }
 
+// Register registers logger middleware for resty.
 func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
