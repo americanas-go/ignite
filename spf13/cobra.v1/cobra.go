@@ -10,6 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// NewCommand returns Command.
 func NewCommand(cmd *cobra.Command, cmds ...*cobra.Command) *cobra.Command {
 	if len(cmds) > 0 {
 		cmd.AddCommand(cmds...)
@@ -17,6 +18,8 @@ func NewCommand(cmd *cobra.Command, cmds ...*cobra.Command) *cobra.Command {
 	return cmd
 }
 
+// Run uses the args and run through the command tree finding
+// appropriate matches for commands and then corresponding flags.
 func Run(rootCmd *cobra.Command, cmds ...*cobra.Command) error {
 
 	rootCmd.AddCommand(cmds...)

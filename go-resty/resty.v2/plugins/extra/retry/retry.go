@@ -13,6 +13,7 @@ type Retry struct {
 	options *Options
 }
 
+// NewRetryWithOptions returns a new Retry with options.
 func NewRetryWithOptions(options *Options) *Retry {
 	return &Retry{options: options}
 }
@@ -25,6 +26,16 @@ func NewRetryWithConfigPath(path string) (*Retry, error) {
 	return NewRetryWithOptions(o), nil
 }
 
+// NewRetry returns a new Retry.
+func NewRetry() *Retry {
+    	o, err := NewOptions()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+	return NewRetryWithOptions(o)
+}
+
+// Register register a retry to resty client
 func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -34,6 +45,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 	return plugin.Register(ctx, client)
 }
 
+// Registry registers retry in resty.
 func (p *Retry) Register(ctx context.Context, client *resty.Client) error {
 
 	if !p.options.Enabled {
