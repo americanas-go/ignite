@@ -12,6 +12,7 @@ type Options struct {
 	ConnType  string
 }
 
+// NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
 	o := &Options{}
 
@@ -23,6 +24,7 @@ func NewOptions() (*Options, error) {
 	return o, nil
 }
 
+// NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
 
 	opts, err = NewOptions()
