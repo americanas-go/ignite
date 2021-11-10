@@ -2,6 +2,7 @@ package mongo
 
 import (
 	"context"
+	"sync"
 
 	"github.com/americanas-go/errors"
 	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
@@ -12,9 +13,12 @@ import (
 type Manager struct {
 	conn    *mongo.Conn
 	options *vault.ManagerOptions
+
+	mux       sync.RWMutex
+	observers map[Observer]struct{}
 }
 
-func NewManager(conn *mongo.Conn) vault.Manager {
+func NewManager(conn *mongo.Conn) *Manager {
 	o, err := vault.NewManagerOptionsWithPath(root)
 	if err != nil {
 		log.Fatalf(err.Error())
@@ -23,7 +27,7 @@ func NewManager(conn *mongo.Conn) vault.Manager {
 	return NewManagerWithOptions(conn, o)
 }
 
-func NewManagerWithConfigPath(conn *mongo.Conn, path string) (vault.Manager, error) {
+func NewManagerWithConfigPath(conn *mongo.Conn, path string) (*Manager, error) {
 	o, err := vault.NewManagerOptionsWithPath(path)
 	if err != nil {
 		return nil, err
@@ -31,8 +35,8 @@ func NewManagerWithConfigPath(conn *mongo.Conn, path string) (vault.Manager, err
 	return NewManagerWithOptions(conn, o), nil
 }
 
-func NewManagerWithOptions(conn *mongo.Conn, options *vault.ManagerOptions) vault.Manager {
-	return &Manager{options: options, conn: conn}
+func NewManagerWithOptions(conn *mongo.Conn, options *vault.ManagerOptions) *Manager {
+	return &Manager{options: options, conn: conn, observers: make(map[Observer]struct{})}
 }
 
 func (m *Manager) Options() *vault.ManagerOptions {
@@ -63,8 +67,32 @@ func (m *Manager) Configure(ctx context.Context, data map[string]interface{}) er
 		return err
 	}
 
-	m.conn.Database = conn.Database
-	m.conn.Client = conn.Client
+	m.Notify(conn)
 
 	return nil
+}
+
+func (m *Manager) Register(observer Observer) {
+	m.mux.Lock()
+	defer m.mux.Unlock()
+	m.observers[observer] = struct{}{}
+}
+
+func (m *Manager) Unregister(observer Observer) {
+	m.mux.Lock()
+	defer m.mux.Unlock()
+	delete(m.observers, observer)
+}
+
+func (m *Manager) Notify(conn *mongo.Conn) {
+	m.mux.RLock()
+	defer m.mux.RUnlock()
+
+	if len(m.observers) == 0 {
+		log.Warn("no observers registered to receive mongo/vault notifications")
+	}
+
+	for o := range m.observers {
+		o.OnNotify(conn)
+	}
 }

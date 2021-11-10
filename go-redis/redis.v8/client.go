@@ -10,12 +10,9 @@ import (
 type Plugin func(context.Context, *redis.Client) error
 
 func NewClient(ctx context.Context, plugins ...Plugin) (*redis.Client, error) {
-
-	logger := log.FromContext(ctx)
-
 	o, err := NewOptions()
 	if err != nil {
-		logger.Fatalf(err.Error())
+		return nil, err
 	}
 
 	return NewClientWithOptions(ctx, o, plugins...)
@@ -46,7 +43,7 @@ func NewClientWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (c
 
 	for _, plugin := range plugins {
 		if err := plugin(ctx, client); err != nil {
-			panic(err)
+			return nil, err
 		}
 	}
 

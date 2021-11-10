@@ -21,13 +21,13 @@ func NewClientDatadogWithConfigPath(path string, traceOptions ...redistrace.Clie
 	return NewClientDatadogWithOptions(o), nil
 }
 
-func NewClientDatadog(traceOptions ...redistrace.ClientOption) *ClientDatadog {
+func NewClientDatadog(traceOptions ...redistrace.ClientOption) (*ClientDatadog, error) {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
 
-	return NewClientDatadogWithOptions(o)
+	return NewClientDatadogWithOptions(o), nil
 }
 
 func NewClientDatadogWithOptions(options *Options) *ClientDatadog {

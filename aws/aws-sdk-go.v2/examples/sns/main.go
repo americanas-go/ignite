@@ -30,7 +30,10 @@ func main() {
 	logger := log.FromContext(ctx)
 
 	// create default aws config
-	awsConfig := aws.NewConfig(ctx)
+	awsConfig, err := aws.NewConfig(ctx)
+	if err != nil {
+		logger.Fatalf(err.Error())
+	}
 
 	// create sns client
 	snsClient := asns.NewFromConfig(awsConfig)
@@ -49,7 +52,7 @@ func main() {
 	}
 
 	// publish
-	err := client.Publish(ctx, input)
+	err = client.Publish(ctx, input)
 	if err != nil {
 		logger.Fatalf(err.Error())
 	}

@@ -30,7 +30,10 @@ func main() {
 	logger := log.FromContext(ctx)
 
 	// create default aws config
-	awsConfig := aws.NewConfig(ctx)
+	awsConfig, err := aws.NewConfig(ctx)
+	if err != nil {
+		logger.Fatalf(err.Error())
+	}
 
 	// create s3 client
 

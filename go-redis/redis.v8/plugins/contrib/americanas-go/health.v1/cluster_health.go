@@ -28,13 +28,13 @@ func NewClusterHealthWithConfigPath(path string) (*ClusterHealth, error) {
 }
 
 // NewClusterHealth returns a health with default options.
-func NewClusterHealth() *ClusterHealth {
+func NewClusterHealth() (*ClusterHealth, error) {
 	o, err := NewOptions()
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
 
-	return NewClusterHealthWithOptions(o)
+	return NewClusterHealthWithOptions(o), nil
 }
 
 // Register registers a new ClusterClientChecker in the health package.

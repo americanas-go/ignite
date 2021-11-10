@@ -28,13 +28,13 @@ func NewClientHealthWithConfigPath(path string) (*ClientHealth, error) {
 }
 
 // NewClientHealth returns a client health with default options.
-func NewClientHealth() *ClientHealth {
+func NewClientHealth() (*ClientHealth, error) {
 	o, err := NewOptions()
 	if err != nil {
-		log.Fatalf(err.Error())
+		return nil, err
 	}
 
-	return NewClientHealthWithOptions(o)
+	return NewClientHealthWithOptions(o), nil
 }
 
 // Register registers a new ClientChecker in the health package.

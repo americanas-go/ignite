@@ -20,7 +20,10 @@ func main() {
 
 	var err error
 
-	healthIntegrator := health.NewClusterHealth()
+	healthIntegrator, err := health.NewClusterHealth()
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
 
 	_, err = redis.NewClusterClient(context.Background(), healthIntegrator.Register)
 	if err != nil {

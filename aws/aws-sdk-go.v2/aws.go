@@ -15,11 +15,10 @@ import (
 type Plugin func(context.Context, *aws.Config) error
 
 // NewConfig returns aws config.
-func NewConfig(ctx context.Context, plugins ...Plugin) aws.Config {
-
+func NewConfig(ctx context.Context, plugins ...Plugin) (aws.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
-		panic(err)
+		return aws.Config{}, err
 	}
 
 	return NewConfigWithOptions(ctx, o, plugins...)
@@ -30,18 +29,18 @@ func NewConfigWithConfigPath(ctx context.Context, path string, plugins ...Plugin
 	if err != nil {
 		return aws.Config{}, err
 	}
-	return NewConfigWithOptions(ctx, opts, plugins...), nil
+	return NewConfigWithOptions(ctx, opts, plugins...)
 }
 
 // NewConfigWithOptions returns aws config with options.
-func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plugin) aws.Config {
+func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plugin) (aws.Config, error) {
 
 	logger := log.FromContext(ctx)
 
 	cfg, err := c.LoadDefaultConfig(ctx)
 	if err != nil {
 		logger.Errorf("unable to load AWS SDK config, %s", err.Error())
-		return aws.Config{}
+		return aws.Config{}, nil
 	}
 
 	if options.DefaultRegion != "" {
@@ -59,11 +58,11 @@ func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plug
 
 	for _, plugin := range plugins {
 		if err := plugin(ctx, &cfg); err != nil {
-			panic(err)
+			return aws.Config{}, err
 		}
 	}
 
-	return cfg
+	return cfg, nil
 }
 
 func retryerConfig(options *Options) func() aws.Retryer {
