@@ -11,8 +11,10 @@ import (
 	"github.com/elastic/go-elasticsearch/v8/esapi"
 )
 
+// Plugin defines a function to process plugin.
 type Plugin func(context.Context, *elasticsearch.Client) error
 
+// NewClient returns elasticsearch client with default options.
 func NewClient(ctx context.Context, plugins ...Plugin) (*elasticsearch.Client, error) {
 
 	logger := log.FromContext(ctx)
@@ -25,6 +27,16 @@ func NewClient(ctx context.Context, plugins ...Plugin) (*elasticsearch.Client, e
 	return NewClientWithOptions(ctx, o, plugins...)
 }
 
+// NewClientWithConfigPath returns elasticsearch client with options from config path.
+func NewClientWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*elasticsearch.Client, error) {
+	opts, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewClientWithOptions(ctx, opts, plugins...)
+}
+
+// NewClientWithOptions returns elasticsearch client with options.
 func NewClientWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (client *elasticsearch.Client, err error) {
 
 	logger := log.FromContext(ctx)

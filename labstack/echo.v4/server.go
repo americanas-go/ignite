@@ -32,6 +32,14 @@ func NewServer(ctx context.Context, plugins ...Plugin) *Server {
 	return NewServerWithOptions(ctx, opt, plugins...)
 }
 
+func NewServerWithConfigPath(ctx context.Context, path string) (*Server, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewServerWithOptions(ctx, options), nil
+}
+
 func NewServerWithOptions(ctx context.Context, opt *Options, plugins ...Plugin) *Server {
 
 	instance := echo.New()

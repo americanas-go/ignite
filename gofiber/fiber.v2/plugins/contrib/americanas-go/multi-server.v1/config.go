@@ -7,19 +7,15 @@ import (
 
 const (
 	root    = fiber.PluginsRoot + ".multiServer"
-	enabled = root + ".enabled"
-	route   = root + ".route"
+	enabled = ".enabled"
+	route   = ".route"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable multi server check route")
-	config.Add(route, "/check", "define multi server check url")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
-}
-
-func getRoute() string {
-	return config.String(route)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable multi server check route")
+	config.Add(path+route, "/check", "define multi server check url")
 }

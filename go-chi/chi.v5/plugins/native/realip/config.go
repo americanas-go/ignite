@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = chi.PluginsRoot + ".realip.enabled"
+	root    = chi.PluginsRoot + ".realip"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable realip middleware")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable realip middleware")
 }

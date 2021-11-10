@@ -6,13 +6,14 @@ import (
 )
 
 const (
-	enabled = fiber.PluginsRoot + ".monitor.enabled"
+	root    = fiber.PluginsRoot + ".monitor"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable monitor middleware")
+	ConfigAdd(root)
 }
 
-func IsEnabled() bool {
-	return config.Bool(enabled)
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable monitor middleware")
 }

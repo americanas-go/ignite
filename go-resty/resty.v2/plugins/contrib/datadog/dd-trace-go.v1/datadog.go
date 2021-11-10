@@ -12,33 +12,47 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
-// DataDog represents Datadog integration with resty.
-type DataDog struct {
+// Datadog represents Datadog integration with resty.
+type Datadog struct {
 	options *Options
 }
 
-// NewDataDogWithOptions returns a new DataDog with options.
-func NewDataDogWithOptions(options *Options) *DataDog {
-	return &DataDog{options: options}
+// NewDatadogWithConfigPath returns a new Datadog with options from config path.
+func NewDatadogWithConfigPath(path string, spanOptions ...ddtrace.StartSpanOption) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path, spanOptions...)
+	if err != nil {
+		return nil, err
+	}
+	return NewDatadogWithOptions(o), nil
 }
 
-// NewDataDog returns a new DataDog with default options.
-func NewDataDog() *DataDog {
-	o, err := NewOptions()
+// NewDatadog returns a new DataDog with default options.
+func NewDatadogWithOptions(options *Options) *Datadog {
+	return &Datadog{options: options}
+}
+
+// NewDatadog returns a new DataDog with default options.
+func NewDatadog(traceOptions ...ddtrace.StartSpanOption) *Datadog {
+	o, err := NewOptions(traceOptions...)
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
-	return NewDataDogWithOptions(o)
+
+	return NewDatadogWithOptions(o)
 }
 
-// Register registers Datadog integration with resty. It is shorthand for NewDataDog().Register(ctx, client).
+// Register registers Datadog integration with resty. It is shorthand for NewDatadog().Register(ctx, client).
 func Register(ctx context.Context, client *resty.Client) error {
-	datadog := NewDataDog()
-	return datadog.Register(ctx, client)
+	o, err := NewOptions()
+	if err != nil {
+		return err
+	}
+	d := NewDatadogWithOptions(o)
+	return d.Register(ctx, client)
 }
 
 // Register registers Datadog integration with resty.
-func (d *DataDog) Register(ctx context.Context, client *resty.Client) error {
+func (d *Datadog) Register(ctx context.Context, client *resty.Client) error {
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil
 	}

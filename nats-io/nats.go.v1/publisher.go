@@ -17,6 +17,14 @@ type Publisher struct {
 	middlewares []PublisherMiddleware
 }
 
+func NewPublisherWithConfigPath(ctx context.Context, path string, middlewares ...PublisherMiddleware) (*Publisher, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return NewPublisherWithOptions(ctx, options, middlewares...)
+}
+
 func NewPublisherWithOptions(ctx context.Context, options *Options, middlewares ...PublisherMiddleware) (*Publisher, error) {
 	conn, err := NewConnWithOptions(ctx, options)
 	if err != nil {
