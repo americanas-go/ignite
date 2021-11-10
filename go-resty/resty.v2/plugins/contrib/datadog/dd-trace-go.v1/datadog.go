@@ -12,10 +12,12 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
+// Datadog represents Datadog integration with resty.
 type Datadog struct {
 	options *Options
 }
 
+// NewDatadogWithConfigPath returns a new Datadog with options from config path.
 func NewDatadogWithConfigPath(path string, spanOptions ...ddtrace.StartSpanOption) (*Datadog, error) {
 	o, err := NewOptionsWithPath(path, spanOptions...)
 	if err != nil {
@@ -24,10 +26,12 @@ func NewDatadogWithConfigPath(path string, spanOptions ...ddtrace.StartSpanOptio
 	return NewDatadogWithOptions(o), nil
 }
 
+// NewDatadog returns a new DataDog with default options.
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
+// NewDatadog returns a new DataDog with default options.
 func NewDatadog(traceOptions ...ddtrace.StartSpanOption) *Datadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
@@ -37,6 +41,7 @@ func NewDatadog(traceOptions ...ddtrace.StartSpanOption) *Datadog {
 	return NewDatadogWithOptions(o)
 }
 
+// Register registers Datadog integration with resty. It is shorthand for NewDatadog().Register(ctx, client).
 func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -46,6 +51,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 	return d.Register(ctx, client)
 }
 
+// Register registers Datadog integration with resty.
 func (d *Datadog) Register(ctx context.Context, client *resty.Client) error {
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil
