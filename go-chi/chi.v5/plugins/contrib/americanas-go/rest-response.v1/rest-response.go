@@ -11,19 +11,23 @@ import (
 	response "github.com/americanas-go/rest-response"
 )
 
+// Register registers a default status to a new chi config.
 func Register(ctx context.Context) (*chi.Config, error) {
 	l := NewStatus()
 	return l.Register(ctx)
 }
 
+// Status struct that represents a status router plugin.
 type Status struct {
 	options *Options
 }
 
+// NewStatusWithOptions returns a status router with options.
 func NewStatusWithOptions(options *Options) *Status {
 	return &Status{options: options}
 }
 
+// NewStatusWithOptions returns a status router with options from config path.
 func NewStatusWithConfigPath(path string) (*Status, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -32,6 +36,7 @@ func NewStatusWithConfigPath(path string) (*Status, error) {
 	return NewStatusWithOptions(o), nil
 }
 
+// NewStatus returns a status router with default options.
 func NewStatus() *Status {
 	o, err := NewOptions()
 	if err != nil {
@@ -41,6 +46,7 @@ func NewStatus() *Status {
 	return NewStatusWithOptions(o)
 }
 
+// Register registers the status router to a new chi config.
 func (i *Status) Register(ctx context.Context) (*chi.Config, error) {
 	if !i.options.Enabled {
 		return nil, nil

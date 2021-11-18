@@ -9,7 +9,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
-// Register registers stripslashes middleware for chi.
+// Register registers stripslashes plugin for chi.
 func Register(ctx context.Context) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
@@ -19,10 +19,12 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	return n.Register(ctx)
 }
 
+// StripSlashes struct which represents a stripslashes plugin from chi.
 type StripSlashes struct {
 	options *Options
 }
 
+// NewStripSlashesWithConfigPath returns a new stripslashes with options from config path.
 func NewStripSlashesWithConfigPath(path string) (*StripSlashes, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -31,10 +33,12 @@ func NewStripSlashesWithConfigPath(path string) (*StripSlashes, error) {
 	return NewStripSlashesWithOptions(o), nil
 }
 
+// NewStripSlashesWithOptions returns a new stripslashes plugin with options.
 func NewStripSlashesWithOptions(options *Options) *StripSlashes {
 	return &StripSlashes{options: options}
 }
 
+// Register registers this stripslashes plugin for a new chi config.
 func (d *StripSlashes) Register(ctx context.Context) (*chi.Config, error) {
 
 	if !d.options.Enabled {

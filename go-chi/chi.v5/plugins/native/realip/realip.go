@@ -19,10 +19,12 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	return n.Register(ctx)
 }
 
+// RealIP struct which represents a realIP plugin
 type RealIP struct {
 	options *Options
 }
 
+// NewRealIPWithConfigPath returns realIP plugin with options from config path.
 func NewRealIPWithConfigPath(path string) (*RealIP, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -31,10 +33,12 @@ func NewRealIPWithConfigPath(path string) (*RealIP, error) {
 	return NewRealIPWithOptions(o), nil
 }
 
+// NewRealIPWithOptions returns realIP plugin with options.
 func NewRealIPWithOptions(options *Options) *RealIP {
 	return &RealIP{options: options}
 }
 
+// Register registers the realIP plugin on a new chi config.
 func (d *RealIP) Register(ctx context.Context) (*chi.Config, error) {
 	if !d.options.Enabled {
 		return nil, nil

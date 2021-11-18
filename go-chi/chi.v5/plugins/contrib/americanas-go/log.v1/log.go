@@ -12,14 +12,17 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 )
 
+// Log struct that represents a Log.
 type Log struct {
 	options *Options
 }
 
+// NewLogWithOptions returns a Log with options.
 func NewLogWithOptions(options *Options) *Log {
 	return &Log{options: options}
 }
 
+// NewLogWithOptions returns a Log with options from config path.
 func NewLogWithConfigPath(path string) (*Log, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -28,6 +31,7 @@ func NewLogWithConfigPath(path string) (*Log, error) {
 	return NewLogWithOptions(o), nil
 }
 
+// NewLog returns a Log with default options.
 func NewLog() *Log {
 	o, err := NewOptions()
 	if err != nil {
@@ -37,6 +41,7 @@ func NewLog() *Log {
 	return NewLogWithOptions(o)
 }
 
+// Register registers the log as a middleware to a new chi config.
 func (i *Log) Register(ctx context.Context) (*chi.Config, error) {
 	if !i.options.Enabled {
 		return nil, nil
@@ -151,6 +156,7 @@ func (i *Log) loggerMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(fn)
 }
 
+// Register registers a new log with default options as a middleware to a new chi config.
 func Register(ctx context.Context) (*chi.Config, error) {
 	l := NewLog()
 	return l.Register(ctx)

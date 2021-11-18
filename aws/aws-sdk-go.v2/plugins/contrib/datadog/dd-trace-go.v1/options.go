@@ -5,11 +5,13 @@ import (
 	awstrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws"
 )
 
+// Options struct which represents a datadog plugin for aws.
 type Options struct {
 	Enabled      bool
 	TraceOptions []awstrace.Option
 }
 
+// NewOptions returns options from config file or environment vars.
 func NewOptions(traceOptions ...awstrace.Option) (*Options, error) {
 	o := &Options{TraceOptions: traceOptions}
 
@@ -21,6 +23,7 @@ func NewOptions(traceOptions ...awstrace.Option) (*Options, error) {
 	return o, nil
 }
 
+// NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string, traceOptions ...awstrace.Option) (opts *Options, err error) {
 
 	opts, err = NewOptions(traceOptions...)
