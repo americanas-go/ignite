@@ -9,10 +9,12 @@ import (
 	"github.com/newrelic/go-agent/v3/integrations/nrredis-v8"
 )
 
+// ClientNewrelic represents a newrelic client for redis.
 type ClientNewrelic struct {
 	options *Options
 }
 
+// NewClientNewrelicWithConfigPath returns a newrelic client with options from config path.
 func NewClientNewrelicWithConfigPath(path string) (*ClientNewrelic, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -21,10 +23,12 @@ func NewClientNewrelicWithConfigPath(path string) (*ClientNewrelic, error) {
 	return NewClientNewrelicWithOptions(o), nil
 }
 
+// NewClientNewrelicWithOptions returns a newrelic client with options.
 func NewClientNewrelicWithOptions(options *Options) *ClientNewrelic {
 	return &ClientNewrelic{options: options}
 }
 
+// Register registers this newrelic client on redis client.
 func (d *ClientNewrelic) Register(ctx context.Context, client *redis.Client) error {
 
 	if !d.options.Enabled || !newrelic.IsEnabled() {
@@ -42,6 +46,7 @@ func (d *ClientNewrelic) Register(ctx context.Context, client *redis.Client) err
 	return nil
 }
 
+// ClientRegister registers a new newrelic client on redis client.
 func ClientRegister(ctx context.Context, client *redis.Client) error {
 	o, err := NewOptions()
 	if err != nil {

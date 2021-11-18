@@ -11,10 +11,12 @@ import (
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
+// Newrelic represents a newrelic plugin for resty client.
 type Newrelic struct {
 	options *Options
 }
 
+// NewNewrelicWithConfigPath returns a new newrelic plugin with options from config path.
 func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -23,10 +25,12 @@ func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	return NewNewrelicWithOptions(o), nil
 }
 
+// NewNewrelicWithOptions returns a new newrelic plugin with options.
 func NewNewrelicWithOptions(options *Options) *Newrelic {
 	return &Newrelic{options: options}
 }
 
+// Register registers a new newrelic plugin on resty client.
 func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -37,6 +41,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 	return plugin.Register(ctx, client)
 }
 
+// Register registers this newrelic plugin on resty client.
 func (i *Newrelic) Register(ctx context.Context, client *resty.Client) error {
 
 	if !i.options.Enabled || !newrelic.IsEnabled() {

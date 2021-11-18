@@ -4,6 +4,7 @@ import (
 	"github.com/americanas-go/config"
 )
 
+// Options represents resty health options.
 type Options struct {
 	Name        string
 	Host        string
