@@ -7,6 +7,7 @@ go 1.16
 // replace github.com/americanas-go/config => ../config/
 
 require (
+	cloud.google.com/go/bigquery v1.8.0
 	github.com/Microsoft/go-winio v0.5.0 // indirect
 	github.com/americanas-go/config v1.4.0
 	github.com/americanas-go/errors v1.1.0
@@ -80,6 +81,7 @@ require (
 	gocloud.dev/pubsub/kafkapubsub v0.24.0
 	golang.org/x/net v0.0.0-20210825183410-e898025ed96a
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+	google.golang.org/api v0.56.0
 	google.golang.org/grpc v1.40.0
 	gopkg.in/DataDog/dd-trace-go.v1 v1.33.0
 	gopkg.in/matryer/try.v1 v1.0.0-20150601225556-312d2599e12e

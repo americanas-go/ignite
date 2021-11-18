@@ -19,10 +19,12 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	return n.Register(ctx)
 }
 
+// Cors struct which represents a native cors plugin for chi.
 type Cors struct {
 	options *Options
 }
 
+// NewCorsWithConfigPath returns a new cors with options from config path.
 func NewCorsWithConfigPath(path string) (*Cors, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -31,10 +33,12 @@ func NewCorsWithConfigPath(path string) (*Cors, error) {
 	return NewCorsWithOptions(o), nil
 }
 
+// NewCorsWithOptions returns a new cors with options.
 func NewCorsWithOptions(options *Options) *Cors {
 	return &Cors{options: options}
 }
 
+// Register registers the cors plugin to a new chi config.
 func (d *Cors) Register(ctx context.Context) (*chi.Config, error) {
 
 	if !d.options.Enabled {

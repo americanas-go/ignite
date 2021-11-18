@@ -9,10 +9,12 @@ import (
 	awstrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws"
 )
 
+// Datadog struct which represents a datadog plugin for aws.
 type Datadog struct {
 	options *Options
 }
 
+// NewDatadogWithConfigPath creates a new datadog plugin with options from config path.
 func NewDatadogWithConfigPath(path string, traceOptions ...awstrace.Option) (*Datadog, error) {
 	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
@@ -21,10 +23,12 @@ func NewDatadogWithConfigPath(path string, traceOptions ...awstrace.Option) (*Da
 	return NewDatadogWithOptions(o), nil
 }
 
+// NewDatadogWithOptions creates a new datadog plugin with options.
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
+// NewDatadogWithOptions creates a new datadog plugin with trace options.
 func NewDatadog(traceOptions ...awstrace.Option) (*Datadog, error) {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
@@ -34,6 +38,7 @@ func NewDatadog(traceOptions ...awstrace.Option) (*Datadog, error) {
 	return NewDatadogWithOptions(o), nil
 }
 
+// Register registers AWS tracing for Datadog plugin with default options.
 func Register(ctx context.Context, awsCfg *aws.Config) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -44,7 +49,7 @@ func Register(ctx context.Context, awsCfg *aws.Config) error {
 	return plugin.Register(ctx, awsCfg)
 }
 
-// Register registers AWS tracing for Datadog.
+// Register registers AWS tracing for Datadog plugin instance.
 func (i *Datadog) Register(ctx context.Context, awsCfg *aws.Config) error {
 
 	if !i.options.Enabled || !datadog.IsTracerEnabled() {

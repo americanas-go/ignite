@@ -19,10 +19,12 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	return n.Register(ctx)
 }
 
+// Recoverer struct which represents a recoverer middleware for chi.
 type Recoverer struct {
 	options *Options
 }
 
+// NewRecovererWithConfigPath returns a recoverer middleware with options from config path.
 func NewRecovererWithConfigPath(path string) (*Recoverer, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -31,10 +33,12 @@ func NewRecovererWithConfigPath(path string) (*Recoverer, error) {
 	return NewRecovererWithOptions(o), nil
 }
 
+// NewRecovererWithOptions returns a recoverer middleware with options.
 func NewRecovererWithOptions(options *Options) *Recoverer {
 	return &Recoverer{options: options}
 }
 
+// Register registers this recoverer middleware on a new chi config.
 func (d *Recoverer) Register(ctx context.Context) (*chi.Config, error) {
 	if !d.options.Enabled {
 		return nil, nil

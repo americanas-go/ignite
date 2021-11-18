@@ -19,10 +19,12 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	return n.Register(ctx)
 }
 
+// RequestID struct which represents a requestID middleware for chi.
 type RequestID struct {
 	options *Options
 }
 
+// NewRequestIDWithConfigPath returns a new requestID plugin with options from config path.
 func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -31,10 +33,12 @@ func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	return NewRequestIDWithOptions(o), nil
 }
 
+// NewRequestIDWithOptions returns a new requestID plugin with options.
 func NewRequestIDWithOptions(options *Options) *RequestID {
 	return &RequestID{options: options}
 }
 
+// Register registers this requestID plugin to a new chi config.
 func (d *RequestID) Register(ctx context.Context) (*chi.Config, error) {
 	if !d.options.Enabled {
 		return nil, nil
