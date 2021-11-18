@@ -15,6 +15,7 @@ func NewLogger() ddtrace.Logger {
 	return &Logger{}
 }
 
+// Log  logs msg according to logLevel
 func (l *Logger) Log(msg string) {
 
 	var fn func(args ...interface{})

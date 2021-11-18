@@ -10,10 +10,12 @@ import (
 	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5"
 )
 
+// Datadog struct that represents a datadog plugin for chi
 type Datadog struct {
 	options *Options
 }
 
+// NewDatadogWithConfigPath returns a new datadog plugin with options from config path.
 func NewDatadogWithConfigPath(path string, traceOptions ...chitrace.Option) (*Datadog, error) {
 	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
@@ -22,10 +24,12 @@ func NewDatadogWithConfigPath(path string, traceOptions ...chitrace.Option) (*Da
 	return NewDatadogWithOptions(o), nil
 }
 
+// NewDatadogWithOptions returns a new datadog plugin with options.
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
+// NewDatadog returns a new datadog plugin with default options.
 func NewDatadog(traceOptions ...chitrace.Option) *Datadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewDatadog(traceOptions ...chitrace.Option) *Datadog {
 	return NewDatadogWithOptions(o)
 }
 
+// Register registers the datadog plugin to a new chi config.
 func (d *Datadog) Register(ctx context.Context) (*chi.Config, error) {
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil, nil
@@ -50,6 +55,7 @@ func (d *Datadog) Register(ctx context.Context) (*chi.Config, error) {
 	}, nil
 }
 
+// Register registers a default datadog plugin to a new chi config.
 func Register(ctx context.Context) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {

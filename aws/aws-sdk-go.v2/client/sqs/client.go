@@ -34,6 +34,7 @@ func NewClient(c *sqs.Client) Client {
 	return &client{c, map[string]*string{}}
 }
 
+// Publish publishes input message to the configured sqs queue.
 func (c *client) Publish(ctx context.Context, input *sqs.SendMessageInput) error {
 
 	logger := log.FromContext(ctx).
@@ -54,6 +55,7 @@ func (c *client) Publish(ctx context.Context, input *sqs.SendMessageInput) error
 	return nil
 }
 
+// ResolveQueueUrl resolves sqs queue url according to queueName.
 func (c *client) ResolveQueueUrl(ctx context.Context, queueName string) (*string, error) {
 	if queueUrl, ok := c.queueUrls[queueName]; ok {
 		return queueUrl, nil

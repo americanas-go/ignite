@@ -13,7 +13,7 @@ import (
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
-// Register registers newrelic middleware for chi.
+// Register registers a default newrelic plugin as a middleware in a new chi config.
 func Register(ctx context.Context) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
@@ -23,10 +23,12 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	return n.Register(ctx)
 }
 
+// NewRelic struct which represents a new relic plugin for chi
 type Newrelic struct {
 	options *Options
 }
 
+// NewNewrelicWithConfigPath returns a new relic plugin with options from config path.
 func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -35,10 +37,12 @@ func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	return NewNewrelicWithOptions(o), nil
 }
 
+// NewNewrelicWithOptions returns a new relic plugin with options.
 func NewNewrelicWithOptions(options *Options) *Newrelic {
 	return &Newrelic{options: options}
 }
 
+// Register registers the newrelic plugin as a middleware in a new chi config.
 func (d *Newrelic) Register(ctx context.Context) (*chi.Config, error) {
 	if !d.options.Enabled || !newrelic.IsEnabled() {
 		return nil, nil

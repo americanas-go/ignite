@@ -24,6 +24,7 @@ func NewConfig(ctx context.Context, plugins ...Plugin) (aws.Config, error) {
 	return NewConfigWithOptions(ctx, o, plugins...)
 }
 
+// NewConfigWithOptions returns aws config with options from config path.
 func NewConfigWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (aws.Config, error) {
 	opts, err := NewOptionsWithPath(path)
 	if err != nil {

@@ -15,14 +15,17 @@ func Register(ctx context.Context) (*chi.Config, error) {
 	return l.Register(ctx)
 }
 
+// MultiServer struct that represents a multiserver.
 type MultiServer struct {
 	options *Options
 }
 
+// NewMultiServerWithOptions returns a new multiserver with options.
 func NewMultiServerWithOptions(options *Options) *MultiServer {
 	return &MultiServer{options: options}
 }
 
+// NewMultiServerWithConfigPath returns a new multiserver with options from config path.
 func NewMultiServerWithConfigPath(path string) (*MultiServer, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -31,6 +34,7 @@ func NewMultiServerWithConfigPath(path string) (*MultiServer, error) {
 	return NewMultiServerWithOptions(o), nil
 }
 
+// NewMultiServer returns a new multiserver with default options.
 func NewMultiServer() *MultiServer {
 	o, err := NewOptions()
 	if err != nil {
@@ -40,6 +44,7 @@ func NewMultiServer() *MultiServer {
 	return NewMultiServerWithOptions(o)
 }
 
+// Register registers a multi server check router in a new chi config.
 func (i *MultiServer) Register(ctx context.Context) (*chi.Config, error) {
 	if !i.options.Enabled {
 		return nil, nil
