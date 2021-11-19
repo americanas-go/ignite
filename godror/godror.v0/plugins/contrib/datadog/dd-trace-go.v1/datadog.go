@@ -9,6 +9,7 @@ import (
 	sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql"
 )
 
+// Register registers a new datadog plugin on sql DB.
 func Register(ctx context.Context, db *sql.DB) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,14 +19,17 @@ func Register(ctx context.Context, db *sql.DB) error {
 	return h.Register(ctx, db)
 }
 
+// Datadog represents datadog plugin for go driver for oracle.
 type Datadog struct {
 	options *Options
 }
 
+// NewDatadogWithOptions returns a new datadog with options.
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
+// NewDatadogWithConfigPath returns a new datadog with options from config path.
 func NewDatadogWithConfigPath(path string, traceOptions ...sqltrace.Option) (*Datadog, error) {
 	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
@@ -34,6 +38,7 @@ func NewDatadogWithConfigPath(path string, traceOptions ...sqltrace.Option) (*Da
 	return NewDatadogWithOptions(o), nil
 }
 
+// NewDatadog returns a new datadog plugin.
 func NewDatadog(traceOptions ...sqltrace.Option) *Datadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
@@ -43,6 +48,7 @@ func NewDatadog(traceOptions ...sqltrace.Option) *Datadog {
 	return NewDatadogWithOptions(o)
 }
 
+// Register registers this datadog plugin on sql DB.
 func (i *Datadog) Register(ctx context.Context, db *sql.DB) error {
 	if !i.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil

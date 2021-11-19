@@ -31,6 +31,7 @@ func NewTopic(ctx context.Context) (*pubsub.Topic, error) {
 	return NewTopicWithOptions(ctx, o)
 }
 
+// NewTopicWithConfigPath start a new topic for sending messages with options from config path.
 func NewTopicWithConfigPath(ctx context.Context, path string) (*pubsub.Topic, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -39,7 +40,7 @@ func NewTopicWithConfigPath(ctx context.Context, path string) (*pubsub.Topic, er
 	return NewTopicWithOptions(ctx, options)
 }
 
-// NewTopicWithOptions start a new topic for send message
+// NewTopicWithOptions start a new topic for sending messages.
 func NewTopicWithOptions(ctx context.Context, o *Options) (*pubsub.Topic, error) {
 
 	logger := log.FromContext(ctx)
@@ -60,7 +61,7 @@ func NewTopicWithOptions(ctx context.Context, o *Options) (*pubsub.Topic, error)
 
 }
 
-// NewSubscription creates a subscription
+// NewSubscription creates a subscription.
 func NewSubscription(ctx context.Context) (*pubsub.Subscription, error) {
 	o, err := NewOptions()
 	if err != nil {
@@ -70,6 +71,7 @@ func NewSubscription(ctx context.Context) (*pubsub.Subscription, error) {
 	return NewSubscriptionWithOptions(ctx, o)
 }
 
+// NewSubscriptionWithConfigPath return a subscription with options from config path.
 func NewSubscriptionWithConfigPath(ctx context.Context, path string) (*pubsub.Subscription, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -78,7 +80,7 @@ func NewSubscriptionWithConfigPath(ctx context.Context, path string) (*pubsub.Su
 	return NewSubscriptionWithOptions(ctx, options)
 }
 
-// NewSubscriptionWithOptions ..
+// NewSubscriptionWithOptions return a subscription with options from config path.
 func NewSubscriptionWithOptions(ctx context.Context, o *Options) (*pubsub.Subscription, error) {
 
 	logger := log.FromContext(ctx)

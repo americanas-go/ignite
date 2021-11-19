@@ -10,6 +10,7 @@ import (
 
 var subsOnce sync.Once
 
+// Module fx module for nats subscriber.
 func SubscriberModule() fx.Option {
 	options := fx.Options()
 
@@ -27,6 +28,7 @@ func SubscriberModule() fx.Option {
 
 var pubOnce sync.Once
 
+// Module fx module for nats publisher.
 func PublisherModule() fx.Option {
 	options := fx.Options()
 

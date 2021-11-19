@@ -11,6 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/x/mongo/driver/connstring"
 )
 
+// Conn represents a mongo connection.
 type Conn struct {
 	ClientOptions *options.ClientOptions
 	Client        *mongo.Client
@@ -19,11 +20,16 @@ type Conn struct {
 	Plugins       []Plugin
 }
 
+// ClientOptionsPlugin defines a mongo client options plugin signature.
 type ClientOptionsPlugin func(context.Context, *options.ClientOptions) error
+
+// ClientPlugin defines a mongo client plugin signature.
 type ClientPlugin func(context.Context, *mongo.Client) error
 
+// Plugin defines a function to process plugin.
 type Plugin func(context.Context) (ClientOptionsPlugin, ClientPlugin)
 
+// NewConn returns a new connection with default options.
 func NewConn(ctx context.Context, plugins ...Plugin) (*Conn, error) {
 
 	logger := log.FromContext(ctx)
@@ -36,6 +42,7 @@ func NewConn(ctx context.Context, plugins ...Plugin) (*Conn, error) {
 	return NewConnWithOptions(ctx, o, plugins...)
 }
 
+// NewConnWithConfigPath returns a new connection with options from config path.
 func NewConnWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*Conn, error) {
 	opts, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -44,6 +51,7 @@ func NewConnWithConfigPath(ctx context.Context, path string, plugins ...Plugin) 
 	return NewConnWithOptions(ctx, opts, plugins...)
 }
 
+// NewConnWithOptions returns a new connection with options from config path.
 func NewConnWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (conn *Conn, err error) {
 
 	logger := log.FromContext(ctx)

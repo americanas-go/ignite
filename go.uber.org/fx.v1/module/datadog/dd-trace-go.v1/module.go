@@ -10,6 +10,7 @@ import (
 
 var optOnce sync.Once
 
+// Module fx module for datadog options.
 func OptionsModule() fx.Option {
 	options := fx.Options()
 
@@ -26,6 +27,7 @@ func OptionsModule() fx.Option {
 
 var tracerOnce sync.Once
 
+// Module fx module for datadog tracer.
 func TracerModule() fx.Option {
 	options := fx.Options()
 
@@ -44,6 +46,7 @@ func TracerModule() fx.Option {
 
 var profilerOnce sync.Once
 
+// Module fx module for datadog profiler.
 func ProfilerModule() fx.Option {
 	options := fx.Options()
 

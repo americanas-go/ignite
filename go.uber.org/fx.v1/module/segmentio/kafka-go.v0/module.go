@@ -1,4 +1,4 @@
-package nats
+package kafka
 
 import (
 	"sync"
@@ -8,12 +8,13 @@ import (
 	"go.uber.org/fx"
 )
 
-var leaderOnce sync.Once
+var once sync.Once
 
-func LeaderModule() fx.Option {
+// Module fx module for kafka connection.
+func Module() fx.Option {
 	options := fx.Options()
 
-	leaderOnce.Do(func() {
+	once.Do(func() {
 		options = fx.Options(
 			contextfx.Module(),
 			fx.Provide(
