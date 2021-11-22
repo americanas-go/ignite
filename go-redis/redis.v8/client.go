@@ -7,8 +7,10 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
+// Plugin defines a function to process plugin.
 type Plugin func(context.Context, *redis.Client) error
 
+// NewClient returns a new redis client.
 func NewClient(ctx context.Context, plugins ...Plugin) (*redis.Client, error) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,6 +20,7 @@ func NewClient(ctx context.Context, plugins ...Plugin) (*redis.Client, error) {
 	return NewClientWithOptions(ctx, o, plugins...)
 }
 
+// NewClientWithConfigPath returns a new redis client with options from config path.
 func NewClientWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*redis.Client, error) {
 	opts, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -26,6 +29,7 @@ func NewClientWithConfigPath(ctx context.Context, path string, plugins ...Plugin
 	return NewClientWithOptions(ctx, opts, plugins...)
 }
 
+// NewClientWithOptions returns a new redis client with options.
 func NewClientWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (client *redis.Client, err error) {
 
 	logger := log.FromContext(ctx)

@@ -10,10 +10,12 @@ import (
 	mongotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo"
 )
 
+//Datadog represents a datadog plugin for mongo.
 type Datadog struct {
 	options *Options
 }
 
+// NewDatadogWithConfigPath returns a new datadog plugin with options from config path.
 func NewDatadogWithConfigPath(path string, options ...mongotrace.Option) (*Datadog, error) {
 	o, err := NewOptionsWithPath(path, options...)
 	if err != nil {
@@ -22,10 +24,12 @@ func NewDatadogWithConfigPath(path string, options ...mongotrace.Option) (*Datad
 	return NewDatadogWithOptions(o), nil
 }
 
+// NewDatadogWithOptions returns a new datadog plugin with options.
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
+// NewDatadog returns a new datadog plugin with default options.
 func NewDatadog(traceOptions ...mongotrace.Option) *Datadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewDatadog(traceOptions ...mongotrace.Option) *Datadog {
 	return NewDatadogWithOptions(o)
 }
 
+// Register registers this datadog plugin on a new mongo client.
 func (d *Datadog) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil, nil
@@ -53,6 +58,7 @@ func (d *Datadog) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mong
 	}, nil
 }
 
+// Register registers a new datadog plugin on a new mongo client.
 func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
 	o, err := NewOptions()
 	if err != nil {

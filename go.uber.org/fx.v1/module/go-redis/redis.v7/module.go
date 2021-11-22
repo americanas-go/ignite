@@ -17,6 +17,7 @@ type clusterParams struct {
 	Plugins []redis.ClusterPlugin `optional:"true"`
 }
 
+// ClusterModule fx module for redis cluster client.
 func ClusterModule() fx.Option {
 	options := fx.Options()
 
@@ -40,6 +41,7 @@ type clientParams struct {
 	Plugins []redis.Plugin `optional:"true"`
 }
 
+// ClientModule fx module for redis client.
 func ClientModule() fx.Option {
 	options := fx.Options()
 

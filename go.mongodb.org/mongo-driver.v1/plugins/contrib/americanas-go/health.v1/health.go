@@ -9,14 +9,17 @@ import (
 	m "go.mongodb.org/mongo-driver/mongo"
 )
 
+// Health represents a healh plugin for mongo.
 type Health struct {
 	options *Options
 }
 
+// NewHealthWithOptions returns a new health with options.
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+// NewHealthWithConfigPath returns a new health with options from config path.
 func NewHealthWithConfigPath(path string) (*Health, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -25,15 +28,16 @@ func NewHealthWithConfigPath(path string) (*Health, error) {
 	return NewHealthWithOptions(o), nil
 }
 
+// NewHealth returns a new health with default options.
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
-
 	return NewHealthWithOptions(o)
 }
 
+// Register registers this health plugin on a new mongo client.
 func (i *Health) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
 
 	logger := log.WithTypeOf(*i)
@@ -52,6 +56,7 @@ func (i *Health) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo
 	}
 }
 
+// Register registers a new health plugin on a new mongo client.
 func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
 	o, err := NewOptions()
 	if err != nil {

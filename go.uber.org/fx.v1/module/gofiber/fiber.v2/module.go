@@ -19,6 +19,7 @@ type params struct {
 
 var once sync.Once
 
+// Module fx module for fiber server.
 func Module() fx.Option {
 	options := fx.Options()
 

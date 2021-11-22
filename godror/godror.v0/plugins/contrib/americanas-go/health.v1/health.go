@@ -8,6 +8,7 @@ import (
 	"github.com/americanas-go/log"
 )
 
+// Register registers a new health check on sql DB.
 func Register(ctx context.Context, db *sql.DB) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, db *sql.DB) error {
 	return h.Register(ctx, db)
 }
 
+// Health represents a health check for go driver for oracle.
 type Health struct {
 	options *Options
 }
 
+// NewHealthWithOptions returns a new health check with options.
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+// NewHealthWithConfigPath returns a new health check with options from config path.
 func NewHealthWithConfigPath(path string) (*Health, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewHealthWithConfigPath(path string) (*Health, error) {
 	return NewHealthWithOptions(o), nil
 }
 
+// NewHealth returns a new health check.
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewHealth() *Health {
 	return NewHealthWithOptions(o)
 }
 
+// Register registers this health check on sql DB.
 func (i *Health) Register(ctx context.Context, db *sql.DB) error {
 
 	logger := log.FromContext(ctx).WithTypeOf(*i)

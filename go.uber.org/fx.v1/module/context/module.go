@@ -9,6 +9,7 @@ import (
 
 var once sync.Once
 
+// Module fx module for context.
 func Module() fx.Option {
 	options := fx.Options()
 

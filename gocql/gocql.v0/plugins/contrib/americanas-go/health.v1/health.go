@@ -8,6 +8,7 @@ import (
 	"github.com/gocql/gocql"
 )
 
+// Register registers a new health plugin on gocql session.
 func Register(ctx context.Context, session *gocql.Session) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, session *gocql.Session) error {
 	return h.Register(ctx, session)
 }
 
+// Health represents health plugin from gocql.
 type Health struct {
 	options *Options
 }
 
+// NewHealthWithOptions returns a new health checker with options.
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+// NewHealthWithOptions returns a new health checker with options from config path.
 func NewHealthWithConfigPath(path string) (*Health, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewHealthWithConfigPath(path string) (*Health, error) {
 	return NewHealthWithOptions(o), nil
 }
 
+// NewHealth returns a new health checker with default options
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewHealth() *Health {
 	return NewHealthWithOptions(o)
 }
 
+// Register registers this health checker plugin on gocql session.
 func (i *Health) Register(ctx context.Context, session *gocql.Session) error {
 
 	logger := log.FromContext(ctx).WithTypeOf(*i)

@@ -8,10 +8,12 @@ import (
 	"github.com/opentracing/opentracing-go"
 )
 
+// Opentracing represents opentracing plugin for resty client.
 type Opentracing struct {
 	options *Options
 }
 
+// NewOpentracingWithConfigPath returns new opentracing with options from config path.
 func NewOpentracingWithConfigPath(path string) (*Opentracing, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -20,10 +22,12 @@ func NewOpentracingWithConfigPath(path string) (*Opentracing, error) {
 	return NewOpentracingWithOptions(o), nil
 }
 
+// NewOpentracingWithOptions returns new opentracing with options.
 func NewOpentracingWithOptions(options *Options) *Opentracing {
 	return &Opentracing{options: options}
 }
 
+// Register registers a new opentracing plugin on resty client.
 func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -34,6 +38,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 	return plugin.Register(ctx, client)
 }
 
+// Register registers this opentracing plugin on resty client.
 func (i *Opentracing) Register(ctx context.Context, client *resty.Client) error {
 
 	if !i.options.Enabled {

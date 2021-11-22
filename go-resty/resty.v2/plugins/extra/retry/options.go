@@ -6,6 +6,7 @@ import (
 	"github.com/americanas-go/config"
 )
 
+// Options represents a retry plugin for resty client options.
 type Options struct {
 	Enabled     bool
 	Count       int

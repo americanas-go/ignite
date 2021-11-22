@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+// OptionsTransport represents resty transport options.
 type OptionsTransport struct {
 	DisableCompression    bool
 	DisableKeepAlives     bool

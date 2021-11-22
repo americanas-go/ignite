@@ -6,6 +6,7 @@ import (
 	"github.com/americanas-go/config"
 )
 
+// Options represents resty client options.
 type Options struct {
 	Debug             bool
 	ConnectionTimeout time.Duration

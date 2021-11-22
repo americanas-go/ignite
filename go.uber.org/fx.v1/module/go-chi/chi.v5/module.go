@@ -19,6 +19,7 @@ type params struct {
 	Plugins []chi.Plugin `optional:"true"`
 }
 
+// Module fx module for chi.
 func Module() fx.Option {
 	options := fx.Options()
 

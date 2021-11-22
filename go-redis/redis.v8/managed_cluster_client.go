@@ -6,12 +6,14 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
+// ManagedClusterClient represents a redis cluster managed client.
 type ManagedClusterClient struct {
 	Client  *redis.ClusterClient
 	Plugins []ClusterPlugin
 	Options *Options
 }
 
+// NewManagedClusterClientWithConfigPath returns a new managed client with options from config path.
 func NewManagedClusterClientWithConfigPath(ctx context.Context, path string, plugins ...ClusterPlugin) (*ManagedClusterClient, error) {
 
 	opts, err := NewOptionsWithPath(path)
@@ -31,6 +33,7 @@ func NewManagedClusterClientWithConfigPath(ctx context.Context, path string, plu
 	}, nil
 }
 
+// NewManagedClusterClient returns a new managed client with default options.
 func NewManagedClusterClient(ctx context.Context, plugins ...ClusterPlugin) (*ManagedClusterClient, error) {
 	opts, err := NewOptions()
 	if err != nil {
@@ -49,6 +52,7 @@ func NewManagedClusterClient(ctx context.Context, plugins ...ClusterPlugin) (*Ma
 	}, nil
 }
 
+// NewManagedClusterClientWithOptions returns a new managed client with options.
 func NewManagedClusterClientWithOptions(ctx context.Context, opts *Options, plugins ...ClusterPlugin) (*ManagedClusterClient, error) {
 	s, err := NewClusterClientWithOptions(ctx, opts, plugins...)
 	if err != nil {

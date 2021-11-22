@@ -6,6 +6,7 @@ import (
 	"github.com/americanas-go/config"
 )
 
+// Options represents redis client set options.
 type Options struct {
 	Sentinel           SentinelOptions
 	Password           string
