@@ -5,10 +5,12 @@ import (
 	"go.uber.org/fx"
 )
 
+// Logger represents a logger for fx.
 type Logger struct {
 	level string
 }
 
+// Printf logs format and args according to log level.
 func (p *Logger) Printf(format string, args ...interface{}) {
 	switch p.level {
 	case "INFO":
@@ -20,6 +22,7 @@ func (p *Logger) Printf(format string, args ...interface{}) {
 	}
 }
 
+// NewLogger returns a new logger.
 func NewLogger() fx.Printer {
 	return &Logger{level: LogLevel()}
 }

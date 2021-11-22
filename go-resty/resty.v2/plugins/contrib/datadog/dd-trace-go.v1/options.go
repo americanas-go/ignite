@@ -5,6 +5,7 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
 )
 
+// Options represents datadog client for resty options.
 type Options struct {
 	Enabled       bool
 	OperationName string

@@ -8,8 +8,10 @@ import (
 	"github.com/gocql/gocql"
 )
 
+// Plugin defines a gocql plugin signature.
 type Plugin func(context.Context, *gocql.Session) error
 
+// NewSessionWithConfigPath returns a new session with options from config path.
 func NewSessionWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*gocql.Session, error) {
 	opts, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -18,6 +20,7 @@ func NewSessionWithConfigPath(ctx context.Context, path string, plugins ...Plugi
 	return NewSessionWithOptions(ctx, opts, plugins...)
 }
 
+// NewSession returns a new session with default options.
 func NewSession(ctx context.Context, plugins ...Plugin) (*gocql.Session, error) {
 
 	o, err := NewOptions()
@@ -28,6 +31,7 @@ func NewSession(ctx context.Context, plugins ...Plugin) (*gocql.Session, error) 
 	return NewSessionWithOptions(ctx, o, plugins...)
 }
 
+// NewSessionWithOptions returns a new session with options.
 func NewSessionWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (session *gocql.Session, err error) {
 
 	logger := log.FromContext(ctx)

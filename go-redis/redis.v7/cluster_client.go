@@ -8,6 +8,7 @@ import (
 	"github.com/go-redis/redis/v7"
 )
 
+// ClusterPlugin represents a redis cluster plugin func signature.
 type ClusterPlugin func(context.Context, *redis.ClusterClient) error
 
 // NewClusterClient returns a new ClusterClient.
@@ -23,7 +24,7 @@ func NewClusterClient(ctx context.Context, plugins ...ClusterPlugin) (*redis.Clu
 	return NewClusterClientWithOptions(ctx, o, plugins...)
 }
 
-// NewClusterClientWithOptions returns a new ClusterClient with options from config path.
+// NewClusterClientWithConfigPath returns a new ClusterClient with options from config path.
 func NewClusterClientWithConfigPath(ctx context.Context, path string, plugins ...ClusterPlugin) (*redis.ClusterClient, error) {
 	opts, err := NewOptionsWithPath(path)
 	if err != nil {

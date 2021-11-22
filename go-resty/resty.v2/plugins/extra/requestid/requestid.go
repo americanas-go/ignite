@@ -8,10 +8,12 @@ import (
 	"github.com/google/uuid"
 )
 
+// RequestID represents a requestID plugin for resty client.
 type RequestID struct {
 	options *Options
 }
 
+// NewRequestIDWithConfigPath returns a new requestID plugin with options from config path.
 func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -20,10 +22,12 @@ func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	return NewRequestIDWithOptions(o), nil
 }
 
+// NewRequestIDWithOptions returns a new requestID plugin with options.
 func NewRequestIDWithOptions(options *Options) *RequestID {
 	return &RequestID{options: options}
 }
 
+// Register registers a new requestID plugin on resty client.
 func Register(ctx context.Context, client *resty.Client) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -34,6 +38,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 	return plugin.Register(ctx, client)
 }
 
+// Register registers this requestID plugin on resty client.
 func (i *RequestID) Register(ctx context.Context, client *resty.Client) error {
 
 	if !i.options.Enabled {

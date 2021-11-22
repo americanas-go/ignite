@@ -4,6 +4,7 @@ import (
 	"github.com/americanas-go/config"
 )
 
+// Options represents a health plugin for redis options.
 type Options struct {
 	Name        string
 	Enabled     bool

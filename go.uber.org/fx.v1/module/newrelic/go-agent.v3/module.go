@@ -10,6 +10,7 @@ import (
 
 var once sync.Once
 
+// Module fx module for newrelic agent.
 func Module() fx.Option {
 	options := fx.Options()
 

@@ -22,6 +22,7 @@ type srvParams struct {
 
 var once sync.Once
 
+// Module fx module for multiserver.
 func Module() fx.Option {
 	options := fx.Options()
 

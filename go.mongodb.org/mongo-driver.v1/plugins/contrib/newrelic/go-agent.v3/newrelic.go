@@ -10,10 +10,12 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// Newrelic represents newrelic plugin for mongo.
 type Newrelic struct {
 	options *Options
 }
 
+// NewNewrelicWithConfigPath returns a new newrelic plugin with options from config path.
 func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -22,10 +24,12 @@ func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	return NewNewrelicWithOptions(o), nil
 }
 
+// NewNewrelicWithOptions returns a new newrelic plugin with options.
 func NewNewrelicWithOptions(options *Options) *Newrelic {
 	return &Newrelic{options: options}
 }
 
+// Register registers this newrelic plugin on a new mongo client.
 func (d *Newrelic) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
 
 	if !d.options.Enabled || !newrelic.IsEnabled() {
@@ -45,6 +49,7 @@ func (d *Newrelic) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mon
 	}, nil
 }
 
+// Register registers a new newrelic plugin on a new mongo client.
 func Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
 	o, err := NewOptions()
 	if err != nil {

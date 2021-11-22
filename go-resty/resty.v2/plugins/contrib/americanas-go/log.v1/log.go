@@ -13,10 +13,12 @@ type l func(format string, args ...interface{})
 
 var lvl string
 
+// Log represents a logger middleware for resty.
 type Log struct {
 	options *Options
 }
 
+// NewLogWithConfigPath returns a new log with options from config path.
 func NewLogWithConfigPath(path string) (*Log, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -25,6 +27,7 @@ func NewLogWithConfigPath(path string) (*Log, error) {
 	return NewLogWithOptions(o), nil
 }
 
+// NewLogWithOptions returns a new log with options.
 func NewLogWithOptions(options *Options) *Log {
 	return &Log{options: options}
 }
@@ -40,6 +43,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 	return plugin.Register(ctx, client)
 }
 
+// Register registers this logger middleware for resty client.
 func (i *Log) Register(ctx context.Context, client *resty.Client) error {
 
 	if !i.options.Enabled {

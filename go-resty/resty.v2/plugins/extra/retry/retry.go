@@ -9,6 +9,7 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+// Retry represents a retry plugin for resty client.
 type Retry struct {
 	options *Options
 }
@@ -18,6 +19,7 @@ func NewRetryWithOptions(options *Options) *Retry {
 	return &Retry{options: options}
 }
 
+// NewRetryWithConfigPath returns a new Retry with options from config path.
 func NewRetryWithConfigPath(path string) (*Retry, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -28,7 +30,7 @@ func NewRetryWithConfigPath(path string) (*Retry, error) {
 
 // NewRetry returns a new Retry.
 func NewRetry() *Retry {
-    	o, err := NewOptions()
+	o, err := NewOptions()
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -45,7 +47,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 	return plugin.Register(ctx, client)
 }
 
-// Registry registers retry in resty.
+// Register registers retry in resty.
 func (p *Retry) Register(ctx context.Context, client *resty.Client) error {
 
 	if !p.options.Enabled {

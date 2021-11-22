@@ -9,8 +9,10 @@ import (
 	"github.com/godror/godror"
 )
 
+// Plugin defines a go driver for oracle plugin signature.
 type Plugin func(context.Context, *sql.DB) error
 
+// NewDBWithConfigPath returns a new sql DB with options from config path.
 func NewDBWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*sql.DB, error) {
 	opts, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -19,6 +21,7 @@ func NewDBWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*
 	return NewDBWithOptions(ctx, opts, plugins...)
 }
 
+// NewDBWithOptions returns a new sql DB with options.
 func NewDBWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (db *sql.DB, err error) {
 
 	logger := log.FromContext(ctx)
@@ -56,6 +59,7 @@ func NewDBWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (db *s
 	return db, err
 }
 
+// NewDB returns a new DB.
 func NewDB(ctx context.Context, plugins ...Plugin) (*sql.DB, error) {
 
 	logger := log.FromContext(ctx)
