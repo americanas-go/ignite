@@ -30,7 +30,8 @@ func ConfigAdd(path string) {
 	config.Add(path+allowedHeaders, []string{e.HeaderOrigin, e.HeaderContentType, e.HeaderAccept},
 		"cors allowed headers")
 	config.Add(path+allowedMethods,
-		[]string{http.MethodGet, http.MethodHead, http.MethodPut, http.MethodPatch, http.MethodPost, http.MethodDelete},
+		[]string{http.MethodGet, http.MethodOptions, http.MethodHead, http.MethodPut,
+			http.MethodPatch, http.MethodPost, http.MethodDelete},
 		"cors allowed methods")
 	config.Add(path+allowedCredentials, true, "cors allowed credentials")
 	config.Add(path+exposedHeaders, []string{}, "cors exposed headers")
