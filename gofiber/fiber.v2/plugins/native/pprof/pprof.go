@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/pprof"
 )
 
+// Register registers a new pprof plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,10 +19,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// PProf represents a new pprof plugin for fiber.
 type PProf struct {
 	options *Options
 }
 
+// NewPProfWithConfigPath returns a new pprof plugin with options from config path.
 func NewPProfWithConfigPath(path string) (*PProf, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -30,10 +33,12 @@ func NewPProfWithConfigPath(path string) (*PProf, error) {
 	return NewPProfWithOptions(o), nil
 }
 
+// NewPProfWithOptions returns a new pprof plugin with options.
 func NewPProfWithOptions(options *Options) *PProf {
 	return &PProf{options: options}
 }
 
+// Register registers this pprof plugin for fiber.
 func (d *PProf) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !d.options.Enabled {
 		return nil, nil

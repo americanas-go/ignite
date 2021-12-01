@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
+// Register registers a new recover plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,10 +19,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// Recover represents a new recover plugin for fiber.
 type Recover struct {
 	options *Options
 }
 
+// NewRecoverWithConfigPath returns a new recover plugin with options from config path.
 func NewRecoverWithConfigPath(path string) (*Recover, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -30,10 +33,12 @@ func NewRecoverWithConfigPath(path string) (*Recover, error) {
 	return NewRecoverWithOptions(o), nil
 }
 
+// NewRecoverWithOptions returns a new recover plugin with options.
 func NewRecoverWithOptions(options *Options) *Recover {
 	return &Recover{options: options}
 }
 
+// Register registers this recover plugin for fiber.
 func (d *Recover) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !d.options.Enabled {
 		return nil, nil

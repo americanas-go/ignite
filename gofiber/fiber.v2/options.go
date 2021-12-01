@@ -5,12 +5,14 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// Options represents fiber server options
 type Options struct {
 	Port   int
 	Type   string
 	Config *fiber.Config
 }
 
+// NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
 	o := &Options{}
 
@@ -22,6 +24,7 @@ func NewOptions() (*Options, error) {
 	return o, nil
 }
 
+// NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
 
 	opts, err = NewOptions()

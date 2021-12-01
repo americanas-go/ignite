@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/compress"
 )
 
+// Register registers a new compress plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,10 +19,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// Compress represents a new compress plugin for fiber.
 type Compress struct {
 	options *Options
 }
 
+// NewCompressWithConfigPath returns a new compress plugin with options from config path.
 func NewCompressWithConfigPath(path string) (*Compress, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -30,10 +33,12 @@ func NewCompressWithConfigPath(path string) (*Compress, error) {
 	return NewCompressWithOptions(o), nil
 }
 
+// NewCompressWithOptions returns a new compress plugin with options.
 func NewCompressWithOptions(options *Options) *Compress {
 	return &Compress{options: options}
 }
 
+// Register registers this compress plugin for fiber.
 func (d *Compress) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !d.options.Enabled {
 		return nil, nil

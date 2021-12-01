@@ -5,11 +5,13 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/compress"
 )
 
+// Options compress plugin for fiber options.
 type Options struct {
 	Enabled bool
 	Level   int
 }
 
+// GetLevel returns current compress level.
 func (o *Options) GetLevel() compress.Level {
 	switch config.Int(level) {
 	case -1:
@@ -23,6 +25,7 @@ func (o *Options) GetLevel() compress.Level {
 	}
 }
 
+// NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
 	o := &Options{}
 
@@ -34,6 +37,7 @@ func NewOptions() (*Options, error) {
 	return o, nil
 }
 
+// NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
 	opts, err = NewOptions()
 	if err != nil {
