@@ -10,6 +10,7 @@ import (
 	fibertrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2"
 )
 
+// Register registers a new datadog plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -19,14 +20,17 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return h.Register(ctx, options)
 }
 
+// Datadog represents a datadog plugin for fiber.
 type Datadog struct {
 	options *Options
 }
 
+// NewDatadogWithOptions returns a new datadog plugin with options.
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
+// NewDatadogWithConfigPath returns a new datadog plugin with options from config path.
 func NewDatadogWithConfigPath(path string, traceOptions ...fibertrace.Option) (*Datadog, error) {
 	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewDatadogWithConfigPath(path string, traceOptions ...fibertrace.Option) (*
 	return NewDatadogWithOptions(o), nil
 }
 
+// NewDatadog returns a new datadog plugin with default options.
 func NewDatadog(traceOptions ...fibertrace.Option) *Datadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
@@ -44,6 +49,7 @@ func NewDatadog(traceOptions ...fibertrace.Option) *Datadog {
 	return NewDatadogWithOptions(o)
 }
 
+// Register registers this datadog plugin for fiber.
 func (i *Datadog) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 
 	if !i.options.Enabled || !datadog.IsTracerEnabled() {

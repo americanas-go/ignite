@@ -9,6 +9,7 @@ import (
 	f "github.com/gofiber/fiber/v2"
 )
 
+// Register registers a new health checker for fiber with options.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,14 +19,17 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return health.Register(ctx, options)
 }
 
+// Health represets a health checker plugin for fiber
 type Health struct {
 	options *Options
 }
 
+// NewHealthWithOptions returns a health checker with options.
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+// NewHealthWithOptions returns a health checker with options from config path.
 func NewHealthWithConfigPath(path string) (*Health, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -34,6 +38,7 @@ func NewHealthWithConfigPath(path string) (*Health, error) {
 	return NewHealthWithOptions(o), nil
 }
 
+// NewHealthWithOptions returns a health checker with options.
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
@@ -43,6 +48,7 @@ func NewHealth() *Health {
 	return NewHealthWithOptions(o)
 }
 
+// Register registers this health checker for fiber with options.
 func (i *Health) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 
 	if !i.options.Enabled {

@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/monitor"
 )
 
+// Register registers a new monitor plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,10 +19,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// Monitor represents a new monitor plugin for fiber.
 type Monitor struct {
 	options *Options
 }
 
+// NewMonitorWithConfigPath returns a new monitor plugin with options from config path.
 func NewMonitorWithConfigPath(path string) (*Monitor, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -30,10 +33,12 @@ func NewMonitorWithConfigPath(path string) (*Monitor, error) {
 	return NewMonitorWithOptions(o), nil
 }
 
+// NewMonitorWithOptions returns a new monitor plugin with options.
 func NewMonitorWithOptions(options *Options) *Monitor {
 	return &Monitor{options: options}
 }
 
+// Register registers this monitor plugin for fiber.
 func (d *Monitor) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 
 	if !d.options.Enabled {

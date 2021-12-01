@@ -10,19 +10,23 @@ import (
 	f "github.com/gofiber/fiber/v2"
 )
 
+// Register registers a new multiserver plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	l := NewMultiServer()
 	return l.Register(ctx, options)
 }
 
+// MultiServer represents multiserver plugin for fiber.
 type MultiServer struct {
 	options *Options
 }
 
+// NewMultiServerWithOptions returns a new multiserver plugin with options.
 func NewMultiServerWithOptions(options *Options) *MultiServer {
 	return &MultiServer{options: options}
 }
 
+// NewMultiServerWithConfigPath returns a new multiserver plugin with options from config path.
 func NewMultiServerWithConfigPath(path string) (*MultiServer, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -31,6 +35,7 @@ func NewMultiServerWithConfigPath(path string) (*MultiServer, error) {
 	return NewMultiServerWithOptions(o), nil
 }
 
+// NewMultiServer returns a new multiserver plugin with default options.
 func NewMultiServer() *MultiServer {
 	o, err := NewOptions()
 	if err != nil {
@@ -40,6 +45,7 @@ func NewMultiServer() *MultiServer {
 	return NewMultiServerWithOptions(o)
 }
 
+// Register registers this multiserver plugin for fiber.
 func (i *MultiServer) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !i.options.Enabled {
 		return nil, nil

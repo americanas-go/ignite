@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 )
 
+// Register registers a new requestID plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,10 +19,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// RequestID represents a new requestID plugin for fiber.
 type RequestID struct {
 	options *Options
 }
 
+// NewRequestIDWithConfigPath returns a new requestID plugin with options from config path.
 func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -30,10 +33,12 @@ func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	return NewRequestIDWithOptions(o), nil
 }
 
+// NewRequestIDWithOptions returns a new requestID plugin with options.
 func NewRequestIDWithOptions(options *Options) *RequestID {
 	return &RequestID{options: options}
 }
 
+// Register registers this requestID plugin for fiber.
 func (d *RequestID) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 
 	if !d.options.Enabled {
