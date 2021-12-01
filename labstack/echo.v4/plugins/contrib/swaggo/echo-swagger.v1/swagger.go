@@ -8,6 +8,7 @@ import (
 	eswagger "github.com/swaggo/echo-swagger"
 )
 
+// Register registers a new swagger plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Swagger represents swagger plugin for echo server.
 type Swagger struct {
 	options *Options
 }
 
+// NewSwaggerWithOptions returns a new swagger plugin with options.
 func NewSwaggerWithOptions(options *Options) *Swagger {
 	return &Swagger{options: options}
 }
 
+// NewSwaggerWithConfigPath returns a new swagger plugin with options from config path.
 func NewSwaggerWithConfigPath(path string) (*Swagger, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewSwaggerWithConfigPath(path string) (*Swagger, error) {
 	return NewSwaggerWithOptions(o), nil
 }
 
+// NewSwagger returns a new swagger plugin with default options.
 func NewSwagger() *Swagger {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewSwagger() *Swagger {
 	return NewSwaggerWithOptions(o)
 }
 
+// Register registers this swagger plugin for echo server.
 func (i *Swagger) Register(ctx context.Context, server *echo.Server) error {
 
 	if !i.options.Enabled {

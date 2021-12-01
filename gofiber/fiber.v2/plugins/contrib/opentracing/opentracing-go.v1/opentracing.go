@@ -8,6 +8,7 @@ import (
 	f "github.com/gofiber/fiber/v2"
 )
 
+// Register registers a new opentracing plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,10 +18,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// Opentracing represents a new opentracing plugin for fiber.
 type Opentracing struct {
 	options *Options
 }
 
+// NewOpentracingWithConfigPath returns a new opentracing plugin with options from config path.
 func NewOpentracingWithConfigPath(path string) (*Opentracing, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -29,10 +32,12 @@ func NewOpentracingWithConfigPath(path string) (*Opentracing, error) {
 	return NewOpentracingWithOptions(o), nil
 }
 
+// NewOpentracingWithOptions returns a new opentracing plugin with options.
 func NewOpentracingWithOptions(options *Options) *Opentracing {
 	return &Opentracing{options: options}
 }
 
+// Register registers this opentracing plugin for fiber.
 func (d *Opentracing) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !d.options.Enabled {
 		return nil, nil

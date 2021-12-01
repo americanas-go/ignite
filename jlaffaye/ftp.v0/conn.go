@@ -9,6 +9,7 @@ import (
 	"gopkg.in/matryer/try.v1"
 )
 
+// NewServerConnWithOptions returns a new ftp server connection with options.
 func NewServerConnWithOptions(ctx context.Context, options *Options) (*ftp.ServerConn, error) {
 
 	var conn *ftp.ServerConn
@@ -30,6 +31,7 @@ func NewServerConnWithOptions(ctx context.Context, options *Options) (*ftp.Serve
 	return conn, nil
 }
 
+// NewServerConnWithConfigPath returns a new ftp server connection with options from config path.
 func NewServerConnWithConfigPath(ctx context.Context, path string) (*ftp.ServerConn, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -38,6 +40,7 @@ func NewServerConnWithConfigPath(ctx context.Context, path string) (*ftp.ServerC
 	return NewServerConnWithOptions(ctx, options)
 }
 
+// NewServerConn returns a new ftp server connection with default options.
 func NewServerConn(ctx context.Context) (*ftp.ServerConn, error) {
 
 	logger := log.FromContext(ctx)

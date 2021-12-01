@@ -10,6 +10,7 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
+// Register registers a new status plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -19,14 +20,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Status represents status plugin for echo server.
 type Status struct {
 	options *Options
 }
 
+// NewStatusWithOptions returns a new status plugin with options.
 func NewStatusWithOptions(options *Options) *Status {
 	return &Status{options: options}
 }
 
+// NewStatusWithConfigPath returns a new status plugin with options from config path.
 func NewStatusWithConfigPath(path string) (*Status, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewStatusWithConfigPath(path string) (*Status, error) {
 	return NewStatusWithOptions(o), nil
 }
 
+// NewStatus returns a new status plugin with default options.
 func NewStatus() *Status {
 	o, err := NewOptions()
 	if err != nil {
@@ -44,6 +49,7 @@ func NewStatus() *Status {
 	return NewStatusWithOptions(o)
 }
 
+// Register registers this status plugin for echo server.
 func (i *Status) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

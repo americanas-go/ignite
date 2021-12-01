@@ -9,6 +9,7 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
+// Register registers a new health checker plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,14 +19,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Health represents health checker plugin for echo server.
 type Health struct {
 	options *Options
 }
 
+// NewHealthWithOptions returns a new health checker plugin with options.
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+// NewHealthWithConfigPath returns a new health checker plugin with options from config path.
 func NewHealthWithConfigPath(path string) (*Health, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -34,6 +38,7 @@ func NewHealthWithConfigPath(path string) (*Health, error) {
 	return NewHealthWithOptions(o), nil
 }
 
+// NewHealth returns a new health checker plugin with default options.
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
@@ -43,6 +48,7 @@ func NewHealth() *Health {
 	return NewHealthWithOptions(o)
 }
 
+// Register registers this health checker plugin for echo server.
 func (i *Health) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

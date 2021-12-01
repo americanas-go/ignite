@@ -1,4 +1,4 @@
-package gzip
+package recover
 
 import (
 	"github.com/americanas-go/config"

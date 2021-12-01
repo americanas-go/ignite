@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// Error converts errors to grpc errors
 func Error(err error) error {
 
 	if errors.IsNotFound(err) {

@@ -9,6 +9,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
+// NewClientset returns a new kubernetes client set with default options.
 func NewClientset(ctx context.Context) *kubernetes.Clientset {
 
 	logger := log.FromContext(ctx)
@@ -21,6 +22,7 @@ func NewClientset(ctx context.Context) *kubernetes.Clientset {
 	return NewClientsetWithOptions(ctx, o)
 }
 
+// NewClientsetWithConfigPath returns a new kubernetes client set with options from config path.
 func NewClientsetWithConfigPath(ctx context.Context, path string) (*kubernetes.Clientset, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -29,6 +31,7 @@ func NewClientsetWithConfigPath(ctx context.Context, path string) (*kubernetes.C
 	return NewClientsetWithOptions(ctx, options), nil
 }
 
+// NewClientsetWithOptions returns a new kubernetes client set with options.
 func NewClientsetWithOptions(ctx context.Context, options *Options) *kubernetes.Clientset {
 
 	logger := log.FromContext(ctx).
