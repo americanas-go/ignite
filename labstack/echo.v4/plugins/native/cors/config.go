@@ -1,11 +1,8 @@
 package cors
 
 import (
-	"net/http"
-
 	"github.com/americanas-go/config"
 	"github.com/americanas-go/ignite/labstack/echo.v4"
-	e "github.com/labstack/echo/v4"
 )
 
 const (
@@ -27,11 +24,10 @@ func init() {
 func ConfigAdd(path string) {
 	config.Add(path+enabled, true, "enable/disable cors middleware")
 	config.Add(path+allowedOrigins, []string{"*"}, "cors allowed origins")
-	config.Add(path+allowedHeaders, []string{e.HeaderOrigin, e.HeaderContentType, e.HeaderAccept},
+	config.Add(path+allowedHeaders, []string{"*"},
 		"cors allowed headers")
 	config.Add(path+allowedMethods,
-		[]string{http.MethodGet, http.MethodOptions, http.MethodHead, http.MethodPut,
-			http.MethodPatch, http.MethodPost, http.MethodDelete},
+		[]string{"*"},
 		"cors allowed methods")
 	config.Add(path+allowedCredentials, true, "cors allowed credentials")
 	config.Add(path+exposedHeaders, []string{}, "cors exposed headers")
