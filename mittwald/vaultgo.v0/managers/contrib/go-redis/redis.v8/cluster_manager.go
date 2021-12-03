@@ -9,11 +9,13 @@ import (
 	"github.com/americanas-go/log"
 )
 
+// Manager represents a vault manager for redis cluster client.
 type ClusterManager struct {
 	managedClusterClient *redis.ManagedClusterClient
 	options              *vault.ManagerOptions
 }
 
+// NewManager returns a new vault manager with default options.
 func NewClusterManager(managedClient *redis.ManagedClusterClient) vault.Manager {
 	o, err := vault.NewManagerOptionsWithPath(root)
 	if err != nil {
@@ -23,6 +25,7 @@ func NewClusterManager(managedClient *redis.ManagedClusterClient) vault.Manager 
 	return NewClusterManagerWithOptions(managedClient, o)
 }
 
+// NewManagerWithConfigPath returns a new vault manager with options from config path.
 func NewClusterManagerWithConfigPath(managedClient *redis.ManagedClusterClient, path string) (vault.Manager, error) {
 	o, err := vault.NewManagerOptionsWithPath(path)
 	if err != nil {
@@ -31,18 +34,22 @@ func NewClusterManagerWithConfigPath(managedClient *redis.ManagedClusterClient, 
 	return NewClusterManagerWithOptions(managedClient, o), nil
 }
 
+// NewManagerWithOptions returns a new vault manager with options.
 func NewClusterManagerWithOptions(managedClient *redis.ManagedClusterClient, options *vault.ManagerOptions) vault.Manager {
 	return &ClusterManager{options: options, managedClusterClient: managedClient}
 }
 
+// Options returns vault manager options.
 func (m *ClusterManager) Options() *vault.ManagerOptions {
 	return m.options
 }
 
+// Close closes redis cluster client.
 func (m *ClusterManager) Close(ctx context.Context) error {
 	return m.managedClusterClient.Client.Close()
 }
 
+// Configure configures redis cluster client.
 func (m *ClusterManager) Configure(ctx context.Context, data map[string]interface{}) error {
 	var password string
 	var ok bool

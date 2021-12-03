@@ -70,10 +70,12 @@ func init() {
 		"newrelic serverless mode apdex threshold")
 }
 
+// IsEnabled returns enabled config value.
 func IsEnabled() bool {
 	return config.Bool(enabled)
 }
 
+// Debug returns debug config value.
 func Debug() bool {
 	return config.Bool(debug)
 }

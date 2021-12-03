@@ -4,6 +4,7 @@ import (
 	"github.com/americanas-go/config"
 )
 
+// Options kafka connection options.
 type Options struct {
 	Address   string
 	Topic     string

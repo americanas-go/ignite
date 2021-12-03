@@ -8,6 +8,7 @@ import (
 	apmecho "github.com/opentracing-contrib/echo"
 )
 
+// Register registers a new opentracing plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// OpenTracing represents opentracing plugin for echo server.
 type OpenTracing struct {
 	options *Options
 }
 
+// NewOpenTracingWithOptions returns a new opentracing plugin with options.
 func NewOpenTracingWithOptions(options *Options) *OpenTracing {
 	return &OpenTracing{options: options}
 }
 
+// NewOpenTracingWithConfigPath returns a new opentracing plugin with options from config path.
 func NewOpenTracingWithConfigPath(path string) (*OpenTracing, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewOpenTracingWithConfigPath(path string) (*OpenTracing, error) {
 	return NewOpenTracingWithOptions(o), nil
 }
 
+// NewOpenTracing returns a new opentracing plugin with default options.
 func NewOpenTracing() *OpenTracing {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewOpenTracing() *OpenTracing {
 	return NewOpenTracingWithOptions(o)
 }
 
+// Register registers this opentracing plugin for echo server.
 func (i *OpenTracing) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

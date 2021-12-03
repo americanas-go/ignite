@@ -9,6 +9,7 @@ import (
 	"golang.org/x/sync/semaphore"
 )
 
+// Register registers a new semaphore plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,15 +19,18 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Semaphore represents semaphore plugin for echo server.
 type Semaphore struct {
 	options *Options
 	sem     *semaphore.Weighted
 }
 
+// NewSemaphoreWithOptions returns a new semaphore plugin with options.
 func NewSemaphoreWithOptions(options *Options) *Semaphore {
 	return &Semaphore{options: options}
 }
 
+// NewSemaphoreWithConfigPath returns a new semaphore plugin with options from config path.
 func NewSemaphoreWithConfigPath(path string) (*Semaphore, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewSemaphoreWithConfigPath(path string) (*Semaphore, error) {
 	return NewSemaphoreWithOptions(o), nil
 }
 
+// NewSemaphore returns a new semaphore plugin with default options.
 func NewSemaphore() *Semaphore {
 	o, err := NewOptions()
 	if err != nil {
@@ -44,6 +49,7 @@ func NewSemaphore() *Semaphore {
 	return NewSemaphoreWithOptions(o)
 }
 
+// Register registers this semaphore plugin for echo server.
 func (i *Semaphore) Register(ctx context.Context, server *echo.Server) error {
 
 	if !i.options.Enabled {

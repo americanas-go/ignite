@@ -8,6 +8,7 @@ import (
 
 const NewRelicTransaction = "__newrelic_transaction__"
 
+// FromContext returns the newrelic transaction from context.
 func FromContext(ctx context.Context) *newrelic.Transaction {
 	txn := newrelic.FromContext(ctx)
 	if txn == nil {

@@ -8,6 +8,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
+// Register registers a new CORS plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Cors represents CORS plugin for echo server.
 type Cors struct {
 	options *Options
 }
 
+// NewCorsWithOptions returns a new CORS plugin with options.
 func NewCorsWithOptions(options *Options) *Cors {
 	return &Cors{options: options}
 }
 
+// NewCorsWithConfigPath returns a new CORS plugin with options from config path.
 func NewCorsWithConfigPath(path string) (*Cors, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewCorsWithConfigPath(path string) (*Cors, error) {
 	return NewCorsWithOptions(o), nil
 }
 
+// NewCors returns a new CORS plugin with default options.
 func NewCors() *Cors {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewCors() *Cors {
 	return NewCorsWithOptions(o)
 }
 
+// Register registers this CORS plugin for echo server.
 func (i *Cors) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

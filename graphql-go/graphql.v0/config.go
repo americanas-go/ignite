@@ -19,6 +19,7 @@ func init() {
 	config.Add(enablePlayground, true, "enable/disable Playground")
 }
 
+// DefaultHandlerConfig unmarshals the default graphql handler config.
 func DefaultHandlerConfig() (*handler.Config, error) {
 
 	o := &handler.Config{}

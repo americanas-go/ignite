@@ -14,8 +14,10 @@ import (
 	"google.golang.org/grpc/keepalive"
 )
 
+// Plugin defines a function to process plugin.
 type Plugin func(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption)
 
+// NewClientConn returns a new grpc client connection.
 func NewClientConn(ctx context.Context, plugins ...Plugin) *grpc.ClientConn {
 	opt, err := NewOptions()
 	if err != nil {
@@ -24,6 +26,7 @@ func NewClientConn(ctx context.Context, plugins ...Plugin) *grpc.ClientConn {
 	return NewClientConnWithOptions(ctx, opt, plugins...)
 }
 
+// NewClientConnWithConfigPath returns a new grpc client connection with options from config path.
 func NewClientConnWithConfigPath(ctx context.Context, path string) (*grpc.ClientConn, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -32,6 +35,7 @@ func NewClientConnWithConfigPath(ctx context.Context, path string) (*grpc.Client
 	return NewClientConnWithOptions(ctx, options), nil
 }
 
+// NewClientConnWithOptions returns a new grpc client connection with options.
 func NewClientConnWithOptions(ctx context.Context, options *Options, plugins ...Plugin) *grpc.ClientConn {
 
 	var err error

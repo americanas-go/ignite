@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// NewServerWithOptions returns a pointer with new Server
+// NewServerWithOptions returns a pointer with new http Server
 func NewServer(handler http.Handler) *http.Server {
 	opt, err := NewOptions()
 	if err != nil {
@@ -13,6 +13,7 @@ func NewServer(handler http.Handler) *http.Server {
 	return NewServerWithOptions(handler, opt)
 }
 
+// NewServerWithConfigPath returns a pointer with new http Server
 func NewServerWithConfigPath(handler http.Handler, path string) (*http.Server, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -21,7 +22,7 @@ func NewServerWithConfigPath(handler http.Handler, path string) (*http.Server, e
 	return NewServerWithOptions(handler, options), nil
 }
 
-// NewServerWithOptions returns a pointer with new Server
+// NewServerWithOptions returns a pointer with new http Server
 func NewServerWithOptions(handler http.Handler, options *Options) *http.Server {
 	return &http.Server{
 		Addr:              options.Addr,

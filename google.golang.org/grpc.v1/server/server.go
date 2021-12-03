@@ -21,14 +21,17 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
+// Plugin defines a grpc server Plugin function to execute.
 type Plugin func(ctx context.Context) []grpc.ServerOption
 
+// Server represents a grpc server.
 type Server struct {
 	server           *grpc.Server
 	serviceRegistrar grpc.ServiceRegistrar
 	options          *Options
 }
 
+// NewServer returns a new grpc server with default options.
 func NewServer(ctx context.Context, plugins ...Plugin) *Server {
 	opt, err := NewOptions()
 	if err != nil {
@@ -37,6 +40,7 @@ func NewServer(ctx context.Context, plugins ...Plugin) *Server {
 	return NewServerWithOptions(ctx, opt, plugins...)
 }
 
+// NewServerWithConfigPath returns a new grpc server with options from config path.
 func NewServerWithConfigPath(ctx context.Context, path string) (*Server, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -45,6 +49,7 @@ func NewServerWithConfigPath(ctx context.Context, path string) (*Server, error) 
 	return NewServerWithOptions(ctx, options), nil
 }
 
+// NewServerWithOptions returns a new grpc server with options.
 func NewServerWithOptions(ctx context.Context, opt *Options, plugins ...Plugin) *Server {
 
 	logger := log.FromContext(ctx)
@@ -100,14 +105,17 @@ func NewServerWithOptions(ctx context.Context, opt *Options, plugins ...Plugin) 
 	}
 }
 
+// Server returns the wrapped grpc server instance.
 func (s *Server) Server() *grpc.Server {
 	return s.server
 }
 
+// ServiceRegistrar returns grpc service register.
 func (s *Server) ServiceRegistrar() grpc.ServiceRegistrar {
 	return s.server
 }
 
+// Serve starts grpc server.
 func (s *Server) Serve(ctx context.Context) {
 
 	logger := log.FromContext(ctx)
@@ -127,6 +135,7 @@ func (s *Server) Serve(ctx context.Context) {
 	logger.Error(s.server.Serve(lis))
 }
 
+// Shutdown stops grpc server gracefully.
 func (s *Server) Shutdown(ctx context.Context) {
 	s.server.GracefulStop()
 }

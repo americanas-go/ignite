@@ -11,6 +11,7 @@ import (
 	nr "github.com/newrelic/go-agent/v3/newrelic"
 )
 
+// NewPublisherRegister returns a new newrelic plugin with default options.
 func NewPublisherRegister() ginats.PublisherMiddleware {
 	o, err := NewOptions()
 	if err != nil {
@@ -20,6 +21,7 @@ func NewPublisherRegister() ginats.PublisherMiddleware {
 	return NewPublisherRegisterWithOptions(o)
 }
 
+// NewPublisherRegisterWithConfigPath returns a new newrelic plugin with options from config path.
 func NewPublisherRegisterWithConfigPath(path string) (ginats.PublisherMiddleware, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -28,14 +30,19 @@ func NewPublisherRegisterWithConfigPath(path string) (ginats.PublisherMiddleware
 	return NewPublisherRegisterWithOptions(o), nil
 }
 
+// NewPublisherRegisterWithOptions returns a new newrelic plugin with options.
 func NewPublisherRegisterWithOptions(options *Options) ginats.PublisherMiddleware {
 	return &Publisher{options: options}
 }
 
+// Publisher represents newrelic plugin for nats publisher.
 type Publisher struct {
 	options *Options
 }
 
+// Before creates and starts a newrelic.MessageProducerSegment
+// (https://godoc.org/github.com/newrelic/go-agent#MessageProducerSegment)
+// for NATS publishers.
 func (p *Publisher) Before(ctx context.Context, conn *nats.Conn, msg *nats.Msg) (context.Context, error) {
 	if !p.options.Enabled || !newrelic.IsEnabled() {
 		return ctx, nil
@@ -47,6 +54,9 @@ func (p *Publisher) Before(ctx context.Context, conn *nats.Conn, msg *nats.Msg) 
 	return context.WithValue(ctx, "seg", seg), nil
 }
 
+// After finishes the newrelic.MessageProducerSegment
+// (https://godoc.org/github.com/newrelic/go-agent#MessageProducerSegment)
+// on context.
 func (p *Publisher) After(ctx context.Context) error {
 	seg := ctx.Value("seg").(*nr.MessageProducerSegment)
 	seg.End()

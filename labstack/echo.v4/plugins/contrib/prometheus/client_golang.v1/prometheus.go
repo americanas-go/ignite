@@ -10,6 +10,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
+// Register registers a new prometheus plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -19,14 +20,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Prometheus represents prometheus plugin for echo server.
 type Prometheus struct {
 	options *Options
 }
 
+// NewPrometheusWithOptions returns a new prometheus plugin with options.
 func NewPrometheusWithOptions(options *Options) *Prometheus {
 	return &Prometheus{options: options}
 }
 
+// NewPrometheusWithConfigPath returns a new prometheus plugin with options from config path.
 func NewPrometheusWithConfigPath(path string) (*Prometheus, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewPrometheusWithConfigPath(path string) (*Prometheus, error) {
 	return NewPrometheusWithOptions(o), nil
 }
 
+// NewPrometheus returns a new prometheus plugin with default options.
 func NewPrometheus() *Prometheus {
 	o, err := NewOptions()
 	if err != nil {
@@ -44,6 +49,7 @@ func NewPrometheus() *Prometheus {
 	return NewPrometheusWithOptions(o)
 }
 
+// Register registers this prometheus plugin for echo server.
 func (i *Prometheus) Register(ctx context.Context, server *echo.Server) error {
 
 	if !i.options.Enabled {

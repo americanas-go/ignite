@@ -9,15 +9,18 @@ import (
 	vault "github.com/mittwald/vaultgo"
 )
 
+// ManagerPool represents a manager pool for vault.
 type ManagerPool struct {
 	managers []Manager
 	client   *vault.Client
 }
 
+// NewManagerPool returns a new manager pool.
 func NewManagerPool(client *vault.Client, managers ...Manager) *ManagerPool {
 	return &ManagerPool{managers: managers, client: client}
 }
 
+// ManageAll configures all managers to a new manager pool.
 func ManageAll(ctx context.Context, managers ...Manager) {
 	client, err := NewClient(ctx)
 	if err != nil {
@@ -28,6 +31,7 @@ func ManageAll(ctx context.Context, managers ...Manager) {
 	mp.ManageAll(ctx)
 }
 
+// ManageAll configures all managers from this manager pool.
 func (m *ManagerPool) ManageAll(ctx context.Context) {
 
 	for _, manager := range m.managers {
@@ -40,6 +44,7 @@ func (m *ManagerPool) ManageAll(ctx context.Context) {
 
 }
 
+// Configure configures manager with options from this manager pool.
 func (m *ManagerPool) Configure(ctx context.Context, manager Manager) error {
 
 	var response api.Secret

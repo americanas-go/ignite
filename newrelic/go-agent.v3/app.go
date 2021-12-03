@@ -11,6 +11,7 @@ import (
 
 var app *newrelic.Application
 
+// Application initialize the new newrelic application singleton, if required, and/or return it.
 func Application() *newrelic.Application {
 	if app == nil {
 		var err error
@@ -21,6 +22,7 @@ func Application() *newrelic.Application {
 	return app
 }
 
+// NewApplication always initialize the new newrelic application singleton if enabled.
 func NewApplication(ctx context.Context) (*newrelic.Application, error) {
 
 	if !IsEnabled() {

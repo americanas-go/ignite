@@ -10,6 +10,7 @@ import (
 	"github.com/newrelic/go-agent/v3/integrations/nrecho-v4"
 )
 
+// Register registers a new newrelic plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -19,14 +20,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Newrelic represents newrelic plugin for echo server.
 type Newrelic struct {
 	options *Options
 }
 
+// NewNewrelicWithOptions returns a new newrelic plugin with options.
 func NewNewrelicWithOptions(options *Options) *Newrelic {
 	return &Newrelic{options: options}
 }
 
+// NewNewrelicWithConfigPath returns a new newrelic plugin with options from config path.
 func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	return NewNewrelicWithOptions(o), nil
 }
 
+// NewNewrelic returns a new newrelic plugin with default options.
 func NewNewrelic() *Newrelic {
 	o, err := NewOptions()
 	if err != nil {
@@ -44,6 +49,7 @@ func NewNewrelic() *Newrelic {
 	return NewNewrelicWithOptions(o)
 }
 
+// Register registers this newrelic plugin for echo server.
 func (i *Newrelic) Register(ctx context.Context, server *echo.Server) error {
 
 	if !i.options.Enabled || !newrelic.IsEnabled() {

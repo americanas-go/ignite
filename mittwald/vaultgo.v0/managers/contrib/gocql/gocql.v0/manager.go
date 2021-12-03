@@ -9,11 +9,13 @@ import (
 	"github.com/americanas-go/log"
 )
 
+// Manager represents a vault manager for cassandra client.
 type Manager struct {
 	managedSession *gocql.ManagedSession
 	options        *vault.ManagerOptions
 }
 
+// NewManager returns a new vault manager with default options.
 func NewManager(managedSession *gocql.ManagedSession) vault.Manager {
 	o, err := vault.NewManagerOptionsWithPath(root)
 	if err != nil {
@@ -23,6 +25,7 @@ func NewManager(managedSession *gocql.ManagedSession) vault.Manager {
 	return NewManagerWithOptions(managedSession, o)
 }
 
+// NewManagerWithConfigPath returns a new vault manager with options from config path.
 func NewManagerWithConfigPath(managedSession *gocql.ManagedSession, path string) (vault.Manager, error) {
 	o, err := vault.NewManagerOptionsWithPath(path)
 	if err != nil {
@@ -31,19 +34,23 @@ func NewManagerWithConfigPath(managedSession *gocql.ManagedSession, path string)
 	return NewManagerWithOptions(managedSession, o), nil
 }
 
+// NewManagerWithOptions returns a new vault manager with options.
 func NewManagerWithOptions(managedSession *gocql.ManagedSession, options *vault.ManagerOptions) vault.Manager {
 	return &Manager{options: options, managedSession: managedSession}
 }
 
+// Options returns vault manager options.
 func (m *Manager) Options() *vault.ManagerOptions {
 	return m.options
 }
 
+// Close closes cassandra client.
 func (m *Manager) Close(ctx context.Context) error {
 	m.managedSession.Session.Close()
 	return nil
 }
 
+// Configure configures cassandra client.
 func (m *Manager) Configure(ctx context.Context, data map[string]interface{}) error {
 	var username, password string
 	var ok bool
