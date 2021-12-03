@@ -8,6 +8,7 @@ import (
 	"google.golang.org/grpc"
 )
 
+// Register registers a new logger plugin for grpc client.
 func Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 	return h.Register(ctx)
 }
 
+// Log represents logger plugin for grpc client.
 type Log struct {
 	options *Options
 }
 
+// NewLogWithOptions returns a new logger plugin with options.
 func NewLogWithOptions(options *Options) *Log {
 	return &Log{options: options}
 }
 
+// NewLogWithConfigPath returns a new logger plugin with options from config path.
 func NewLogWithConfigPath(path string) (*Log, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewLogWithConfigPath(path string) (*Log, error) {
 	return NewLogWithOptions(o), nil
 }
 
+// NewLog returns a new logger plugin with default options.
 func NewLog() *Log {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewLog() *Log {
 	return NewLogWithOptions(o)
 }
 
+// Register registers this logger plugin for grpc client.
 func (i *Log) Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 
 	if !i.options.Enabled {

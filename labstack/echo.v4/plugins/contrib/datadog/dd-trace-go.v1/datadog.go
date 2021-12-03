@@ -9,6 +9,7 @@ import (
 	echotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4"
 )
 
+// Register registers a new datadog plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,14 +19,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Datadog represents datadog plugin for echo server.
 type Datadog struct {
 	options *Options
 }
 
+// NewDatadogWithOptions returns a new datadog plugin with options.
 func NewDatadogWithOptions(options *Options) *Datadog {
 	return &Datadog{options: options}
 }
 
+// NewDatadogWithConfigPath returns a new datadog plugin with options from config path.
 func NewDatadogWithConfigPath(path string, traceOptions ...echotrace.Option) (*Datadog, error) {
 	o, err := NewOptionsWithPath(path, traceOptions...)
 	if err != nil {
@@ -34,6 +38,7 @@ func NewDatadogWithConfigPath(path string, traceOptions ...echotrace.Option) (*D
 	return NewDatadogWithOptions(o), nil
 }
 
+// NewDatadog returns a new datadog plugin with default options.
 func NewDatadog(traceOptions ...echotrace.Option) *Datadog {
 	o, err := NewOptions(traceOptions...)
 	if err != nil {
@@ -42,6 +47,7 @@ func NewDatadog(traceOptions ...echotrace.Option) *Datadog {
 	return NewDatadogWithOptions(o)
 }
 
+// Register registers this datadog plugin for echo server.
 func (i *Datadog) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil

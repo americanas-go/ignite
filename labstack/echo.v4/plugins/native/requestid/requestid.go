@@ -8,6 +8,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
+// Register registers a new requestID plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// RequestID represents requestID plugin for echo server.
 type RequestID struct {
 	options *Options
 }
 
+// NewRequestIDWithOptions returns a new requestID plugin with options.
 func NewRequestIDWithOptions(options *Options) *RequestID {
 	return &RequestID{options: options}
 }
 
+// NewRequestIDWithConfigPath returns a new requestID plugin with options from config path.
 func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewRequestIDWithConfigPath(path string) (*RequestID, error) {
 	return NewRequestIDWithOptions(o), nil
 }
 
+// NewRequestID returns a new requestID plugin with default options.
 func NewRequestID() *RequestID {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewRequestID() *RequestID {
 	return NewRequestIDWithOptions(o)
 }
 
+// Register registers this requestID plugin for echo server.
 func (i *RequestID) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

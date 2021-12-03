@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
+// Register registers a new newrelic plugin for grpc client.
 func Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,14 +19,17 @@ func Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 	return h.Register(ctx)
 }
 
+// Newrelic represents newrelic plugin for grpc client.
 type Newrelic struct {
 	options *Options
 }
 
+// NewNewrelicWithOptions returns a new newrelic plugin with options.
 func NewNewrelicWithOptions(options *Options) *Newrelic {
 	return &Newrelic{options: options}
 }
 
+// NewNewrelicWithConfigPath returns a new newrelic plugin with options from config path.
 func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -34,6 +38,7 @@ func NewNewrelicWithConfigPath(path string) (*Newrelic, error) {
 	return NewNewrelicWithOptions(o), nil
 }
 
+// NewNewrelic returns a new newrelic plugin with default options.
 func NewNewrelic() *Newrelic {
 	o, err := NewOptions()
 	if err != nil {
@@ -43,6 +48,7 @@ func NewNewrelic() *Newrelic {
 	return NewNewrelicWithOptions(o)
 }
 
+// Register registers this newrelic plugin for grpc client.
 func (i *Newrelic) Register(ctx context.Context) ([]grpc.DialOption, []grpc.CallOption) {
 
 	if !i.options.Enabled || !newrelic.IsEnabled() {

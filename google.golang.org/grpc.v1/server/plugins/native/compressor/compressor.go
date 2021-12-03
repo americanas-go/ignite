@@ -8,6 +8,7 @@ import (
 	"google.golang.org/grpc/encoding/gzip"
 )
 
+// Register registers a new compressor plugin for grpc server.
 func Register(ctx context.Context) []grpc.ServerOption {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context) []grpc.ServerOption {
 	return h.Register(ctx)
 }
 
+// Compressor represents compressor plugin for grpc server.
 type Compressor struct {
 	options *Options
 }
 
+// NewCompressorWithOptions returns a new compressor plugin with options.
 func NewCompressorWithOptions(options *Options) *Compressor {
 	return &Compressor{options: options}
 }
 
+// NewCompressorWithConfigPath returns a new compressor plugin with options from config path.
 func NewCompressorWithConfigPath(path string) (*Compressor, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewCompressorWithConfigPath(path string) (*Compressor, error) {
 	return NewCompressorWithOptions(o), nil
 }
 
+// NewCompressor returns a new compressor plugin with default options.
 func NewCompressor() *Compressor {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewCompressor() *Compressor {
 	return NewCompressorWithOptions(o)
 }
 
+// Register registers this compressor plugin for grpc server.
 func (i *Compressor) Register(ctx context.Context) []grpc.ServerOption {
 
 	logger := log.FromContext(ctx)

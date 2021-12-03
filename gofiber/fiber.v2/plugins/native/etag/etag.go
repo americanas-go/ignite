@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/etag"
 )
 
+// Register registers a new etag plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -18,10 +19,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// ETag represents a new etag plugin for fiber.
 type ETag struct {
 	options *Options
 }
 
+// NewETagWithConfigPath returns a new etag plugin with options from config path.
 func NewETagWithConfigPath(path string) (*ETag, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -30,10 +33,12 @@ func NewETagWithConfigPath(path string) (*ETag, error) {
 	return NewETagWithOptions(o), nil
 }
 
+// NewETagWithOptions returns a new etag plugin with options.
 func NewETagWithOptions(options *Options) *ETag {
 	return &ETag{options: options}
 }
 
+// Register registers this etag plugin for fiber.
 func (d *ETag) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	if !d.options.Enabled {
 		return nil, nil

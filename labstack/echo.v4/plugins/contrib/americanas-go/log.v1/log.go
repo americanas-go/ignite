@@ -10,6 +10,7 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
+// Register registers a new logger plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -19,14 +20,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// Log represents logger plugin for echo server.
 type Log struct {
 	options *Options
 }
 
+// NewLogWithOptions returns a new logger plugin with options.
 func NewLogWithOptions(options *Options) *Log {
 	return &Log{options: options}
 }
 
+// NewLogWithConfigPath returns a new logger plugin with options from config path.
 func NewLogWithConfigPath(path string) (*Log, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewLogWithConfigPath(path string) (*Log, error) {
 	return NewLogWithOptions(o), nil
 }
 
+// NewLog returns a new logger plugin with default options.
 func NewLog() *Log {
 	o, err := NewOptions()
 	if err != nil {
@@ -44,6 +49,7 @@ func NewLog() *Log {
 	return NewLogWithOptions(o)
 }
 
+// Register registers this logger plugin for echo server.
 func (i *Log) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

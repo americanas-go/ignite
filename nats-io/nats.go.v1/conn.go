@@ -7,8 +7,10 @@ import (
 	"github.com/nats-io/nats.go"
 )
 
+// Plugin defines a function to process plugin.
 type Plugin func(context.Context, *nats.Conn) error
 
+// Register registers a nats connection.
 func NewConnWithOptions(ctx context.Context, options *Options, plugins ...Plugin) (*nats.Conn, error) {
 
 	logger := log.FromContext(ctx)
@@ -37,6 +39,7 @@ func NewConnWithOptions(ctx context.Context, options *Options, plugins ...Plugin
 	return conn, nil
 }
 
+// NewConnWithConfigPath returns a new nats connection with options from config path.
 func NewConnWithConfigPath(ctx context.Context, path string) (*nats.Conn, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -45,6 +48,7 @@ func NewConnWithConfigPath(ctx context.Context, path string) (*nats.Conn, error)
 	return NewConnWithOptions(ctx, options)
 }
 
+// NewConn returns a new connection with default options.
 func NewConn(ctx context.Context, plugins ...Plugin) (*nats.Conn, error) {
 
 	logger := log.FromContext(ctx)

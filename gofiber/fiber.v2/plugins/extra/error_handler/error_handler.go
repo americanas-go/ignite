@@ -12,6 +12,7 @@ import (
 	f "github.com/gofiber/fiber/v2"
 )
 
+// Register registers a new error handler plugin for fiber.
 func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 	o, err := NewOptions()
 	if err != nil {
@@ -21,10 +22,12 @@ func Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, 
 	return n.Register(ctx, options)
 }
 
+// ErrorHandler represents a new error handler plugin for fiber.
 type ErrorHandler struct {
 	options *Options
 }
 
+// NewErrorHandlerWithConfigPath returns a new error handler plugin with options from config path.
 func NewErrorHandlerWithConfigPath(path string) (*ErrorHandler, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,10 +36,12 @@ func NewErrorHandlerWithConfigPath(path string) (*ErrorHandler, error) {
 	return NewErrorHandlerWithOptions(o), nil
 }
 
+// NewErrorHandlerWithOptions returns a new error handler plugin with options.
 func NewErrorHandlerWithOptions(options *Options) *ErrorHandler {
 	return &ErrorHandler{options: options}
 }
 
+// Register registers this error handler plugin for fiber.
 func (d *ErrorHandler) Register(ctx context.Context, options *fiber.Options) (fiber.ConfigPlugin, fiber.AppPlugin) {
 
 	if !d.options.Enabled {

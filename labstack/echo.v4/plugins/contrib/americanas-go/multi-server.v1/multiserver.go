@@ -10,6 +10,7 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
+// Register registers a new multiserver plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -19,14 +20,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// MultiServer represents multiserver plugin for echo server.
 type MultiServer struct {
 	options *Options
 }
 
+// NewMultiServerWithOptions returns a new multiserver plugin with options.
 func NewMultiServerWithOptions(options *Options) *MultiServer {
 	return &MultiServer{options: options}
 }
 
+// NewMultiServerWithConfigPath returns a new multiserver plugin with options from config path.
 func NewMultiServerWithConfigPath(path string) (*MultiServer, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -35,6 +39,7 @@ func NewMultiServerWithConfigPath(path string) (*MultiServer, error) {
 	return NewMultiServerWithOptions(o), nil
 }
 
+// NewMultiServer returns a new multiserver plugin with default options.
 func NewMultiServer() *MultiServer {
 	o, err := NewOptions()
 	if err != nil {
@@ -44,6 +49,7 @@ func NewMultiServer() *MultiServer {
 	return NewMultiServerWithOptions(o)
 }
 
+// Register registers this multiserver plugin for echo server.
 func (i *MultiServer) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

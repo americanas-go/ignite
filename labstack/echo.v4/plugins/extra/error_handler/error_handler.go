@@ -8,6 +8,7 @@ import (
 	e "github.com/labstack/echo/v4"
 )
 
+// Register registers a new error handler plugin for echo server.
 func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, server *echo.Server) error {
 	return h.Register(ctx, server)
 }
 
+// ErrorHandler represents error handler plugin for echo server.
 type ErrorHandler struct {
 	options *Options
 }
 
+// NewErrorHandlerWithOptions returns a new error handler plugin with options.
 func NewErrorHandlerWithOptions(options *Options) *ErrorHandler {
 	return &ErrorHandler{options: options}
 }
 
+// NewErrorHandlerWithConfigPath returns a new error handler plugin with options from config path.
 func NewErrorHandlerWithConfigPath(path string) (*ErrorHandler, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewErrorHandlerWithConfigPath(path string) (*ErrorHandler, error) {
 	return NewErrorHandlerWithOptions(o), nil
 }
 
+// NewErrorHandler returns a new error handler plugin with default options.
 func NewErrorHandler() *ErrorHandler {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewErrorHandler() *ErrorHandler {
 	return NewErrorHandlerWithOptions(o)
 }
 
+// Register registers this error handler plugin for echo server.
 func (i *ErrorHandler) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
 		return nil

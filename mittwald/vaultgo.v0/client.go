@@ -7,6 +7,7 @@ import (
 	vault "github.com/mittwald/vaultgo"
 )
 
+// NewClientWithOptions returns a new vault client with options.
 func NewClientWithOptions(ctx context.Context, options *Options) (*vault.Client, error) {
 
 	var clientOpts vault.ClientOpts
@@ -46,6 +47,7 @@ func NewClientWithOptions(ctx context.Context, options *Options) (*vault.Client,
 	return client, err
 }
 
+// NewClientWithConfigPath returns a new vault client with options from config path.
 func NewClientWithConfigPath(ctx context.Context, path string) (*vault.Client, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -54,6 +56,7 @@ func NewClientWithConfigPath(ctx context.Context, path string) (*vault.Client, e
 	return NewClientWithOptions(ctx, options)
 }
 
+// NewClient returns a new vault client with default options.
 func NewClient(ctx context.Context) (*vault.Client, error) {
 
 	logger := log.FromContext(ctx)

@@ -9,6 +9,12 @@ import (
 	"google.golang.org/grpc"
 )
 
+// Register registers a new compressor plugin for grpc server.
+// Compressor represents compressor plugin for grpc server.
+// NewCompressorWithOptions returns a new compressor plugin with options.
+// NewCompressorWithConfigPath returns a new compressor plugin with options from config path.
+// NewCompressor returns a new compressor plugin with default options.
+// Register registers this compressor plugin for grpc server.
 func Register(ctx context.Context) []grpc.ServerOption {
 	o, err := NewOptions()
 	if err != nil {
