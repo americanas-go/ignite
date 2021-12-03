@@ -8,6 +8,7 @@ import (
 	"github.com/nats-io/nats.go"
 )
 
+// Register registers a new health checker plugin for nats connection.
 func Register(ctx context.Context, conn *nats.Conn) error {
 	o, err := NewOptions()
 	if err != nil {
@@ -17,14 +18,17 @@ func Register(ctx context.Context, conn *nats.Conn) error {
 	return h.Register(ctx, conn)
 }
 
+// Health represents health checker plugin for nats connection.
 type Health struct {
 	options *Options
 }
 
+// NewHealthWithOptions returns a new health checker plugin with options.
 func NewHealthWithOptions(options *Options) *Health {
 	return &Health{options: options}
 }
 
+// NewHealthWithConfigPath returns a new health checker plugin with options from config path.
 func NewHealthWithConfigPath(path string) (*Health, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,6 +37,7 @@ func NewHealthWithConfigPath(path string) (*Health, error) {
 	return NewHealthWithOptions(o), nil
 }
 
+// NewHealth returns a new health checker plugin with default options.
 func NewHealth() *Health {
 	o, err := NewOptions()
 	if err != nil {
@@ -42,6 +47,7 @@ func NewHealth() *Health {
 	return NewHealthWithOptions(o)
 }
 
+// Register registers this health checker plugin for nats connection.
 func (i *Health) Register(ctx context.Context, conn *nats.Conn) error {
 
 	logger := log.FromContext(ctx).WithTypeOf(*i)

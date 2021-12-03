@@ -2,6 +2,7 @@ package vault
 
 import "context"
 
+// Manager vault manager interface.
 type Manager interface {
 	Options() *ManagerOptions
 	Close(context.Context) error

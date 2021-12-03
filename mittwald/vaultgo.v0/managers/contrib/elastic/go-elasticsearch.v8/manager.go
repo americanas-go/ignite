@@ -9,11 +9,13 @@ import (
 	"github.com/americanas-go/log"
 )
 
+// Manager represents a vault manager for elasticsearch client.
 type Manager struct {
 	managedClient *elasticsearch.ManagedClient
 	options       *vault.ManagerOptions
 }
 
+// NewManager returns a new vault manager with default options.
 func NewManager(managedClient *elasticsearch.ManagedClient) vault.Manager {
 	o, err := vault.NewManagerOptionsWithPath(root)
 	if err != nil {
@@ -23,6 +25,7 @@ func NewManager(managedClient *elasticsearch.ManagedClient) vault.Manager {
 	return NewManagerWithOptions(managedClient, o)
 }
 
+// NewManagerWithConfigPath returns a new vault manager with options from config path.
 func NewManagerWithConfigPath(managedClient *elasticsearch.ManagedClient, path string) (vault.Manager, error) {
 	o, err := vault.NewManagerOptionsWithPath(path)
 	if err != nil {
@@ -31,18 +34,22 @@ func NewManagerWithConfigPath(managedClient *elasticsearch.ManagedClient, path s
 	return NewManagerWithOptions(managedClient, o), nil
 }
 
+// NewManagerWithOptions returns a new vault manager with options.
 func NewManagerWithOptions(managedClient *elasticsearch.ManagedClient, options *vault.ManagerOptions) vault.Manager {
 	return &Manager{options: options, managedClient: managedClient}
 }
 
+// Options returns vault manager options.
 func (m *Manager) Options() *vault.ManagerOptions {
 	return m.options
 }
 
+// Close closes elasticsearch client.
 func (m *Manager) Close(ctx context.Context) error {
 	return nil
 }
 
+// Configure configures elasticsearch client.
 func (m *Manager) Configure(ctx context.Context, data map[string]interface{}) error {
 	var username, password string
 	var ok bool

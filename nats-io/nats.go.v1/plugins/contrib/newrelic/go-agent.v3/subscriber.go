@@ -7,6 +7,7 @@ import (
 	"github.com/newrelic/go-agent/v3/integrations/nrnats"
 )
 
+// Register registers a new newrelic plugin for nats subscriber.
 func Register(msgHandler nats.MsgHandler) nats.MsgHandler {
 	o, err := NewOptions()
 	if err != nil {
@@ -16,6 +17,7 @@ func Register(msgHandler nats.MsgHandler) nats.MsgHandler {
 	return h.Register(msgHandler)
 }
 
+// NewSubscriber returns a new newrelic plugin with default options.
 func NewSubscriber() *Subscriber {
 	o, err := NewOptions()
 	if err != nil {
@@ -25,6 +27,7 @@ func NewSubscriber() *Subscriber {
 	return NewSubscriberWithOptions(o)
 }
 
+// NewSubscriberWithConfigPath returns a new newrelic plugin with options from config path.
 func NewSubscriberWithConfigPath(path string) (*Subscriber, error) {
 	o, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -33,14 +36,17 @@ func NewSubscriberWithConfigPath(path string) (*Subscriber, error) {
 	return NewSubscriberWithOptions(o), nil
 }
 
+// NewSubscriberWithOptions returns a new newrelic plugin with options.
 func NewSubscriberWithOptions(options *Options) *Subscriber {
 	return &Subscriber{options: options}
 }
 
+// Subscriber represents newrelic plugin for nats subscriber.
 type Subscriber struct {
 	options *Options
 }
 
+// Register registers this newrelic plugin for nats subscriber.
 func (p *Subscriber) Register(msgHandler nats.MsgHandler) nats.MsgHandler {
 	if !p.options.Enabled || !newrelic.IsEnabled() {
 		return msgHandler

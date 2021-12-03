@@ -10,6 +10,7 @@ import (
 	"github.com/americanas-go/log"
 )
 
+// Manager represents a vault manager for mongodb client.
 type Manager struct {
 	conn    *mongo.Conn
 	options *vault.ManagerOptions
@@ -18,6 +19,7 @@ type Manager struct {
 	observers map[Observer]struct{}
 }
 
+// NewManager returns a new vault manager with default options.
 func NewManager(conn *mongo.Conn) *Manager {
 	o, err := vault.NewManagerOptionsWithPath(root)
 	if err != nil {
@@ -27,6 +29,7 @@ func NewManager(conn *mongo.Conn) *Manager {
 	return NewManagerWithOptions(conn, o)
 }
 
+// NewManagerWithConfigPath returns a new vault manager with options from config path.
 func NewManagerWithConfigPath(conn *mongo.Conn, path string) (*Manager, error) {
 	o, err := vault.NewManagerOptionsWithPath(path)
 	if err != nil {
@@ -35,18 +38,22 @@ func NewManagerWithConfigPath(conn *mongo.Conn, path string) (*Manager, error) {
 	return NewManagerWithOptions(conn, o), nil
 }
 
+// NewManagerWithOptions returns a new vault manager with options.
 func NewManagerWithOptions(conn *mongo.Conn, options *vault.ManagerOptions) *Manager {
 	return &Manager{options: options, conn: conn, observers: make(map[Observer]struct{})}
 }
 
+// Options returns vault manager options.
 func (m *Manager) Options() *vault.ManagerOptions {
 	return m.options
 }
 
+// Close closes mongodb client.
 func (m *Manager) Close(ctx context.Context) error {
 	return m.conn.Client.Disconnect(ctx)
 }
 
+// Configure configures mongodb client.
 func (m *Manager) Configure(ctx context.Context, data map[string]interface{}) error {
 	var username, password string
 	var ok bool

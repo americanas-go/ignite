@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/go-memdb"
 )
 
-// returns a new MemDB with the schema.
+// NewMemDB returns a new MemDB with the schema.
 func NewMemDB(ctx context.Context, schema *memdb.DBSchema) (db *memdb.MemDB, err error) {
 
 	logger := log.FromContext(ctx)

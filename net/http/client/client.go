@@ -9,6 +9,7 @@ import (
 	"github.com/americanas-go/log"
 )
 
+// NewClientWithConfigPath returns a http client with options from config path.
 func NewClientWithConfigPath(ctx context.Context, path string) (*http.Client, error) {
 	options, err := NewOptionsWithPath(path)
 	if err != nil {
@@ -17,6 +18,7 @@ func NewClientWithConfigPath(ctx context.Context, path string) (*http.Client, er
 	return NewClientWithOptions(ctx, options), nil
 }
 
+// NewClientWithOptions returns a new http client with options.
 func NewClientWithOptions(ctx context.Context, options *Options) *http.Client {
 
 	tr := &http.Transport{
@@ -92,6 +94,7 @@ func NewClientWithOptions(ctx context.Context, options *Options) *http.Client {
 	}
 }
 
+// NewClient returns a new http client with default options.
 func NewClient(ctx context.Context) *http.Client {
 
 	logger := log.FromContext(ctx)
