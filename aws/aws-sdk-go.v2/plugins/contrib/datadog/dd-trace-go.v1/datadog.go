@@ -3,7 +3,7 @@ package datadog
 import (
 	"context"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
+	datadog "github.com/americanas-go/ignite/apm/datadog/dd-trace-go.v1"
 	"github.com/americanas-go/log"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awstrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws"

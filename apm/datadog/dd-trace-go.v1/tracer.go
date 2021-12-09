@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	"github.com/americanas-go/ignite/net/http/client"
+	"github.com/americanas-go/ignite/http/client/net/client"
 	"github.com/americanas-go/log"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )

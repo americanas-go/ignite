@@ -1,12 +1,12 @@
 package log
 
 import (
-	"github.com/americanas-go/ignite/go.uber.org/zap.v1"
-	"github.com/americanas-go/ignite/rs/zerolog.v1"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1/formatter/cloudwatch"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1/formatter/json"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1/formatter/text"
+	"github.com/americanas-go/ignite/log/go.uber.org/zap.v1"
+	"github.com/americanas-go/ignite/log/rs/zerolog.v1"
+	"github.com/americanas-go/ignite/log/sirupsen/logrus.v1"
+	"github.com/americanas-go/ignite/log/sirupsen/logrus.v1/formatter/cloudwatch"
+	"github.com/americanas-go/ignite/log/sirupsen/logrus.v1/formatter/json"
+	"github.com/americanas-go/ignite/log/sirupsen/logrus.v1/formatter/text"
 	lr "github.com/sirupsen/logrus"
 )
 
