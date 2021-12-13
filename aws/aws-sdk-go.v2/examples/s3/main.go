@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/aws/aws-sdk-go.v2"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
 	"github.com/americanas-go/log"
 	a "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/s3"

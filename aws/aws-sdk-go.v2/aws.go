@@ -3,7 +3,7 @@ package aws
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/net/http/client"
+	"github.com/americanas-go/ignite/http/client/net/client"
 	"github.com/americanas-go/log"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"

@@ -2,7 +2,7 @@ package json
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
+	"github.com/americanas-go/ignite/log/sirupsen/logrus.v1"
 )
 
 const (
