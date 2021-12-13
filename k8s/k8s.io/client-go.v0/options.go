@@ -6,8 +6,9 @@ import (
 
 // Options kubernetes client set options.
 type Options struct {
-	KubeConfigPath string
-	Context        string
+	Type              string
+	KubeConfigPath    string
+	KubeConfigContext string
 }
 
 // NewOptions returns options from config file or environment vars.
