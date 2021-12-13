@@ -3,8 +3,8 @@ package datadog
 import (
 	"sync"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
+	datadog "github.com/americanas-go/ignite/apm/datadog/dd-trace-go.v1"
+	contextfx "github.com/americanas-go/ignite/injection/go.uber.org/fx.v1/module/context"
 	"go.uber.org/fx"
 )
 

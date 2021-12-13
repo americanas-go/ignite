@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/gocql/gocql.v0"
+	"github.com/americanas-go/ignite/db/nosql/gocql/gocql.v0"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
 )
 
 func main() {

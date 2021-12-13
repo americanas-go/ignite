@@ -6,13 +6,13 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/contrib/americanas-go/health.v1"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/contrib/americanas-go/log.v1"
-	status "github.com/americanas-go/ignite/go-chi/chi.v5/plugins/contrib/americanas-go/rest-response.v1"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/realip"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/recoverer"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5/plugins/contrib/americanas-go/health.v1"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5/plugins/contrib/americanas-go/log.v1"
+	status "github.com/americanas-go/ignite/http/server/go-chi/chi.v5/plugins/contrib/americanas-go/rest-response.v1"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5/plugins/native/realip"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5/plugins/native/recoverer"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
 )
 
 const HelloWorldEndpoint = "app.endpoint.helloworld"

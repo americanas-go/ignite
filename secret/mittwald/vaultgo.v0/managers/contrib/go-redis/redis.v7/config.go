@@ -1,7 +1,7 @@
 package redis
 
 import (
-	vault "github.com/americanas-go/ignite/mittwald/vaultgo.v0"
+	vault "github.com/americanas-go/ignite/secret/mittwald/vaultgo.v0"
 )
 
 const (

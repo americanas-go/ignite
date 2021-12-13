@@ -7,7 +7,7 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5"
 	"github.com/americanas-go/log"
 	"github.com/go-chi/chi/v5/middleware"
 )

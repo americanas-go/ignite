@@ -2,7 +2,7 @@ package datadog
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/data/nosql/go-redis/redis.v7"
+	"github.com/americanas-go/ignite/db/nosql/go-redis/redis.v7"
 )
 
 const (

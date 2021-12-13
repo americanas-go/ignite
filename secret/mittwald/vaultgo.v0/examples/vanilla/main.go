@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/americanas-go/config"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
+	"github.com/americanas-go/ignite/db/nosql/go.mongodb.org/mongo-driver.v1"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
 	"github.com/americanas-go/log"
 	"github.com/hashicorp/vault/api"
 	vault "github.com/mittwald/vaultgo"

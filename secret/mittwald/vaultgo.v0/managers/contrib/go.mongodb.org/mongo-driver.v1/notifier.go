@@ -1,7 +1,7 @@
 package mongo
 
 import (
-	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
+	"github.com/americanas-go/ignite/db/nosql/go.mongodb.org/mongo-driver.v1"
 )
 
 // Observer

@@ -3,7 +3,7 @@ package bodylimit
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/labstack/echo.v4"
+	"github.com/americanas-go/ignite/http/server/labstack/echo.v4"
 	"github.com/americanas-go/log"
 	"github.com/labstack/echo/v4/middleware"
 )

@@ -5,11 +5,11 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/go-chi/chi.v5"
-	multiserverplugin "github.com/americanas-go/ignite/go-chi/chi.v5/plugins/contrib/americanas-go/multi-server.v1"
-	"github.com/americanas-go/ignite/go-chi/chi.v5/plugins/native/recoverer"
-	"github.com/americanas-go/ignite/net/http/server"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5"
+	multiserverplugin "github.com/americanas-go/ignite/http/server/go-chi/chi.v5/plugins/contrib/americanas-go/multi-server.v1"
+	"github.com/americanas-go/ignite/http/server/go-chi/chi.v5/plugins/native/recoverer"
+	"github.com/americanas-go/ignite/http/server/net/server"
+	"github.com/americanas-go/ignite/log/americanas-go/log.v1"
 	"github.com/americanas-go/multiserver"
 )
 

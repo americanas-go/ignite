@@ -6,9 +6,9 @@ import (
 
 	"github.com/americanas-go/config"
 	h "github.com/americanas-go/health"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/elastic/go-elasticsearch.v8"
-	"github.com/americanas-go/ignite/elastic/go-elasticsearch.v8/plugins/contrib/americanas-go/health.v1"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
+	"github.com/americanas-go/ignite/text/elastic/go-elasticsearch.v8"
+	"github.com/americanas-go/ignite/text/elastic/go-elasticsearch.v8/plugins/contrib/americanas-go/health.v1"
 	"github.com/americanas-go/log"
 )
 

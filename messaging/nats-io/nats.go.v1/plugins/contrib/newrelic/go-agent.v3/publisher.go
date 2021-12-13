@@ -3,8 +3,8 @@ package newrelic
 import (
 	"context"
 
-	ginats "github.com/americanas-go/ignite/nats-io/nats.go.v1"
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
+	newrelic "github.com/americanas-go/ignite/apm/newrelic/go-agent.v3"
+	ginats "github.com/americanas-go/ignite/messaging/nats-io/nats.go.v1"
 	"github.com/americanas-go/log"
 	"github.com/nats-io/nats.go"
 	"github.com/newrelic/go-agent/v3/integrations/nrnats"

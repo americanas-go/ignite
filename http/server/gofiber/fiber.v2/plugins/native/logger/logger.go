@@ -3,7 +3,7 @@ package logger
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2"
 	"github.com/americanas-go/log"
 	f "github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"

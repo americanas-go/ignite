@@ -3,7 +3,7 @@ package prometheus
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/labstack/echo.v4"
+	"github.com/americanas-go/ignite/http/server/labstack/echo.v4"
 	"github.com/americanas-go/log"
 	prometheus "github.com/globocom/echo-prometheus"
 	e "github.com/labstack/echo/v4"

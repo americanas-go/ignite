@@ -2,7 +2,7 @@ package echo
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/golang.org/x/net.v0/http2/server"
+	"github.com/americanas-go/ignite/http/server/golang.org/x/net.v0/http2/server"
 )
 
 const (

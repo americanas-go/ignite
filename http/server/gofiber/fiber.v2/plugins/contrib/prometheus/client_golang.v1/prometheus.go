@@ -3,7 +3,7 @@ package prometheus
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2"
 	"github.com/americanas-go/log"
 	"github.com/ansrivas/fiberprometheus/v2"
 	f "github.com/gofiber/fiber/v2"

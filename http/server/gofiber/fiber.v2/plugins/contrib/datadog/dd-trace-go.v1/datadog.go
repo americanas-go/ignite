@@ -3,8 +3,8 @@ package datadog
 import (
 	"context"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
+	datadog "github.com/americanas-go/ignite/apm/datadog/dd-trace-go.v1"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2"
 	"github.com/americanas-go/log"
 	f "github.com/gofiber/fiber/v2"
 	fibertrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/gofiber/fiber.v2"

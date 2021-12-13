@@ -3,8 +3,8 @@ package newrelic
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
+	newrelic "github.com/americanas-go/ignite/apm/newrelic/go-agent.v3"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2"
 	"github.com/americanas-go/log"
 	f "github.com/gofiber/fiber/v2"
 )

@@ -3,8 +3,8 @@ package bigquery
 import (
 	"sync"
 
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	"github.com/americanas-go/ignite/google.golang.org/bigquery.v1"
+	"github.com/americanas-go/ignite/gcp/google.golang.org/bigquery.v1"
+	contextfx "github.com/americanas-go/ignite/injection/go.uber.org/fx.v1/module/context"
 	"go.uber.org/fx"
 )
 

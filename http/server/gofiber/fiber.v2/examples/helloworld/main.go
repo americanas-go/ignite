@@ -5,11 +5,11 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/extra/error_handler"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/native/cors"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/native/etag"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2/plugins/extra/error_handler"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2/plugins/native/cors"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2/plugins/native/etag"
+	"github.com/americanas-go/ignite/log/americanas-go/log.v1"
 	f "github.com/gofiber/fiber/v2"
 )
 

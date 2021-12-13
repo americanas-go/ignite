@@ -2,7 +2,7 @@ package newrelic
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/panjf2000/ants.v2"
+	"github.com/americanas-go/ignite/task/panjf2000/ants.v2"
 )
 
 const (

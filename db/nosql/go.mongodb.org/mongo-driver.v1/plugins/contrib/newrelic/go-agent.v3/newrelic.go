@@ -4,7 +4,7 @@ import (
 	"context"
 
 	newrelic "github.com/americanas-go/ignite/apm/newrelic/go-agent.v3"
-	"github.com/americanas-go/ignite/data/nosql/go.mongodb.org/mongo-driver.v1"
+	"github.com/americanas-go/ignite/db/nosql/go.mongodb.org/mongo-driver.v1"
 	"github.com/americanas-go/log"
 	"github.com/newrelic/go-agent/v3/integrations/nrmongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

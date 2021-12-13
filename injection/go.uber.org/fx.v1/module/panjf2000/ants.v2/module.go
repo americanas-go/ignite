@@ -3,7 +3,7 @@ package ants
 import (
 	"sync"
 
-	ants "github.com/americanas-go/ignite/panjf2000/ants.v2"
+	ants "github.com/americanas-go/ignite/task/panjf2000/ants.v2"
 	a "github.com/panjf2000/ants/v2"
 	"go.uber.org/fx"
 )

@@ -4,7 +4,7 @@ import (
 	"sync"
 
 	cloudevents "github.com/americanas-go/ignite/cloudevents/sdk-go.v2"
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
+	contextfx "github.com/americanas-go/ignite/injection/go.uber.org/fx.v1/module/context"
 	"go.uber.org/fx"
 )
 

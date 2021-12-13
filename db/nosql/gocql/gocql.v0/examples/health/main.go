@@ -6,9 +6,9 @@ import (
 
 	"github.com/americanas-go/config"
 	"github.com/americanas-go/health"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/gocql/gocql.v0"
-	h "github.com/americanas-go/ignite/gocql/gocql.v0/plugins/contrib/americanas-go/health.v1"
+	"github.com/americanas-go/ignite/db/nosql/gocql/gocql.v0"
+	h "github.com/americanas-go/ignite/db/nosql/gocql/gocql.v0/plugins/contrib/americanas-go/health.v1"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
 	"github.com/americanas-go/log"
 )
 

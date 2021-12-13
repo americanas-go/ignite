@@ -5,7 +5,7 @@ import (
 
 	"net/http"
 
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
+	newrelic "github.com/americanas-go/ignite/apm/newrelic/go-agent.v3"
 	"github.com/americanas-go/log"
 	"github.com/go-resty/resty/v2"
 	nr "github.com/newrelic/go-agent/v3/newrelic"

@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/americanas-go/ignite/net/http/server"
+	"github.com/americanas-go/ignite/http/server/net/server"
 	"github.com/americanas-go/log"
 	"github.com/go-chi/chi/v5"
 )

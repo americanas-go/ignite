@@ -5,8 +5,8 @@ import (
 	"sync"
 
 	"github.com/americanas-go/errors"
-	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
-	vault "github.com/americanas-go/ignite/mittwald/vaultgo.v0"
+	"github.com/americanas-go/ignite/db/nosql/go.mongodb.org/mongo-driver.v1"
+	vault "github.com/americanas-go/ignite/secret/mittwald/vaultgo.v0"
 	"github.com/americanas-go/log"
 )
 

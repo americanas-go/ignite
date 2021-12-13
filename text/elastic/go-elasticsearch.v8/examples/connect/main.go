@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/config"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/elastic/go-elasticsearch.v8"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
+	"github.com/americanas-go/ignite/text/elastic/go-elasticsearch.v8"
 	"github.com/americanas-go/log"
 )
 

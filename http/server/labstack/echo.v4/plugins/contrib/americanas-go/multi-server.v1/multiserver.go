@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/americanas-go/ignite/labstack/echo.v4"
+	"github.com/americanas-go/ignite/http/server/labstack/echo.v4"
 	"github.com/americanas-go/log"
 	"github.com/americanas-go/multiserver"
 	e "github.com/labstack/echo/v4"

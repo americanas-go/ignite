@@ -2,7 +2,7 @@ package health
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/gocql/gocql.v0"
+	"github.com/americanas-go/ignite/db/nosql/gocql/gocql.v0"
 )
 
 const (

@@ -2,7 +2,7 @@ package datadog
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/godror/godror.v0"
+	"github.com/americanas-go/ignite/db/sql/godror/godror.v0"
 )
 
 const (

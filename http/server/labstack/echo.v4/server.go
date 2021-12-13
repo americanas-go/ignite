@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/americanas-go/ignite/golang.org/x/net.v0/http2/server"
+	"github.com/americanas-go/ignite/http/server/golang.org/x/net.v0/http2/server"
 	"github.com/americanas-go/log"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/net/http2"

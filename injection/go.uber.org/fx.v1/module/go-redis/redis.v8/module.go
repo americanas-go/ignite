@@ -4,8 +4,8 @@ import (
 	"context"
 	"sync"
 
-	"github.com/americanas-go/ignite/go-redis/redis.v8"
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
+	"github.com/americanas-go/ignite/db/nosql/go-redis/redis.v8"
+	contextfx "github.com/americanas-go/ignite/injection/go.uber.org/fx.v1/module/context"
 	r "github.com/go-redis/redis/v8"
 	"go.uber.org/fx"
 )

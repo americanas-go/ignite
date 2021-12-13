@@ -7,10 +7,10 @@ import (
 	"os"
 
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/labstack/echo.v4"
-	logplugin "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/labstack/echo.v4/plugins/extra/error_handler"
+	"github.com/americanas-go/ignite/http/server/labstack/echo.v4"
+	logplugin "github.com/americanas-go/ignite/http/server/labstack/echo.v4/plugins/contrib/americanas-go/log.v1"
+	"github.com/americanas-go/ignite/http/server/labstack/echo.v4/plugins/extra/error_handler"
+	"github.com/americanas-go/ignite/log/americanas-go/log.v1"
 	e "github.com/labstack/echo/v4"
 )
 

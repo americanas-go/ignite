@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/errors"
-	"github.com/americanas-go/ignite/go-redis/redis.v7"
-	vault "github.com/americanas-go/ignite/mittwald/vaultgo.v0"
+	"github.com/americanas-go/ignite/db/nosql/go-redis/redis.v7"
+	vault "github.com/americanas-go/ignite/secret/mittwald/vaultgo.v0"
 	"github.com/americanas-go/log"
 )
 

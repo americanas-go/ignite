@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/americanas-go/config"
-	gifiber "github.com/americanas-go/ignite/gofiber/fiber.v2"
+	gifiber "github.com/americanas-go/ignite/http/server/gofiber/fiber.v2"
 	"github.com/gofiber/fiber/v2"
 )
 

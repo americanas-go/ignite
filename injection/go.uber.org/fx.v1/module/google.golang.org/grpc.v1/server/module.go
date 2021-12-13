@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync"
 
-	"github.com/americanas-go/ignite/go.uber.org/fx.v1/module/americanas-go/multiserver.v1"
-	contextfx "github.com/americanas-go/ignite/go.uber.org/fx.v1/module/context"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server"
+	"github.com/americanas-go/ignite/injection/go.uber.org/fx.v1/module/americanas-go/multiserver.v1"
+	contextfx "github.com/americanas-go/ignite/injection/go.uber.org/fx.v1/module/context"
+	"github.com/americanas-go/ignite/rpc/google.golang.org/grpc.v1/server"
 	s "github.com/americanas-go/multiserver"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"

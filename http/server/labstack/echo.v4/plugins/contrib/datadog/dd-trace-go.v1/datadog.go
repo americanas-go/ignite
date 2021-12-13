@@ -3,8 +3,8 @@ package datadog
 import (
 	"context"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
-	"github.com/americanas-go/ignite/labstack/echo.v4"
+	datadog "github.com/americanas-go/ignite/apm/datadog/dd-trace-go.v1"
+	"github.com/americanas-go/ignite/http/server/labstack/echo.v4"
 	"github.com/americanas-go/log"
 	echotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4"
 )

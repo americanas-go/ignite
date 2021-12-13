@@ -3,8 +3,8 @@ package newrelic
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/labstack/echo.v4"
-	newrelic "github.com/americanas-go/ignite/newrelic/go-agent.v3"
+	newrelic "github.com/americanas-go/ignite/apm/newrelic/go-agent.v3"
+	"github.com/americanas-go/ignite/http/server/labstack/echo.v4"
 	"github.com/americanas-go/log"
 	e "github.com/labstack/echo/v4"
 	"github.com/newrelic/go-agent/v3/integrations/nrecho-v4"

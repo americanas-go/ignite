@@ -3,7 +3,7 @@ package datadog
 import (
 	"context"
 
-	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
+	datadog "github.com/americanas-go/ignite/apm/datadog/dd-trace-go.v1"
 
 	"github.com/americanas-go/log"
 	"github.com/go-redis/redis/v8"

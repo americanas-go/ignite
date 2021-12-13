@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/americanas-go/config"
-	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
-	mserver "github.com/americanas-go/ignite/gofiber/fiber.v2/plugins/contrib/americanas-go/multi-server.v1"
+	"github.com/americanas-go/ignite/http/server/gofiber/fiber.v2"
+	mserver "github.com/americanas-go/ignite/http/server/gofiber/fiber.v2/plugins/contrib/americanas-go/multi-server.v1"
+	ilog "github.com/americanas-go/ignite/log/americanas-go/log.v1"
 	"github.com/americanas-go/multiserver"
 	f "github.com/gofiber/fiber/v2"
 )
