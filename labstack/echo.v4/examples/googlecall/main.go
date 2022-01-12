@@ -90,12 +90,16 @@ func main() {
 
 	// instance.AddErrorAdvice(customErrors.InvalidPayload, 400)
 
-	options := resty.Options{
-		Host: "http://www.google.com",
+	options, err := resty.NewOptions()
+	if err != nil {
+		panic(err)
 	}
+	options.Host = "http://www.google.com"
 
-	client := resty.NewClientWithOptions(ctx, &options)
-
+	client, err := resty.NewWithOptions(ctx, options)
+	if err != nil {
+		panic(err)
+	}
 	handler := NewHandler(client)
 	srv.GET(c.App.Endpoint.Google, handler.Get)
 
