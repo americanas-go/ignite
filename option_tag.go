@@ -31,6 +31,8 @@ type IgniteOptionTag struct {
 	// option config path without options root, because it may change.
 	// It is generated according to the tags added to the options struct.
 	Path string
+	// Hides config. If not present it is false.
+	Hide bool
 }
 
 // tag as string: <path>: <default_value> // <description>
@@ -69,6 +71,7 @@ func getTags(f reflect.StructField, p string) []*IgniteOptionTag {
 			Default:     getDefault(f),
 			Description: getTagValue(f, "desc"),
 			Path:        path,
+			Hide:        getTagValue(f, "hide") == "true",
 		}
 		tags = append(tags, tag)
 	}

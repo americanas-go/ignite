@@ -6,7 +6,9 @@ import (
 	"github.com/americanas-go/config"
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/go-resty/resty.v2"
+	"github.com/americanas-go/ignite/go-resty/resty.v2/plugins/contrib/americanas-go/health.v1"
 	"github.com/americanas-go/log"
+	r "github.com/go-resty/resty/v2"
 )
 
 func main() {
@@ -21,25 +23,22 @@ func main() {
 
 	logger := log.FromContext(ctx)
 
-	options, err := resty.NewOptions()
-	if err != nil {
-		logger.Fatal(err.Error())
+	options := health.Options{
+		Name:        "Google Inc",
+		Host:        "http://google.com",
+		Endpoint:    "/status",
+		Enabled:     true,
+		Description: "Search Engine",
+		Required:    true,
 	}
-	healthOptions := &(options.Plugins.Health)
-	healthOptions.Name = "Google Inc"
-	healthOptions.Host = "http://google.com"
-	healthOptions.Endpoint = "/status"
-	healthOptions.Enabled = true
-	healthOptions.Description = "Search Engine"
-	healthOptions.Required = true
 
-	client, err := resty.NewWithOptions(ctx, options)
-	if err != nil {
-		logger.Fatal(err.Error())
-	}
+	healthIntegrator := health.NewHealthWithOptions(&options)
+
+	client := resty.NewClientWithOptions(ctx, &resty.Options{}, healthIntegrator.Register)
 	request := client.R().EnableTrace()
 
-	resp, err := request.Get("http://google.com")
+	var resp *r.Response
+	resp, err = request.Get("http://google.com")
 	if err != nil {
 		logger.Fatalf(err.Error())
 	}

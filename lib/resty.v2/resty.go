@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/americanas-go/ignite"
-	"github.com/americanas-go/ignite/go-resty/resty.v2/plugins"
-	iresty "github.com/americanas-go/ignite/go-resty/resty.v2/resty"
+	"github.com/americanas-go/ignite/lib/resty.v2/plugins"
+	iresty "github.com/americanas-go/ignite/lib/resty.v2/resty"
 	"github.com/go-resty/resty/v2"
 )
 

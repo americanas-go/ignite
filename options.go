@@ -24,7 +24,11 @@ func LoadWithPath[O IgniteOptions](path string) (o O, e error) {
 	// adding default values
 	tags := GetTags(o)
 	for _, t := range tags {
-		config.Add(path+t.Path, t.Default, t.Description)
+		if t.Hide {
+			config.Add(path+t.Path, t.Default, t.Description, config.WithHide())
+		} else {
+			config.Add(path+t.Path, t.Default, t.Description)
+		}
 	}
 	// load config
 	config.Load()

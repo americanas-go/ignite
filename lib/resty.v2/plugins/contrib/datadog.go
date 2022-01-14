@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
-	iresty "github.com/americanas-go/ignite/go-resty/resty.v2/resty"
+	iresty "github.com/americanas-go/ignite/lib/resty.v2/resty"
 	"github.com/americanas-go/log"
 	"github.com/go-resty/resty/v2"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace"

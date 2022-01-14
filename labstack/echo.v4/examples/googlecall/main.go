@@ -96,10 +96,8 @@ func main() {
 	}
 	options.Host = "http://www.google.com"
 
-	client, err := resty.NewWithOptions(ctx, options)
-	if err != nil {
-		panic(err)
-	}
+	client := resty.NewClientWithOptions(ctx, options)
+
 	handler := NewHandler(client)
 	srv.GET(c.App.Endpoint.Google, handler.Get)
 

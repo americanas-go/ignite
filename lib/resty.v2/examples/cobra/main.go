@@ -7,10 +7,8 @@ import (
 	"github.com/americanas-go/config"
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
 	"github.com/americanas-go/ignite/go-resty/resty.v2"
-	logplugin "github.com/americanas-go/ignite/go-resty/resty.v2/plugins/contrib/americanas-go/log.v1"
 	c "github.com/americanas-go/ignite/spf13/cobra.v1"
 	"github.com/americanas-go/log"
-	r "github.com/go-resty/resty/v2"
 	"github.com/spf13/cobra"
 )
 
@@ -31,12 +29,8 @@ func init() {
 
 	os.Setenv("APP_RESTY_GOOGLE_HOST", "http://www.google.com")
 	os.Setenv("APP_RESTY_ACOM_HOST", "https://www.americanas.com.br")
+	os.Setenv("APP_RESTY_ACOM_PLUGINS_LOG_ENABLED", "true")
 	os.Setenv("APP_RESTY_ACOM_PLUGINS_LOG_LEVEL", "INFO")
-
-	resty.ConfigAdd(google)
-	resty.ConfigAdd(acom)
-
-	logplugin.ConfigAdd(acomLogPlugin)
 }
 
 func main() {
@@ -59,13 +53,7 @@ func main() {
 			Use:  "acom",
 			Long: "acom call",
 			RunE: func(cmd *cobra.Command, args []string) error {
-
-				acomLogP, err := logplugin.NewLogWithConfigPath(acomLogPlugin)
-				if err != nil {
-					return err
-				}
-
-				return call(ctx, acom, acomLogP.Register)
+				return call(ctx, acom)
 			},
 		},
 	}
@@ -83,19 +71,19 @@ func main() {
 	// go run main.go google -> call google
 }
 
-func call(ctx context.Context, path string, plugins ...resty.Plugin) error {
+func call(ctx context.Context, path string) error {
 
 	logger := log.FromContext(ctx)
 
 	var err error
 
-	var client *r.Client
-	if client, err = resty.NewClientWithConfigPath(ctx, path, plugins...); err != nil {
+	client, err := resty.NewWithConfigPath(ctx, path)
+	if err != nil {
 		return err
 	}
 
-	var response *r.Response
-	if response, err = client.R().Get("/"); err != nil {
+	response, err := client.R().Get("/")
+	if err != nil {
 		return err
 	}
 

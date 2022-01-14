@@ -7,7 +7,7 @@ import (
 
 	"github.com/americanas-go/errors"
 	"github.com/americanas-go/health"
-	iresty "github.com/americanas-go/ignite/go-resty/resty.v2/resty"
+	iresty "github.com/americanas-go/ignite/lib/resty.v2/resty"
 	"github.com/americanas-go/log"
 	"github.com/go-resty/resty/v2"
 )

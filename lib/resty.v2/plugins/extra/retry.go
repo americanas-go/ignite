@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	iresty "github.com/americanas-go/ignite/go-resty/resty.v2/resty"
+	iresty "github.com/americanas-go/ignite/lib/resty.v2/resty"
 	"github.com/americanas-go/log"
 	"github.com/go-resty/resty/v2"
 )
