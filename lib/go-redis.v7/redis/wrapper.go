@@ -156,5 +156,5 @@ func standaloneClient(o *Options) *redis.Client {
 }
 
 func redisSentinel(o *Options) bool {
-	return o.Sentinel.MasterName != "" || o.Sentinel.Addrs != nil
+	return o.Sentinel.MasterName != "" || len(o.Sentinel.Addrs) > 0
 }

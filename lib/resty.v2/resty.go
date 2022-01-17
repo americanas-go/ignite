@@ -12,28 +12,19 @@ import (
 // creates a new resty client with default options.
 func New(ctx context.Context) (*resty.Client, error) {
 	w, e := ignite.Setup(ctx, plugins.All...)
-	if e != nil {
-		return nil, e
-	}
-	return w.Instance, nil
+	return w.Instance, e
 }
 
 // creates a new resty client with options from config path.
 func NewWithConfigPath(ctx context.Context, path string) (*resty.Client, error) {
 	w, e := ignite.SetupWithConfigPath(ctx, path, plugins.All...)
-	if e != nil {
-		return nil, e
-	}
-	return w.Instance, nil
+	return w.Instance, e
 }
 
 // creates a new resty client with options.
 func NewWithOptions(ctx context.Context, o *iresty.Options) (*resty.Client, error) {
 	w, e := ignite.SetupWithOptions(ctx, o, plugins.All...)
-	if e != nil {
-		return nil, e
-	}
-	return w.Instance, nil
+	return w.Instance, e
 }
 
 // creates a new resty client options with values from default path.

@@ -18,10 +18,13 @@ func main() {
 
 	ilog.New()
 
-	_, err := iredis.New[*redis.Client](context.Background())
+	var err error
+
+	_, err = iredis.New[*redis.ClusterClient](context.Background())
 	if err != nil {
 		log.Error(err)
 	}
+
 	all := h.CheckAll(context.Background())
 
 	j, _ := json.Marshal(all)

@@ -4,6 +4,9 @@ import (
 	"time"
 )
 
+// Options config Root
+const OptionsRoot = "ignite.redis"
+
 // Options represents redis client set options.
 type Options struct {
 	Password           string        `default:"" hide:"true" desc:"optional password. Must match the password specified in the requirepass server configuration option"`
@@ -27,7 +30,7 @@ type Options struct {
 
 // options root path
 func (o *Options) Root() string {
-	return "ignite.redis"
+	return OptionsRoot
 }
 
 func (o *Options) PostLoad() error {

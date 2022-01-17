@@ -18,52 +18,61 @@ func TestOptions(t *testing.T) {
 			name:  "loads options",
 			setup: func() {},
 			want: func() *Options {
-				o := ignite.New[*Options]()
-				o.Debug = false
-				o.CloseConnection = false
-				o.Host = "http://localhost"
-				o.ConnectionTimeout = 3 * time.Minute
-				o.KeepAlive = 30 * time.Second
-				o.RequestTimeout = 30 * time.Second
-				o.FallbackDelay = 300 * time.Millisecond
-				t := &(o.Transport)
-				t.DisableCompression = false
-				t.DisableKeepAlives = false
-				t.ExpectContinueTimeout = 1 * time.Second
-				t.ForceAttemptHTTP2 = true
-				t.IdleConnTimeout = 90 * time.Second
-				t.MaxConnsPerHost = 100
-				t.MaxIdleConns = 100
-				t.MaxIdleConnsPerHost = 2
-				t.ResponseHeaderTimeout = 2 * time.Second
-				t.TLSHandshakeTimeout = 10 * time.Second
-				// Plugins ---
-				p := &(o.Plugins)
-				// Datadog
-				p.Datadog.Enabled = false
-				p.Datadog.OperationName = ""
-				// Health
-				p.Health.Enabled = false
-				p.Health.Description = "default connection"
-				p.Health.Endpoint = "/resource-status"
-				p.Health.Host = ""
-				p.Health.Name = "rest api"
-				p.Health.Required = true
-				// Log
-				p.Log.Enabled = false
-				p.Log.Level = "DEBUG"
-				// Newrelic
-				p.Newrelic.Enabled = false
-				// Opentracing
-				p.Opentracing.Enabled = false
-				// Retry
-				p.Retry.Enabled = true
-				p.Retry.Count = 0
-				p.Retry.MaxWaitTime = 2 * time.Second
-				p.Retry.WaitTime = 200 * time.Millisecond
-				//RequestID
-				p.RequestID.Enabled = true
-				return o
+				return &Options{
+					Debug:             false,
+					CloseConnection:   false,
+					Host:              "http://localhost",
+					ConnectionTimeout: 3 * time.Minute,
+					KeepAlive:         30 * time.Second,
+					RequestTimeout:    30 * time.Second,
+					FallbackDelay:     300 * time.Millisecond,
+					Transport: Transport{
+						DisableCompression:    false,
+						DisableKeepAlives:     false,
+						ExpectContinueTimeout: 1 * time.Second,
+						ForceAttemptHTTP2:     true,
+						IdleConnTimeout:       90 * time.Second,
+						MaxConnsPerHost:       100,
+						MaxIdleConns:          100,
+						MaxIdleConnsPerHost:   2,
+						ResponseHeaderTimeout: 2 * time.Second,
+						TLSHandshakeTimeout:   10 * time.Second,
+					},
+					Plugins: Plugins{
+						Datadog: Datadog{
+							Enabled:       false,
+							OperationName: "",
+						},
+						Health: Health{
+							Enabled:     false,
+							Description: "default connection",
+							Endpoint:    "/resource-status",
+							Host:        "",
+							Name:        "rest api",
+							Required:    true,
+						},
+						Log: Log{
+							Enabled: false,
+							Level:   "DEBUG",
+						},
+						Newrelic: Newrelic{
+							Enabled: false,
+						},
+						Opentracing: Opentracing{
+							Enabled: false,
+						},
+						RequestID: RequestID{
+							Enabled: true,
+						},
+						Retry: Retry{
+							Enabled:     true,
+							Count:       0,
+							MaxWaitTime: 2 * time.Second,
+							WaitTime:    200 * time.Millisecond,
+						},
+					},
+				}
+
 			},
 		},
 	}
