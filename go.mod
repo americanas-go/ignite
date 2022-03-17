@@ -1,23 +1,19 @@
 module github.com/americanas-go/ignite
 
-go 1.17
+go 1.18
 
-// replace github.com/americanas-go/log => ../log/
-// replace github.com/americanas-go/multiserver => ../multiserver/
-// replace github.com/americanas-go/config => ../config/
-// replace k8s.io/client-go => k8s.io/client-go v0.19.16
-// replace github.com/docker/distribution => github.com/distribution/distribution/v2 v2.8.0
-// replace github.com/docker/distribution => github.com/docker/distribution/v2 v2.8.0
-
-replace github.com/nats-io/nats-server/v2 => github.com/nats-io/nats-server/v2 v2.7.2
-
-replace github.com/opencontainers/runc => github.com/opencontainers/runc v1.1.0
-
-replace github.com/opencontainers/image-spec => github.com/opencontainers/image-spec v1.0.2
-
-replace github.com/spf13/viper => github.com/spf13/viper v1.10.1
-
-replace github.com/prometheus/client_golang => github.com/prometheus/client_golang v1.12.1
+replace (
+	// github.com/americanas-go/log => ../log/
+	// github.com/americanas-go/multiserver => ../multiserver/
+	// github.com/americanas-go/config => ../config/
+	// k8s.io/client-go => k8s.io/client-go v0.19.16
+	// github.com/docker/distribution => github.com/distribution/distribution/v2 v2.8.1
+	github.com/nats-io/nats-server/v2 => github.com/nats-io/nats-server/v2 v2.7.4
+	github.com/opencontainers/image-spec => github.com/opencontainers/image-spec v1.0.2
+	github.com/opencontainers/runc => github.com/opencontainers/runc v1.1.0
+	github.com/prometheus/client_golang => github.com/prometheus/client_golang v1.12.1
+	github.com/spf13/viper => github.com/spf13/viper v1.10.1
+)
 
 require (
 	cloud.google.com/go/bigquery v1.28.0
@@ -61,7 +57,7 @@ require (
 	github.com/labstack/echo/v4 v4.6.3
 	github.com/labstack/gommon v0.3.1
 	github.com/mittwald/vaultgo v0.0.11
-	github.com/nats-io/nats.go v1.13.1-0.20220121202836-972a071d373d
+	github.com/nats-io/nats.go v1.13.1-0.20220308171302-2f2f6968e98d
 	github.com/newrelic/go-agent/v3 v3.15.2
 	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.0.2
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.1
@@ -193,7 +189,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/klauspost/compress v1.14.1 // indirect
+	github.com/klauspost/compress v1.14.4 // indirect
 	github.com/knadh/koanf v1.4.0 // indirect
 	github.com/lann/builder v0.0.0-20180802200727-47ae307949d0 // indirect
 	github.com/lann/ps v0.0.0-20150810152359-62de8c46ede0 // indirect
@@ -211,7 +207,7 @@ require (
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/nats-io/nats-server/v2 v2.0.0-00010101000000-000000000000 // indirect
+	github.com/nats-io/nats-server/v2 v2.7.4 // indirect
 	github.com/nats-io/nkeys v0.3.0 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/oklog/run v1.0.0 // indirect
