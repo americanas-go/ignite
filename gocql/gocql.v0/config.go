@@ -11,8 +11,8 @@ const (
 	hosts                    = ".hosts"
 	port                     = ".port"
 	dc                       = ".dc"
-	username                 = ".username"
-	password                 = ".password"
+	pu                       = ".username"
+	pp                       = ".password"
 	cqlVersion               = ".CQLVersion"
 	protoVersion             = ".protoVersion"
 	timeout                  = ".timeout"
@@ -40,8 +40,8 @@ func ConfigAdd(path string) {
 	config.Add(path+hosts, []string{"127.0.0.1"}, "addresses for the initial connections")
 	config.Add(path+port, 9042, "define port")
 	config.Add(path+dc, "", "define DC")
-	config.Add(path+username, "", "define username")
-	config.Add(path+password, "", "define password", config.WithHide())
+	config.Add(path+pu, "", "define username")
+	config.Add(path+pp, "", "define password", config.WithHide())
 	config.Add(path+cqlVersion, "3.0.0", "define cql version")
 	config.Add(path+protoVersion, 0, "define version of the native protocol to use")
 	config.Add(path+timeout, 600*time.Millisecond, "connection timeout")
