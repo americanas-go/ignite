@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package main;
+option go_package = "github.com/americanas-go/ignite/google.golang.org/grpc.v1/server/examples/examplesvc/pb";
+
+service Example {
+    rpc test (TestRequest) returns (TestResponse) {
+    }
+}
+
+message TestRequest {
+    string message = 1;
+}
+
+message TestResponse {
+    string message = 1;
+}
