@@ -12,7 +12,7 @@ const (
 	jwtRoot      = k8sRoot + ".jwt"
 	jwtFile      = jwtRoot + ".file"
 	jwtContent   = jwtRoot + ".content"
-	token        = ".token"
+	tk           = ".token"
 	ManagersRoot = root + ".managers"
 
 	secretPath       = ".secretPath"
@@ -33,7 +33,7 @@ func ConfigAdd(path string) {
 	config.Add(path+k8sRole, "default", "defines k8s role")
 	config.Add(path+jwtFile, "", "defines jwt file")
 	config.Add(path+jwtContent, "", "defines jwt content")
-	config.Add(path+token, "XPTOTOKEN", "defines vault token")
+	config.Add(path+tk, "XPTOTOKEN", "defines vault token")
 }
 
 func ManagerConfigAdd(path string) {

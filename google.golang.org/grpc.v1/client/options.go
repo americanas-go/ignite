@@ -8,25 +8,15 @@ import (
 
 // Options grpc client options.
 type Options struct {
-	TLS struct {
-		Enabled            bool
-		CertFile           string
-		KeyFile            string
-		CAFile             string `config:"caFile"`
-		InsecureSkipVerify bool
-	} `config:"tls"`
+	TLS                   TLSOptions `config:"tls"`
 	InitialWindowSize     int32
 	InitialConnWindowSize int32
 	Host                  string
 	Block                 bool
 	HostOverwrite         string
 	Port                  int
-	Keepalive             struct {
-		Time                time.Duration
-		Timeout             time.Duration
-		PermitWithoutStream bool
-	}
-	ConnectParams struct {
+	Keepalive             KeepAliveOptions
+	ConnectParams         struct {
 		Backoff struct {
 			BaseDelay  time.Duration
 			Multiplier float64
@@ -35,6 +25,20 @@ type Options struct {
 		}
 		MinConnectTimeout time.Duration
 	}
+}
+
+type TLSOptions struct {
+	Enabled            bool
+	CertFile           string
+	KeyFile            string
+	CAFile             string `config:"caFile"`
+	InsecureSkipVerify bool
+}
+
+type KeepAliveOptions struct {
+	Time                time.Duration
+	Timeout             time.Duration
+	PermitWithoutStream bool
 }
 
 // NewOptions returns options from config file or environment vars.

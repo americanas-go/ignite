@@ -26,10 +26,12 @@ func main() {
 
 	options, _ := server.NewOptions()
 	options.Port = 8080
+	options.TLS.Enabled = true
+	options.TLS.Auto.Host = "localhost"
 
 	srv := server.NewServerWithOptions(ctx, options, log.Register)
 
-	pb.RegisterExampleServer(srv.ServiceRegistrar(), NewService())
+	pb.RegisterExampleServer(srv.ServiceRegistrar(), &Service{})
 
 	srv.Serve(ctx)
 }
@@ -45,8 +47,4 @@ func (h *Service) Test(ctx context.Context, request *pb.TestRequest) (*pb.TestRe
 	logger.Infof(request.Message)
 
 	return &pb.TestResponse{Message: "hello world"}, nil
-}
-
-func NewService() pb.ExampleServer {
-	return &Service{}
 }

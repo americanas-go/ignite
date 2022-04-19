@@ -11,8 +11,6 @@ const (
 	tlsRoot               = ".tls"
 	tlsEnabled            = tlsRoot + ".enabled"
 	tlsType               = tlsRoot + ".type"
-	tlsAuthRoot           = tlsRoot + ".auth"
-	tlsAuthType           = tlsAuthRoot + ".type"
 	tlsAutoRoot           = tlsRoot + ".auto"
 	tlsAutoHost           = tlsAutoRoot + ".host"
 	tlsFileRoot           = tlsRoot + ".file"
@@ -33,7 +31,6 @@ func ConfigAdd(path string) {
 	config.Add(path+initialConnWindowSize, 1024*1024*2, "sets the initial window size for a connection")
 	config.Add(path+tlsEnabled, false, "use TLS - required for HTTP2")
 	config.Add(path+tlsType, "AUTO", "defines tls type. AUTO/FILE")
-	config.Add(path+tlsAuthType, 0, "defines tls auth type. 0 = ")
 	config.Add(path+tlsAutoHost, "localhost", "defines tls auto host")
 	config.Add(path+tlsFileCert, "", "path to the CRT/PEM file")
 	config.Add(path+tlsFileKey, "", "path to the private key file")
