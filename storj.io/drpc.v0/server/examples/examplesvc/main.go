@@ -6,9 +6,8 @@ import (
 
 	"github.com/americanas-go/config"
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server/examples/examplesvc/pb"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server/plugins/contrib/americanas-go/log.v1"
+	"github.com/americanas-go/ignite/storj.io/drpc.v0/server"
+	"github.com/americanas-go/ignite/storj.io/drpc.v0/server/examples/examplesvc/pb"
 	alog "github.com/americanas-go/log"
 )
 
@@ -24,18 +23,17 @@ func main() {
 
 	ilog.New()
 
-	options, _ := server.NewOptions()
-	options.Port = 8080
-
-	srv := server.NewServerWithOptions(ctx, options, log.Register)
-
-	pb.RegisterExampleServer(srv.ServiceRegistrar(), NewService())
+	srv, _ := server.NewServer(ctx)
+	m := srv.Mux()
+	if err := pb.DRPCRegisterExample(m, &Service{}); err != nil {
+		panic(err)
+	}
 
 	srv.Serve(ctx)
 }
 
 type Service struct {
-	pb.UnimplementedExampleServer
+	pb.DRPCExampleUnimplementedServer
 }
 
 func (h *Service) Test(ctx context.Context, request *pb.TestRequest) (*pb.TestResponse, error) {
@@ -47,6 +45,6 @@ func (h *Service) Test(ctx context.Context, request *pb.TestRequest) (*pb.TestRe
 	return &pb.TestResponse{Message: "hello world"}, nil
 }
 
-func NewService() pb.ExampleServer {
+func NewService() pb.DRPCExampleServer {
 	return &Service{}
 }

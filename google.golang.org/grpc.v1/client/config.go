@@ -27,11 +27,12 @@ const (
 	keepalivePermitWithoutStream = keepaliveRoot + ".permitWithoutStream"
 	connectParamsRoot            = ".connectParams"
 	minConnectTimeout            = connectParamsRoot + ".minConnectTimeout"
-	backoffRoot                  = connectParamsRoot + ".backoff"
-	backoffBaseDelay             = backoffRoot + ".baseDelay"
-	backoffMultiplier            = backoffRoot + ".multiplier"
-	backoffJitter                = backoffRoot + ".jitter"
-	backoffMaxDelay              = backoffRoot + ".maxDelay"
+
+	backoffRoot       = connectParamsRoot + ".backoff"
+	backoffBaseDelay  = backoffRoot + ".baseDelay"
+	backoffMultiplier = backoffRoot + ".multiplier"
+	backoffJitter     = backoffRoot + ".jitter"
+	backoffMaxDelay   = backoffRoot + ".maxDelay"
 )
 
 func init() {
@@ -50,12 +51,12 @@ func ConfigAdd(path string) {
 	config.Add(path+caFile, "", "defines ca file")
 	config.Add(path+hostOverwrite, "", "defines host overwrite")
 	config.Add(path+insecureSkipVerify, true, "enable/disable insecure skip verify ")
-	config.Add(path+keepaliveTime, 0*time.Second, "After a duration of this time if the client doesn't see any activity it pings the server to see if the transport is still alive. If set below 10s, a minimum value of 10s will be used instead")
+	config.Add(path+keepaliveTime, 10*time.Second, "After a duration of this time if the client doesn't see any activity it pings the server to see if the transport is still alive. If set below 10s, a minimum value of 10s will be used instead")
 	config.Add(path+keepaliveTimeout, 20*time.Second, "After having pinged for keepalive check, the client waits for a duration of Timeout and if no activity is seen even after that the connection is closed")
 	config.Add(path+keepalivePermitWithoutStream, false, "If true, client sends keepalive pings even with no active RPCs. If false, when there are no active RPCs, Time and Timeout will be ignored and no keepalive pings will be sent.")
 	config.Add(path+minConnectTimeout, 20*time.Second, "is the minimum amount of time we are willing to give a connection to complete")
-	config.Add(path+backoffBaseDelay, 20*time.Millisecond, "BaseDelay is the amount of time to backoff after the first failure")
-	config.Add(path+backoffMultiplier, 1.2, "is the factor with which to multiply backoffs after a failed retry. Should ideally be greater than 1")
-	config.Add(path+backoffJitter, 1.0, "Jitter is the factor with which backoffs are randomized")
-	config.Add(path+backoffMaxDelay, 200*time.Millisecond, "MaxDelay is the upper bound of backoff delay")
+	config.Add(path+backoffBaseDelay, 1.0*time.Second, "BaseDelay is the amount of time to backoff after the first failure")
+	config.Add(path+backoffMultiplier, 1.6, "is the factor with which to multiply backoffs after a failed retry. Should ideally be greater than 1")
+	config.Add(path+backoffJitter, 0.2, "Jitter is the factor with which backoffs are randomized")
+	config.Add(path+backoffMaxDelay, 120*time.Second, "MaxDelay is the upper bound of backoff delay")
 }

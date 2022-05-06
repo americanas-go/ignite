@@ -11,6 +11,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/keepalive"
 )
 
@@ -51,7 +52,7 @@ func NewClientConnWithOptions(ctx context.Context, options *Options, plugins ...
 		opts = addTlsOptions(ctx, options, opts)
 	} else {
 		logger.Tracef("creating insecure grpc client for host %s", serverAddr)
-		opts = append(opts, grpc.WithInsecure())
+		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	}
 
 	callOpts := make([]grpc.CallOption, 0)
