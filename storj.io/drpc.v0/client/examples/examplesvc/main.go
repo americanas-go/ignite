@@ -7,9 +7,8 @@ import (
 
 	"github.com/americanas-go/config"
 	ilog "github.com/americanas-go/ignite/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/client"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/client/plugins/contrib/americanas-go/log.v1"
-	"github.com/americanas-go/ignite/google.golang.org/grpc.v1/server/examples/examplesvc/pb"
+	"github.com/americanas-go/ignite/storj.io/drpc.v0/client"
+	"github.com/americanas-go/ignite/storj.io/drpc.v0/server/examples/examplesvc/pb"
 	alog "github.com/americanas-go/log"
 )
 
@@ -29,16 +28,10 @@ func main() {
 		Message: "mensagem da requisição",
 	}
 
-	options, _ := client.NewOptions()
-	options.Host = "localhost"
-	options.Port = 8080
-	options.TLS.Enabled = true
-	options.TLS.InsecureSkipVerify = true
-
-	conn := client.NewClientConnWithOptions(ctx, options, log.Register)
+	conn, _ := client.NewClientConn(ctx)
 	defer conn.Close()
 
-	c := pb.NewExampleClient(conn)
+	c := pb.NewDRPCExampleClient(conn)
 
 	rctx, _ := context.WithTimeout(ctx, 1*time.Minute)
 
@@ -48,6 +41,4 @@ func main() {
 	}
 
 	alog.Infof(test.Message)
-
-	alog.Infof(conn.GetState().String())
 }

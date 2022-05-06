@@ -9,8 +9,8 @@ import (
 const (
 	root                = "ignite.godror"
 	connectString       = ".connectString"
-	username            = ".username"
-	password            = ".password"
+	pu                  = ".username"
+	pp                  = ".password"
 	maxLifetime         = ".maxLifetime"
 	sessionTimeout      = ".sessionTimeout"
 	waitTimeout         = ".waitTimeout"
@@ -27,8 +27,8 @@ func init() {
 
 func ConfigAdd(path string) {
 	config.Add(path+connectString, "localhost:1521/database?connect_timeout=2", "sets database connection string")
-	config.Add(path+username, "", "sets database username")
-	config.Add(path+password, "", "sets database password")
+	config.Add(path+pu, "", "sets database username")
+	config.Add(path+pp, "", "sets database password")
 	config.Add(path+maxLifetime, 1*time.Hour, "sets the maximum amount of time a connection may be reused. If d <= 0, connections are reused forever")
 	config.Add(path+sessionTimeout, 5*time.Minute, "sets the session timeout")
 	config.Add(path+waitTimeout, 30*time.Second, "sets the wait timeout")

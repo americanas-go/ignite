@@ -8,8 +8,8 @@ import (
 
 const (
 	root                  = "ignite.aws"
-	key                   = ".accessKeyId"
-	secret                = ".secretAccessKey"
+	aki                   = ".accessKeyId"
+	sak                   = ".secretAccessKey"
 	region                = ".defaultRegion"
 	accountNumber         = ".defaultAccountNumber"
 	customEndpoint        = ".customEndpoint"
@@ -38,8 +38,8 @@ func init() {
 }
 
 func ConfigAdd(path string) {
-	config.Add(path+key, "", "defines the aws key id", config.WithHide())
-	config.Add(path+secret, "", "defines the aws secret key", config.WithHide())
+	config.Add(path+aki, "", "defines the aws key id", config.WithHide())
+	config.Add(path+sak, "", "defines the aws secret key", config.WithHide())
 	config.Add(path+region, "", "defines the aws region")
 	config.Add(path+accountNumber, "", "defines the aws account number")
 	config.Add(path+customEndpoint, false, "defines if should point to localhost")

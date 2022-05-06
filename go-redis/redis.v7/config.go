@@ -8,7 +8,7 @@ import (
 
 const (
 	root               = "ignite.redis"
-	password           = ".password"
+	pp                 = ".password"
 	maxRetries         = ".maxRetries"
 	minRetryBackoff    = ".minRetryBackoff"
 	maxRetryBackoff    = ".maxRetryBackoff"
@@ -26,7 +26,7 @@ const (
 	db                 = ".client.db"
 	sentinelMaster     = ".sentinel.masterName"
 	sentinelAddr       = ".sentinel.addrs"
-	sentinelPassword   = ".sentinel.password"
+	sentinelPP         = ".sentinel.password"
 	addrs              = ".cluster.addrs"
 	maxRedirects       = ".cluster.maxRedirects"
 	readOnly           = ".cluster.readOnly"
@@ -45,7 +45,7 @@ func ConfigAdd(path string) {
 	config.Add(path+readOnly, false, "enables read-only commands on slave nodes")
 	config.Add(path+routeByLatency, false, "allows routing read-only commands to the closest master or slave node")
 	config.Add(path+routeRandomly, false, "allows routing read-only commands to the random master or slave node")
-	config.Add(path+password, "", "optional password. Must match the password specified in the requirepass server configuration option", config.WithHide())
+	config.Add(path+pp, "", "optional password. Must match the password specified in the requirepass server configuration option", config.WithHide())
 	config.Add(path+maxRetries, 0, "maximum number of retries before giving up")
 	config.Add(path+minRetryBackoff, 8*time.Millisecond, "minimum backoff between each retry")
 	config.Add(path+maxRetryBackoff, 512*time.Millisecond, "maximum backoff between each retry")
@@ -63,5 +63,5 @@ func ConfigAdd(path string) {
 	config.Add(path+db, 0, "database to be selected after connecting to the server")
 	config.Add(path+sentinelMaster, "", "redis sentinel master name")
 	config.Add(path+sentinelAddr, nil, "redis sentinel addr list host:port")
-	config.Add(path+sentinelPassword, "", "redis sentinel password")
+	config.Add(path+sentinelPP, "", "redis sentinel password")
 }

@@ -49,7 +49,6 @@ func NewClientWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (c
 		APIKey:                o.APIKey,
 		RetryOnStatus:         o.RetryOnStatus,
 		DisableRetry:          o.DisableRetry,
-		EnableRetryOnTimeout:  o.EnableRetryOnTimeout,
 		MaxRetries:            o.MaxRetries,
 		DiscoverNodesOnStart:  o.DiscoverNodesOnStart,
 		DiscoverNodesInterval: o.DiscoverNodesInterval,

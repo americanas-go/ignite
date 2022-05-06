@@ -9,8 +9,8 @@ import (
 const (
 	root                  = "ignite.elasticsearch"
 	addresses             = ".addresses"
-	username              = ".username"
-	password              = ".password"
+	pu                    = ".username"
+	pp                    = ".password"
 	cloudID               = ".cloudID"
 	apiKey                = ".APIKey"
 	caCert                = ".CACert"
@@ -32,10 +32,10 @@ func init() {
 
 func ConfigAdd(path string) {
 	config.Add(path+addresses, []string{"http://127.0.0.1:9200"}, "a list of Elasticsearch nodes to use")
-	config.Add(path+username, "", "username for HTTP Basic Authentication")
-	config.Add(path+password, "", "password for HTTP Basic Authentication", config.WithHide())
+	config.Add(path+pu, "", "username for HTTP Basic Authentication")
+	config.Add(path+pp, "", "password for HTTP Basic Authentication", config.WithHide())
 	config.Add(path+cloudID, "", "endpoint for the Elastic Service (https://elastic.co/cloud)")
-	config.Add(path+apiKey, "", "base64-encoded token for authorization; if set, overrides username and password")
+	config.Add(path+apiKey, "", "base64-encoded token for authorization; if set, overrides pu and pp")
 	config.Add(path+caCert, "", "PEM-encoded certificate authorities")
 	config.Add(path+retryOnStatus, []int{502, 503, 504}, "List of status codes for retry")
 	config.Add(path+disableRetry, false, "")
