@@ -87,7 +87,7 @@ require (
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	google.golang.org/api v0.73.0
 	google.golang.org/grpc v1.45.0
-	gopkg.in/DataDog/dd-trace-go.v1 v1.37.0
+	gopkg.in/DataDog/dd-trace-go.v1 v1.38.1
 	gopkg.in/matryer/try.v1 v1.0.0-20150601225556-312d2599e12e
 	k8s.io/client-go v0.23.5
 )
