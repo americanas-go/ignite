@@ -42,7 +42,7 @@ func ConfigAdd(path string) {
 	config.Add(path+sak, "", "defines the aws secret key", config.WithHide())
 	config.Add(path+region, "", "defines the aws region")
 	config.Add(path+accountNumber, "", "defines the aws account number")
-	config.Add(path+customEndpoint, false, "defines if should point to localhost")
+	config.Add(path+customEndpoint, make(OptionsCustomEndpoint), "defines custom endpoints for services")
 	config.Add(path+retryerMaxAttempts, 5, "defines max attempts for rate limit")
 	config.Add(path+retryerHasRateLimit, true, "defines if retryer has rate limit")
 	config.Add(path+maxIdleConnPerHost, 10, "http max idle connections per host")
