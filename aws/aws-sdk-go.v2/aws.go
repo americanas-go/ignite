@@ -38,7 +38,7 @@ func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plug
 
 	logger := log.FromContext(ctx)
 
-	cfg, err := c.LoadDefaultConfig(ctx)
+	cfg, err := c.LoadDefaultConfig(ctx, c.WithEndpointResolverWithOptions(customResolver(ctx, options)))
 	if err != nil {
 		logger.Errorf("unable to load AWS SDK config, %s", err.Error())
 		return aws.Config{}, nil
@@ -64,6 +64,26 @@ func NewConfigWithOptions(ctx context.Context, options *Options, plugins ...Plug
 	}
 
 	return cfg, nil
+}
+
+func customResolver(ctx context.Context, options *Options) aws.EndpointResolverWithOptionsFunc {
+
+	logger := log.FromContext(ctx)
+
+	return func(service, region string, opts ...interface{}) (aws.Endpoint, error) {
+		if ce, ok := options.CustomEndpoint[service]; ok {
+
+			logger.Debugf("configuring custom endpoint to service %s", service)
+
+			return aws.Endpoint{
+				PartitionID:       ce.PartitionID,
+				URL:               ce.URL,
+				SigningRegion:     ce.SigningRegion,
+				HostnameImmutable: ce.HostnameImmutable,
+			}, nil
+		}
+		return aws.Endpoint{}, &aws.EndpointNotFoundError{}
+	}
 }
 
 func retryerConfig(options *Options) func() aws.Retryer {

@@ -8,6 +8,13 @@ import (
 	"github.com/americanas-go/ignite/net/http/client"
 )
 
+type OptionsCustomEndpoint map[string]struct {
+	PartitionID       string `config:"partitionId"`
+	URL               string `config:"url"`
+	SigningRegion     string
+	HostnameImmutable bool
+}
+
 type Options struct {
 	AccessKeyId                 string
 	SecretAccessKey             string
@@ -15,6 +22,7 @@ type Options struct {
 	SessionToken                string
 	DefaultAccountNumber        string
 	MaxAttempts                 int
+	CustomEndpoint              OptionsCustomEndpoint
 	HasRateLimit                bool
 	MaxConnsPerHost             int
 	MaxIdleConns                int
