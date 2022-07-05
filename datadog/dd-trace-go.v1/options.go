@@ -9,9 +9,14 @@ import (
 )
 
 type Options struct {
-	Service       string
-	Env           string
-	Enabled       bool
+	Service string
+	Env     string
+	Tracer  struct {
+		Enabled bool
+	}
+	Profiler struct {
+		Enabled bool
+	}
 	Tags          map[string]string
 	Host          string
 	Port          string

@@ -35,13 +35,13 @@ require (
 	github.com/globocom/echo-prometheus v0.1.2
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/go-chi/cors v1.2.0
-	github.com/go-playground/validator/v10 v10.10.1
+	github.com/go-playground/validator/v10 v10.11.0
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/gocql/gocql v1.0.0
 	github.com/godror/godror v0.32.1
-	github.com/gofiber/fiber/v2 v2.30.0
+	github.com/gofiber/fiber/v2 v2.34.1
 	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.3.0
 	github.com/graphql-go/graphql v0.8.0
@@ -74,11 +74,12 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.4.0
 	github.com/stretchr/testify v1.7.1
-	github.com/swaggo/echo-swagger v1.3.0
+	github.com/swaggo/echo-swagger v1.3.3
+	github.com/swaggo/swag v1.8.3 // indirect
 	github.com/tidwall/buntdb v1.2.9
-	github.com/valyala/fasthttp v1.34.0
+	github.com/valyala/fasthttp v1.37.0
 	github.com/wesovilabs/beyond v1.0.1
-	go.mongodb.org/mongo-driver v1.8.4
+	go.mongodb.org/mongo-driver v1.9.1
 	go.uber.org/fx v1.17.1
 	gocloud.dev v0.24.0
 	gocloud.dev/pubsub/kafkapubsub v0.24.0
@@ -92,7 +93,6 @@ require (
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.15.4
 	google.golang.org/protobuf v1.28.0
 	storj.io/drpc v0.0.30
 )
@@ -122,7 +122,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/ini v1.3.9 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.9.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.1.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.7.4 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.13.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sso v1.11.2 // indirect
@@ -231,8 +230,7 @@ require (
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/objx v0.3.0 // indirect
-	github.com/swaggo/files v0.0.0-20210815190702-a29dd2bc99b2 // indirect
-	github.com/swaggo/swag v1.8.0 // indirect
+	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/testcontainers/testcontainers-go v0.12.0 // indirect
 	github.com/tidwall/btree v1.2.1 // indirect
 	github.com/tidwall/gjson v1.14.0 // indirect
