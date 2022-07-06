@@ -14,10 +14,10 @@ go 1.18
 
 require (
 	cloud.google.com/go/bigquery v1.30.0
-	github.com/americanas-go/config v1.5.0
+	github.com/americanas-go/config v1.6.0
 	github.com/americanas-go/errors v1.1.0
 	github.com/americanas-go/health v1.0.0
-	github.com/americanas-go/log v1.7.0
+	github.com/americanas-go/log v1.8.0
 	github.com/americanas-go/multiserver v1.1.0
 	github.com/americanas-go/rest-response v1.0.2
 	github.com/ansrivas/fiberprometheus/v2 v2.2.0
@@ -73,7 +73,7 @@ require (
 	github.com/segmentio/kafka-go v0.4.30
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.4.0
-	github.com/stretchr/testify v1.7.1
+	github.com/stretchr/testify v1.8.0
 	github.com/swaggo/echo-swagger v1.3.3
 	github.com/swaggo/swag v1.8.3 // indirect
 	github.com/tidwall/buntdb v1.2.9
@@ -197,7 +197,7 @@ require (
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.15.1 // indirect
-	github.com/knadh/koanf v1.4.0 // indirect
+	github.com/knadh/koanf v1.4.2 // indirect
 	github.com/lann/builder v0.0.0-20180802200727-47ae307949d0 // indirect
 	github.com/lann/ps v0.0.0-20150810152359-62de8c46ede0 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
@@ -226,10 +226,10 @@ require (
 	github.com/prometheus/common v0.33.0 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
-	github.com/rs/zerolog v1.26.1 // indirect
+	github.com/rs/zerolog v1.27.0 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/objx v0.3.0 // indirect
+	github.com/stretchr/objx v0.4.0 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	github.com/testcontainers/testcontainers-go v0.12.0 // indirect
 	github.com/tidwall/btree v1.2.1 // indirect
