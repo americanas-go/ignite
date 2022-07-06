@@ -5,7 +5,6 @@ import (
 	"strconv"
 
 	"github.com/americanas-go/log"
-	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -65,10 +64,6 @@ func NewServerWithOptions(ctx context.Context, options *Options, plugins ...Plug
 			logger.Fatalf(err.Error())
 		}
 	}
-
-	cfg := options.Config
-	cfg.JSONEncoder = json.Marshal
-	cfg.JSONDecoder = json.Unmarshal
 
 	app := fiber.New(*options.Config)
 
