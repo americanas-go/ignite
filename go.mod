@@ -20,7 +20,7 @@ require (
 	github.com/americanas-go/log v1.8.0
 	github.com/americanas-go/multiserver v1.1.0
 	github.com/americanas-go/rest-response v1.0.2
-	github.com/ansrivas/fiberprometheus/v2 v2.2.0
+	github.com/ansrivas/fiberprometheus/v2 v2.1.2
 	github.com/aws/aws-sdk-go v1.43.28
 	github.com/aws/aws-sdk-go-v2 v1.16.3
 	github.com/aws/aws-sdk-go-v2/config v1.15.2
