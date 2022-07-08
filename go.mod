@@ -17,7 +17,7 @@ require (
 	github.com/americanas-go/config v1.6.0
 	github.com/americanas-go/errors v1.1.0
 	github.com/americanas-go/health v1.0.0
-	github.com/americanas-go/log v1.8.0
+	github.com/americanas-go/log v1.8.1
 	github.com/americanas-go/multiserver v1.1.0
 	github.com/americanas-go/rest-response v1.0.2
 	github.com/ansrivas/fiberprometheus/v2 v2.1.2
