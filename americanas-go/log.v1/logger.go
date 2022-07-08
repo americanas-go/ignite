@@ -7,12 +7,15 @@ import (
 	"github.com/americanas-go/ignite/sirupsen/logrus.v1/formatter/cloudwatch"
 	"github.com/americanas-go/ignite/sirupsen/logrus.v1/formatter/json"
 	"github.com/americanas-go/ignite/sirupsen/logrus.v1/formatter/text"
+	"github.com/americanas-go/log"
 	lr "github.com/sirupsen/logrus"
 )
 
 // New initializes the log according to the configured type and formatter.
 func New() {
 	switch Type() {
+	case "NOOP":
+		log.SetGlobalLogger(log.NewNoop())
 	case "ZEROLOG":
 		zerolog.NewLogger()
 	case "ZAP":
