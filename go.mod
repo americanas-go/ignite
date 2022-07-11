@@ -87,7 +87,7 @@ require (
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	google.golang.org/api v0.73.0
 	google.golang.org/grpc v1.45.0
-	gopkg.in/DataDog/dd-trace-go.v1 v1.38.1
+	gopkg.in/DataDog/dd-trace-go.v1 v1.39.1
 	gopkg.in/matryer/try.v1 v1.0.0-20150601225556-312d2599e12e
 	k8s.io/client-go v0.23.5
 )
@@ -259,6 +259,8 @@ require (
 	go.uber.org/goleak v1.1.12 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
+	go4.org/intern v0.0.0-20211027215823-ae77deb06f29 // indirect
+	go4.org/unsafe/assume-no-moving-gc v0.0.0-20211027215541-db492cf91b37 // indirect
 	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e // indirect
 	golang.org/x/oauth2 v0.0.0-20220309155454-6242fa91716a // indirect
@@ -275,6 +277,7 @@ require (
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+	inet.af/netaddr v0.0.0-20211027220019-c74959edd3b6 // indirect
 	k8s.io/api v0.23.5 // indirect
 	k8s.io/apimachinery v0.23.5 // indirect
 	k8s.io/klog/v2 v2.60.1 // indirect
