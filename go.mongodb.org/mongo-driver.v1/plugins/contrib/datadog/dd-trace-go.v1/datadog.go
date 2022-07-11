@@ -10,14 +10,14 @@ import (
 	mongotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo"
 )
 
-//Datadog represents a datadog plugin for mongo.
+// Datadog represents a datadog plugin for mongo.
 type Datadog struct {
 	options *Options
 }
 
 // NewDatadogWithConfigPath returns a new datadog plugin with options from config path.
-func NewDatadogWithConfigPath(path string, options ...mongotrace.Option) (*Datadog, error) {
-	o, err := NewOptionsWithPath(path, options...)
+func NewDatadogWithConfigPath(path string) (*Datadog, error) {
+	o, err := NewOptionsWithPath(path)
 	if err != nil {
 		return nil, err
 	}
@@ -30,8 +30,8 @@ func NewDatadogWithOptions(options *Options) *Datadog {
 }
 
 // NewDatadog returns a new datadog plugin with default options.
-func NewDatadog(traceOptions ...mongotrace.Option) *Datadog {
-	o, err := NewOptions(traceOptions...)
+func NewDatadog() *Datadog {
+	o, err := NewOptions()
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
@@ -45,12 +45,18 @@ func (d *Datadog) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mong
 		return nil, nil
 	}
 
+	opt := []mongotrace.Option{
+		mongotrace.WithServiceName(d.options.ServiceName),
+		mongotrace.WithAnalytics(d.options.Analytics),
+		mongotrace.WithAnalyticsRate(d.options.AnalyticsRate),
+	}
+
 	return func(ctx context.Context, options *options.ClientOptions) error {
 		logger := log.FromContext(ctx)
 
 		logger.Trace("integrating datadog in mongo")
 
-		options.SetMonitor(mongotrace.NewMonitor(d.options.Options...))
+		options.SetMonitor(mongotrace.NewMonitor(opt...))
 
 		logger.Debug("datadog successfully integrated in mongo")
 
