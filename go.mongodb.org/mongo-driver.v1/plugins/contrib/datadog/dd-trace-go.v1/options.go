@@ -2,20 +2,19 @@ package datadog
 
 import (
 	"github.com/americanas-go/config"
-	mongotrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo"
 )
 
 // Options represents datadog plugin for mongo options.
 type Options struct {
-	Enabled bool
-	Options []mongotrace.Option
+	Enabled       bool
+	ServiceName   string
+	Analytics     bool
+	AnalyticsRate float64
 }
 
 // NewOptions returns options from config file or environment vars.
-func NewOptions(options ...mongotrace.Option) (*Options, error) {
-	o := &Options{
-		Options: options,
-	}
+func NewOptions() (*Options, error) {
+	o := &Options{}
 
 	err := config.UnmarshalWithPath(root, o)
 	if err != nil {
@@ -26,8 +25,8 @@ func NewOptions(options ...mongotrace.Option) (*Options, error) {
 }
 
 // NewOptionsWithPath unmarshals options based a given key path.
-func NewOptionsWithPath(path string, options ...mongotrace.Option) (opts *Options, err error) {
-	opts, err = NewOptions(options...)
+func NewOptionsWithPath(path string) (opts *Options, err error) {
+	opts, err = NewOptions()
 	if err != nil {
 		return nil, err
 	}
