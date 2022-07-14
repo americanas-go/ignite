@@ -16,7 +16,7 @@ const (
 )
 
 func init() {
-
+	ConfigAdd(root)
 }
 
 func ConfigAdd(path string) {
