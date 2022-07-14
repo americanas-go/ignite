@@ -3,6 +3,7 @@ package error_handler
 import (
 	"context"
 	"net/http"
+	"strconv"
 
 	"github.com/americanas-go/errors"
 	"github.com/americanas-go/ignite/gofiber/fiber.v2"
@@ -54,9 +55,9 @@ func (d *ErrorHandler) Register(ctx context.Context, options *fiber.Options) (fi
 	return func(ctx context.Context, config *f.Config) error {
 
 		if options.Type != "REST" {
-			config.ErrorHandler = errorHandler
+			config.ErrorHandler = d.errorHandler
 		} else {
-			config.ErrorHandler = errorHandlerJSON
+			config.ErrorHandler = d.errorHandlerJSON
 		}
 
 		logger.Debug("error handler successfully sets in fiber")
@@ -65,16 +66,42 @@ func (d *ErrorHandler) Register(ctx context.Context, options *fiber.Options) (fi
 	}, nil
 }
 
-func errorHandler(c *f.Ctx, err error) error {
+func (d *ErrorHandler) print(ctx context.Context, err error, tp int) {
+	logger := log.FromContext(ctx)
+	if tp == 5 && !d.options.Logger.Print5xx {
+		return
+	} else if tp == 4 && !d.options.Logger.Print4xx {
+		return
+	} else {
+		msg := err.Error()
+		if d.options.Logger.PrintStackTrace {
+			msg = errors.ErrorStack(err)
+		}
+		l := logger.FromContext(ctx).WithError(err)
+		switch tp {
+		case 5:
+			l.Errorf(msg)
+		default:
+			l.Warnf(msg)
+		}
+	}
+}
+
+func (d *ErrorHandler) errorHandler(c *f.Ctx, err error) error {
 	if errors.IsNotFound(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusNotFound).SendString(err.Error())
 	} else if errors.IsNotValid(err) || errors.IsBadRequest(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusBadRequest).SendString(err.Error())
 	} else if errors.IsServiceUnavailable(err) {
+		d.print(c.UserContext(), err, 5)
 		return c.Status(http.StatusServiceUnavailable).SendString(err.Error())
 	} else if errors.IsConflict(err) || errors.IsAlreadyExists(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusConflict).SendString(err.Error())
 	} else if errors.IsNotImplemented(err) || errors.IsNotProvisioned(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusNotImplemented).SendString(err.Error())
 	} else if errors.IsUnauthorized(err) {
 		return c.Status(http.StatusUnauthorized).SendString(err.Error())
@@ -84,49 +111,65 @@ func errorHandler(c *f.Ctx, err error) error {
 
 		switch t := err.(type) {
 		case validator.ValidationErrors:
+			d.print(c.UserContext(), err, 4)
 			return c.Status(http.StatusUnprocessableEntity).SendString("The server understands the content type " +
 				"of the request entity but was unable to process the contained instructions.")
 		case *f.Error:
+			d.print(c.UserContext(), err, 4)
 			return c.Status(t.Code).SendString(t.Message)
 		default:
+			d.print(c.UserContext(), err, 5)
 			return c.Status(http.StatusInternalServerError).SendString(err.Error())
 		}
 	}
 }
 
-func errorHandlerJSON(c *f.Ctx, err error) error {
+func (d *ErrorHandler) errorHandlerJSON(c *f.Ctx, err error) error {
 
 	if errors.IsNotFound(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusNotFound).JSON(
 			response.Error{HttpStatusCode: http.StatusNotFound, Message: err.Error()})
 	} else if errors.IsNotValid(err) || errors.IsBadRequest(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusBadRequest).JSON(
 			response.Error{HttpStatusCode: http.StatusBadRequest, Message: err.Error()})
 	} else if errors.IsServiceUnavailable(err) {
+		d.print(c.UserContext(), err, 5)
 		return c.Status(http.StatusServiceUnavailable).JSON(
 			response.Error{HttpStatusCode: http.StatusServiceUnavailable, Message: err.Error()})
 	} else if errors.IsConflict(err) || errors.IsAlreadyExists(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusConflict).JSON(
 			response.Error{HttpStatusCode: http.StatusConflict, Message: err.Error()})
 	} else if errors.IsNotImplemented(err) || errors.IsNotProvisioned(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusNotImplemented).JSON(
 			response.Error{HttpStatusCode: http.StatusNotImplemented, Message: err.Error()})
 	} else if errors.IsUnauthorized(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusUnauthorized).JSON(
 			response.Error{HttpStatusCode: http.StatusUnauthorized, Message: err.Error()})
 	} else if errors.IsForbidden(err) {
+		d.print(c.UserContext(), err, 4)
 		return c.Status(http.StatusForbidden).JSON(
 			response.Error{HttpStatusCode: http.StatusForbidden, Message: err.Error()})
 	} else {
 
 		switch t := err.(type) {
 		case validator.ValidationErrors:
+			d.print(c.UserContext(), err, 4)
 			return c.Status(http.StatusUnprocessableEntity).JSON(
 				response.NewUnprocessableEntity(t))
 		case *f.Error:
+			fs := strconv.Itoa(t.Code)[0:1]
+			if tp, err := strconv.Atoi(fs); err != nil {
+				d.print(c.UserContext(), err, tp)
+			}
 			return c.Status(t.Code).JSON(
 				response.Error{HttpStatusCode: t.Code, Message: t.Message})
 		default:
+			d.print(c.UserContext(), err, 5)
 			return c.Status(http.StatusInternalServerError).JSON(
 				response.Error{HttpStatusCode: http.StatusInternalServerError, Message: t.Error()})
 		}
