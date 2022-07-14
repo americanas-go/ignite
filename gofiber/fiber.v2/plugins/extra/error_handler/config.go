@@ -22,7 +22,7 @@ func init() {
 func ConfigAdd(path string) {
 	config.Add(path+enabled, true, "enable/disable error handler middleware")
 	config.Add(path+loggerEnabled, true, "enable/disable print error log")
-	config.Add(path+print4xx, true, "enable/disable print 4xx errors")
-	config.Add(path+print5xx, false, "enable/disable error 5xx errors")
+	config.Add(path+print4xx, false, "enable/disable print 4xx errors")
+	config.Add(path+print5xx, true, "enable/disable error 5xx errors")
 	config.Add(path+printStackTrace, false, "enable/disable error print stacktrace")
 }
