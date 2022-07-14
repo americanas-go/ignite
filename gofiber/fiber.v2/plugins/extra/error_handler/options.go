@@ -7,6 +7,11 @@ import (
 // Options error handler plugin for fiber options.
 type Options struct {
 	Enabled bool
+	Logger  struct {
+		Print4xx        bool
+		Print5xx        bool
+		PrintStackTrace bool
+	}
 }
 
 // NewOptions returns options from config file or environment vars.
