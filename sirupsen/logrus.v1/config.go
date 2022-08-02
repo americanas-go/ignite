@@ -17,7 +17,6 @@ const (
 	fileMaxAge     = fileRoot + ".maxage"
 	timeFormat     = root + ".time.format"
 	formatterType  = root + ".formatterType"
-	FormattersRoot = root + ".formatters"
 )
 
 func init() {

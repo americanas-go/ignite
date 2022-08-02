@@ -2,11 +2,10 @@ package cloudwatch
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/sirupsen/logrus.v1"
 )
 
 const (
-	root             = logrus.FormattersRoot + ".cloudwatch"
+	root             = "ignite.logrus.formatters.cloudwatch"
 	prefixFields     = root + ".prefixFields"
 	disableSorting   = root + ".disableSorting"
 	quoteEmptyFields = root + ".quoteEmptyFields"
