@@ -14,10 +14,10 @@ go 1.18
 
 require (
 	cloud.google.com/go/bigquery v1.30.0
-	github.com/americanas-go/config v1.6.0
+	github.com/americanas-go/config v1.8.0
 	github.com/americanas-go/errors v1.1.0
 	github.com/americanas-go/health v1.0.0
-	github.com/americanas-go/log v1.8.2
+	github.com/americanas-go/log v1.8.5
 	github.com/americanas-go/multiserver v1.1.0
 	github.com/americanas-go/rest-response v1.0.2
 	github.com/ansrivas/fiberprometheus/v2 v2.1.2
@@ -93,8 +93,12 @@ require (
 )
 
 require (
+	github.com/allegro/bigcache v1.2.1
+	github.com/americanas-go/cache v1.0.0-beta.1
 	github.com/bytedance/sonic v1.3.2
+	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/goccy/go-json v0.9.8
+	github.com/jedib0t/go-pretty/v6 v6.3.5
 	google.golang.org/protobuf v1.28.0
 	storj.io/drpc v0.0.30
 )
@@ -209,6 +213,7 @@ require (
 	github.com/matryer/try v0.0.0-20161228173917-9ac251b645a2 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
+	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
@@ -230,6 +235,7 @@ require (
 	github.com/prometheus/common v0.33.0 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
+	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rs/zerolog v1.27.0 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
