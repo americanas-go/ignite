@@ -16,6 +16,7 @@ const (
 	fileCompress   = fileRoot + ".compress"
 	fileMaxAge     = fileRoot + ".maxage"
 	timeFormat     = root + ".time.format"
+	formatterType  = root + ".formatterType"
 	FormattersRoot = root + ".formatters"
 )
 
@@ -30,4 +31,9 @@ func init() {
 	config.Add(fileCompress, true, "log file compress")
 	config.Add(fileMaxAge, 28, "log file max age (days)")
 	config.Add(timeFormat, "2006/01/02 15:04:05.000", "defines time format")
+	config.Add(formatterType, "TEXT", "defines logrus formatter TEXT/JSON/CLOUDWATCH")
+}
+
+func FormatterType() string {
+	return config.String(formatterType)
 }

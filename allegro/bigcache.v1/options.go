@@ -1,4 +1,4 @@
-package freecache
+package bigcache
 
 import (
 	"time"
@@ -6,32 +6,19 @@ import (
 	"github.com/americanas-go/config"
 )
 
-// Options represents cache options.
 type Options struct {
-	CacheSize int
-	TTL       time.Duration `config:"ttl"`
-}
-
-// Option represents an option.
-type Option func(options *Options)
-
-// WithCacheSize returns option that defines cache size.
-func WithCacheSize(cacheSize int) Option {
-	return func(options *Options) {
-		options.CacheSize = cacheSize
-	}
-}
-
-// WithTTL returns option that defines cache duration.
-func WithTTL(ttl time.Duration) Option {
-	return func(options *Options) {
-		options.TTL = ttl
-	}
+	Shards             int
+	LifeWindow         time.Duration
+	CleanWindow        time.Duration
+	MaxEntriesInWindow int
+	MaxEntrySize       int
+	Verbose            bool
+	HardMaxCacheSize   int
 }
 
 // NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
-	o := &Options{}
+	o := new(Options)
 
 	err := config.UnmarshalWithPath(root, o)
 	if err != nil {
