@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"github.com/americanas-go/cache/contrib/go-redis/redis.v7"
+	"github.com/americanas-go/cache/contrib/go-redis/redis.v8"
 	"github.com/americanas-go/config"
 )
 

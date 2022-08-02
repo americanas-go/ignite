@@ -1,37 +1,27 @@
 package freecache
 
 import (
-	"context"
-
 	"github.com/americanas-go/cache"
+	cfreecache "github.com/americanas-go/cache/contrib/coocood/freecache.v1"
 	"github.com/coocood/freecache"
 )
 
-type fcache struct {
-	cache   *freecache.Cache
-	options *Options
+// NewDriverWithConfigPath returns a cache with options from config path .
+func NewDriverWithConfigPath(cache *freecache.Cache, path string) (cache.Driver, error) {
+	options, err := NewOptionsWithPath(path)
+	if err != nil {
+		return nil, err
+	}
+	return cfreecache.New(cache, options), nil
 }
 
-func (c *fcache) Del(ctx context.Context, key string) error {
-	c.cache.Del([]byte(key))
-	return nil
-}
-
-func (c *fcache) Get(ctx context.Context, key string) (data []byte, err error) {
-	return c.cache.Get([]byte(key))
-}
-
-func (c *fcache) Set(ctx context.Context, key string, data []byte) (err error) {
-
-	seconds := c.options.TTL.Seconds()
-
-	if err = c.cache.Set([]byte(key), data, int(seconds)); err != nil {
-		return err
+// NewDriver returns a cache.
+func NewDriver(cache *freecache.Cache) (c cache.Driver, err error) {
+	var options *cfreecache.Options
+	options, err = NewOptions()
+	if err != nil {
+		return nil, err
 	}
 
-	return nil
-}
-
-func New(cache *freecache.Cache, options *Options) cache.Driver {
-	return &fcache{cache: cache, options: options}
+	return cfreecache.New(cache, options), nil
 }

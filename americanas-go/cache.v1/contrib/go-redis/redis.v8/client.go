@@ -2,8 +2,8 @@ package redis
 
 import (
 	"github.com/americanas-go/cache"
-	credis "github.com/americanas-go/cache/contrib/go-redis/redis.v7"
-	"github.com/go-redis/redis/v7"
+	credis "github.com/americanas-go/cache/contrib/go-redis/redis.v8"
+	"github.com/go-redis/redis/v8"
 )
 
 // NewClientDriverWithConfigPath returns a cache with options from config path .

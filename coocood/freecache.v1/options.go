@@ -1,15 +1,12 @@
 package freecache
 
 import (
-	"time"
-
 	"github.com/americanas-go/config"
 )
 
 // Options represents cache options.
 type Options struct {
 	CacheSize int
-	TTL       time.Duration `config:"ttl"`
 }
 
 // Option represents an option.
@@ -19,13 +16,6 @@ type Option func(options *Options)
 func WithCacheSize(cacheSize int) Option {
 	return func(options *Options) {
 		options.CacheSize = cacheSize
-	}
-}
-
-// WithTTL returns option that defines cache duration.
-func WithTTL(ttl time.Duration) Option {
-	return func(options *Options) {
-		options.TTL = ttl
 	}
 }
 
