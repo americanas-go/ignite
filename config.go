@@ -12,6 +12,7 @@ const (
 	strict        = banner + ".strict"
 	prt           = root + ".print"
 	cfg           = prt + ".config"
+	maxLength     = cfg + ".maxLength"
 	cfgEnabled    = cfg + ".enabled"
 )
 
@@ -23,4 +24,5 @@ func init() {
 	config.Add(color, "white", "banner color")
 	config.Add(strict, true, "sets banner strict")
 	config.Add(cfgEnabled, true, "enable/disable print ignite configs")
+	config.Add(maxLength, 25, "defines value max length")
 }
