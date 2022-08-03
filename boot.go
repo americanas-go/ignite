@@ -1,6 +1,7 @@
 package ignite
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/americanas-go/config"
@@ -24,7 +25,7 @@ func Boot() {
 				v = "****"
 			}
 			rows = append(rows, table.Row{
-				entry.Key, entry.Value, v,
+				entry.Key, fmt.Sprintf("%v", entry.Value)[:config.Int(maxLength)], v,
 			})
 		}
 
