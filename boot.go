@@ -12,7 +12,7 @@ func Boot() {
 	config.Load()
 
 	if config.Bool(bannerEnabled) {
-		fig := figure.NewColorFigure("ignite", "standard", "white", false)
+		fig := figure.NewColorFigure(config.String(phrase), config.String(fontName), config.String(color), config.Bool(strict))
 		fig.Print()
 	}
 
