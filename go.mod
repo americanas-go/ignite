@@ -93,8 +93,8 @@ require (
 )
 
 require (
-	github.com/allegro/bigcache v1.2.1
-	github.com/americanas-go/cache v1.0.0-beta.3
+	github.com/allegro/bigcache/v3 v3.0.2
+	github.com/americanas-go/cache v1.0.0-beta.4
 	github.com/bytedance/sonic v1.3.2
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/goccy/go-json v0.9.8
