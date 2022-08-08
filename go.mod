@@ -17,11 +17,11 @@ replace (
 	github.com/miekg/dns => github.com/miekg/dns v1.1.25
 	// github.com/nats-io/nats-server => github.com/nats-io/nats-server v2.2.0
 	github.com/opencontainers/runc => github.com/opencontainers/runc v1.0.3
-	github.com/tidwall/gjson => github.com/tidwall/gjson v1.9.3
+	github.com/tidwall/gjson => github.com/tidwall/gjson v1.13.0
 	// go.etcd.io/etcd => go.etcd.io/etcd v3.5.3
-	golang.org/x/crypto => golang.org/x/crypto v0.0.0-20201216223049-8b5274cf687f
-	golang.org/x/net => golang.org/x/net v0.0.0-20211209124913-491a49abca63
-	golang.org/x/text => golang.org/x/text v0.3.3
+	golang.org/x/crypto => golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa
+	golang.org/x/net => golang.org/x/net v0.0.0-20220802222814-0bcc04d9c69b
+	golang.org/x/text => golang.org/x/text v0.3.7
 	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 	k8s.io/kubernetes => k8s.io/kubernetes v1.22.2
 	nhooyr.io/websocket => nhooyr.io/websocket v1.8.7
@@ -62,7 +62,6 @@ require (
 	github.com/gocql/gocql v1.2.0
 	github.com/godror/godror v0.34.0
 	github.com/gofiber/fiber/v2 v2.36.0
-	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.3.0
 	github.com/graphql-go/graphql v0.8.0
 	github.com/graphql-go/handler v0.2.3
@@ -171,6 +170,7 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/golang/glog v1.0.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/gnostic v0.6.9 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
@@ -284,7 +284,7 @@ require (
 	golang.org/x/tools v0.1.12 // indirect
 	golang.org/x/xerrors v0.0.0-20220609144429-65e65417b02f // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20220805133916-01dd62135a58 // indirect
+	google.golang.org/genproto v0.0.0-20220808131553-a91ffa7f803e // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
