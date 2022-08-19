@@ -54,8 +54,9 @@ require (
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/labstack/gommon v0.3.1
 	github.com/mittwald/vaultgo v0.1.0
-	github.com/nats-io/nats-server/v2 v2.7.4 // indirect
-	github.com/nats-io/nats.go v1.13.1-0.20220308171302-2f2f6968e98d
+	github.com/nats-io/jwt/v2 v2.3.0 // indirect
+	github.com/nats-io/nats-server/v2 v2.8.4 // indirect
+	github.com/nats-io/nats.go v1.16.0
 	github.com/newrelic/go-agent/v3 v3.15.2
 	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.0.2
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.1
@@ -93,8 +94,8 @@ require (
 )
 
 require (
-	github.com/allegro/bigcache v1.2.1
-	github.com/americanas-go/cache v1.0.0-beta.3
+	github.com/allegro/bigcache/v3 v3.0.2
+	github.com/americanas-go/cache v1.0.0-beta.4
 	github.com/bytedance/sonic v1.3.2
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/goccy/go-json v0.9.8
