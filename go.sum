@@ -205,10 +205,10 @@ github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRF
 github.com/alecthomas/units v0.0.0-20190717042225-c3de453c63f4/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/alecthomas/units v0.0.0-20190924025748-f65c72e2690d/go.mod h1:rBZYJk541a8SKzHPHnH3zbiI+7dagKZ0cgpgrD7Fyho=
 github.com/alexflint/go-filemutex v0.0.0-20171022225611-72bdc8eae2ae/go.mod h1:CgnQgUtFrFz9mxFNtED3jI5tLDjKlOM+oUF/sTk6ps0=
-github.com/allegro/bigcache v1.2.1 h1:hg1sY1raCwic3Vnsvje6TT7/pnZba83LeFck5NrFKSc=
-github.com/allegro/bigcache v1.2.1/go.mod h1:Cb/ax3seSYIx7SuZdm2G2xzfwmv3TPSk2ucNfQESPXM=
-github.com/americanas-go/cache v1.0.0-beta.3 h1:P2sVTgSnI/yHfgvCcqq2P88nvvwJaoATjFawT8jp6Fo=
-github.com/americanas-go/cache v1.0.0-beta.3/go.mod h1:ufCQuZzTgBJ2bSjAq9IOWmQZb4UvTMAFImLIDLxOaSk=
+github.com/allegro/bigcache/v3 v3.0.2 h1:AKZCw+5eAaVyNTBmI2fgyPVJhHkdWder3O9IrprcQfI=
+github.com/allegro/bigcache/v3 v3.0.2/go.mod h1:aPyh7jEvrog9zAwx5N7+JUQX5dZTSGpxF1LAR4dr35I=
+github.com/americanas-go/cache v1.0.0-beta.4 h1:On9bK3h6y+Bk1oxilmiM+l3cjqLXT46QwhyAo/PjwSA=
+github.com/americanas-go/cache v1.0.0-beta.4/go.mod h1:0VMrjI0P/Oj2OxxJum6Jk69KTSOVlY/e6yui0UNOZ7U=
 github.com/americanas-go/config v1.8.0 h1:SMlSmwpOEnI9ufaLpD2acNsyXc1TbEhtofvtQ9XvIS8=
 github.com/americanas-go/config v1.8.0/go.mod h1:7L0aWl2C++RDSQONh5OR8YgnJonjlGlq5QyLSIEeM4U=
 github.com/americanas-go/errors v1.0.0/go.mod h1:yM2qJYuyQ1VCUqyhEqVwpnu0c4NFxxE6A20ZARKllng=

@@ -24,8 +24,21 @@ func Boot() {
 			if entry.Options.Hide {
 				v = "****"
 			}
+
+			maxLength := config.Int(maxLength)
+
+			defaultValue := fmt.Sprintf("%v", entry.Value)
+			if len(defaultValue) > maxLength {
+				defaultValue = defaultValue[:maxLength]
+			}
+
+			value := fmt.Sprintf("%v", v)
+			if len(value) > maxLength {
+				value = value[:maxLength]
+			}
+
 			rows = append(rows, table.Row{
-				entry.Key, fmt.Sprintf("%v", entry.Value)[:config.Int(maxLength)], v,
+				entry.Key, defaultValue, value,
 			})
 		}
 

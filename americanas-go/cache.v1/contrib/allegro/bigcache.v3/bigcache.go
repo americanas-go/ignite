@@ -3,9 +3,9 @@ package bigcache
 import (
 	"context"
 
-	"github.com/allegro/bigcache"
+	"github.com/allegro/bigcache/v3"
 	"github.com/americanas-go/cache"
-	cbigcache "github.com/americanas-go/cache/contrib/allegro/bigcache.v1"
+	cbigcache "github.com/americanas-go/cache/contrib/allegro/bigcache.v3"
 )
 
 // NewDriver returns a cache.
