@@ -41,7 +41,7 @@ require (
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/gocql/gocql v1.0.0
 	github.com/godror/godror v0.32.1
-	github.com/gofiber/fiber/v2 v2.34.1
+	github.com/gofiber/fiber/v2 v2.36.0
 	github.com/golang/protobuf v1.5.2
 	github.com/google/uuid v1.3.0
 	github.com/graphql-go/graphql v0.8.0
@@ -51,7 +51,7 @@ require (
 	github.com/hashicorp/vault/api v1.5.0
 	github.com/hiko1129/echo-pprof v1.0.1
 	github.com/jlaffaye/ftp v0.0.0-20220310202011-d2c44e311e78
-	github.com/labstack/echo/v4 v4.7.2
+	github.com/labstack/echo/v4 v4.8.0
 	github.com/labstack/gommon v0.3.1
 	github.com/mittwald/vaultgo v0.1.0
 	github.com/nats-io/jwt/v2 v2.3.0 // indirect
@@ -78,7 +78,7 @@ require (
 	github.com/swaggo/echo-swagger v1.3.3
 	github.com/swaggo/swag v1.8.3 // indirect
 	github.com/tidwall/buntdb v1.2.9
-	github.com/valyala/fasthttp v1.37.0
+	github.com/valyala/fasthttp v1.38.0
 	github.com/wesovilabs/beyond v1.0.1
 	go.mongodb.org/mongo-driver v1.10.1
 	go.uber.org/fx v1.17.1
