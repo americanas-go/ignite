@@ -1,6 +1,6 @@
 module github.com/americanas-go/ignite
 
-go 1.18
+go 1.19
 
 // replace github.com/americanas-go/log => ../log/
 // replace github.com/americanas-go/multiserver => ../multiserver/
@@ -17,7 +17,7 @@ require (
 	github.com/americanas-go/config v1.8.0
 	github.com/americanas-go/errors v1.1.0
 	github.com/americanas-go/health v1.0.0
-	github.com/americanas-go/log v1.8.5
+	github.com/americanas-go/log v1.8.6
 	github.com/americanas-go/multiserver v1.1.0
 	github.com/americanas-go/rest-response v1.0.2
 	github.com/ansrivas/fiberprometheus/v2 v2.1.2
@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sns v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.18.2
 	github.com/cloudevents/sdk-go/v2 v2.8.0
-	github.com/coocood/freecache v1.2.1
+	github.com/coocood/freecache v1.2.2
 	github.com/elastic/go-elasticsearch/v8 v8.1.0
 	github.com/globocom/echo-prometheus v0.1.2
 	github.com/go-chi/chi/v5 v5.0.7
@@ -51,7 +51,7 @@ require (
 	github.com/hashicorp/vault/api v1.5.0
 	github.com/hiko1129/echo-pprof v1.0.1
 	github.com/jlaffaye/ftp v0.0.0-20220310202011-d2c44e311e78
-	github.com/labstack/echo/v4 v4.8.0
+	github.com/labstack/echo/v4 v4.9.0
 	github.com/labstack/gommon v0.3.1
 	github.com/mittwald/vaultgo v0.1.0
 	github.com/nats-io/jwt/v2 v2.3.0 // indirect
@@ -72,7 +72,7 @@ require (
 	github.com/prometheus/client_golang v1.12.1
 	github.com/ravernkoh/cwlogsfmt v0.0.0-20180121032441-917bad983b4c
 	github.com/segmentio/kafka-go v0.4.30
-	github.com/sirupsen/logrus v1.8.1
+	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cobra v1.4.0
 	github.com/stretchr/testify v1.8.0
 	github.com/swaggo/echo-swagger v1.3.3
@@ -80,7 +80,7 @@ require (
 	github.com/tidwall/buntdb v1.2.9
 	github.com/valyala/fasthttp v1.38.0
 	github.com/wesovilabs/beyond v1.0.1
-	go.mongodb.org/mongo-driver v1.10.1
+	go.mongodb.org/mongo-driver v1.10.2
 	go.uber.org/fx v1.17.1
 	gocloud.dev v0.24.0
 	gocloud.dev/pubsub/kafkapubsub v0.24.0
@@ -96,7 +96,7 @@ require (
 require (
 	github.com/allegro/bigcache/v3 v3.0.2
 	github.com/americanas-go/cache v1.0.0-beta.4
-	github.com/bytedance/sonic v1.4.0
+	github.com/bytedance/sonic v1.5.0-rc
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/goccy/go-json v0.9.8
 	github.com/jedib0t/go-pretty/v6 v6.3.5
@@ -237,7 +237,7 @@ require (
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/rs/zerolog v1.27.0 // indirect
+	github.com/rs/zerolog v1.28.0 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/stretchr/objx v0.4.0 // indirect
@@ -265,13 +265,13 @@ require (
 	go.uber.org/dig v1.14.1 // indirect
 	go.uber.org/goleak v1.1.12 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
-	go.uber.org/zap v1.21.0 // indirect
+	go.uber.org/zap v1.23.0 // indirect
 	go4.org/intern v0.0.0-20211027215823-ae77deb06f29 // indirect
 	go4.org/unsafe/assume-no-moving-gc v0.0.0-20211027215541-db492cf91b37 // indirect
 	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
 	golang.org/x/oauth2 v0.0.0-20220309155454-6242fa91716a // indirect
-	golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a // indirect
+	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20220224211638-0e9765cccd65 // indirect
