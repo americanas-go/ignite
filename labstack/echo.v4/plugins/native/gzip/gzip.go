@@ -56,7 +56,10 @@ func (i *Gzip) Register(ctx context.Context, server *echo.Server) error {
 
 	logger.Trace("enabling gzip middleware in echo")
 
-	server.Use(middleware.Gzip())
+	server.Use(middleware.GzipWithConfig(middleware.GzipConfig{
+		Skipper: middleware.DefaultGzipConfig.Skipper,
+		Level:   i.options.Level,
+	}))
 
 	logger.Debug("gzip middleware successfully enabled in echo")
 
