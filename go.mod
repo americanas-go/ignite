@@ -51,7 +51,7 @@ require (
 	github.com/hashicorp/vault/api v1.5.0
 	github.com/hiko1129/echo-pprof v1.0.1
 	github.com/jlaffaye/ftp v0.0.0-20220310202011-d2c44e311e78
-	github.com/labstack/echo/v4 v4.7.2
+	github.com/labstack/echo/v4 v4.9.0
 	github.com/labstack/gommon v0.3.1
 	github.com/mittwald/vaultgo v0.1.0
 	github.com/nats-io/jwt/v2 v2.3.0 // indirect
