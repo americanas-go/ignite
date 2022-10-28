@@ -50,6 +50,7 @@ func NewGzip() *Gzip {
 // Register registers this gzip plugin for echo server.
 func (i *Gzip) Register(ctx context.Context, server *echo.Server) error {
 	if !i.options.Enabled {
+		return nil
 	}
 
 	logger := log.FromContext(ctx)
