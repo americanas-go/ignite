@@ -2,11 +2,11 @@ package json
 
 import (
 	"github.com/americanas-go/config"
-	"github.com/americanas-go/ignite/gofiber/fiber.v2"
+	"github.com/americanas-go/ignite/labstack/echo.v4"
 )
 
 const (
-	root    = fiber.PluginsRoot + ".goccyGoJson"
+	root    = echo.PluginsRoot + ".goccyGoJson"
 	enabled = ".enabled"
 )
 
