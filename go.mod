@@ -82,7 +82,7 @@ require (
 	github.com/tidwall/buntdb v1.2.10
 	github.com/valyala/fasthttp v1.40.0
 	github.com/wesovilabs/beyond v1.0.1
-	go.mongodb.org/mongo-driver v1.10.2
+	go.mongodb.org/mongo-driver v1.11.0
 	go.uber.org/fx v1.18.1
 	gocloud.dev v0.26.0
 	gocloud.dev/pubsub/kafkapubsub v0.26.0
@@ -91,7 +91,7 @@ require (
 	google.golang.org/api v0.96.0
 	google.golang.org/grpc v1.49.0
 	google.golang.org/protobuf v1.28.1
-	gopkg.in/DataDog/dd-trace-go.v1 v1.42.0
+	gopkg.in/DataDog/dd-trace-go.v1 v1.43.1
 	gopkg.in/matryer/try.v1 v1.0.0-20150601225556-312d2599e12e
 	k8s.io/client-go v0.25.1
 	storj.io/drpc v0.0.32
