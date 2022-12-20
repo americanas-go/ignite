@@ -35,3 +35,8 @@ func CommandConfigAdd(cmd string) {
 	config.Add(path+hystrixMaxConcurrentRequests, 20, "defines how many commands of the same type can run at the same time")
 	config.Add(path+hystrixSleepWindow, 5000, "defines how long, in milliseconds, to wait after a circuit opens before testing for recovery")
 }
+
+func IsCommandEnabled(cmd string) bool {
+	path := strings.Join([]string{cmdRoot, cmd}, ".")
+	return config.Bool(path + hystrixEnabled)
+}
