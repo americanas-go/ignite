@@ -8,6 +8,7 @@ import (
 type Options struct {
 	Namespace string
 	Labels    map[string]string
+	Enabled   bool
 }
 
 // NewOptions returns options from config file or environment vars.
