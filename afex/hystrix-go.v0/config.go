@@ -19,13 +19,13 @@ const (
 	hystrixSleepWindow            = ".sleepWindow"
 )
 
-func CmdConfigsAdd(cmds []string) {
+func CommandConfigsAdd(cmds []string) {
 	for _, cmd := range cmds {
-		CmdConfigAdd(cmd)
+		CommandConfigAdd(cmd)
 	}
 }
 
-func CmdConfigAdd(cmd string) {
+func CommandConfigAdd(cmd string) {
 	path := strings.Join([]string{cmdRoot, cmd}, ".")
 	config.Add(path+hystrixEnabled, true, "enable/disable circuit breaker when necessary")
 	config.Add(path+hystrixCommand, cmd, "defines hystrix command cmd")
