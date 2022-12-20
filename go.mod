@@ -14,6 +14,7 @@ go 1.19
 
 require (
 	cloud.google.com/go/bigquery v1.41.0
+	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5
 	github.com/allegro/bigcache/v3 v3.0.2
 	github.com/americanas-go/cache v1.0.0-beta.5
 	github.com/americanas-go/config v1.8.0
