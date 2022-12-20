@@ -1,13 +1,12 @@
-package gzip
+package json
 
 import (
 	"github.com/americanas-go/config"
 )
 
-// Options gzip plugin for echo server options.
+// Options represents goccy/go-json plugin for fiber options.
 type Options struct {
 	Enabled bool
-	Level   int
 }
 
 // NewOptions returns options from config file or environment vars.
@@ -24,7 +23,6 @@ func NewOptions() (*Options, error) {
 
 // NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
-
 	opts, err = NewOptions()
 	if err != nil {
 		return nil, err

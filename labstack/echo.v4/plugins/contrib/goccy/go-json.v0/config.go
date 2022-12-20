@@ -1,4 +1,4 @@
-package gzip
+package json
 
 import (
 	"github.com/americanas-go/config"
@@ -6,9 +6,8 @@ import (
 )
 
 const (
-	root    = echo.PluginsRoot + ".gzip"
+	root    = echo.PluginsRoot + ".goccyGoJson"
 	enabled = ".enabled"
-	level   = ".level"
 )
 
 func init() {
@@ -16,6 +15,5 @@ func init() {
 }
 
 func ConfigAdd(path string) {
-	config.Add(path+enabled, true, "enable/disable gzip middleware")
-	config.Add(path+level, -1, "sets gzip level")
+	config.Add(path+enabled, true, "enable/disable goccy/go-json encoder")
 }

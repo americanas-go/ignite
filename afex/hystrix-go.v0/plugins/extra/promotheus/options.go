@@ -1,13 +1,14 @@
-package gzip
+package promotheus
 
 import (
 	"github.com/americanas-go/config"
 )
 
-// Options gzip plugin for echo server options.
+// Options represents health options.
 type Options struct {
-	Enabled bool
-	Level   int
+	Namespace string
+	Labels    map[string]string
+	Enabled   bool
 }
 
 // NewOptions returns options from config file or environment vars.
