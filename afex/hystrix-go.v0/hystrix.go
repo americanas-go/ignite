@@ -7,13 +7,18 @@ import (
 
 func ConfigureCommands(cmds []string) error {
 	for _, cmd := range cmds {
-		options, err := NewOptionsFromCommand(cmd)
-		if err != nil {
-			return err
-		}
-		if err := ConfigureCommandWithOptions(cmd, options); err != nil {
-			return err
-		}
+		ConfigureCommand(cmd)
+	}
+	return nil
+}
+
+func ConfigureCommand(cmd string) error {
+	options, err := NewOptionsFromCommand(cmd)
+	if err != nil {
+		return err
+	}
+	if err := ConfigureCommandWithOptions(cmd, options); err != nil {
+		return err
 	}
 	return nil
 }
