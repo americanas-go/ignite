@@ -1,4 +1,4 @@
-package promotheus
+package prometheus
 
 import (
 	"github.com/americanas-go/config"

@@ -1,4 +1,4 @@
-package promotheus
+package prometheus
 
 import (
 	"fmt"
