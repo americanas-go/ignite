@@ -17,19 +17,14 @@ type Options struct {
 
 // NewOptionsFromCommand unmarshals options based a given key path.
 func NewOptionsFromCommand(cmd string) (opts *Options, err error) {
-
+	opts = new(Options)
 	path := strings.Join([]string{cmdRoot, cmd}, ".")
-
-	err = config.UnmarshalWithPath(path, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	return opts, nil
+	return NewOptionsWithPath(path)
 }
 
 // NewOptionsWithPath unmarshals options based a given key path.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
+	opts = new(Options)
 
 	err = config.UnmarshalWithPath(path, opts)
 	if err != nil {
