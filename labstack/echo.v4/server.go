@@ -119,12 +119,12 @@ func (s *Server) Group(prefix string, m ...echo.MiddlewareFunc) *echo.Group {
 	return s.instance.Group(prefix, m...)
 }
 
-// Add registers registers the handler and middlewares for method route at path.
+// Add registers the handler and middlewares for method route at path.
 func (s *Server) Add(method string, path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) *echo.Route {
 	return s.instance.Add(method, path, h, m...)
 }
 
-// Any registers registers the handler and middlewares for all method routes at path.
+// Any registers the handler and middlewares for all method routes at path.
 func (s *Server) Any(path string, h echo.HandlerFunc, m ...echo.MiddlewareFunc) []*echo.Route {
 	return s.instance.Any(path, h, m...)
 }

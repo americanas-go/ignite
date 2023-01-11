@@ -1,6 +1,8 @@
 package freecache
 
-import "github.com/americanas-go/config"
+import (
+	"github.com/americanas-go/config"
+)
 
 const (
 	root      = "ignite.freecache"

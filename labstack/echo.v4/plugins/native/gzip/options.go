@@ -7,6 +7,7 @@ import (
 // Options gzip plugin for echo server options.
 type Options struct {
 	Enabled bool
+	Level   int
 }
 
 // NewOptions returns options from config file or environment vars.
