@@ -12,5 +12,5 @@ func New[R any](name string) grapper.Middleware[R] {
 	if o, _ := NewOptions(name); !o.Enabled {
 		return nil
 	}
-	return datadog.NewSpan[R](name, "wrapper")
+	return datadog.New[R](name, "wrapper")
 }

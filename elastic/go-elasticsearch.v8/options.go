@@ -2,6 +2,8 @@ package elasticsearch
 
 import (
 	"time"
+
+	"github.com/americanas-go/ignite"
 )
 
 type Options struct {
@@ -27,13 +29,7 @@ func NewOptions() (*Options, error) {
 	return ignite.NewOptionsWithPath[Options](root)
 }
 
-// NewOptionsWithPath unmarshals options based a given key path.
+// NewOptionsWithPath unmarshals a given key path into options and returns it.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
-
-	opts, err = NewOptions()
-	if err != nil {
-		return nil, err
-	}
-
-	return ignite.MergeOptionsWithPath[Options](opts, path)
+	return ignite.NewOptionsWithPath[Options](root, path)
 }

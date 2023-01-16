@@ -5,7 +5,7 @@ import (
 
 	"github.com/allegro/bigcache/v3"
 	"github.com/americanas-go/cache"
-	cbigcache "github.com/americanas-go/cache/contrib/allegro/bigcache.v3"
+	cbigcache "github.com/americanas-go/cache/driver/contrib/allegro/bigcache.v3"
 )
 
 // NewDriver returns a cache.
