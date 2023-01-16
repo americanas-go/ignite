@@ -25,12 +25,7 @@ func NewOptions() (*Options, error) {
 }
 
 // NewOptionsWithPath unmarshals a given key path into options and returns it.
+// NewOptionsWithPath unmarshals a given key path into options and returns it.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
-
-	opts, err = NewOptions()
-	if err != nil {
-		return nil, err
-	}
-
-	return ignite.MergeOptionsWithPath[Options](opts, path)
+	return ignite.NewOptionsWithPath[Options](root, path)
 }
