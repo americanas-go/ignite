@@ -2,6 +2,7 @@ package compress
 
 import (
 	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 )
 

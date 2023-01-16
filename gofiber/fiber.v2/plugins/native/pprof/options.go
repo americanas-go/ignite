@@ -1,5 +1,7 @@
 package pprof
 
+import "github.com/americanas-go/ignite"
+
 // Options pprof plugin for fiber options.
 type Options struct {
 	Enabled bool

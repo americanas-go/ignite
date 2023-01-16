@@ -1,5 +1,7 @@
 package requestid
 
+import "github.com/americanas-go/ignite"
+
 // Options requestID plugin for fiber options.
 type Options struct {
 	Enabled bool

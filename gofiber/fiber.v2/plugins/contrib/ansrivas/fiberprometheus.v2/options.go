@@ -1,5 +1,7 @@
 package prometheus
 
+import "github.com/americanas-go/ignite"
+
 // Options prometheus plugin for fiber.
 type Options struct {
 	Enabled bool

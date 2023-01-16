@@ -1,5 +1,7 @@
 package json
 
+import "github.com/americanas-go/ignite"
+
 // Options represents goccy/go-json plugin for fiber options.
 type Options struct {
 	Enabled bool
