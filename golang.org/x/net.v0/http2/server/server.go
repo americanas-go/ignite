@@ -12,10 +12,5 @@ func NewServer() (*http2.Server, error) {
 
 // NewServerWithPath returns a pointer with new Server
 func NewServerWithPath(path string) (srv *http2.Server, err error) {
-	srv, err = NewServer()
-	if err != nil {
-		return nil, err
-	}
-
-	return ignite.MergeOptionsWithPath[http2.Server](srv, path)
+	return ignite.NewOptionsWithPath[http2.Server](root, path)
 }

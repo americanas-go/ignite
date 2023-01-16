@@ -24,12 +24,5 @@ func NewOptionsWithPath(path string, traceOptions ...awstrace.Option) (opts *Opt
 		return nil, err
 	}
 
-	opts, err = ignite.MergeOptionsWithPath[Options](opts, path)
-	if err != nil {
-		return nil, err
-	}
-
-	opts.TraceOptions = traceOptions
-
-	return opts, err
+	return ignite.MergeOptionsWithPath[Options](opts, path)
 }

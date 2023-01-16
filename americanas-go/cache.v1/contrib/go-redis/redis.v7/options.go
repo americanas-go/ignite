@@ -12,11 +12,5 @@ func NewOptions() (*redis.Options, error) {
 
 // NewOptionsWithPath unmarshals a given key path into options and returns it.
 func NewOptionsWithPath(path string) (opts *redis.Options, err error) {
-
-	opts, err = NewOptions()
-	if err != nil {
-		return nil, err
-	}
-
-	return ignite.MergeOptionsWithPath[redis.Options](opts, path)
+	return ignite.NewOptionsWithPath[redis.Options](root, path)
 }
