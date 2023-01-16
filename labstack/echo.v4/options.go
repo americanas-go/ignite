@@ -38,6 +38,3 @@ func NewOptions() (*Options, error) {
 func NewOptionsWithPath(path string) (opts *Options, err error) {
 	return ignite.NewOptionsWithPath[Options](root, path)
 }
-
-return ignite.NewOptionsWithPath[Options](root, path)
-}
