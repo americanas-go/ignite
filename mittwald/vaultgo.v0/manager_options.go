@@ -1,7 +1,7 @@
 package vault
 
 import (
-	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 )
 
 // ManagerOptions represents a vault client options.
@@ -16,13 +16,5 @@ type ManagerOptions struct {
 
 // NewManagerOptionsWithPath unmarshals manager options based a given key path.
 func NewManagerOptionsWithPath(path string) (opts *ManagerOptions, err error) {
-
-	opts = &ManagerOptions{}
-
-	err = config.UnmarshalWithPath(path, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	return opts, nil
+	return ignite.NewOptionsWithPath[ManagerOptions](path)
 }

@@ -1,20 +1,13 @@
 package server
 
 import (
-	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 	"golang.org/x/net/http2"
 )
 
 // NewServer returns a pointer with new Server
 func NewServer() (*http2.Server, error) {
-	srv := &http2.Server{}
-
-	err := config.UnmarshalWithPath(root, srv)
-	if err != nil {
-		return nil, err
-	}
-
-	return srv, nil
+	return ignite.NewOptionsWithPath[http2.Server](root)
 }
 
 // NewServerWithPath returns a pointer with new Server
@@ -24,10 +17,5 @@ func NewServerWithPath(path string) (srv *http2.Server, err error) {
 		return nil, err
 	}
 
-	err = config.UnmarshalWithPath(path, srv)
-	if err != nil {
-		return nil, err
-	}
-
-	return srv, nil
+	return ignite.MergeOptionsWithPath[http2.Server](srv, path)
 }
