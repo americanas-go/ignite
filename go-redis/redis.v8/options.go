@@ -3,7 +3,7 @@ package redis
 import (
 	"time"
 
-	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 )
 
 // Options represents redis client set options.
@@ -28,14 +28,7 @@ type Options struct {
 
 // NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
-	o := &Options{}
-
-	err := config.UnmarshalWithPath(root, o)
-	if err != nil {
-		return nil, err
-	}
-
-	return o, nil
+	return ignite.NewOptionsWithPath[Options](root)
 }
 
 // NewOptionsWithPath unmarshals options based a given key path.
@@ -46,10 +39,5 @@ func NewOptionsWithPath(path string) (opts *Options, err error) {
 		return nil, err
 	}
 
-	err = config.UnmarshalWithPath(path, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	return opts, nil
+	return ignite.MergeOptionsWithPath[Options](opts, path)
 }

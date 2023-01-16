@@ -4,7 +4,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 	"github.com/americanas-go/ignite/net/http/client"
 )
 
@@ -42,19 +42,12 @@ func NewOptionsWithPath(path string) (opts *Options, err error) {
 		return nil, err
 	}
 
-	err = config.UnmarshalWithPath(path, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	return opts, nil
+	return ignite.MergeOptionsWithPath[Options](opts, path)
 }
 
 // NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
-	opts := &Options{}
-
-	err := config.UnmarshalWithPath(root, opts)
+	opts, err := ignite.NewOptionsWithPath[Options](root)
 	if err != nil {
 		return nil, err
 	}

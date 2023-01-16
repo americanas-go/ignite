@@ -13,14 +13,3 @@ type Options struct {
 func NewOptions() (*Options, error) {
 	return ignite.NewOptionsWithPath[Options](root)
 }
-
-// NewOptionsWithPath unmarshals options based a given key path.
-func NewOptionsWithPath(path string) (opts *Options, err error) {
-
-	opts, err = NewOptions()
-	if err != nil {
-		return nil, err
-	}
-
-	return ignite.MergeOptionsWithPath[Options](opts, path)
-}
