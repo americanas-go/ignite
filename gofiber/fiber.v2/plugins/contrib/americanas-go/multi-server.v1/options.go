@@ -1,5 +1,7 @@
 package multiserver
 
+import "github.com/americanas-go/ignite"
+
 // Options represents multiserver plugin for fiber options.
 type Options struct {
 	Enabled bool

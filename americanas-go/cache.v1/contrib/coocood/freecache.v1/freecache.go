@@ -2,7 +2,7 @@ package freecache
 
 import (
 	"github.com/americanas-go/cache"
-	cfreecache "github.com/americanas-go/cache/contrib/coocood/freecache.v1"
+	cfreecache "github.com/americanas-go/cache/driver/contrib/coocood/freecache.v1"
 	"github.com/coocood/freecache"
 )
 

@@ -1,5 +1,7 @@
 package opentracing
 
+import "github.com/americanas-go/ignite"
+
 // Options opentracing plugin for fiber options.
 type Options struct {
 	Enabled bool

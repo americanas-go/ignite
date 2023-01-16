@@ -1,5 +1,7 @@
 package health
 
+import "github.com/americanas-go/ignite"
+
 // Options represents healh checker for fiber options.
 type Options struct {
 	Enabled bool

@@ -1,7 +1,7 @@
 package datadog
 
 import (
-	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 	chitrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5"
 )
 
@@ -13,14 +13,9 @@ type Options struct {
 
 // NewOptions returns options from config file or environment vars.
 func NewOptions(traceOptions ...chitrace.Option) (*Options, error) {
-	o := &Options{TraceOptions: traceOptions}
+	opts := &Options{TraceOptions: traceOptions}
 
-	err := config.UnmarshalWithPath(root, o)
-	if err != nil {
-		return nil, err
-	}
-
-	return o, nil
+	return ignite.MergeOptionsWithPath[Options](opts, root)
 }
 
 // NewOptionsWithPath returns options from config path.
@@ -30,10 +25,5 @@ func NewOptionsWithPath(path string, traceOptions ...chitrace.Option) (opts *Opt
 		return nil, err
 	}
 
-	err = config.UnmarshalWithPath(path, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	return opts, nil
+	return ignite.MergeOptionsWithPath[Options](opts, path)
 }

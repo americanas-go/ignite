@@ -2,6 +2,8 @@ package elasticsearch
 
 import (
 	"time"
+
+	"github.com/americanas-go/ignite"
 )
 
 type Options struct {

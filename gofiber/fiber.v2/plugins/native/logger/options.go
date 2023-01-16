@@ -1,5 +1,7 @@
 package logger
 
+import "github.com/americanas-go/ignite"
+
 // Options logger plugin for fiber options.
 type Options struct {
 	Enabled bool

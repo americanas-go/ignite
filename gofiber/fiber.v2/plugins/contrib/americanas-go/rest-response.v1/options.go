@@ -1,5 +1,7 @@
 package status
 
+import "github.com/americanas-go/ignite"
+
 // Options represents status plugin for fiber options.
 type Options struct {
 	Enabled bool
