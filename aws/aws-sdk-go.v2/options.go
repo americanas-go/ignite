@@ -34,8 +34,9 @@ type Options struct {
 	HttpClient                  client.Options
 }
 
-// NewOptionsWithPath unmarshals a given key path into options and returns it.func NewOptionsWithPath(path string) (opts *Options, err error) {
-return ignite.NewOptionsWithPath[Options](root, path)
+// NewOptionsWithPath unmarshals a given key path into options and returns it.
+func NewOptionsWithPath(path string) (opts *Options, err error) {
+	return ignite.NewOptionsWithPath[Options](root, path)
 }
 
 // NewOptions returns options from config file or environment vars.
