@@ -15,7 +15,7 @@ go 1.19
 require (
 	cloud.google.com/go/bigquery v1.41.0
 	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5
-	github.com/allegro/bigcache/v3 v3.0.2
+	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/americanas-go/cache v1.0.0-beta.9
 	github.com/americanas-go/config v1.8.0
 	github.com/americanas-go/errors v1.1.0
@@ -36,7 +36,7 @@ require (
 	github.com/bytedance/sonic v1.5.0-rc
 	github.com/cloudevents/sdk-go/v2 v2.11.0
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
-	github.com/coocood/freecache v1.2.2
+	github.com/coocood/freecache v1.2.3
 	github.com/elastic/go-elasticsearch/v8 v8.4.0
 	github.com/globocom/echo-prometheus v0.1.2
 	github.com/go-chi/chi/v5 v5.0.7
@@ -45,7 +45,7 @@ require (
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/go-resty/resty/v2 v2.7.0
-	github.com/goccy/go-json v0.9.11
+	github.com/goccy/go-json v0.10.0
 	github.com/gocql/gocql v1.2.1
 	github.com/godror/godror v0.34.0
 	github.com/gofiber/fiber/v2 v2.37.1

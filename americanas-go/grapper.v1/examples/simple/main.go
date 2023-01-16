@@ -28,7 +28,7 @@ func main() {
 
 	wrp := grapper.New[string]("example", logger.New[string], hystrix.New[string])
 
-	r, err = wrp.Exec(ctx,
+	r, err = wrp.Exec(ctx, "xpto",
 		func(ctx context.Context) (string, error) {
 			l := log.FromContext(ctx)
 			l.Info("executed business rule")

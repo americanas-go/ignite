@@ -1,7 +1,7 @@
 package freecache
 
 import (
-	"github.com/americanas-go/cache/contrib/coocood/freecache.v1"
+	"github.com/americanas-go/cache/driver/contrib/coocood/freecache.v1"
 	"github.com/americanas-go/ignite"
 )
 

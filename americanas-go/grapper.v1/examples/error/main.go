@@ -29,13 +29,13 @@ func main() {
 
 	wrp := grapper.New[string]("example", logger.New[string], hystrix.New[string])
 
-	r, err = wrp.Exec(ctx,
+	r, err = wrp.Exec(ctx, "xpto",
 		func(ctx context.Context) (string, error) {
 			l := log.FromContext(ctx)
 			l.Info("executed business rule with error")
 			return "", errors.New("an error ocurred")
 		},
-		func(ctx context.Context, err error) (string, error) {
+		func(ctx context.Context, v string, err error) (string, error) {
 			l := log.FromContext(ctx)
 			if err != nil {
 				l.Info("executed fallback business rule")
