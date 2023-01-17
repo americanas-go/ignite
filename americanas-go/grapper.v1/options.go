@@ -6,7 +6,7 @@ import (
 
 // Options struct which represents cors plugin from chi options.
 type Options struct {
-	Name bool
+	Name string
 }
 
 // NewOptions returns options from config file or environment vars.

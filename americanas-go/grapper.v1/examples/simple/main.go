@@ -26,7 +26,7 @@ func main() {
 	var r string
 	var err error
 
-	wrp := grapper.New[string]("example", logger.New[string], hystrix.New[string])
+	wrp, _ := grapper.NewWrapper[string](logger.New[string], hystrix.New[string])
 
 	r, err = wrp.Exec(ctx, "xpto",
 		func(ctx context.Context) (string, error) {
