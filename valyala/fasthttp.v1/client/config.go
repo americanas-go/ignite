@@ -40,7 +40,7 @@ func ConfigAdd(path string) {
 	config.Add(path+maxIdleConnDuration, 10*time.Second, "the default duration before idle keep-alive")
 	config.Add(path+maxConnDuration, 0*time.Second, "Keep-alive connections are closed after this duration.")
 	config.Add(path+disableHeaderNamesNormalizing, false, "header names are passed as-is without normalization")
-	config.Add(path+dialDualStack, "", "attempt to connect to both ipv4 and ipv6 addresses if set to true")
+	config.Add(path+dialDualStack, false, "attempt to connect to both ipv4 and ipv6 addresses if set to true")
 	config.Add(path+maxResponseBodySize, 52428800, "maximum response body size")
 	config.Add(path+maxIdemponentCallAttempts, 5, "maximum number of attempts for idempotent calls")
 }

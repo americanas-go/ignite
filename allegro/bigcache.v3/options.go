@@ -3,7 +3,7 @@ package bigcache
 import (
 	"time"
 
-	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 )
 
 type Options struct {
@@ -18,28 +18,10 @@ type Options struct {
 
 // NewOptions returns options from config file or environment vars.
 func NewOptions() (*Options, error) {
-	o := new(Options)
-
-	err := config.UnmarshalWithPath(root, o)
-	if err != nil {
-		return nil, err
-	}
-
-	return o, nil
+	return ignite.NewOptionsWithPath[Options](root)
 }
 
 // NewOptionsWithPath unmarshals a given key path into options and returns it.
 func NewOptionsWithPath(path string) (opts *Options, err error) {
-
-	opts, err = NewOptions()
-	if err != nil {
-		return nil, err
-	}
-
-	err = config.UnmarshalWithPath(path, opts)
-	if err != nil {
-		return nil, err
-	}
-
-	return opts, nil
+	return ignite.NewOptionsWithPath[Options](root, path)
 }

@@ -2,6 +2,7 @@ package graphql
 
 import (
 	"github.com/americanas-go/config"
+	"github.com/americanas-go/ignite"
 	"github.com/graphql-go/handler"
 )
 
@@ -21,13 +22,5 @@ func init() {
 
 // DefaultHandlerConfig unmarshals the default graphql handler config.
 func DefaultHandlerConfig() (*handler.Config, error) {
-
-	o := &handler.Config{}
-
-	err := config.UnmarshalWithPath(handlerConfig, o)
-	if err != nil {
-		return nil, err
-	}
-
-	return o, nil
+	return ignite.NewOptionsWithPath[handler.Config](handlerConfig)
 }
