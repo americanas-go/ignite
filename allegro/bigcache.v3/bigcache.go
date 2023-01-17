@@ -30,12 +30,13 @@ func NewCacheWithOptions(ctx context.Context, opt *Options) (cache *bigcache.Big
 		HardMaxCacheSize:   opt.HardMaxCacheSize,
 		Verbose:            opt.Verbose,
 		Logger:             log.GetLogger(),
+		StatsEnabled:       opt.StatsEnabled,
 		// Hasher:             nil,
 		// OnRemove:           nil,
 		// OnRemoveWithReason: nil,
 	}
 
-	cache, err = bigcache.NewBigCache(cfg)
+	cache, err = bigcache.New(ctx, cfg)
 	if err != nil {
 		return nil, err
 	}

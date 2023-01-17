@@ -3,6 +3,7 @@ package ignite
 import (
 	"fmt"
 	"os"
+	"sort"
 
 	"github.com/americanas-go/config"
 	"github.com/common-nighthawk/go-figure"
@@ -19,7 +20,13 @@ func Boot() {
 
 	if config.Bool(cfgEnabled) {
 		var rows []table.Row
-		for _, entry := range config.Entries() {
+
+		entries := config.Entries()
+		sort.Slice(entries[:], func(i, j int) bool {
+			return entries[i].Key < entries[j].Key
+		})
+
+		for _, entry := range entries {
 			v := config.Get(entry.Key)
 			if entry.Options.Hide {
 				v = "****"

@@ -14,6 +14,7 @@ type Options struct {
 	MaxEntrySize       int
 	Verbose            bool
 	HardMaxCacheSize   int
+	StatsEnabled       bool
 }
 
 // NewOptions returns options from config file or environment vars.
