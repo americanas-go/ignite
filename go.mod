@@ -57,7 +57,7 @@ require (
 	github.com/hashicorp/go-memdb v1.3.3
 	github.com/hashicorp/vault/api v1.7.2
 	github.com/hiko1129/echo-pprof v1.0.1
-	github.com/jedib0t/go-pretty/v6 v6.3.8
+	github.com/jedib0t/go-pretty/v6 v6.4.4
 	github.com/jlaffaye/ftp v0.1.0
 	github.com/labstack/echo/v4 v4.9.0
 	github.com/labstack/gommon v0.3.1
