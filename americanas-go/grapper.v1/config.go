@@ -1,11 +1,13 @@
 package grapper
 
-import "github.com/americanas-go/config"
+import (
+	"github.com/americanas-go/config"
+)
 
 const (
 	root        = "ignite.grapper"
 	PluginsRoot = root + ".plugins"
-	name        = root + ".name"
+	name        = ".name"
 )
 
 func init() {
