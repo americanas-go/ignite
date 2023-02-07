@@ -39,10 +39,14 @@ func StartTracerWithOptions(ctx context.Context, options *Options, startOptions 
 	tracerOnce.Do(func() {
 		logger := log.FromContext(ctx)
 
+		exporterOpts := []otlptracehttp.Option{otlptracehttp.WithEndpoint(options.Endpoint)}
+		if IsInsecure() {
+			exporterOpts = append(exporterOpts, otlptracehttp.WithInsecure())
+		}
+
 		exporter, err := otlptracehttp.New(
 			ctx,
-			otlptracehttp.WithEndpoint(options.Addr),
-			otlptracehttp.WithInsecure(),
+			exporterOpts...,
 		)
 		if err != nil {
 			logger.Error("error creating opentelemetry exporter: ", err)
