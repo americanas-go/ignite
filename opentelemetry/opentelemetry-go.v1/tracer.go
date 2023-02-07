@@ -28,8 +28,8 @@ func StartTracer(ctx context.Context, startOptions ...sdktrace.TracerProviderOpt
 var tracerOnce sync.Once
 
 // StartTracerWithOptions starts the tracer with the given set of options. Calling
-// it multiple times will have no effect. If an error o occours during tracer initialization,
-// an Noop trace provider will be set instead.
+// it multiple times will have no effect. If an error occours during tracer initialization,
+// a Noop trace provider will be used instead.
 func StartTracerWithOptions(ctx context.Context, options *Options, startOptions ...sdktrace.TracerProviderOption) {
 
 	if !IsTracerEnabled() {
