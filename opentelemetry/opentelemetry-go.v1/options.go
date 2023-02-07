@@ -1,21 +1,19 @@
 package opentelemetry
 
 import (
-	"net"
 	"os"
 
 	"github.com/americanas-go/config"
 )
 
 type Options struct {
-	Enabled bool
-	Service string
-	Env     string
-	Version string
-	Host    string
-	Port    string
-	Addr    string
-	Tags    map[string]string
+	Enabled  bool
+	Service  string
+	Env      string
+	Version  string
+	Endpoint string
+	Insecure bool
+	Tags     map[string]string
 }
 
 // NewOptionsWithPath unmarshals options based on a given key path.
@@ -44,27 +42,21 @@ func NewOptions() (*Options, error) {
 		return nil, err
 	}
 
-	if v := os.Getenv("DD_SERVICE"); v != "" {
+	if v := os.Getenv("OTEL_SERVICE_NAME"); v != "" {
 		opts.Service = v
 	}
 
-	if v := os.Getenv("DD_AGENT_HOST"); v != "" {
-		opts.Host = v
-	}
-
-	if v := os.Getenv("DD_TRACE_AGENT_PORT"); v != "" {
-		opts.Port = v
-	}
-
-	if v := os.Getenv("DD_ENV"); v != "" {
-		opts.Env = v
-	}
-
-	if v := os.Getenv("DD_VERSION"); v != "" {
+	if v := os.Getenv("OTEL_SERVICE_VERSION"); v != "" {
 		opts.Version = v
 	}
 
-	opts.Addr = net.JoinHostPort(opts.Host, opts.Port)
+	if v := os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT"); v != "" {
+		opts.Endpoint = v
+	}
+
+	if v := os.Getenv("OTEL_ENV"); v != "" {
+		opts.Env = v
+	}
 
 	return opts, nil
 }
