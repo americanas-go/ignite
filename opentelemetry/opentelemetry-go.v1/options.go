@@ -50,10 +50,6 @@ func NewOptions() (*Options, error) {
 		opts.Version = v
 	}
 
-	if v := os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT"); v != "" {
-		opts.Endpoint = v
-	}
-
 	if v := os.Getenv("OTEL_ENV"); v != "" {
 		opts.Env = v
 	}
