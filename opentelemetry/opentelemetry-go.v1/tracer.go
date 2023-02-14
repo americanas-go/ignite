@@ -2,6 +2,7 @@ package opentelemetry
 
 import (
 	"context"
+	"os"
 	"sync"
 
 	"github.com/americanas-go/log"
@@ -39,7 +40,11 @@ func StartTracerWithOptions(ctx context.Context, options *Options, startOptions 
 	tracerOnce.Do(func() {
 		logger := log.FromContext(ctx)
 
-		exporterOpts := []otlptracehttp.Option{otlptracehttp.WithEndpoint(options.Endpoint)}
+		var exporterOpts []otlptracehttp.Option
+		if _, ok := os.LookupEnv("OTEL_EXPORTER_OTLP_ENDPOINT"); !ok { // Only using WithEndpoint when the environment variable is not set
+			exporterOpts = append(exporterOpts, otlptracehttp.WithEndpoint(options.Endpoint)) //TODO see https://github.com/open-telemetry/opentelemetry-go/issues/3730
+		}
+
 		if IsInsecure() {
 			exporterOpts = append(exporterOpts, otlptracehttp.WithInsecure())
 		}
