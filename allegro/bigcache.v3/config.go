@@ -15,6 +15,7 @@ const (
 	maxEntrySize       = ".maxEntrySize"
 	verbose            = ".verbose"
 	hardMaxCacheSize   = ".hardMaxCacheSize"
+	statsEnabled       = ".statsEnabled"
 )
 
 func init() {
@@ -28,5 +29,6 @@ func ConfigAdd(path string) {
 	config.Add(path+maxEntriesInWindow, 1000*10*60, "max number of entries in life window. Used only to calculate initial size for cache shards. when proper value is set then additional memory allocation does not occur.")
 	config.Add(path+maxEntrySize, 1*1024*1024, "max size of entry in bytes. Used only to calculate initial size for cache shards")
 	config.Add(path+verbose, false, "verbose mode prints information about new memory allocation")
-	config.Add(path+hardMaxCacheSize, 0, "hardMaxCacheSize is a limit for cache size in MB. Cache will not allocate more memory than this limit. when the limit is higher than 0 and reached then the oldest entries are overridden for the new ones")
+	config.Add(path+statsEnabled, false, "if true calculate the number of times a cached resource was requested")
+	config.Add(path+hardMaxCacheSize, 1, "hardMaxCacheSize is a limit for cache size in MB. Cache will not allocate more memory than this limit. when the limit is higher than 0 and reached then the oldest entries are overridden for the new ones")
 }

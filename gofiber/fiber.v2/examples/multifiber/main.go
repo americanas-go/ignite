@@ -50,12 +50,10 @@ func main() {
 
 	ctx2 := context.Background()
 
-	options2, err := fiber.NewOptionsWithPath("ignite.fiber2")
+	srv2, err := fiber.NewServerWithConfigPath(ctx2, "ignite.fiber2")
 	if err != nil {
 		panic(err)
 	}
-
-	srv2 := fiber.NewServerWithOptions(ctx2, options2)
 
 	srv2.Get("/test", Get)
 

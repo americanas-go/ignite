@@ -64,7 +64,7 @@ func NewClientWithOptions(ctx context.Context, options *Options, plugins ...Plug
 		SetTransport(transport).
 		SetTimeout(options.RequestTimeout).
 		SetDebug(options.Debug).
-		SetHostURL(options.Host).
+		SetBaseURL(options.Host).
 		SetCloseConnection(options.CloseConnection)
 
 	for _, plugin := range plugins {
