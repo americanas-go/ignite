@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"reflect"
 
-	st "github.com/golang/protobuf/ptypes/struct"
+	st "google.golang.org/protobuf/types/known/structpb"
 )
 
 // ToStruct converts a map[string]interface{} to a ptypes.Struct
