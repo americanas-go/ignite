@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 )
 
-// Client knows how to bulkpublish on kinesis.
+// Client knows how to bulk publish on kinesis.
 type Client interface {
 	BulkPublish(ctx context.Context, messages []types.PutRecordsRequestEntry, resource string) error
 	Publish(ctx context.Context, input *kinesis.PutRecordInput) error
@@ -21,12 +21,12 @@ type client struct {
 	client *kinesis.Client
 }
 
-// NewClient returns a initialized client.
+// NewClient returns an initialized client.
 func NewClient(c *kinesis.Client) Client {
 	return &client{c}
 }
 
-// Publish publish message on kinesis.
+// Publish publishes message on kinesis.
 func (c *client) Publish(ctx context.Context, input *kinesis.PutRecordInput) error {
 
 	logger := log.FromContext(ctx).
