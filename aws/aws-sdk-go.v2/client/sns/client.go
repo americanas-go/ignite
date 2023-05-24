@@ -18,7 +18,7 @@ type client struct {
 	client *sns.Client
 }
 
-// NewClient returns a initialized client.
+// NewClient returns an initialized client.
 func NewClient(c *sns.Client) Client {
 	return &client{c}
 }

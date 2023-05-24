@@ -11,7 +11,7 @@ import (
 
 // Client knows how to publish on sqs.
 type Client interface {
-	// Publish publish message on sns.
+	// Publish publishes message on sns.
 	Publish(ctx context.Context, input *sqs.SendMessageInput) error
 
 	// ResolveQueueUrl resolves the URL of the queue.
