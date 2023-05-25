@@ -10,8 +10,6 @@ const (
 	maxReconnects      = ".maxReconnects"
 	reconnectWait      = ".reconnectWait"
 	url                = ".url"
-	version            = ".version"
-	port               = ".port"
 	reconnectJitter    = ".reconnectJitter"
 	reconnectJitterTLS = ".reconnectJitterTLS"
 	timeout            = ".timeout"
@@ -19,9 +17,7 @@ const (
 	maxPingOut         = ".maxPingOut"
 	maxChanLen         = ".maxChanLen"
 	reconnectBufSize   = ".reconnectBufSize"
-	requestChanLen     = ".requestChanLen"
 	drainTimeout       = ".drainTimeout"
-	langString         = ".langString"
 	PluginsRoot        = root + ".plugins"
 )
 
@@ -40,7 +36,5 @@ func ConfigAdd(path string) {
 	config.Add(path+maxPingOut, nats.DefaultMaxPingOut, "")
 	config.Add(path+maxChanLen, nats.DefaultMaxChanLen, "")
 	config.Add(path+reconnectBufSize, nats.DefaultReconnectBufSize, "")
-	config.Add(path+requestChanLen, nats.RequestChanLen, "")
 	config.Add(path+drainTimeout, nats.DefaultDrainTimeout, "")
-	config.Add(path+langString, nats.LangString, "")
 }

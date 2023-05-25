@@ -18,9 +18,7 @@ type Options struct {
 	MaxPingOut           int
 	MaxChanLen           int
 	ReconnectBufSize     int
-	RequestChanLen       int
 	DrainTimeout         time.Duration
-	LangString           string
 	Verbose              bool
 	Compression          bool
 	RetryOnFailedConnect bool
