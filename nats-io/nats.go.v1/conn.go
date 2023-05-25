@@ -10,7 +10,7 @@ import (
 // Plugin defines a function to process plugin.
 type Plugin func(context.Context, *nats.Conn) error
 
-// Register registers a nats connection.
+// NewConnWithOptions registers a nats connection.
 func NewConnWithOptions(ctx context.Context, options *Options, plugins ...Plugin) (*nats.Conn, error) {
 
 	logger := log.FromContext(ctx)
