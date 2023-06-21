@@ -66,7 +66,6 @@ require (
 	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.0.3
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.2
 	github.com/newrelic/go-agent/v3/integrations/nrmongo v1.0.3
-	github.com/newrelic/go-agent/v3/integrations/nrnats v1.1.2
 	github.com/newrelic/go-agent/v3/integrations/nrredis-v7 v1.0.1
 	github.com/newrelic/go-agent/v3/integrations/nrredis-v8 v1.0.0
 	github.com/opentracing-contrib/echo v0.0.0-20190807091611-5fe2e1308f06
@@ -105,7 +104,6 @@ require (
 require (
 	github.com/DataDog/appsec-internal-go v1.0.0 // indirect
 	github.com/DataDog/go-libddwaf v1.2.0 // indirect
-	github.com/apache/arrow/go/v11 v11.0.0 // indirect
 	github.com/apache/arrow/go/v12 v12.0.0 // indirect
 	github.com/apache/thrift v0.18.1 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
@@ -243,8 +241,6 @@ require (
 	github.com/nats-io/nats-server/v2 v2.9.0 // indirect
 	github.com/nats-io/nkeys v0.4.4 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
-	github.com/onsi/ginkgo/v2 v2.9.1 // indirect
-	github.com/onsi/gomega v1.27.4 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/philhofer/fwd v1.1.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.17 // indirect
@@ -294,7 +290,7 @@ require (
 	golang.org/x/crypto v0.9.0 // indirect; indirect221014153046-6fdb5e3db783 // indirect
 	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/term v0.8.0 // indirect
-	golang.org/x/text v0.9.0 // indirect
+	golang.org/x/text v0.9.0
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/tools v0.9.1 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
