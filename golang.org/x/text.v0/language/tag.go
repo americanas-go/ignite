@@ -5,16 +5,16 @@ import (
 )
 
 var (
-	t language.Tag
+	t *language.Tag
 )
 
 func DefaultTag() (language.Tag, error) {
-	if t.String() == "" {
+	if t == nil {
 		tag, err := language.Parse(Default())
 		if err != nil {
-			return t, err
+			return *t, err
 		}
-		t = tag
+		t = &tag
 	}
-	return t, nil
+	return *t, nil
 }
