@@ -70,7 +70,8 @@ func ErrorStatusCode(err error) int {
 		return http.StatusUnauthorized
 	case errors.IsForbidden(err):
 		return http.StatusForbidden
-
+	case errors.IsNotSupported(err) || errors.IsNotAssigned(err):
+		return http.StatusUnprocessableEntity
 	default:
 		if _, ok := err.(validator.ValidationErrors); ok {
 			return http.StatusUnprocessableEntity

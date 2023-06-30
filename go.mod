@@ -18,8 +18,8 @@ require (
 	github.com/allegro/bigcache/v3 v3.1.0
 	github.com/americanas-go/cache v1.0.0-beta.11
 	github.com/americanas-go/config v1.8.4
-	github.com/americanas-go/errors v1.1.0
-	github.com/americanas-go/grapper v1.0.0-beta.6
+	github.com/americanas-go/errors v1.1.1
+	github.com/americanas-go/grapper v1.0.0-beta.10
 	github.com/americanas-go/health v1.0.0
 	github.com/americanas-go/log v1.8.8
 	github.com/americanas-go/multiserver v1.1.0
@@ -62,10 +62,11 @@ require (
 	github.com/labstack/gommon v0.4.0
 	github.com/mittwald/vaultgo v0.1.4
 	github.com/nats-io/nats.go v1.26.0
-	github.com/newrelic/go-agent/v3 v3.21.1
+	github.com/newrelic/go-agent/v3 v3.23.0
 	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.0.3
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.3.2
 	github.com/newrelic/go-agent/v3/integrations/nrmongo v1.0.3
+	github.com/newrelic/go-agent/v3/integrations/nrnats v1.1.4
 	github.com/newrelic/go-agent/v3/integrations/nrredis-v7 v1.0.1
 	github.com/newrelic/go-agent/v3/integrations/nrredis-v8 v1.0.0
 	github.com/opentracing-contrib/echo v0.0.0-20190807091611-5fe2e1308f06
@@ -113,6 +114,7 @@ require (
 	github.com/klauspost/asmfmt v1.3.2 // indirect
 	github.com/minio/asm2plan9s v0.0.0-20200509001527-cdd76441f9d8 // indirect
 	github.com/minio/c2goasm v0.0.0-20190812172519-36a3d3bbc4f3 // indirect
+	github.com/nats-io/jwt/v2 v2.4.1 // indirect
 	github.com/outcaste-io/ristretto v0.2.1 // indirect
 	github.com/savsgio/dictpool v0.0.0-20221023140959-7bf2e61cea94 // indirect
 	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
@@ -238,7 +240,6 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/nats-io/nats-server/v2 v2.9.0 // indirect
 	github.com/nats-io/nkeys v0.4.4 // indirect
 	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
