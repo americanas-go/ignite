@@ -8,7 +8,7 @@ import (
 	"github.com/americanas-go/log"
 )
 
-func New[R any](name string) grapper.Middleware[R] {
+func NewAnyError[R any](name string) grapper.AnyErrorMiddleware[R] {
 	ConfigAdd(name)
 	config.Load()
 	if o, _ := NewOptions(name); !o.Enabled {
@@ -17,5 +17,29 @@ func New[R any](name string) grapper.Middleware[R] {
 	if err := h.ConfigureCommand(name); err != nil {
 		log.Error(err.Error())
 	}
-	return hystrix.New[R](name)
+	return hystrix.NewAnyErrorMiddleware[R](name)
+}
+
+func NewAny[R any](name string) grapper.AnyMiddleware[R] {
+	ConfigAdd(name)
+	config.Load()
+	if o, _ := NewOptions(name); !o.Enabled {
+		return nil
+	}
+	if err := h.ConfigureCommand(name); err != nil {
+		log.Error(err.Error())
+	}
+	return hystrix.NewAnyMiddleware[R](name)
+}
+
+func NewError(name string) grapper.ErrorMiddleware {
+	ConfigAdd(name)
+	config.Load()
+	if o, _ := NewOptions(name); !o.Enabled {
+		return nil
+	}
+	if err := h.ConfigureCommand(name); err != nil {
+		log.Error(err.Error())
+	}
+	return hystrix.NewErrorMiddleware(name)
 }
