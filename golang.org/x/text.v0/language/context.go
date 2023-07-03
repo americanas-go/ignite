@@ -10,7 +10,7 @@ func ToContext(ctx context.Context, lang string) (context.Context, error) {
 	if err != nil {
 		return nil, err
 	}
-	return context.WithValue(ctx, UserKey(), userLanguage), nil
+	return context.WithValue(ctx, UserKey(), userLanguage.String()), nil
 }
 
 func FromContext(ctx context.Context) (language.Tag, error) {
