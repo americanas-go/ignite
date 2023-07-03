@@ -19,7 +19,7 @@ require (
 	github.com/americanas-go/cache v1.0.0-beta.11
 	github.com/americanas-go/config v1.8.4
 	github.com/americanas-go/errors v1.1.1
-	github.com/americanas-go/grapper v1.0.0-beta.10
+	github.com/americanas-go/grapper v1.0.0-beta.12
 	github.com/americanas-go/health v1.0.0
 	github.com/americanas-go/log v1.8.8
 	github.com/americanas-go/multiserver v1.1.0
@@ -73,7 +73,7 @@ require (
 	github.com/opentracing-contrib/go-grpc v0.0.0-20210225150812-73cb765af46e
 	github.com/opentracing/opentracing-go v1.2.0
 	github.com/panjf2000/ants/v2 v2.7.4
-	github.com/prometheus/client_golang v1.15.1
+	github.com/prometheus/client_golang v1.16.0
 	github.com/ravernkoh/cwlogsfmt v0.0.0-20180121032441-917bad983b4c
 	github.com/segmentio/kafka-go v0.4.40
 	github.com/sirupsen/logrus v1.9.2
@@ -249,7 +249,7 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_model v0.4.0 // indirect
 	github.com/prometheus/common v0.44.0 // indirect
-	github.com/prometheus/procfs v0.10.0 // indirect
+	github.com/prometheus/procfs v0.10.1 // indirect
 	github.com/rcrowley/go-metrics v0.0.0-20201227073835-cf1acfcdf475 // indirect
 	github.com/richardartoul/molecule v1.0.1-0.20221107223329-32cfee06a052 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect

@@ -6,7 +6,7 @@ import (
 	"github.com/americanas-go/ignite"
 )
 
-// Options struct which represents cors plugin from chi options.
+// Options struct which represents options.
 type Options struct {
 	Enabled bool
 }
