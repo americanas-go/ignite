@@ -566,8 +566,8 @@ github.com/americanas-go/config v1.8.4/go.mod h1:QWF14smqPomA9mp14jXm5Z9Z6FKmt2B
 github.com/americanas-go/errors v1.0.0/go.mod h1:yM2qJYuyQ1VCUqyhEqVwpnu0c4NFxxE6A20ZARKllng=
 github.com/americanas-go/errors v1.1.1 h1:2SZkpwPwvEfQz+rvBZRPKbw4JhndTGSaAgqcESg/Pqo=
 github.com/americanas-go/errors v1.1.1/go.mod h1:hMayqj9yUESTubhsdfzcXmHuKvcNEMjr2AwCv1xTzRE=
-github.com/americanas-go/grapper v1.0.0-beta.12 h1:1uXWhNpYhdJEi66lrkgSz/YRiLbVJeh+wFtRjJcCKAs=
-github.com/americanas-go/grapper v1.0.0-beta.12/go.mod h1:3D8UDQVn7V1Da5FQECEy3IrJdOQETLKXo4qIE6HqJPU=
+github.com/americanas-go/grapper v1.0.0-beta.13 h1:yN8bdQA3EigILc2QiVA2rE8X4iYA982Gm74NWA45zsU=
+github.com/americanas-go/grapper v1.0.0-beta.13/go.mod h1:3D8UDQVn7V1Da5FQECEy3IrJdOQETLKXo4qIE6HqJPU=
 github.com/americanas-go/health v1.0.0 h1:pSWqKibs6zGd8TiMmh6bNn/aLTATgZXvztXJMlg3AsE=
 github.com/americanas-go/health v1.0.0/go.mod h1:eDOEGHqgQnw9vWMk1sJDCO/kD1x2lFkbUZtXmvLXHIo=
 github.com/americanas-go/log v1.8.8 h1:5vb50YPSTsDRNaIS8LqjP2v5+UWKXD9SY/pCnZ3QADo=
@@ -705,6 +705,8 @@ github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 h1:DDGfHa7BWjL4Yn
 github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869/go.mod h1:Ekp36dRnpXw/yCqJaO+ZrUyxD+3VXMFFr56k5XYrpB4=
 github.com/bombsimon/wsl v1.2.1/go.mod h1:43lEF/i0kpXbLCeDXL9LMT8c92HyBywXb0AsgMHYngM=
 github.com/bshuster-repo/logrus-logstash-hook v0.4.1/go.mod h1:zsTqEiSzDgAa/8GZR7E1qaXrhYNDKBYy5/dWPTIflbk=
+github.com/bsm/ginkgo/v2 v2.5.0 h1:aOAnND1T40wEdAtkGSkvSICWeQ8L3UASX7YVCqQx+eQ=
+github.com/bsm/gomega v1.20.0 h1:JhAwLmtRzXFTx2AkALSLa8ijZafntmhSoU63Ok18Uq8=
 github.com/buger/jsonparser v0.0.0-20180808090653-f4dd9f5a6b44/go.mod h1:bbYlZJ7hK1yFx9hf58LP0zeX7UjIGs20ufpu3evjr+s=
 github.com/buger/jsonparser v1.1.1/go.mod h1:6RYKKt7H4d4+iWqouImQ9R2FZql3VbhNgx27UK13J/0=
 github.com/bugsnag/bugsnag-go v0.0.0-20141110184014-b1d153021fcd/go.mod h1:2oa8nejYd4cQ/b0hMIopN0lCRxU0bueqREvZLWFrtK8=

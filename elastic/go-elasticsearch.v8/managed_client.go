@@ -24,7 +24,7 @@ func NewManagedClientWithConfigPath(ctx context.Context, path string, plugins ..
 	return NewManagedClientWithOptions(ctx, opts, plugins...)
 }
 
-// NewManagedClientWithConfigPath returns a managed client with default options.
+// NewManagedClient returns a managed client with default options.
 func NewManagedClient(ctx context.Context, plugins ...Plugin) (*ManagedClient, error) {
 	opts, err := NewOptions()
 	if err != nil {
@@ -34,7 +34,7 @@ func NewManagedClient(ctx context.Context, plugins ...Plugin) (*ManagedClient, e
 	return NewManagedClientWithOptions(ctx, opts, plugins...)
 }
 
-// NewManagedClientWithConfigPath returns a managed client with options.
+// NewManagedClientWithOptions returns a managed client with options.
 func NewManagedClientWithOptions(ctx context.Context, opts *Options, plugins ...Plugin) (*ManagedClient, error) {
 	s, err := NewClientWithOptions(ctx, opts, plugins...)
 	if err != nil {

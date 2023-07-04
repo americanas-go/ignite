@@ -19,7 +19,7 @@ require (
 	github.com/americanas-go/cache v1.0.0-beta.11
 	github.com/americanas-go/config v1.8.4
 	github.com/americanas-go/errors v1.1.1
-	github.com/americanas-go/grapper v1.0.0-beta.12
+	github.com/americanas-go/grapper v1.0.0-beta.13
 	github.com/americanas-go/health v1.0.0
 	github.com/americanas-go/log v1.8.8
 	github.com/americanas-go/multiserver v1.1.0
