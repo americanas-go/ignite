@@ -50,7 +50,7 @@ func (l *Logger) LogRoundTrip(
 	case err != nil:
 		logger.Error(err)
 	case res != nil && res.StatusCode > 0 && res.StatusCode < 300:
-		logger.Info("success")
+		logger.Debug("success")
 	case res != nil && res.StatusCode > 299 && res.StatusCode < 500:
 		logger.Warn("warning")
 	default:
