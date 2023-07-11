@@ -27,7 +27,6 @@ func (l *Logger) LogRoundTrip(
 	)
 
 	// Count number of bytes in request and response.
-	//
 	if req != nil && req.Body != nil && req.Body != http.NoBody {
 		nReq, _ = io.Copy(ioutil.Discard, req.Body)
 	}
@@ -36,8 +35,8 @@ func (l *Logger) LogRoundTrip(
 	}
 
 	// Log event.
-	//
-	logger := log.WithFields(log.Fields{
+
+	logger := log.FromContext(req.Context()).WithFields(log.Fields{
 		"method":      req.Method,
 		"status_code": res.StatusCode,
 		"duration":    dur,
@@ -50,7 +49,7 @@ func (l *Logger) LogRoundTrip(
 	case err != nil:
 		logger.Error(err)
 	case res != nil && res.StatusCode > 0 && res.StatusCode < 300:
-		logger.Info("success")
+		logger.Debug("success")
 	case res != nil && res.StatusCode > 299 && res.StatusCode < 500:
 		logger.Warn("warning")
 	default:

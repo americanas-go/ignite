@@ -19,10 +19,10 @@ require (
 	github.com/americanas-go/cache v1.0.0-beta.11
 	github.com/americanas-go/config v1.8.4
 	github.com/americanas-go/errors v1.1.1
-	github.com/americanas-go/grapper v1.0.0-beta.13
+	github.com/americanas-go/grapper v1.0.0-beta.14
 	github.com/americanas-go/health v1.0.0
 	github.com/americanas-go/log v1.8.8
-	github.com/americanas-go/multiserver v1.1.0
+	github.com/americanas-go/multiserver v1.1.1
 	github.com/americanas-go/rest-response v1.0.7
 	github.com/ansrivas/fiberprometheus/v2 v2.6.0
 	github.com/aws/aws-sdk-go v1.44.268
@@ -96,7 +96,7 @@ require (
 	google.golang.org/api v0.124.0
 	google.golang.org/grpc v1.55.0
 	google.golang.org/protobuf v1.30.0
-	gopkg.in/DataDog/dd-trace-go.v1 v1.50.1
+	gopkg.in/DataDog/dd-trace-go.v1 v1.52.0
 	gopkg.in/matryer/try.v1 v1.0.0-20150601225556-312d2599e12e
 	k8s.io/client-go v0.27.2
 	storj.io/drpc v0.0.33
