@@ -563,7 +563,6 @@ github.com/americanas-go/cache v1.0.0-beta.11 h1:Jx8MVyEG1p1YI0UgaXjx503Xoy/Zvw2
 github.com/americanas-go/cache v1.0.0-beta.11/go.mod h1:VvctM1ys78QXuwvpUW1FTpbhonjl/yGnaDKxfGcEX/0=
 github.com/americanas-go/config v1.8.4 h1:T0bRCHQl1LfZHpU0R9Js/fOoXMKV1E8Sa1Jw6RUDin4=
 github.com/americanas-go/config v1.8.4/go.mod h1:QWF14smqPomA9mp14jXm5Z9Z6FKmt2BTxXSg3qv0980=
-github.com/americanas-go/errors v1.0.0/go.mod h1:yM2qJYuyQ1VCUqyhEqVwpnu0c4NFxxE6A20ZARKllng=
 github.com/americanas-go/errors v1.1.1 h1:2SZkpwPwvEfQz+rvBZRPKbw4JhndTGSaAgqcESg/Pqo=
 github.com/americanas-go/errors v1.1.1/go.mod h1:hMayqj9yUESTubhsdfzcXmHuKvcNEMjr2AwCv1xTzRE=
 github.com/americanas-go/grapper v1.0.0-beta.14 h1:sdR0Pdhzbbh4/J6HNQam9CPDemHYMciCJ1ljulo5Ncs=
@@ -572,8 +571,8 @@ github.com/americanas-go/health v1.0.0 h1:pSWqKibs6zGd8TiMmh6bNn/aLTATgZXvztXJMl
 github.com/americanas-go/health v1.0.0/go.mod h1:eDOEGHqgQnw9vWMk1sJDCO/kD1x2lFkbUZtXmvLXHIo=
 github.com/americanas-go/log v1.8.8 h1:5vb50YPSTsDRNaIS8LqjP2v5+UWKXD9SY/pCnZ3QADo=
 github.com/americanas-go/log v1.8.8/go.mod h1:UkWkvy0A+ovy/QPPX//R04h1Q6QxulCOCAfL9ivOL4w=
-github.com/americanas-go/multiserver v1.1.0 h1:LfG9m4O1JKQuC3Yow1rJXmqkcYW7+gBlKIsMQlTgm0s=
-github.com/americanas-go/multiserver v1.1.0/go.mod h1:SfIgCpzxo+RoO4jo/f/zkRdrhU2dVoO9Bqs126+SVxo=
+github.com/americanas-go/multiserver v1.1.1 h1:sg35W89KydDHtdsR3g9FDTECP4tLaMdX+pytZcOq2vc=
+github.com/americanas-go/multiserver v1.1.1/go.mod h1:3cYdklh5lXcyN3TUoWfJanseBnkQV7X0NjO0tqugfdU=
 github.com/americanas-go/rest-response v1.0.7 h1:Z6StpbnFqADYGr4lQiaGVgpodbdlpC467ZVIb4wLMXM=
 github.com/americanas-go/rest-response v1.0.7/go.mod h1:HXKoPne8Y+6i55R8shAOfh+pXpk4D0zKCeRksaKXMbo=
 github.com/andybalholm/brotli v1.0.4/go.mod h1:fO7iG3H7G2nSZ7m0zPUDn85XEX2GTukHGRSepvi9Eig=
