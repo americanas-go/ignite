@@ -1,6 +1,7 @@
 package elasticsearch
 
 import (
+	"runtime"
 	"time"
 
 	"github.com/americanas-go/config"
@@ -23,6 +24,13 @@ const (
 	enableMetrics         = ".enableMetrics"
 	enableDebugLogger     = ".enableDebugLogger"
 	retryBackoff          = ".retryBackoff"
+	bulk                  = ".bulk"
+	index                 = bulk + ".index"
+	numWorkers            = bulk + ".numWorkers"
+	flushInterval         = bulk + ".flushInterval"
+	flushBytes            = bulk + ".flushBytes"
+	pipeline              = bulk + ".pipeline"
+	timeout               = bulk + ".timeout"
 	PluginsRoot           = root + ".plugins"
 )
 
@@ -46,4 +54,10 @@ func ConfigAdd(path string) {
 	config.Add(path+enableMetrics, false, "enable the metrics collection")
 	config.Add(path+enableDebugLogger, false, "enable the debug logging")
 	config.Add(path+retryBackoff, 5*time.Millisecond, "optional backoff duration")
+	config.Add(path+index, "index", "defines index")
+	config.Add(path+numWorkers, runtime.NumCPU(), "defines bulk workers")
+	config.Add(path+flushInterval, 30*time.Second, "defines flush interval")
+	config.Add(path+flushBytes, 5242880, "defines flush bytes")
+	config.Add(path+pipeline, "", "defines pipeline")
+	config.Add(path+timeout, 2*time.Second, "defines timeout")
 }
