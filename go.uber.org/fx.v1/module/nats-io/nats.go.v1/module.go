@@ -8,35 +8,17 @@ import (
 	"go.uber.org/fx"
 )
 
-var subsOnce sync.Once
+var once sync.Once
 
-// Module fx module for nats subscriber.
-func SubscriberModule() fx.Option {
+// Module fx module for nats.
+func Module() fx.Option {
 	options := fx.Options()
 
-	subsOnce.Do(func() {
+	once.Do(func() {
 		options = fx.Options(
 			contextfx.Module(),
 			fx.Provide(
-				nats.NewSubscriber,
-			),
-		)
-	})
-
-	return options
-}
-
-var pubOnce sync.Once
-
-// Module fx module for nats publisher.
-func PublisherModule() fx.Option {
-	options := fx.Options()
-
-	pubOnce.Do(func() {
-		options = fx.Options(
-			contextfx.Module(),
-			fx.Provide(
-				nats.NewPublisher,
+				nats.NewConn,
 			),
 		)
 	})
