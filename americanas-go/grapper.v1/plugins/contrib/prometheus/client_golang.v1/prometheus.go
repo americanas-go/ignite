@@ -1,10 +1,10 @@
-package datadog
+package prometheus
 
 import (
 	"context"
 	"github.com/americanas-go/config"
 	"github.com/americanas-go/grapper"
-	"github.com/americanas-go/grapper/middleware/contrib/datadog/dd-trace-go.v1"
+	prometheus "github.com/americanas-go/grapper/middleware/contrib/prometheus/client_golang.v1"
 )
 
 func NewAnyError[R any](ctx context.Context, name string) grapper.AnyErrorMiddleware[R] {
@@ -13,7 +13,7 @@ func NewAnyError[R any](ctx context.Context, name string) grapper.AnyErrorMiddle
 	if o, _ := NewOptions(name); !o.Enabled {
 		return nil
 	}
-	return datadog.NewAnyErrorMiddleware[R](ctx, name, "wrapper")
+	return prometheus.NewAnyErrorMiddleware[R](ctx)
 }
 
 func NewAny[R any](ctx context.Context, name string) grapper.AnyMiddleware[R] {
@@ -22,7 +22,7 @@ func NewAny[R any](ctx context.Context, name string) grapper.AnyMiddleware[R] {
 	if o, _ := NewOptions(name); !o.Enabled {
 		return nil
 	}
-	return datadog.NewAnyMiddleware[R](ctx, name, "wrapper")
+	return prometheus.NewAnyMiddleware[R](ctx)
 }
 
 func NewError(ctx context.Context, name string) grapper.ErrorMiddleware {
@@ -31,5 +31,5 @@ func NewError(ctx context.Context, name string) grapper.ErrorMiddleware {
 	if o, _ := NewOptions(name); !o.Enabled {
 		return nil
 	}
-	return datadog.NewErrorMiddleware(ctx, name, "wrapper")
+	return prometheus.NewErrorMiddleware(ctx)
 }

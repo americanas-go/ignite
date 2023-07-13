@@ -65,8 +65,8 @@ func (i *Health) Register(ctx context.Context) (*chi.Config, error) {
 }
 
 func handler(ctx context.Context) http.HandlerFunc {
-	resp, httpCode := response.NewHealth(ctx)
 	return func(w http.ResponseWriter, r *http.Request) {
+		resp, httpCode := response.NewHealth(ctx)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(httpCode)
 		json.NewEncoder(w).Encode(resp)

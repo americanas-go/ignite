@@ -1,6 +1,7 @@
 package hystrix
 
 import (
+	"context"
 	"github.com/americanas-go/config"
 	"github.com/americanas-go/grapper"
 	"github.com/americanas-go/grapper/middleware/contrib/afex/hystrix-go.v0"
@@ -8,7 +9,7 @@ import (
 	"github.com/americanas-go/log"
 )
 
-func New[R any](name string) grapper.Middleware[R] {
+func NewAnyError[R any](ctx context.Context, name string) grapper.AnyErrorMiddleware[R] {
 	ConfigAdd(name)
 	config.Load()
 	if o, _ := NewOptions(name); !o.Enabled {
@@ -17,5 +18,29 @@ func New[R any](name string) grapper.Middleware[R] {
 	if err := h.ConfigureCommand(name); err != nil {
 		log.Error(err.Error())
 	}
-	return hystrix.New[R](name)
+	return hystrix.NewAnyErrorMiddleware[R](ctx, name)
+}
+
+func NewAny[R any](ctx context.Context, name string) grapper.AnyMiddleware[R] {
+	ConfigAdd(name)
+	config.Load()
+	if o, _ := NewOptions(name); !o.Enabled {
+		return nil
+	}
+	if err := h.ConfigureCommand(name); err != nil {
+		log.Error(err.Error())
+	}
+	return hystrix.NewAnyMiddleware[R](ctx, name)
+}
+
+func NewError(ctx context.Context, name string) grapper.ErrorMiddleware {
+	ConfigAdd(name)
+	config.Load()
+	if o, _ := NewOptions(name); !o.Enabled {
+		return nil
+	}
+	if err := h.ConfigureCommand(name); err != nil {
+		log.Error(err.Error())
+	}
+	return hystrix.NewErrorMiddleware(ctx, name)
 }
