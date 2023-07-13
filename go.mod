@@ -37,7 +37,7 @@ require (
 	github.com/cloudevents/sdk-go/v2 v2.14.0
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/coocood/freecache v1.2.3
-	github.com/elastic/go-elasticsearch/v7 v7.17.1
+	github.com/elastic/go-elasticsearch/v7 v7.17.10
 	github.com/elastic/go-elasticsearch/v8 v8.8.2
 	github.com/globocom/echo-prometheus v0.1.2
 	github.com/go-chi/chi/v5 v5.0.8
@@ -94,7 +94,7 @@ require (
 	gocloud.dev/pubsub/kafkapubsub v0.30.0
 	golang.org/x/net v0.12.0
 	golang.org/x/sync v0.3.0
-	google.golang.org/api v0.130.0
+	google.golang.org/api v0.131.0
 	google.golang.org/grpc v1.56.2
 	google.golang.org/protobuf v1.31.0
 	gopkg.in/DataDog/dd-trace-go.v1 v1.52.0
