@@ -11,9 +11,13 @@ type Options struct {
 	Service  string
 	Env      string
 	Version  string
+	Protocol string
 	Endpoint string
 	Insecure bool
 	Tags     map[string]string
+	TLS      struct {
+		Cert string
+	}
 }
 
 // NewOptionsWithPath unmarshals options based on a given key path.
@@ -40,6 +44,10 @@ func NewOptions() (*Options, error) {
 	err := config.UnmarshalWithPath(root, opts)
 	if err != nil {
 		return nil, err
+	}
+
+	if v := os.Getenv("OTEL_EXPORTER_OTLP_PROTOCOL"); v != "" {
+		opts.Protocol = v
 	}
 
 	if v := os.Getenv("OTEL_SERVICE_NAME"); v != "" {
