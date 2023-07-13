@@ -66,7 +66,6 @@ require (
 	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.0.3
 	github.com/newrelic/go-agent/v3/integrations/nrgrpc v1.4.0
 	github.com/newrelic/go-agent/v3/integrations/nrmongo v1.1.0
-	github.com/newrelic/go-agent/v3/integrations/nrnats v1.1.4
 	github.com/newrelic/go-agent/v3/integrations/nrredis-v7 v1.0.1
 	github.com/newrelic/go-agent/v3/integrations/nrredis-v8 v1.0.0
 	github.com/opentracing-contrib/echo v0.0.0-20190807091611-5fe2e1308f06
@@ -124,7 +123,7 @@ require (
 	github.com/minio/c2goasm v0.0.0-20190812172519-36a3d3bbc4f3 // indirect
 	github.com/moby/patternmatcher v0.5.0 // indirect
 	github.com/moby/sys/sequential v0.5.0 // indirect
-	github.com/nats-io/jwt/v2 v2.4.1 // indirect
+	github.com/nats-io/nats-server/v2 v2.9.17 // indirect
 	github.com/outcaste-io/ristretto v0.2.2 // indirect
 	github.com/savsgio/dictpool v0.0.0-20221023140959-7bf2e61cea94 // indirect
 	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
