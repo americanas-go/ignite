@@ -19,23 +19,25 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
-// StartTracer starts the tracer like StartTraceWithOptions but with default Options.
-func StartTracer(ctx context.Context, startOptions ...sdktrace.TracerProviderOption) {
+var tracerProvider = trace.NewNoopTracerProvider()
+
+// StartTracerProvider starts the tracer provider like StartTracerProviderWithOptions but with default Options.
+func StartTracerProvider(ctx context.Context, startOptions ...sdktrace.TracerProviderOption) {
 
 	o, err := NewOptions()
 	if err != nil {
 		panic(err)
 	}
 
-	StartTracerWithOptions(ctx, o, startOptions...)
+	StartTracerProviderWithOptions(ctx, o, startOptions...)
 }
 
 var tracerOnce sync.Once
 
-// StartTracerWithOptions starts the tracer with the given set of options. Calling
+// StartTracerProviderWithOptions starts the tracer provider with the given set of options. Calling
 // it multiple times will have no effect. If an error occours during tracer initialization,
 // a Noop trace provider will be used instead.
-func StartTracerWithOptions(ctx context.Context, options *Options, startOptions ...sdktrace.TracerProviderOption) {
+func StartTracerProviderWithOptions(ctx context.Context, options *Options, startOptions ...sdktrace.TracerProviderOption) {
 
 	if !IsTracerEnabled() {
 		return
@@ -93,6 +95,7 @@ func StartTracerWithOptions(ctx context.Context, options *Options, startOptions 
 		prov := sdktrace.NewTracerProvider(startOptions...)
 
 		otel.SetTracerProvider(prov)
+		tracerProvider = prov
 
 		log.Infof("started opentelemetry tracer: %s", options.Service)
 	})
@@ -144,4 +147,13 @@ func startGRPCTracer(ctx context.Context, options *Options) (*otlptrace.Exporter
 	}
 
 	return exporter, nil
+}
+
+// NewTracer creates a Tracer with the provided name and options. A Tracer
+// allows the creation of spans for custom instrumentation.
+//
+// StartTracerProvider should be called before to setup the tracer provider, otherwise a Noop
+// tracer provider will be used.
+func NewTracer(name string, options ...trace.TracerOption) trace.Tracer {
+	return tracerProvider.Tracer(name, options...)
 }
