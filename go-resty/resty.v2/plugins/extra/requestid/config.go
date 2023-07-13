@@ -7,9 +7,13 @@ import (
 
 const (
 	root    = resty.PluginsRoot + ".requestid"
-	enabled = root + ".enabled"
+	enabled = ".enabled"
 )
 
 func init() {
-	config.Add(enabled, true, "enable/disable requestid")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+enabled, true, "enable/disable requestid")
 }

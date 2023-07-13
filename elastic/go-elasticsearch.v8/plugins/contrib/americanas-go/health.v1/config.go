@@ -7,10 +7,10 @@ import (
 
 const (
 	root        = elasticsearch.PluginsRoot + ".health"
-	name        = root + ".name"
-	description = root + ".description"
-	required    = root + ".required"
-	enabled     = root + ".enabled"
+	name        = ".name"
+	description = ".description"
+	required    = ".required"
+	enabled     = ".enabled"
 )
 
 func init() {

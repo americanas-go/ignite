@@ -7,13 +7,17 @@ import (
 
 const (
 	root      = hystrix.PluginsRoot + ".prometheus"
-	namespace = root + ".namespace"
-	labels    = root + ".labels"
-	enabled   = root + ".enabled"
+	namespace = ".namespace"
+	labels    = ".labels"
+	enabled   = ".enabled"
 )
 
 func init() {
-	config.Add(namespace, "hystrix", "defines hystrix prometheus namespace")
-	config.Add(labels, map[string]interface{}{}, "defines hystrix prometheus labels")
-	config.Add(enabled, true, "enabled/disable hystrix prometheus")
+	ConfigAdd(root)
+}
+
+func ConfigAdd(path string) {
+	config.Add(path+namespace, "hystrix", "defines hystrix prometheus namespace")
+	config.Add(path+labels, map[string]interface{}{}, "defines hystrix prometheus labels")
+	config.Add(path+enabled, true, "enabled/disable hystrix prometheus")
 }
