@@ -8,9 +8,20 @@ import (
 
 // Options nats connection options.
 type Options struct {
-	Url           string
-	MaxReconnects int
-	ReconnectWait time.Duration
+	Url                  string
+	MaxReconnects        int
+	ReconnectWait        time.Duration
+	ReconnectJitter      time.Duration
+	ReconnectJitterTLS   time.Duration
+	Timeout              time.Duration
+	PingInterval         time.Duration
+	MaxPingOut           int
+	MaxChanLen           int
+	ReconnectBufSize     int
+	DrainTimeout         time.Duration
+	Verbose              bool
+	Compression          bool
+	RetryOnFailedConnect bool
 }
 
 // NewOptions returns options from config file or environment vars.

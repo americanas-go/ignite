@@ -9,13 +9,15 @@ import (
 )
 
 // Register registers a new health checker plugin for nats connection.
-func Register(ctx context.Context, conn *nats.Conn) error {
-	o, err := NewOptions()
-	if err != nil {
-		return nil
-	}
-	h := NewHealthWithOptions(o)
-	return h.Register(ctx, conn)
+func Register(ctx context.Context) (func(context.Context, *nats.Conn) error, func(context.Context, []nats.Option) (error, []nats.Option)) {
+	return func(ctx context.Context, conn *nats.Conn) error {
+		o, err := NewOptions()
+		if err != nil {
+			return err
+		}
+		h := NewHealthWithOptions(o)
+		return h.Register(ctx, conn)
+	}, nil
 }
 
 // Health represents health checker plugin for nats connection.
