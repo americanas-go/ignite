@@ -16,6 +16,6 @@ func init() {
 }
 
 func ConfigAdd(path string) {
-	config.Add(path+enabled, true, "enable/disable datadog integration")
+	config.Add(path+enabled, true, "enable/disable the opentelemetry integration")
 	config.Add(path+tracerName, "resty.request", "defines the name of the tracer used to create spans")
 }
