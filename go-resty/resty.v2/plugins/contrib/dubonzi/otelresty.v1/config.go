@@ -1,4 +1,4 @@
-package otelresty
+package otelresty // import "github.com/americanas-go/ignite/go-resty/resty.v2/plugins/contrib/dubonzi/otelresty.v1"
 
 import (
 	"github.com/americanas-go/config"
