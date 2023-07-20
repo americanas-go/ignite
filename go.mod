@@ -112,6 +112,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.4 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.7.28 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.18.0 // indirect
+	github.com/dubonzi/otelresty v1.1.1 // indirect
 	github.com/ebitengine/purego v0.4.0-alpha.5 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/go-jose/go-jose/v3 v3.0.0 // indirect
