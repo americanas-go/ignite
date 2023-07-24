@@ -63,5 +63,5 @@ func (i *OtelEcho) Register(ctx context.Context, server *echo.Server) {
 
 	server.Use(otelecho.Middleware("", i.options.TracingOptions...))
 
-	logger.Debug("recover opentelemetry successfully enabled in echo")
+	logger.Debug("opentelemetry integration successfully enabled in echo")
 }
