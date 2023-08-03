@@ -18,7 +18,7 @@ func NewClusterClient(ctx context.Context, plugins ...ClusterPlugin) (*redis.Clu
 
 	o, err := NewOptions()
 	if err != nil {
-		logger.Fatalf(err.Error())
+		logger.Errorf(err.Error())
 	}
 
 	return NewClusterClientWithOptions(ctx, o, plugins...)

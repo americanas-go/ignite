@@ -17,7 +17,7 @@ func NewClient(ctx context.Context, plugins ...Plugin) (*redis.Client, error) {
 
 	o, err := NewOptions()
 	if err != nil {
-		logger.Fatalf(err.Error())
+		logger.Errorf(err.Error())
 	}
 
 	return NewClientWithOptions(ctx, o, plugins...)
