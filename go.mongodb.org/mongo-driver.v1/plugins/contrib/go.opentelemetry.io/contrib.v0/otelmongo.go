@@ -1,10 +1,10 @@
-package otelmongo // import "github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1/plugins/contrib/opentelemetry/otelmongo.v1
+package contrib
 
 import (
 	"context"
 
 	"github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1"
-	"github.com/americanas-go/ignite/opentelemetry/opentelemetry-go.v1"
+	"github.com/americanas-go/ignite/go.opentelemetry.io/otel.v1"
 	"github.com/americanas-go/log"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.opentelemetry.io/contrib/instrumentation/go.mongodb.org/mongo-driver/mongo/otelmongo"
@@ -41,7 +41,7 @@ func NewOtelMongo() *OtelMongo {
 
 // Register registers this opentelemetry plugin on a new mongo client.
 func (d *OtelMongo) Register(ctx context.Context) (mongo.ClientOptionsPlugin, mongo.ClientPlugin) {
-	if !d.options.Enabled || !opentelemetry.IsTracerEnabled() {
+	if !d.options.Enabled || !otel.IsTracerEnabled() {
 		return nil, nil
 	}
 

@@ -1,4 +1,4 @@
-package otelecho // import "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/opentelemetry/otelecho.v1"
+package contrib
 
 import (
 	"github.com/americanas-go/config"
