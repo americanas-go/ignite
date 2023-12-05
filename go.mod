@@ -13,14 +13,17 @@ go 1.21
 // replace github.com/prometheus/client_golang => github.com/prometheus/client_golang v1.12.1
 // replace github.com/smartystreets/assertions => github.com/smarty/assertions v1.15.1
 // replace github.com/Shopify/sarama => github.com/IBM/sarama v1.42.1
+// replace github.com/IBM/sarama => github.com/Shopify/sarama v1.42.1
 
-replace gocloud.dev/pubsub/kafkapubsub => github.com/google/go-cloud/pubsub/kafkapubsub v0.0.0-20231101181203-6d5d2890816a
+replace gocloud.dev/pubsub/kafkapubsub => github.com/google/go-cloud/pubsub/kafkapubsub v0.34.1-0.20231122211418-53ccd8db26a1
 
-replace gocloud.dev/pubsub/mempubsub => github.com/google/go-cloud/pubsub/mempubsub v0.0.0-20231101181203-6d5d2890816a
+replace gocloud.dev/pubsub/mempubsub => github.com/google/go-cloud/pubsub/mempubsub v0.34.1-0.20231122211418-53ccd8db26a1
 
-replace gocloud.dev/pubsub/awssnssqs => github.com/google/go-cloud/pubsub/awssnssqs v0.0.0-20231101181203-6d5d2890816a
+replace gocloud.dev/pubsub/awssnssqs => github.com/google/go-cloud/pubsub/awssnssqs v0.34.1-0.20231122211418-53ccd8db26a1
 
-replace gocloud.dev/pubsub => github.com/google/go-cloud/pubsub v0.0.0-20231101181203-6d5d2890816a
+replace gocloud.dev/pubsub => github.com/google/go-cloud/pubsub v0.34.1-0.20231122211418-53ccd8db26a1
+
+replace github.com/imdario/mergo => github.com/imdario/mergo v0.3.16
 
 require (
 	cloud.google.com/go/bigquery v1.57.1
@@ -234,7 +237,7 @@ require (
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
 	github.com/hashicorp/golang-lru v1.0.2 // indirect
 	github.com/hashicorp/hcl v1.0.1-vault-5 // indirect
-	github.com/imdario/mergo v0.3.16 // indirect
+	github.com/imdario/mergo v1.0.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jcmturner/aescts/v2 v2.0.0 // indirect
 	github.com/jcmturner/dnsutils/v2 v2.0.0 // indirect
