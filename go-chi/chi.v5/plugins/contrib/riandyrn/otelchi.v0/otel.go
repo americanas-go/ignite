@@ -33,7 +33,7 @@ func (d *OTel) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	}
 
 	logger := log.FromContext(ctx)
-	logger.Trace("enabling prometheus middleware in chi")
+	logger.Trace("enabling otel middleware in chi")
 
 	return &chi.Config{
 		Middlewares: []func(http.Handler) http.Handler{
