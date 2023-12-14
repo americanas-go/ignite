@@ -2,6 +2,7 @@ package otel
 
 import (
 	"context"
+	"github.com/americanas-go/ignite/go.opentelemetry.io/otel.v1"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -28,7 +29,7 @@ func NewOTelWithOptions(options *Options) *OTel {
 
 func (d *OTel) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 
-	if !d.options.Enabled {
+	if !d.options.Enabled || !otel.IsTracerEnabled() {
 		return nil, nil
 	}
 
