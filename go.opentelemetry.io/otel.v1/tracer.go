@@ -2,6 +2,7 @@ package otel
 
 import (
 	"context"
+	"go.opentelemetry.io/otel/propagation"
 	"os"
 	"sync"
 
@@ -89,12 +90,14 @@ func StartTracerProviderWithOptions(ctx context.Context, options *Options, start
 
 		startOptions = append(startOptions,
 			sdktrace.WithBatcher(exporter),
+			sdktrace.WithSampler(sdktrace.AlwaysSample()),
 			sdktrace.WithResource(rs),
 		)
 
 		prov := sdktrace.NewTracerProvider(startOptions...)
 
 		otel.SetTracerProvider(prov)
+		otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
 		tracerProvider = prov
 
 		log.Infof("started opentelemetry tracer: %s", options.Service)
