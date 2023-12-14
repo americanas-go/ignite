@@ -2,6 +2,7 @@ package prometheus
 
 import (
 	"context"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -25,7 +26,7 @@ func NewPrometheusWithOptions(options *Options) *Prometheus {
 	return &Prometheus{options: options}
 }
 
-func (d *Prometheus) Register(ctx context.Context) (*chi.Config, error) {
+func (d *Prometheus) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 
 	if !d.options.Enabled {
 		return nil, nil
@@ -52,11 +53,11 @@ func (d *Prometheus) Register(ctx context.Context) (*chi.Config, error) {
 
 }
 
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	n := NewPrometheusWithOptions(o)
-	return n.Register(ctx)
+	return n.Register(ctx, mux)
 }
