@@ -3,6 +3,7 @@ package health
 import (
 	"context"
 	"encoding/json"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -10,13 +11,13 @@ import (
 	response "github.com/americanas-go/rest-response"
 )
 
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	health := NewHealthWithOptions(o)
-	return health.Register(ctx)
+	return health.Register(ctx, mux)
 }
 
 type Health struct {
@@ -44,7 +45,7 @@ func NewHealth() *Health {
 	return NewHealthWithOptions(o)
 }
 
-func (i *Health) Register(ctx context.Context) (*chi.Config, error) {
+func (i *Health) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !i.options.Enabled {
 		return nil, nil
 	}

@@ -3,6 +3,7 @@ package newrelic
 import (
 	"context"
 	"fmt"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 	"strings"
 
@@ -14,13 +15,13 @@ import (
 )
 
 // Register registers a default newrelic plugin as a middleware in a new chi config.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	n := NewNewrelicWithOptions(o)
-	return n.Register(ctx)
+	return n.Register(ctx, mux)
 }
 
 // NewRelic struct which represents a new relic plugin for chi
@@ -43,7 +44,7 @@ func NewNewrelicWithOptions(options *Options) *Newrelic {
 }
 
 // Register registers the newrelic plugin as a middleware in a new chi config.
-func (d *Newrelic) Register(ctx context.Context) (*chi.Config, error) {
+func (d *Newrelic) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !d.options.Enabled || !newrelic.IsEnabled() {
 		return nil, nil
 	}

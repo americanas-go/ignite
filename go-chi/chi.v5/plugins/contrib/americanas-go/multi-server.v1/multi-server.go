@@ -2,6 +2,7 @@ package multiserver
 
 import (
 	"context"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -10,9 +11,9 @@ import (
 )
 
 // Register registers multi server check router for chi.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	l := NewMultiServer()
-	return l.Register(ctx)
+	return l.Register(ctx, mux)
 }
 
 // MultiServer struct that represents a multiserver.
@@ -45,7 +46,7 @@ func NewMultiServer() *MultiServer {
 }
 
 // Register registers a multi server check router in a new chi config.
-func (i *MultiServer) Register(ctx context.Context) (*chi.Config, error) {
+func (i *MultiServer) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !i.options.Enabled {
 		return nil, nil
 	}

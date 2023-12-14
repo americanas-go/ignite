@@ -2,6 +2,7 @@ package cors
 
 import (
 	"context"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -10,13 +11,13 @@ import (
 )
 
 // Register registers cors middleware for chi.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	n := NewCorsWithOptions(o)
-	return n.Register(ctx)
+	return n.Register(ctx, mux)
 }
 
 // Cors struct which represents a native cors plugin for chi.
@@ -39,7 +40,7 @@ func NewCorsWithOptions(options *Options) *Cors {
 }
 
 // Register registers the cors plugin to a new chi config.
-func (d *Cors) Register(ctx context.Context) (*chi.Config, error) {
+func (d *Cors) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 
 	if !d.options.Enabled {
 		return nil, nil

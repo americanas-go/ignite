@@ -30,7 +30,7 @@ type ConfigRouter struct {
 }
 
 // Plugin defines a function to process plugin.
-type Plugin func(context.Context) (*Config, error)
+type Plugin func(context.Context, *chi.Mux) (*Config, error)
 
 // Server represents a chi http server.
 type Server struct {
@@ -71,7 +71,7 @@ func NewServerWithOptions(ctx context.Context, opts *server.Options, plugins ...
 		var err error
 		var config *Config
 
-		if config, err = plugin(ctx); err != nil {
+		if config, err = plugin(ctx, mux); err != nil {
 			panic(err)
 		}
 
