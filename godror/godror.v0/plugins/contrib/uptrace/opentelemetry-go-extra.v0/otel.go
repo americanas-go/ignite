@@ -3,19 +3,20 @@ package otelsql
 import (
 	"context"
 	"database/sql"
+	"database/sql/driver"
 	"github.com/americanas-go/ignite/go.opentelemetry.io/otel.v1"
 	"github.com/americanas-go/log"
 	"github.com/uptrace/opentelemetry-go-extra/otelsql"
 )
 
 // Register registers a new otel plugin on sql DB.
-func Register(ctx context.Context, db *sql.DB) error {
+func Register(ctx context.Context, db *sql.DB, connector driver.Connector) (d *sql.DB, err error) {
 	o, err := NewOptions()
 	if err != nil {
-		return nil
+		return nil, err
 	}
 	h := NewOTelWithOptions(o)
-	return h.Register(ctx, db)
+	return h.Register(ctx, db, connector)
 }
 
 // OTel represents otel plugin for go driver for oracle.
@@ -48,18 +49,20 @@ func NewOTel() *OTel {
 }
 
 // Register registers this otel plugin on sql DB.
-func (i *OTel) Register(ctx context.Context, db *sql.DB) error {
+func (i *OTel) Register(ctx context.Context, db *sql.DB, connector driver.Connector) (d *sql.DB, err error) {
 	if !i.options.Enabled || !otel.IsTracerEnabled() {
-		return nil
+		return nil, nil
 	}
 
 	logger := log.FromContext(ctx)
 
 	logger.Trace("integrating oracle in otel")
 
+	db = otelsql.OpenDB(connector)
+
 	otelsql.ReportDBStatsMetrics(db)
 
 	logger.Debug("otel successfully integrated in oracle")
 
-	return nil
+	return db, nil
 }
