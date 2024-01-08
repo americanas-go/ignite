@@ -56,7 +56,7 @@ require (
 	github.com/go-playground/validator/v10 v10.16.0
 	github.com/go-redis/redis/v7 v7.4.1
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/go-resty/resty/v2 v2.10.0
+	github.com/go-resty/resty/v2 v2.11.0
 	github.com/goccy/go-json v0.10.2
 	github.com/gocql/gocql v1.6.0
 	github.com/godror/godror v0.40.3
