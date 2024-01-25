@@ -2,10 +2,14 @@ package contrib
 
 import (
 	"context"
+	"go.opentelemetry.io/otel"
+	"time"
 
 	"github.com/americanas-go/ignite/labstack/echo.v4"
 	"github.com/americanas-go/log"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
+
+	e "github.com/labstack/echo/v4"
 )
 
 // Register registers a new opentelemetry plugin for echo server.
@@ -61,6 +65,29 @@ func (i *OtelEcho) Register(ctx context.Context, server *echo.Server) {
 	logger.Trace("enabling opentelemetry middleware in echo")
 
 	server.Use(otelecho.Middleware("", i.options.TracingOptions...))
+	server.Use(MetricsMiddleware())
 
 	logger.Debug("opentelemetry integration successfully enabled in echo")
+}
+
+func MetricsMiddleware() e.MiddlewareFunc {
+
+	provider := otel.GetMeterProvider()
+	meter := provider.Meter("http")
+
+	requestCounter, _ := meter.Int64Counter("http_requests_total")
+	requestLatency, _ := meter.Float64Histogram("http_request_duration_seconds")
+
+	return func(next e.HandlerFunc) e.HandlerFunc {
+		return func(c e.Context) error {
+			start := time.Now()
+			err := next(c) // Process request
+			duration := time.Since(start)
+
+			requestCounter.Add(c.Request().Context(), 1)
+			requestLatency.Record(c.Request().Context(), duration.Seconds())
+
+			return err
+		}
+	}
 }
