@@ -2,6 +2,7 @@ package realip
 
 import (
 	"context"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -10,13 +11,13 @@ import (
 )
 
 // Register registers realIP middleware for chi.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	n := NewRealIPWithOptions(o)
-	return n.Register(ctx)
+	return n.Register(ctx, mux)
 }
 
 // RealIP struct which represents a realIP plugin
@@ -39,7 +40,7 @@ func NewRealIPWithOptions(options *Options) *RealIP {
 }
 
 // Register registers the realIP plugin on a new chi config.
-func (d *RealIP) Register(ctx context.Context) (*chi.Config, error) {
+func (d *RealIP) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !d.options.Enabled {
 		return nil, nil
 	}

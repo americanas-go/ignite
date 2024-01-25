@@ -3,6 +3,7 @@ package log
 import (
 	"context"
 	"fmt"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 	"runtime/debug"
 	"time"
@@ -42,7 +43,7 @@ func NewLog() *Log {
 }
 
 // Register registers the log as a middleware to a new chi config.
-func (i *Log) Register(ctx context.Context) (*chi.Config, error) {
+func (i *Log) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !i.options.Enabled {
 		return nil, nil
 	}
@@ -157,7 +158,7 @@ func (i *Log) loggerMiddleware(next http.Handler) http.Handler {
 }
 
 // Register registers a new log with default options as a middleware to a new chi config.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	l := NewLog()
-	return l.Register(ctx)
+	return l.Register(ctx, mux)
 }

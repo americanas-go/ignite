@@ -2,6 +2,7 @@ package stripslashes
 
 import (
 	"context"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -10,13 +11,13 @@ import (
 )
 
 // Register registers stripslashes plugin for chi.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	n := NewStripSlashesWithOptions(o)
-	return n.Register(ctx)
+	return n.Register(ctx, mux)
 }
 
 // StripSlashes struct which represents a stripslashes plugin from chi.
@@ -39,7 +40,7 @@ func NewStripSlashesWithOptions(options *Options) *StripSlashes {
 }
 
 // Register registers this stripslashes plugin for a new chi config.
-func (d *StripSlashes) Register(ctx context.Context) (*chi.Config, error) {
+func (d *StripSlashes) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 
 	if !d.options.Enabled {
 		return nil, nil

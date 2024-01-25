@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -12,9 +13,9 @@ import (
 )
 
 // Register registers a default status to a new chi config.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	l := NewStatus()
-	return l.Register(ctx)
+	return l.Register(ctx, mux)
 }
 
 // Status struct that represents a status router plugin.
@@ -47,7 +48,7 @@ func NewStatus() *Status {
 }
 
 // Register registers the status router to a new chi config.
-func (i *Status) Register(ctx context.Context) (*chi.Config, error) {
+func (i *Status) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !i.options.Enabled {
 		return nil, nil
 	}
