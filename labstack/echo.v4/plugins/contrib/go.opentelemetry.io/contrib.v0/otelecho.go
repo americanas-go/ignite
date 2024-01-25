@@ -1,4 +1,4 @@
-package otelecho // import "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/opentelemetry/otelecho.v1"
+package contrib
 
 import (
 	"context"
@@ -9,12 +9,11 @@ import (
 )
 
 // Register registers a new opentelemetry plugin for echo server.
-func Register(ctx context.Context, server *echo.Server, tracingOptions ...otelecho.Option) error {
+func Register(ctx context.Context, server *echo.Server) error {
 	o, err := NewOptions()
 	if err != nil {
 		return nil
 	}
-	o.TracingOptions = tracingOptions
 	h := NewOtelEchoWithOptions(o)
 	h.Register(ctx, server)
 	return nil

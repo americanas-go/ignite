@@ -3,19 +3,20 @@ package health
 import (
 	"context"
 	"database/sql"
+	"database/sql/driver"
 
 	"github.com/americanas-go/health"
 	"github.com/americanas-go/log"
 )
 
 // Register registers a new health check on sql DB.
-func Register(ctx context.Context, db *sql.DB) error {
+func Register(ctx context.Context, db *sql.DB, connector driver.Connector) (d *sql.DB, err error) {
 	o, err := NewOptions()
 	if err != nil {
-		return nil
+		return nil, err
 	}
 	h := NewHealthWithOptions(o)
-	return h.Register(ctx, db)
+	return h.Register(ctx, db, connector)
 }
 
 // Health represents a health check for go driver for oracle.
@@ -48,7 +49,7 @@ func NewHealth() *Health {
 }
 
 // Register registers this health check on sql DB.
-func (i *Health) Register(ctx context.Context, db *sql.DB) error {
+func (i *Health) Register(ctx context.Context, db *sql.DB, connector driver.Connector) (d *sql.DB, err error) {
 
 	logger := log.FromContext(ctx).WithTypeOf(*i)
 
@@ -60,5 +61,5 @@ func (i *Health) Register(ctx context.Context, db *sql.DB) error {
 
 	logger.Debug("godror successfully integrated in health")
 
-	return nil
+	return db, nil
 }

@@ -2,6 +2,7 @@ package recoverer
 
 import (
 	"context"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	"github.com/americanas-go/ignite/go-chi/chi.v5"
@@ -10,13 +11,13 @@ import (
 )
 
 // Register registers recoverer middleware for chi.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	n := NewRecovererWithOptions(o)
-	return n.Register(ctx)
+	return n.Register(ctx, mux)
 }
 
 // Recoverer struct which represents a recoverer middleware for chi.
@@ -39,7 +40,7 @@ func NewRecovererWithOptions(options *Options) *Recoverer {
 }
 
 // Register registers this recoverer middleware on a new chi config.
-func (d *Recoverer) Register(ctx context.Context) (*chi.Config, error) {
+func (d *Recoverer) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !d.options.Enabled {
 		return nil, nil
 	}

@@ -3,7 +3,7 @@ package otelresty // import "github.com/americanas-go/ignite/go-resty/resty.v2/p
 import (
 	"context"
 
-	"github.com/americanas-go/ignite/opentelemetry/opentelemetry-go.v1"
+	"github.com/americanas-go/ignite/go.opentelemetry.io/otel.v1"
 	"github.com/americanas-go/log"
 	dubresty "github.com/dubonzi/otelresty"
 	"github.com/go-resty/resty/v2"
@@ -49,7 +49,7 @@ func Register(ctx context.Context, client *resty.Client) error {
 }
 
 func (o *Otelresty) Register(ctx context.Context, client *resty.Client) error {
-	if !o.options.Enabled || !opentelemetry.IsTracerEnabled() {
+	if !o.options.Enabled || !otel.IsTracerEnabled() {
 		return nil
 	}
 

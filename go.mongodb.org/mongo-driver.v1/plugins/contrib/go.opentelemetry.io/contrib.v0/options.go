@@ -1,14 +1,12 @@
-package otelecho // import "github.com/americanas-go/ignite/labstack/echo.v4/plugins/contrib/opentelemetry/otelecho.v1"
+package contrib
 
 import (
 	"github.com/americanas-go/ignite"
-	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
 )
 
-// Options represents the opentelemetry plugin for echo server options.
+// Options represents the opentelemetry plugin for mongo options.
 type Options struct {
-	Enabled        bool
-	TracingOptions []otelecho.Option
+	Enabled bool
 }
 
 // NewOptions returns options from config file or environment vars.

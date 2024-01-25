@@ -3,6 +3,7 @@ package godror
 import (
 	"context"
 	"database/sql"
+	"database/sql/driver"
 
 	"github.com/americanas-go/ignite/time"
 	"github.com/americanas-go/log"
@@ -10,7 +11,7 @@ import (
 )
 
 // Plugin defines a go driver for oracle plugin signature.
-type Plugin func(context.Context, *sql.DB) error
+type Plugin func(context.Context, *sql.DB, driver.Connector) (*sql.DB, error)
 
 // NewDBWithConfigPath returns a new sql DB with options from config path.
 func NewDBWithConfigPath(ctx context.Context, path string, plugins ...Plugin) (*sql.DB, error) {
@@ -26,32 +27,35 @@ func NewDBWithOptions(ctx context.Context, o *Options, plugins ...Plugin) (db *s
 
 	logger := log.FromContext(ctx)
 
-	var P godror.ConnectionParams
-	P.ConnectString = o.ConnectString
+	var params godror.ConnectionParams
+	params.ConnectString = o.ConnectString
 	if o.Username != "" && o.Password != "" {
-		P.Username, P.Password = o.Username, godror.NewPassword(o.Password)
+		params.Username, params.Password = o.Username, godror.NewPassword(o.Password)
 	}
-	P.SessionTimeout = o.SessionTimeout
-	P.MaxLifeTime = o.MaxLifetime
-	P.MaxSessions = o.MaxSessions
-	P.MinSessions = o.MinSessions
-	P.MaxSessionsPerShard = o.MaxSessionsPerShard
-	P.Timezone = time.Location()
-	P.WaitTimeout = o.WaitTimeout
-	P.SessionIncrement = o.SessionIncrement
-	// P.SetSessionParamOnInit("NLS_NUMERIC_CHARACTERS", ",.")
-	// P.SetSessionParamOnInit("NLS_LANGUAGE", "FRENCH")
+	params.SessionTimeout = o.SessionTimeout
+	params.MaxLifeTime = o.MaxLifetime
+	params.MaxSessions = o.MaxSessions
+	params.MinSessions = o.MinSessions
+	params.MaxSessionsPerShard = o.MaxSessionsPerShard
+	params.Timezone = time.Location()
+	params.WaitTimeout = o.WaitTimeout
+	params.SessionIncrement = o.SessionIncrement
+	// params.SetSessionParamOnInit("NLS_NUMERIC_CHARACTERS", ",.")
+	// params.SetSessionParamOnInit("NLS_LANGUAGE", "FRENCH")
 
-	db = sql.OpenDB(godror.NewConnector(P))
+	connector := godror.NewConnector(params)
+
+	db = sql.OpenDB(connector)
+
+	for _, plugin := range plugins {
+		db, err = plugin(ctx, db, connector)
+		if err != nil {
+			return db, err
+		}
+	}
 
 	if err = db.Ping(); err != nil {
 		return nil, err
-	}
-
-	for _, plugin := range plugins {
-		if err := plugin(ctx, db); err != nil {
-			panic(err)
-		}
 	}
 
 	logger.Info("Connected to Oracle (godror) server")

@@ -1,4 +1,4 @@
-package otelmongo // import "github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1/plugins/contrib/opentelemetry/otelmongo.v1
+package contrib // import "github.com/americanas-go/ignite/go.mongodb.org/mongo-driver.v1/plugins/contrib/opentelemetry/otelmongo.v1
 
 import (
 	"github.com/americanas-go/config"

@@ -2,6 +2,7 @@ package datadog
 
 import (
 	"context"
+	c "github.com/go-chi/chi/v5"
 	"net/http"
 
 	datadog "github.com/americanas-go/ignite/datadog/dd-trace-go.v1"
@@ -40,7 +41,7 @@ func NewDatadog(traceOptions ...chitrace.Option) *Datadog {
 }
 
 // Register registers the datadog plugin to a new chi config.
-func (d *Datadog) Register(ctx context.Context) (*chi.Config, error) {
+func (d *Datadog) Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	if !d.options.Enabled || !datadog.IsTracerEnabled() {
 		return nil, nil
 	}
@@ -56,11 +57,11 @@ func (d *Datadog) Register(ctx context.Context) (*chi.Config, error) {
 }
 
 // Register registers a default datadog plugin to a new chi config.
-func Register(ctx context.Context) (*chi.Config, error) {
+func Register(ctx context.Context, mux *c.Mux) (*chi.Config, error) {
 	o, err := NewOptions()
 	if err != nil {
 		return nil, err
 	}
 	d := NewDatadogWithOptions(o)
-	return d.Register(ctx)
+	return d.Register(ctx, mux)
 }
