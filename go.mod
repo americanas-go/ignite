@@ -55,7 +55,7 @@ require (
 	github.com/goccy/go-json v0.10.2
 	github.com/gocql/gocql v1.6.0
 	github.com/godror/godror v0.41.0
-	github.com/gofiber/fiber/v2 v2.52.0
+	github.com/gofiber/fiber/v2 v2.52.1
 	github.com/google/uuid v1.6.0
 	github.com/graphql-go/graphql v0.8.1
 	github.com/graphql-go/handler v0.2.3
@@ -88,12 +88,10 @@ require (
 	github.com/stretchr/testify v1.8.4
 	github.com/swaggo/echo-swagger v1.4.1
 	github.com/tidwall/buntdb v1.3.0
-	github.com/uptrace/opentelemetry-go-extra/otelplay v0.2.3
 	github.com/uptrace/opentelemetry-go-extra/otelsql v0.2.3
 	github.com/valyala/fasthttp v1.51.0
 	github.com/wesovilabs/beyond v1.0.1
 	go.mongodb.org/mongo-driver v1.13.1
-	go.nhat.io/otelsql v0.12.0
 	go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho v0.47.0
 	go.opentelemetry.io/contrib/instrumentation/go.mongodb.org/mongo-driver/mongo/otelmongo v0.47.0
 	go.opentelemetry.io/otel v1.22.0
@@ -137,25 +135,17 @@ require (
 	github.com/google/gnostic-models v0.6.8 // indirect
 	github.com/google/s2a-go v0.1.7 // indirect
 	github.com/klauspost/asmfmt v1.3.2 // indirect
-	github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 // indirect
 	github.com/minio/asm2plan9s v0.0.0-20200509001527-cdd76441f9d8 // indirect
 	github.com/minio/c2goasm v0.0.0-20190812172519-36a3d3bbc4f3 // indirect
 	github.com/newrelic/csec-go-agent v0.5.0 // indirect
 	github.com/outcaste-io/ristretto v0.2.3 // indirect
 	github.com/smartystreets/goconvey v1.8.0 // indirect
 	github.com/swaggo/files/v2 v2.0.0 // indirect
-	github.com/uptrace/uptrace-go v1.18.0 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
 	go.opentelemetry.io/contrib v1.22.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.47.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.47.0 // indirect
-	go.opentelemetry.io/contrib/instrumentation/runtime v0.44.0 // indirect
-	go.opentelemetry.io/otel/exporters/jaeger v1.17.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlpmetric v0.41.0 // indirect
-	go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc v0.41.0 // indirect
-	go.opentelemetry.io/otel/exporters/stdout/stdouttrace v1.18.0 // indirect
 	go.opentelemetry.io/otel/metric v1.22.0 // indirect
-	go.opentelemetry.io/otel/sdk/metric v0.41.0 // indirect
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a // indirect
 	golang.org/x/mod v0.14.0 // indirect
 	golang.org/x/oauth2 v0.16.0 // indirect
