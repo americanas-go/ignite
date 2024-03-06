@@ -9,7 +9,7 @@ type Options struct {
 	ProjectID   string `config:"projectId"`
 	Credentials struct {
 		File string
-		JSON []byte `config:"json"`
+		JSON string `config:"json"`
 	}
 }
 

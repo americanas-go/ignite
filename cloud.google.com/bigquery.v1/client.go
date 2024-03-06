@@ -30,8 +30,8 @@ func NewClientWithOptions(ctx context.Context, options *Options) (*bigquery.Clie
 
 	var opts []option.ClientOption
 
-	if options.Credentials.JSON != nil {
-		opts = append(opts, option.WithCredentialsJSON(options.Credentials.JSON))
+	if options.Credentials.JSON != "" {
+		opts = append(opts, option.WithCredentialsJSON([]byte(options.Credentials.JSON)))
 	} else {
 		opts = append(opts, option.WithCredentialsFile(options.Credentials.File))
 	}
