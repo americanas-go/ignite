@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	root            = "ignite.bigquery"
+	root            = "ignite.pubsub"
 	projectID       = ".projectId"
 	credentialsRoot = ".credentials"
 	credentialsFile = credentialsRoot + ".file"
