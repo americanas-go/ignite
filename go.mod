@@ -31,7 +31,7 @@ require (
 	github.com/americanas-go/multiserver v1.1.1
 	github.com/americanas-go/rest-response v1.0.7
 	github.com/ansrivas/fiberprometheus/v2 v2.6.1
-	github.com/aws/aws-sdk-go v1.50.32
+	github.com/aws/aws-sdk-go v1.50.33
 	github.com/aws/aws-sdk-go-v2 v1.25.2
 	github.com/aws/aws-sdk-go-v2/config v1.27.6
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.6
@@ -40,7 +40,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sns v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.31.1
 	github.com/bytedance/sonic v1.11.2
-	github.com/cloudevents/sdk-go/v2 v2.15.1
+	github.com/cloudevents/sdk-go/v2 v2.15.2
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/coocood/freecache v1.2.4
 	github.com/dubonzi/otelresty v1.3.0
@@ -120,7 +120,7 @@ require (
 	github.com/DataDog/go-sqllexer v0.0.11 // indirect
 	github.com/IBM/sarama v1.43.0 // indirect
 	github.com/apache/arrow/go/v14 v14.0.2 // indirect
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.30.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.30.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.30.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.9.3 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.26.1 // indirect

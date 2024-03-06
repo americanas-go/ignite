@@ -9,6 +9,7 @@ const (
 	projectID       = ".projectId"
 	credentialsRoot = ".credentials"
 	credentialsFile = credentialsRoot + ".file"
+	credentialsJSON = credentialsRoot + ".json"
 )
 
 func init() {
@@ -18,4 +19,5 @@ func init() {
 func ConfigAdd(path string) {
 	config.Add(path+projectID, "default", "defines project ID")
 	config.Add(path+credentialsFile, "credentials.json", "sets credentials file")
+	config.Add(path+credentialsJSON, "", "sets credentials json")
 }
