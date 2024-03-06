@@ -40,7 +40,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sns v1.29.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.31.1
 	github.com/bytedance/sonic v1.11.2
-	github.com/cloudevents/sdk-go/v2 v2.15.1
+	github.com/cloudevents/sdk-go/v2 v2.15.2
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/coocood/freecache v1.2.4
 	github.com/dubonzi/otelresty v1.3.0
