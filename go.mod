@@ -1,6 +1,6 @@
 module github.com/americanas-go/ignite
 
-go 1.21
+go 1.22
 
 // replace github.com/americanas-go/log => ../log/
 // replace github.com/americanas-go/multiserver => ../multiserver/
