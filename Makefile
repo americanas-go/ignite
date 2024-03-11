@@ -9,6 +9,8 @@ test-upgrade-deps:
 .PHONY: upgrade-deps
 upgrade-deps:
 	go get -u ./...
+	go mod tidy
+	go mod vendor
 
 .PHONY: test
 test:
