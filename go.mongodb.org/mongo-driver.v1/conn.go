@@ -119,7 +119,7 @@ func newClient(ctx context.Context, co *options.ClientOptions) (client *mongo.Cl
 		return nil, nil, err
 	}
 
-	var connFields connstring.ConnString
+	var connFields *connstring.ConnString
 
 	connFields, err = connstring.Parse(co.GetURI())
 
